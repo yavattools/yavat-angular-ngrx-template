@@ -1,0 +1,110 @@
+import browser from 'browser-detect';
+import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { MatSelectChange } from '@angular/material/select';
+import { Store, select } from '@ngrx/store';
+import { fromEvent, Observable } from 'rxjs';
+
+import { environment as env } from '../../environments/environment';
+
+import {
+  authLogin,
+  authLogout,
+  routeAnimations,
+  LocalStorageService,
+  selectIsAuthenticated,
+  selectSettingsStickyHeader,
+  selectSettingsLanguage,
+  selectEffectiveTheme,
+  AppState
+} from '../core/core.module';
+import {
+  actionSettingsChangeAnimationsPageDisabled,
+  actionSettingsChangeLanguage
+} from '../core/store/settings/settings.actions';
+import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
+import { distinctUntilChanged, filter, map, pairwise, share, throttleTime } from 'rxjs/operators';
+
+
+
+export enum Direction {
+  Up = 'Up',
+  Down = 'Down'
+}
+
+@Component({
+  selector: 'clgx-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  animations: [routeAnimations]
+})
+export class AppComponent implements OnInit , AfterViewInit{
+  isProd = env.production;
+  envName = env.envName;
+  version = env.versions.app;
+  year = new Date().getFullYear();
+  logo = 'assets/images/logo.png';
+  languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he', 'ar'];
+
+  navigationSideMenu = [
+    { link: 'settings', label: 'clgx.menu.settings' }
+  ];
+
+  scrollPosition = 0;
+  isAuthenticated$: Observable<boolean> | undefined;
+  stickyHeader$: Observable<boolean> | undefined;
+  language$: Observable<string> | undefined;
+  theme$: Observable<string> | undefined;
+
+  constructor(
+    private store: Store<AppState>,
+    private storageService: LocalStorageService,
+    private scrollDispatcher: ScrollDispatcher, private zone: NgZone
+  ) {}
+
+  private static isIEorEdgeOrSafari() {
+    return ['ie', 'edge', 'safari'].includes(browser().name || '');
+  }
+
+  ngOnInit(): void {
+    this.storageService.testLocalStorage();
+    if (AppComponent.isIEorEdgeOrSafari()) {
+      this.store.dispatch(
+        actionSettingsChangeAnimationsPageDisabled({
+          pageAnimationsDisabled: true
+        })
+      );
+    }
+
+    this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
+    this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
+    this.language$ = this.store.pipe(select(selectSettingsLanguage));
+    this.theme$ = this.store.pipe(select(selectEffectiveTheme));
+  }
+
+  onLoginClick() {
+    this.store.dispatch(authLogin());
+  }
+
+  onLogoutClick() {
+    this.store.dispatch(authLogout());
+  }
+
+  onLanguageSelect(event: MatSelectChange) {
+    this.store.dispatch(
+      actionSettingsChangeLanguage({ language: event.value })
+    );
+  }
+
+ngAfterViewInit() {
+     this.scrollDispatcher.scrolled().
+    subscribe((cdk: any)  => {
+    this.zone.run(() => {
+      //Here you can add what to happen when scroll changed
+      //I want to display the scroll position for example
+      const scrollPosition = cdk.getElementRef().nativeElement.scrollTop;
+      console.log("scrolling position: " + scrollPosition);
+      this.scrollPosition = scrollPosition;
+    });
+    });
+}
+}

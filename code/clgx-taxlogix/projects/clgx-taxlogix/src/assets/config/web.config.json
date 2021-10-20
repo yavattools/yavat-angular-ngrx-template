@@ -1,0 +1,9 @@
+{
+    "baseApiUrl" : "",
+    "idleTimoutVal": 7200,
+    "countDownVal" : 60,
+    "httpErrorCodeForRedirection": "302,0"
+}
+
+
+

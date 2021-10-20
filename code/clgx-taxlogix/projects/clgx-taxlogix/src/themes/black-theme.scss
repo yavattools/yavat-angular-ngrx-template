@@ -1,0 +1,11 @@
+@use '~@angular/material' as mat;
+
+$clgx-black-primary: mat.define-palette(mat.$grey-palette, 700, 300, 900);
+$clgx-black-accent: mat.define-palette(mat.$blue-grey-palette, 400);
+$clgx-black-warn: mat.define-palette(mat.$red-palette, 500);
+
+$clgx-black-theme: mat.define-dark-theme(
+  $clgx-black-primary,
+  $clgx-black-accent,
+  $clgx-black-warn
+);

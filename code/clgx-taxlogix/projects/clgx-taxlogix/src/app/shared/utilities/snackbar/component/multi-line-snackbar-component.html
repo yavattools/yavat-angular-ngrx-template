@@ -1,0 +1,25 @@
+<div class="multiline-snack-outer-container">
+    <div fxLayout fxLayoutWrap fxLayout="row"  style="width:100%"
+        fxLayoutAlign="start start" class="header" >
+        <div [fxFlex]="100"  fxLayoutAlign="start end"  >
+            {{title}}
+            <span fxFlex></span>
+            <i class="material-icons" (click)="closeSnack()">
+                close
+            </i>
+        </div>
+        
+    </div>
+    <div fxLayout fxLayoutWrap fxLayout="row"  class="streach-h-100"
+            fxLayoutAlign="start start" >
+        <div [fxFlex]="100"  fxLayoutAlign="start start" 
+            class="message-row" *ngFor="let error of errorMessages" >
+            <div fxLayout fxLayoutWrap fxLayout="row" style="width:100%"
+                fxLayoutAlign="start start" class="history-row">
+                <div [fxFlex]="100"  fxLayoutAlign="start center" >
+                        <h5 class="no-margin-padding" >{{error?.message}}</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

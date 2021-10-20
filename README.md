@@ -1,0 +1,2 @@
+# yavat-angular-ngrx-template
+ 

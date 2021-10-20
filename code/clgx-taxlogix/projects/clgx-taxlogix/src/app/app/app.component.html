@@ -1,0 +1,88 @@
+<div [class]="'theme-wrapper ' + (theme$ | async)">
+
+  <mat-sidenav-container>
+
+    <mat-sidenav #sidenav mode="push">
+      <div class="branding"><img [src]="logo" [alt]="logo"/>
+        <!-- <span>{{ 'clgx.title.short' | translate}}</span> -->
+      </div>
+      <mat-nav-list>
+        <a mat-list-item *ngFor="let item of navigationSideMenu" (click)="sidenav.close()" [routerLink]="[item.link]"
+          routerLinkActive="active">
+          {{item.label | translate}}
+        </a>
+        <a mat-list-item href="https://github.com/tomastrajan/clgx-taxlogix" target="_blank" rel="noopener noreferrer">
+          Github
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content class="wrapper" >
+
+      <div class="toolbar" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'" [class.mat-elevation-z1]="(stickyHeader$ | async) && scrollPosition > 100">
+        <mat-toolbar color="primary" style="background-color: white;height: 4rem;">
+          <button mat-icon-button class="d-md-none" (click)="sidenav.open()">
+            <fa-icon icon="bars"></fa-icon>
+
+          </button>
+
+          <span routerLink="" class="branding spacer center d-inline d-sm-none">
+            <img [src]="logo" [alt]="logo"/></span>
+          <span routerLink="" class="branding spacer center d-none d-sm-inline d-md-none">
+            <img [src]="logo" [alt]="logo"/> 
+            <!-- {{'clgx.title.short' | translate }} -->
+          </span>
+          <span routerLink="" class="branding spacer d-none d-md-inline">
+            <img [src]="logo"[alt]="logo" style="height: 4rem;width: 10rem;" /> 
+            <!-- {{ 'clgx.title.long' | translate }} -->
+          </span>
+
+          <!-- <span class="d-none d-md-inline">
+            <button mat-button class="nav-button" *ngFor="let item of navigation" [routerLink]="[item.link]"
+              routerLinkActive="active">
+              {{item.label | translate}}
+            </button>
+          </span> -->
+
+          <button mat-button mat-stroked-button color="accent" *ngIf="!(isAuthenticated$ | async)" (click)="onLoginClick()">
+            {{ 'clgx.menu.login' | translate }}
+          </button>
+
+          <button *ngIf="(isAuthenticated$ | async)"
+                  mat-icon-button
+                  [matMenuTriggerFor]="toolbarUserMenu">
+            <fa-icon  style="font-size: 2rem;" class="text-muted" icon="user-circle" ></fa-icon>
+          </button>
+          <mat-menu #toolbarUserMenu="matMenu">
+            <button mat-menu-item (click)="onLogoutClick()">
+              <mat-icon><fa-icon icon="power-off"></fa-icon></mat-icon>
+              <span>{{ 'clgx.menu.logout' | translate }}</span>
+            </button>
+          </mat-menu>
+
+          <!-- <button mat-icon-button routerLink="settings" class="d-none d-sm-inline">
+            <fa-icon icon="cog"></fa-icon>
+          </button> -->
+
+        </mat-toolbar>
+      </div>
+
+      <div class="content"  [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.data?.title">
+        <router-outlet #o="outlet"></router-outlet>
+      </div>
+
+      <div class="footer">
+        <app-footer-lg></app-footer-lg>
+        <div class="row">
+          <div class="col-12 signature">
+            &#169; <span class="year">{{year}}</span> - ChainLogix
+            <br class="d-block d-sm-none">
+          </div>
+        </div>
+      </div>
+
+    </mat-sidenav-content>
+
+  </mat-sidenav-container>
+
+</div>

@@ -1,0 +1,174 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "clgx-taxlogix": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "changeDetection": "OnPush",
+          "style": "scss"
+        }
+      },
+      "root": "projects/clgx-taxlogix",
+      "sourceRoot": "projects/clgx-taxlogix/src",
+      "prefix": "clgx",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/clgx-taxlogix",
+            "index": "projects/clgx-taxlogix/src/index.html",
+            "main": "projects/clgx-taxlogix/src/main.ts",
+            "polyfills": "projects/clgx-taxlogix/src/polyfills.ts",
+            "tsConfig": "projects/clgx-taxlogix/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/clgx-taxlogix/src/favicon.ico",
+              "projects/clgx-taxlogix/src/assets"
+            ],
+            "styles": [
+              "node_modules/font-awesome/scss/font-awesome.scss",
+              "projects/clgx-taxlogix/src/assets/iconfont/material-icons.scss",
+              "projects/clgx-taxlogix/src/styles-app-loading.scss",
+              "projects/clgx-taxlogix/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
+            ],
+            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"]
+          },
+          "configurations": {
+            "development":{
+              "sourceMap": true,
+              "optimization": false
+            },
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/clgx-taxlogix/src/environments/environment.ts",
+                  "with": "projects/clgx-taxlogix/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1536kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "polyfills",
+                  "baseline": "150kb",
+                  "maximumWarning": "50kb",
+                  "maximumError": "100kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "styles",
+                  "baseline": "280kb",
+                  "maximumWarning": "50kb",
+                  "maximumError": "100kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "main",
+                  "baseline": "1024kb",
+                  "maximumWarning": "100kb",
+                  "maximumError": "200kb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "clgx-taxlogix:build"
+          },
+          "configurations": {
+            "development":{
+              "sourceMap": true,
+              "optimization": false
+            },
+            "production": {
+              "browserTarget": "clgx-taxlogix:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "clgx-taxlogix:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/clgx-taxlogix/src/test.ts",
+            "polyfills": "projects/clgx-taxlogix/src/polyfills.ts",
+            "tsConfig": "projects/clgx-taxlogix/tsconfig.spec.json",
+            "karmaConfig": "projects/clgx-taxlogix/karma.conf.js",
+            "assets": [
+              "projects/clgx-taxlogix/src/favicon.ico",
+              "projects/clgx-taxlogix/src/assets"
+            ],
+            "styles": [
+              "projects/clgx-taxlogix/src/styles-app-loading.scss",
+              "projects/clgx-taxlogix/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/clgx-taxlogix/src/environments/environment.ts",
+                  "with": "projects/clgx-taxlogix/src/environments/environment.test.ts"
+                }
+              ]
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/clgx-taxlogix/tsconfig.app.json",
+              "projects/clgx-taxlogix/tsconfig.spec.json",
+              "projects/clgx-taxlogix/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/clgx-taxlogix/e2e/protractor.conf.js",
+            "devServerTarget": "clgx-taxlogix:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "clgx-taxlogix:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "clgx-taxlogix",
+  "cli": {
+    "analytics": false
+  }
+}

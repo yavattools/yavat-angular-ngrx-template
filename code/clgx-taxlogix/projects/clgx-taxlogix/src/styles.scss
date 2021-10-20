@@ -1,0 +1,91 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '~@angular/material' as mat;
+
+@import 'styles-variables';
+
+@import '~bootstrap/scss/bootstrap-reboot';
+@import '~bootstrap/scss/bootstrap-grid';
+@import 'styles-reset';
+
+@include mat.core();
+
+@import './themes/default-theme';
+@import './themes/light-theme';
+@import './themes/black-theme';
+@import './themes/nature-theme';
+
+@import 'styles-reset.scss-theme';
+@import './app/app/app.component.scss-theme';
+@import './app/features/dashboard/view/dashboard-view.component.scss-theme';
+@import './app/shared/big-input/big-input/big-input.component.scss-theme';
+@import './app/features/about/about/about.component.scss-theme';
+
+
+@mixin custom-components-theme($theme) {
+  @include clgx-styles-reset-theme($theme);
+  @include clgx-app-component-theme($theme);
+  @include clgx-dashboard-component-theme($theme);
+  @include clgx-about-component-theme($theme);
+  @include clgx-big-input-component-theme($theme);
+ 
+
+}
+
+.default-theme {
+  @include mat.all-component-themes($clgx-theme);
+  @include custom-components-theme($clgx-theme);
+}
+
+.light-theme {
+  @include mat.all-component-themes($clgx-light-theme);
+  @include custom-components-theme($clgx-light-theme);
+}
+
+.black-theme {
+  @include mat.all-component-themes($clgx-black-theme);
+  @include custom-components-theme($clgx-black-theme);
+}
+
+.nature-theme {
+  @include mat.all-component-themes($clgx-nature-theme);
+  @include custom-components-theme($clgx-nature-theme);
+}
+
+body{
+  --navbar-scroll: transparent; 
+  --navbar-scroll-text: white;
+  --navbar-scroll-shadow: none;
+ }
+
+ .default-theme .mat-badge-medium .mat-badge-content {
+  width: 31px;
+  height: 31px;
+  line-height: 31px;
+  /* padding: 5px; */
+}
+
+
+.streach-h-100 {
+  width: 100%;
+}
+
+.streach-v-100 {
+  height: 100%;
+}
+
+.align-item-middle{
+  align-items: center;
+}
+
+.pr-0 {
+  padding-right: 0px !important;
+}
+
+.pl-0{
+  padding-left: 0px !important;
+}
+
+.text-left{
+  text-align: left !important;
+}
