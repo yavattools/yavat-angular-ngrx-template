@@ -5,6 +5,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --open",
+    "mockserver": "json-server --watch mockdata.json --routes routes.json",
+    "app": "concurrently \"npm run mockserver\"  \"npm run start\" ",
     "start:prod": "npm run build:prod && npm run server",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
@@ -64,7 +66,9 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^5.0.1",
     "browser-detect": "^0.2.28",
+    "concurrently": "^3.6.1",
     "font-awesome": "^4.7.0",
+    "json-server": "^0.17.0",
     "ngx-device-detector": "^2.1.1",
     "ngx-page-scroll-core": "^7.0.5",
     "ngx-scroll-event": "^2.0.2",

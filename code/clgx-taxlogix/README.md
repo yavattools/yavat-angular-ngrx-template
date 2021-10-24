@@ -9,4 +9,6 @@
 - `npm run watch` - runs tests in watch mode
 - `npm run format:write` - runs prettier to format whole code base (`.ts` and `.scss`)
 - `npm run analyze` - runs full prod build and `webpack-bundle-analyzer` to visualize how much code is shipped (dependencies & application)
+- `npm run mockserver` - runs mockserver on port 3000, edit the mockdata.json and routes.json files  with mock data
+- `npm run app` - runs mockserver and the application parallely
 

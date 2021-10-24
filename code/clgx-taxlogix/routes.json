@@ -1,0 +1,9 @@
+
+{
+    "/posts/list": "/posts",
+    "/posts/get/:id": "/posts/:id",
+    "/posts/create": "/posts",
+    "/posts/update/:id": "/posts/:id",
+    "/posts/delete/:id": "/posts/:id"
+  }
+  
