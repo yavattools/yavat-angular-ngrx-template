@@ -1,0 +1,56 @@
+
+Please find the email log in credentials for the below mentioned users:
+
+ 
+
+E-mail ID:annabattina.teja@chainlogix.net
+password:N0tep@d2021$
+
+ 
+
+E-mail ID:ummaneni.teja@chainlogix.net
+password:N0tep@d2022$
+
+ 
+
+E-mail ID:kesineni.jana@chainlogix.net
+password:N0tep@d2023$
+
+ 
+
+Please use the below mentioned link to access the Zoho mail:
+
+ 
+
+https://www.zoho.com/mail/login.html
+
+ 
+
+Here is the AWS Workspace Login details:
+
+ 
+
+username:Annabattina
+password:330$%^ACCess330
+
+ 
+
+username:Ummaneni
+password:240$%^braVEE240
+
+ 
+
+username:Kesineni
+password:150$%^conVEY150
+
+ 
+
+To Access workspace from web client/application tool:
+
+ 
+
+Web client: https://clients.amazonworkspaces.com/webclient#/main
+
+ 
+
+Application download link: https://clients.amazonworkspaces.com/

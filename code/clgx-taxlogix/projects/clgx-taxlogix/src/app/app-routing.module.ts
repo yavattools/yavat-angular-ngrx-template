@@ -8,15 +8,17 @@ const routes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'about',
-    loadChildren: () =>
-      import('./features/about/about.module').then((m) => m.AboutModule)
-  },
-  {
     path: 'dashboard',
     loadChildren: () =>
       import('./features/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
+      )
+  },
+  {
+    path: 'agency',
+    loadChildren: () =>
+      import('./features/agency/agency.module').then(
+        (m) => m.AgencyModule
       )
   },
   {

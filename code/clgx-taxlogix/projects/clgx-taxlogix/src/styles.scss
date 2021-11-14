@@ -19,14 +19,12 @@
 @import './app/app/app.component.scss-theme';
 @import './app/features/dashboard/view/dashboard-view.component.scss-theme';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
-@import './app/features/about/about/about.component.scss-theme';
 
 
 @mixin custom-components-theme($theme) {
   @include clgx-styles-reset-theme($theme);
   @include clgx-app-component-theme($theme);
   @include clgx-dashboard-component-theme($theme);
-  @include clgx-about-component-theme($theme);
   @include clgx-big-input-component-theme($theme);
  
 
