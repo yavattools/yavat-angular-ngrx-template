@@ -14,7 +14,7 @@ export class AgencyDetailsContainerComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agencies: Agency[] = agencies;
 
-  isMobile: boolean = false;
+  isMobile: Boolean = false;
   constructor( public deviceService:DeviceDetectorService){
 
   }
@@ -27,7 +27,7 @@ export class AgencyDetailsContainerComponent implements OnInit {
     }
   }
 
-  openLink(link: string) {
-    window.open(link, '_blank');
+  back(){
+
   }
 }

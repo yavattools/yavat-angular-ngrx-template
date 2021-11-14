@@ -1,65 +1,33 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 pb-3">
-      <mat-card-title  class="welcome-title">
-        Welcome, Sarah! - Details Container
-      </mat-card-title>
-    </div>
+<div class="back-button-group" (click)="back()">
+  <img src="../../../../../assets/images/hexLogo.png" alt="" srcset="">
+  <p><small>&lt;dashboard</small></p>
+</div>
+
+<div class="details-container-content">
+  <div class="page-title">
+    <h3>Dealware Country</h3>
+    <p><small>982362341</small></p>
   </div>
-  <div class="row align-items-end">
-    <div *ngFor="let feature of agencies"  class="col-md-3 col-lg-3" [ngClass]="routeAnimationsElements">
-      <mat-card style="height: 150px;"  
-          class="mat-elevation-z1  align-middle" [matBadge]="feature.count" matBadgePosition="after" matBadgeColor="warn">
-        <mat-card-content class="d-flex justify-content-center mb-0 streach-v-100  align-middle">
-          <div class="row d-flex justify-content-center p0 m0 streach-h-100">
-            <div [class.col-4]="isMobile" [class.col-12]="!isMobile" 
-                 class="col-12 d-flex justify-content-center p0 m0 align-middle ">
-                <span class="material-icons feature-icon text-muted pb-2" [class.image-center]="isMobile" >
-                  find_in_page
-                </span>
-            </div>
-            <div [class.col-8]="isMobile" [class.col-12]="!isMobile" 
-                class="col-12 d-flex justify-content-center text-justify">
-                <div class="row d-flex justify-content-center p0 m0">
-                  <div class="col-12 d-flex justify-content-center p0 m0 align-item-middle text-center feature-card-title">
-                    {{ feature.name }}
-                  </div>
-                  <div class="col-12 d-flex justify-content-center p0 m0 ">
-                    <span >
-                      <strong  [class.feature-card-status-green]="feature.status == 'In Progress' || feature.status == 'Next'"
-                              [class.feature-card-status-orange]="feature.status == 'Completed'" >
-                          {{ feature.status }}
-                        </strong>
-                    </span>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </mat-card-content>
-        <!-- <mat-card-actions>
-          <a *ngIf="feature.github" mat-icon-button [href]="feature.github" rel="noopener noreferrer" target="_blank">
-            <fa-icon [icon]="['fab','github']"></fa-icon>
-          </a>
-          <a mat-button [href]="feature.documentation" rel="noopener noreferrer" target="_blank">
-            <fa-icon icon="book"></fa-icon>{{ 'clgx.agencies.documentation' | translate }}
-          </a>
-          <a *ngIf="feature.medium" mat-button [href]="feature.medium" rel="noopener noreferrer" target="_blank">
-            <fa-icon [icon]="['fab','medium-m']"></fa-icon>{{ 'clgx.agencies.guide' | translate }}
-          </a>
-        </mat-card-actions> -->
-      </mat-card>
+
+  <mat-tab-group mat-align-tabs="start">
+    <mat-tab label="Details">Details</mat-tab>
+    <mat-tab label="Collection Practices">Collection Practices</mat-tab>
+    <mat-tab label="Procurement">Procurement Details</mat-tab>
+    <mat-tab label="Payment">Payment Details</mat-tab>
+    <mat-tab label="Logs">Logs Details</mat-tab>
+  </mat-tab-group>
+
+  <div class="internal-group">
+    <div class="internal-heading"><h4>Internal</h4></div>
+    <div class="internal-left">
+      <p><small>Comments and notes</small></p>
+      <textarea class="big-input-box" type="text"></textarea>
     </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 pt-3" [ngClass]="routeAnimationsElements">
-      <mat-card class="special-module-card" >
-        <mat-card-title>
-          Special Module
-        </mat-card-title>
-        <p>
-          By default, most components indicate browser focus by changing their background color as described by the Material Design specification. This behavior, however, can fall short of accessibility requirements, such
-        </p>
-      </mat-card>
+    <div class="internal-right">
+      <p><small>Last updated by</small></p>
+      <input type="text">
+      <p><small>Last date updated</small></p>
+      <input type="text">
     </div>
   </div>
 </div>

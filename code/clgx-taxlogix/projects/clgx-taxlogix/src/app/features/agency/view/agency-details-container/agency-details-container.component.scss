@@ -1,57 +1,29 @@
 @import '../../../../../styles-variables';
 
-.container {
-  margin-top: 0px;
-  max-width: 800px;
-  // background-color: #c0c0c01f;
+.back-button-group{
+  width: fit-content;
+  cursor: pointer;
 }
 
-.main-heading {
-  text-transform: uppercase;
-  margin: 0 0 20px 0;
+.details-container-content{
+  padding: 0 10%;
+  position: relative;
 }
 
-mat-card {
-  margin: 0 0 20px 0;
-  .feature-icon{
-    font-size: 3rem;
+.internal-group{
+  height: 500px;
+  .internal-left{
+    float: left;
   }
-  .image-center {
-    position: relative;
-    margin-top: 30px;
+  .internal-right{
+    float: right;
   }
-  mat-card-title {
-    position: relative;
-
-    code {
-      position: absolute;
-      top: 11px;
-      right: 0;
-      float: right;
-      font-size: 10px;
-    }
-  }
-  mat-card-subtitle {
-    min-height: 60px;
-  }
-
-  @media (max-width: map-get($grid-breakpoints, sm)) {
-    mat-card-subtitle {
-      min-height: auto;
-    }
-  }
-
-  a {
-    fa-icon {
-      position: relative;
-      bottom: 2px;
-      font-size: 16px;
-      margin: 6px;
-    }
-  }
-
-  a[mat-icon-button] {
-    position: relative;
-    left: 5px;
+  .big-input-box{
+    height: 384px;
+    width: 643px;
+    background: #FFFFFF;
+    border: 1px solid #AEAFBC;
+    box-sizing: border-box;
+    box-shadow: inset 0px 2px 2px rgba(134, 134, 134, 0.25);
   }
 }
