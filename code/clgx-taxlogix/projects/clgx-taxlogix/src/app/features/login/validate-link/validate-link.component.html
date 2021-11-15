@@ -1,0 +1,13 @@
+<div fxLayout="row" fxLayoutAlign="none start" class="breadcrumb ml-1">
+    <small>&#60;</small>
+    <div (click)="goback()">Back to home page</div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="center center" *ngIf="!displaySuccessMsg">
+    <div style="margin:5% 10% 10% 10%">
+        <div class="mb-6 pb-6">
+            <p class="text-20 font-700 text-heading">THANK YOU</p>
+            <p class="text-16 font-400 text-grey pt-1">Your account is been activated successfully. Please <a class="text-grey text-underline cursor-pointer" (click)="goback()"> click here</a> to login.</p>
+        </div>
+    </div>
+</div>

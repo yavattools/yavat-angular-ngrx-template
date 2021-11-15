@@ -1,0 +1,30 @@
+
+<div class="row px-4">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+        <span class="heading-text text-heading">Let's Connect !</span>
+        <mat-icon class="close-icon" (click)="close()">close</mat-icon>
+    </div>
+</div>
+
+<div class="row pt-3 px-4 mb-2" [formGroup]="letsConnectForm">
+    <mat-form-field class="w-100 text-dark-grey" appearance="fill">
+        <mat-label>Name</mat-label>
+        <textarea matInput formControlName="username"></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-100 text-dark-grey" appearance="fill">
+        <mat-label>Phone Number</mat-label>
+        <textarea matInput formControlName="usernumber"></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-100 text-dark-grey" appearance="fill">
+        <mat-label>Email</mat-label>
+        <textarea matInput formControlName="useremail"></textarea>
+    </mat-form-field>
+    <mat-form-field class="w-100 text-dark-grey" appearance="fill">
+        <mat-label>Message</mat-label>
+        <textarea matInput formControlName="usermessage"></textarea>
+    </mat-form-field>
+    <div fxLayout="row" fxLayoutAlign="end start">
+        <app-button [btnType]="'primary'" [isRounded]=true [btnText]="'SUBMIT'" [btnSize]="'login'"
+            (onbtnClick)="submit()"></app-button>
+    </div>
+</div>

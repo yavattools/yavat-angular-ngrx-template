@@ -36,6 +36,12 @@ import { MultiLineSnackbarComponent } from './utilities/snackbar/component/multi
 import { ClgxSnackBarService } from './utilities';
 import { FooterLgComponent } from './components/footer-lg/footer-lg.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TaxlogixSpinnerComponent } from './utilities/taxlogix-spinner/taxlogix-spinner.component';
+import { ButtonComponent } from './components/button/button.component';
+import { AlertMessageComponent } from './dialog-model/alert-message/alert-message.component';
+import { ProgressBarColorDirective } from './dialog-model/alert-message/progress-bar-color.directive';
+import { RegistrationPlansComponent } from './components/registration-plans/registration-plans.component';
+import { LetsconnectDialogComponent } from './dialog-model/letsconnect-dialog/letsconnect-dialog.component';
 
 @NgModule({
   imports: [
@@ -45,15 +51,20 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     Shared3rdPartyModule,
     TranslateModule,
     // NgbModule,
-    FontAwesomeModule,
-  
+    FontAwesomeModule
   ],
   declarations: [
     BigInputComponent,
     BigInputActionComponent,
     RtlSupportDirective,
     MultiLineSnackbarComponent,
-    FooterLgComponent
+    FooterLgComponent,
+    ButtonComponent,
+    AlertMessageComponent,
+    LetsconnectDialogComponent,
+    ProgressBarColorDirective,
+    RegistrationPlansComponent,
+    TaxlogixSpinnerComponent
   ],
   exports: [
     CommonModule,
@@ -65,11 +76,14 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     BigInputComponent,
     BigInputActionComponent,
     RtlSupportDirective,
-    FooterLgComponent
+    FooterLgComponent,
+    ButtonComponent,
+    AlertMessageComponent,
+    LetsconnectDialogComponent,
+    RegistrationPlansComponent,
+    TaxlogixSpinnerComponent
   ],
-  providers: [
-    ClgxSnackBarService
-  ]
+  providers: [ClgxSnackBarService]
 })
 export class SharedModule {
   constructor(faIconLibrary: FaIconLibrary) {

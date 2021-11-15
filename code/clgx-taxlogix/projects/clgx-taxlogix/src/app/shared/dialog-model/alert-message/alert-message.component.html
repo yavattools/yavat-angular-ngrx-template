@@ -1,0 +1,29 @@
+<div>
+    <mat-progress-bar class="progress-info" color="red" mode="determinate" [value]="progressbarValue" [appProgressBarColor]="color"></mat-progress-bar>
+    <div class="row message-container">
+        <div fxFlex="5">
+            <mat-icon *ngIf="alertType === 'success'" style="color: #1FFFE4;" class="v-align-bottom" >check_circle</mat-icon>
+            <mat-icon *ngIf="alertType === 'error'" style="color: #F51618;" class="v-align-bottom">error</mat-icon>
+            <mat-icon *ngIf="alertType === 'warning' || alertType === 'unsave-confirm'" style="color: #F6BE22;" class="v-align-bottom">warning</mat-icon>
+        </div>
+        <div fxFlex="3"></div>
+        <div fxFlex="85">
+            <!-- <span class="material-icons-outlined">
+                check_circle
+                </span> -->
+                <!-- <mat-icon style="color: green;" class="v-align-bottom" >check_circle</mat-icon> -->
+            <span class="font-500 text-16 text-grey alert-msg ml-2">{{message}}</span>
+        </div>
+        <div fxFlex="3"></div>
+        <div fxFlex="4" >
+            <div fxLayout="row" fxLayoutAlign="center center" >
+                <mat-icon class="close-icon" (click)="closeDialog()">close</mat-icon>
+            </div>
+           
+        </div>
+    </div>
+    <div class="row p-1" fxLayoutAlign="end" *ngIf="data.alertType === 'unsave-confirm'">
+        <app-button [btnType]="'flat'" [isRounded]=true [btnText]="'Yes'" [btnSize]="'login'" (onbtnClick)="submitDialog(true)"></app-button>
+        <app-button class="ml-2" [btnType]="'flat'" [isRounded]=true [btnText]="'No'" [btnSize]="'login'" (onbtnClick)="submitDialog(false)"></app-button>
+    </div>
+</div>

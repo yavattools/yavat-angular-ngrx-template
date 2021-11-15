@@ -1,0 +1,52 @@
+<div class="register-plans-box pt-3 pb-2 px-4">
+    <div >
+        <div class="heading mb-4">Choose the right plan for you.</div>
+        <div  class="mb-3">
+            <div fxLayout="row" fxLayoutAlign="center none" >
+                <div fxFlex="30" [ngClass]="{'register-container':  i < registartionPlans.length -1 }" *ngFor="let plans of registartionPlans; let i = index">
+                    <div class="pl-1 pr-3  py-2 custom-height" [ngClass]="stylesObj[i]?.boxStyle">
+                        <div class="pl-3">
+                            <p class="text-20 font-500 text-heading pb-1">{{plans.planName}}</p>
+                            <p class="text-16 text-grey pb-1">
+                                {{plans?.description}}
+                            </p>
+
+                        </div>
+                        <div class="mb-4" class="feature-box" #featureBox>
+                            <p class="pt-1" fxLayout="row" fxLayoutAlign="start center" *ngFor="let features of plans?.taxLogixFeatureModel;">
+                                <span ><img src="././assets/icons/done.png" alt="success" style="width:12px;height:12px;margin-top:3px"></span>
+                                <span class="pl-1">{{features?.featureName}}</span>
+                            </p>
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center none" class="mr-3 pb-2" *ngIf="plans?.planType === 'Online'">
+                            <app-button [btnType]="stylesObj[i].customStyle" [btnText]="stylesObj[i].buttonText" [isRounded]=true  [btnSize]="'medium'" [ngClass]="stylesObj[i]?.customStyle"  
+                            (mouseover)="stylesObj[i].customStyle='primary'; stylesObj[i].buttonText='REGISTER'; stylesObj[i].boxStyle='plans-box'"
+                            (mouseout)="stylesObj[i].customStyle='flat'; stylesObj[i].buttonText='SELECT'; stylesObj[i].boxStyle=''" (click)="selectPlan(i)" ></app-button>
+
+                        </div>
+                        <div fxLayout="row" fxLayoutAlign="center" class="mr-3" *ngIf="plans?.planType === 'Offline'">
+                            <!-- <div class="contact-sales p-05"> -->
+                                <!-- <p style="text-align:center;">Email us at</p>
+                                <p>sales@chainlogix.net</p> -->
+                                 <app-button [btnType]="stylesObj[i].customStyle" [btnText]="stylesObj[i].buttonText" [isRounded]=true  [btnSize]="'medium'" [ngClass]="stylesObj[i]?.customStyle"  
+                            (mouseover)="stylesObj[i].customStyle='primary'; stylesObj[i].buttonText='LET`S CONNECT'; stylesObj[i].boxStyle='plans-box'"
+                            (mouseout)="stylesObj[i].customStyle='flat'; stylesObj[i].buttonText='LET`S CONNECT'; stylesObj[i].boxStyle=''" (click)="openDialog()" ></app-button>
+                            <!-- </div> -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+           
+            </div>
+        
+        <div class="need-help-box text-center" *ngIf="false">
+            <p>Need help?</p>
+
+            <div class="pt-1">
+                If you have a question, please either contact us at 1-888-234-5678
+                or click on chat and someone will be able to assist you.
+            </div>
+        </div>
+        </div>
+</div>

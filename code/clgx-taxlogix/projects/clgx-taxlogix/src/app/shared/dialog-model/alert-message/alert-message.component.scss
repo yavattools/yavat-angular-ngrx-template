@@ -1,0 +1,12 @@
+.message-container {
+  padding: 20px;
+
+  .close-icon {
+    cursor: pointer;
+  }
+
+  .alert-msg {
+    margin-bottom: 4px;
+    display: inline-flex;
+  }
+}

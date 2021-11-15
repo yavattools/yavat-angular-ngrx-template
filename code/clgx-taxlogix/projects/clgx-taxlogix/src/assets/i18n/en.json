@@ -4,5 +4,9 @@
   "clgx.settings.themes.title": "Themes",
   "clgx.settings.title": "Settings",
   "clgx.title.long": "Chainlogix - Taxlogix",
-  "clgx.title.short": "Taxlogix"
+  "clgx.title.short": "Taxlogix",
+  "clgx.menu.login": "Login",
+  "clgx.menu.logout": "Logout",
+  "clgx.agency.landing.title": "Agencies",
+  "clgx.agency.details-container.title": ""
 }

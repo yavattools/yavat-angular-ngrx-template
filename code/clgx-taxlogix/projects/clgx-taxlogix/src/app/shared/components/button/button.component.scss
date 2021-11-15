@@ -1,0 +1,44 @@
+button {
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: #1fffe4;
+  color: #0b0f46;
+  font-size: 12px;
+  line-height: normal;
+  font-weight: bold;
+  border: 0;
+}
+.flat-btn {
+  background: #ffffff;
+  color: #03204f;
+  font-size: 12px;
+  line-height: 11px;
+  border: 1px solid rgba(0, 11, 108, 0.8);
+  vertical-align: bottom;
+}
+.rounded {
+  border-radius: 3px;
+}
+.primary-button-invert-grey {
+  background: #ffffff;
+  color: #03204f;
+  font-size: 12px;
+  line-height: 11px;
+  vertical-align: bottom;
+  font-weight: 600;
+  border: 1px solid #cfcfcf;
+}
+.login-btn {
+  padding: 12px 35px;
+}
+.small-btn {
+  padding: 11px 47px;
+}
+.large-btn {
+  padding: 17px 20px;
+}
+.medium-btn {
+  padding: 17px 46px;
+}

@@ -18,16 +18,15 @@
 @import 'styles-reset.scss-theme';
 @import './app/app/app.component.scss-theme';
 @import './app/features/dashboard/view/dashboard-view.component.scss-theme';
+@import './app/features/agency/view/agency-details-container/agency-details-container.component.scss-theme.scss';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
-
 
 @mixin custom-components-theme($theme) {
   @include clgx-styles-reset-theme($theme);
   @include clgx-app-component-theme($theme);
   @include clgx-dashboard-component-theme($theme);
   @include clgx-big-input-component-theme($theme);
- 
-
+  @include clgx-agency-details-container-component-theme($theme);
 }
 
 .default-theme {
@@ -50,19 +49,11 @@
   @include custom-components-theme($clgx-nature-theme);
 }
 
-body{
-  --navbar-scroll: transparent; 
+body {
+  --navbar-scroll: transparent;
   --navbar-scroll-text: white;
   --navbar-scroll-shadow: none;
- }
-
- .default-theme .mat-badge-medium .mat-badge-content {
-  width: 31px;
-  height: 31px;
-  line-height: 31px;
-  /* padding: 5px; */
 }
-
 
 .streach-h-100 {
   width: 100%;
@@ -72,7 +63,7 @@ body{
   height: 100%;
 }
 
-.align-item-middle{
+.align-item-middle {
   align-items: center;
 }
 
@@ -80,10 +71,10 @@ body{
   padding-right: 0px !important;
 }
 
-.pl-0{
+.pl-0 {
   padding-left: 0px !important;
 }
 
-.text-left{
+.text-left {
   text-align: left !important;
 }

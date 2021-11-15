@@ -6,35 +6,68 @@
   $success: map-get($theme, success);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  
 
   clgx-dashboard {
+    .default-theme .mat-badge-medium .mat-badge-content {
+      width: 31px;
+      height: 31px;
+      line-height: 31px;
 
-   
-    .welcome-title{
+      background-color: mat.get-color-from-palette(
+        $primary
+      ); /* For browsers that do not support gradients */
+      background-image: linear-gradient(
+        to top right,
+        mat.get-color-from-palette($accent),
+        mat.get-color-from-palette($primary)
+      );
+      color: white;
+      /* padding: 5px; */
+    }
+
+    .welcome-title {
       color: mat.get-color-from-palette($accent) !important;
     }
-    .feature-card-title{
+    .feature-card-title {
       color: mat.get-color-from-palette($accent, 400) !important;
       font-weight: 700;
+      font-family: 'Barlow', sans-serif !important;
     }
-    .feature-card-status-green{
-      color: mat.get-color-from-palette($success-colors)  !important;
+    .feature-card-status-green {
+      color: mat.get-color-from-palette($success-colors) !important;
       text-transform: capitalize !important;
       text-transform: uppercase !important;
-
     }
-    .feature-card-status-orange{
-      color: mat.get-color-from-palette($warning-colors)  !important;
+    .feature-card-status-orange {
+      color: mat.get-color-from-palette($warning-colors) !important;
       text-transform: capitalize !important;
       text-transform: uppercase !important;
     }
     .special-module-card {
       min-height: 150px;
-      background-color: mat.get-color-from-palette($primary); /* For browsers that do not support gradients */
-      background-image: linear-gradient(to top right, mat.get-color-from-palette($accent),  mat.get-color-from-palette($primary));
-      color:  white;
+      background-color: mat.get-color-from-palette(
+        $primary
+      ); /* For browsers that do not support gradients */
+      background-image: linear-gradient(
+        to top right,
+        mat.get-color-from-palette($accent),
+        mat.get-color-from-palette($primary)
+      );
+      color: white;
     }
+    .mat-badge-content {
+      // min-height: 150px;
+      background-color: mat.get-color-from-palette(
+        $primary
+      ); /* For browsers that do not support gradients */
+      background-image: linear-gradient(
+        to top right,
+        mat.get-color-from-palette($accent),
+        mat.get-color-from-palette($primary)
+      );
+      color: white;
+    }
+
     .background {
       color: mat.get-color-from-palette($foreground, text);
       background-color: mat.get-color-from-palette($background, background);

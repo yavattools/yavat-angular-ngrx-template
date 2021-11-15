@@ -1,80 +1,88 @@
 @use '~@angular/material' as mat;
 
-
 /* For use in src/lib/core/theming/_palette.scss */
 $md-cl-primary: (
-    50 : #e7faf9,
-    100 : #c2f2f0,
-    200 : #9ae9e7,
-    300 : #71e0dd,
-    400 : #52dad5,
-    500 : #34d3ce,
-    600 : #2fcec9,
-    700 : #27c8c2,
-    800 : #21c2bc,
-    900 : #15b7b0,
-    A100 : #e9fffe,
-    A200 : #b6fffb,
-    A400 : #83fff9,
-    A700 : #69fff8,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #000000,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
+  50: #e7faf9,
+  100: #c2f2f0,
+  200: #9ae9e7,
+  300: #71e0dd,
+  400: #52dad5,
+  500: #34d3ce,
+  600: #2fcec9,
+  700: #27c8c2,
+  800: #21c2bc,
+  900: #15b7b0,
+  A100: #e9fffe,
+  A200: #b6fffb,
+  A400: #83fff9,
+  A700: #69fff8,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #000000,
+    500: #000000,
+    600: #000000,
+    700: #000000,
+    800: #000000,
+    900: #000000,
+    A100: #000000,
+    A200: #000000,
+    A400: #000000,
+    A700: #000000
+  )
 );
-
 
 $md-cl-accent: (
-    50 : #e6e2f2,
-    100 : #c0b7df,
-    200 : #9787ca,
-    300 : #6d57b4,
-    400 : #4d33a4,
-    500 : #2e0f94,
-    600 : #290d8c,
-    700 : #230b81,
-    800 : #1d0877,
-    900 : #120465,
-    A100 : #9f95ff,
-    A200 : #7162ff,
-    A400 : #422fff,
-    A700 : #2b15ff,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #ffffff,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #ffffff,
-        A400 : #ffffff,
-        A700 : #ffffff,
-    )
+  50: #e0e2ed,
+  100: #b3b6d3,
+  200: #8085b6,
+  300: #4d5498,
+  400: #263082,
+  500: #000b6c,
+  600: #000a64,
+  700: #000859,
+  800: #00064f,
+  900: #00033d,
+  A100: #7373ff,
+  A200: #4040ff,
+  A400: #0d0dff,
+  A700: #0000f2,
+  contrast: (
+    50: #000000,
+    100: #000000,
+    200: #000000,
+    300: #ffffff,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+    800: #ffffff,
+    900: #ffffff,
+    A100: #000000,
+    A200: #ffffff,
+    A400: #ffffff,
+    A700: #ffffff
+  )
 );
 
-
-
+$clgx-typography: mat.define-typography-config(
+  $font-family: '"Barlow", sans-serif'
+);
 
 $clgx-primary: mat.define-palette($md-cl-primary, 800, 300, 900);
-$clgx-accent: mat.define-palette($md-cl-accent, 600, 300, 900 );
+$clgx-accent: mat.define-palette($md-cl-accent, 500, 300, 900);
 $clgx-warn: mat.define-palette(mat.$pink-palette, 600);
 $clgx-success: mat.define-palette(mat.$green-palette, 600);
 
-$clgx-theme: mat.define-light-theme($clgx-primary, $clgx-accent, $clgx-warn);
+$clgx-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $clgx-primary,
+      accent: $clgx-accent,
+      warn: $clgx-warn
+    ),
+    typography: $clgx-typography
+  )
+);

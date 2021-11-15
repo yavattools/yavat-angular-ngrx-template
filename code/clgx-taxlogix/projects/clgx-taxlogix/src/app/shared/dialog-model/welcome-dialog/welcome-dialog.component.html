@@ -1,0 +1,23 @@
+<div class="row pt-1 pb-1">
+    <div fxFlex fxLayoutAlign="end">
+        <mat-icon class="close-icon" (click)="matDialogRef.close()">close</mat-icon>
+    </div>
+</div>
+<div class="row pt-4 px-6">
+    <div fxFlex >
+        <span class="heading-text text-heading">WELCOME TO TAXLOGIX!</span>
+        
+    </div>
+</div>
+<div class="row pt-1 px-6">
+    <span class="info-text text-grey">Our comprehensive real estate tax report is great for either purchasing or refinance requirements. Each report 
+        includes but not limited to property data, assessment data, agency pay to information and detailed delinquent 
+        requirements should your request have delinquent taxes. We also provide upon request a Municipal Lien Report 
+        that includes unrecorded open permits, water & sewer charges, code violations and special assessments.</span>
+</div>
+<div class="row pt-6 px-6 pb-5" fxLayoutAlign="end center">
+    <!-- <span class="pt-1 text-heading">READ FAQs</span> -->
+    <div>
+        <app-button [btnType]="'primary'" [isRounded]=true [btnText]="'START A SEARCH'" [btnSize]="'login'" (onbtnClick)="goToNewSearch()"></app-button>
+    </div>
+</div>

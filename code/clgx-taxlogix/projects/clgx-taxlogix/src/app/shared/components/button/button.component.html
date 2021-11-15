@@ -1,0 +1,11 @@
+<button  [ngClass]="{'primary-btn': btnType === 'primary', 'flat-btn': btnType === 'flat' ,
+'primary-button-invert-grey': btnType === 'flat-grey' ,
+ 'small-btn': btnSize === 'small' ,
+ 'login-btn': btnSize === 'login' ,
+ 'medium-btn': btnSize === 'medium' , 
+ 'rounded': isRounded === true , 
+ 'w-100' : fullWidth === true ,
+'large-btn': btnSize === 'large'}" (click)="onClick()"
+[disabled]="btnDisabled"
+class="cursor-pointer"
+>{{btnText}}</button>

@@ -1,7 +1,8 @@
-<div class="back-button-group" (click)="back()">
+<!-- <div class="back-button-group" (click)="back()">
   <img src="../../../../../assets/images/hexLogo.png" alt="" srcset="">
   <p><small>&lt;dashboard</small></p>
-</div>
+</div> -->
+<div class="container">
 
 <div class="details-container-content">
   <div class="page-title">
@@ -9,12 +10,22 @@
     <p><small>982362341</small></p>
   </div>
 
-  <mat-tab-group mat-align-tabs="start">
-    <mat-tab label="Details">Details</mat-tab>
-    <mat-tab label="Collection Practices">Collection Practices</mat-tab>
-    <mat-tab label="Procurement">Procurement Details</mat-tab>
-    <mat-tab label="Payment">Payment Details</mat-tab>
-    <mat-tab label="Logs">Logs Details</mat-tab>
+  <mat-tab-group  mat-stretch-tabs mat-align-tabs="start">
+    <mat-tab label="Details">
+      <span class="tab-label">Details</span>
+    </mat-tab>
+    <mat-tab label="Collection Practices">
+      <span class="tab-label">Collection Practices</span>
+    </mat-tab>
+    <mat-tab label="Procurement">
+      <span class="tab-label">Procurement </span>
+    </mat-tab>
+    <mat-tab label="Payment">
+      <span class="tab-label">Payment</span>
+    </mat-tab>
+    <mat-tab label="Logs">
+      <span class="tab-label">Logs</span>
+      </mat-tab>
   </mat-tab-group>
 
   <div class="internal-group">
@@ -30,4 +41,5 @@
       <input type="text">
     </div>
   </div>
+</div>
 </div>

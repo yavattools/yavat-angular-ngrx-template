@@ -15,14 +15,13 @@ export class AgencyLandingComponent implements OnInit {
   agencies: Agency[] = agencies;
 
   isMobile: boolean = false;
-  constructor( public deviceService:DeviceDetectorService){
-
-  }
+  constructor(public deviceService: DeviceDetectorService) {}
 
   ngOnInit() {
-    if(this.deviceService.isMobile()){
+    debugger;
+    if (this.deviceService.isMobile()) {
       this.isMobile = true;
-    }else{
+    } else {
       this.isMobile = false;
     }
   }

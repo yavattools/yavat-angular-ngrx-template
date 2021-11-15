@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { TaxlogixSpinnerComponent } from './shared/utilities/taxlogix-spinner/taxlogix-spinner.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full'
+    redirectTo: 'login'
+  },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('./features/login/login.module').then((m) => m.LoginModule)
   },
   {
     path: 'dashboard',
@@ -17,9 +22,7 @@ const routes: Routes = [
   {
     path: 'agency',
     loadChildren: () =>
-      import('./features/agency/agency.module').then(
-        (m) => m.AgencyModule
-      )
+      import('./features/agency/agency.module').then((m) => m.AgencyModule)
   },
   {
     path: 'settings',
@@ -29,15 +32,19 @@ const routes: Routes = [
       )
   },
   {
+    path: 'spin',
+    component: TaxlogixSpinnerComponent
+  },
+  {
     path: 'home',
     loadChildren: () =>
-    import('./features/dashboard/dashboard.module').then(
-      (m) => m.DashboardModule
-    )
+      import('./features/dashboard/dashboard.module').then(
+        (m) => m.DashboardModule
+      )
   },
   {
     path: '**',
-    redirectTo: 'about'
+    redirectTo: 'login'
   }
 ];
 

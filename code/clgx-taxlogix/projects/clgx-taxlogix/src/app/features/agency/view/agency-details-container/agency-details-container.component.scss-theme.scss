@@ -6,34 +6,43 @@
   $success: map-get($theme, success);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  
 
-  clgx-agency-view {
-
-   
-    .welcome-title{
+  clgx-agency-details-container {
+    .mat-tab-label-content {
+      color: mat.get-color-from-palette($accent, 600) !important;
+      font-weight: 400 !important;
+    }
+    .tab-label {
       color: mat.get-color-from-palette($accent) !important;
     }
-    .feature-card-title{
+    .welcome-title {
+      color: mat.get-color-from-palette($accent) !important;
+    }
+    .feature-card-title {
       color: mat.get-color-from-palette($accent, 400) !important;
       font-weight: 700;
     }
-    .feature-card-status-green{
-      color: mat.get-color-from-palette($success-colors)  !important;
+    .feature-card-status-green {
+      color: mat.get-color-from-palette($success-colors) !important;
       text-transform: capitalize !important;
       text-transform: uppercase !important;
-
     }
-    .feature-card-status-orange{
-      color: mat.get-color-from-palette($warning-colors)  !important;
+    .feature-card-status-orange {
+      color: mat.get-color-from-palette($warning-colors) !important;
       text-transform: capitalize !important;
       text-transform: uppercase !important;
     }
     .special-module-card {
       min-height: 150px;
-      background-color: mat.get-color-from-palette($primary); /* For browsers that do not support gradients */
-      background-image: linear-gradient(to top right, mat.get-color-from-palette($accent),  mat.get-color-from-palette($primary));
-      color:  white;
+      background-color: mat.get-color-from-palette(
+        $primary
+      ); /* For browsers that do not support gradients */
+      background-image: linear-gradient(
+        to top right,
+        mat.get-color-from-palette($accent),
+        mat.get-color-from-palette($primary)
+      );
+      color: white;
     }
     .background {
       color: mat.get-color-from-palette($foreground, text);
