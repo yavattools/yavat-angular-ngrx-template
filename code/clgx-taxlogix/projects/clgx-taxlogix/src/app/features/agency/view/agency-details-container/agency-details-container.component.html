@@ -12,33 +12,43 @@
 
   <mat-tab-group  mat-stretch-tabs mat-align-tabs="start">
     <mat-tab label="Details">
-      <span class="tab-label"><clgx-agency-details></clgx-agency-details></span>
+        <clgx-agency-details></clgx-agency-details>
     </mat-tab>
     <mat-tab label="Collection Practices">
-      <span class="tab-label">Collection Practices</span>
+      <div class="tab-content tab-label">
+        <small class="tab-description">Collection Practices Tab under Construction</small>
+      </div>
     </mat-tab>
     <mat-tab label="Procurement">
-      <span class="tab-label">Procurement </span>
+      <div class="tab-content tab-label">
+        <small class="tab-description">Procurement Tab under Construction</small>
+      </div>
     </mat-tab>
     <mat-tab label="Payment">
-      <span class="tab-label">Payment</span>
+      <div class="tab-content tab-label">
+        <small class="tab-description">Payment Tab under Construction</small>
+      </div>
     </mat-tab>
     <mat-tab label="Logs">
-      <span class="tab-label">Logs</span>
+      <div class="tab-content tab-label">
+        <small class="tab-description">Logs Tab under Construction</small>
+      </div>
       </mat-tab>
   </mat-tab-group>
 
   <div class="internal-group">
     <div class="internal-heading"><h4>Internal</h4></div>
-    <div class="internal-left">
-      <p><small>Comments and notes</small></p>
-      <textarea class="big-input-box" type="text"></textarea>
-    </div>
-    <div class="internal-right">
-      <p><small>Last updated by</small></p>
-      <input type="text">
-      <p><small>Last date updated</small></p>
-      <input type="text">
+    <div class="grid-wrapper">
+      <div >
+        <p><small>Comments and notes</small></p>
+        <textarea class="big-input-box" type="text"></textarea>
+      </div>
+      <div>
+        <p><small>Last updated by</small></p>
+        <input type="text">
+        <p><small>Last date updated</small></p>
+        <input type="text">
+      </div>
     </div>
   </div>
 </div>

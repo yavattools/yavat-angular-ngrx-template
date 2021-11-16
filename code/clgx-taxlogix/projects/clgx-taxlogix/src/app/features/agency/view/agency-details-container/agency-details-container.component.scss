@@ -14,19 +14,25 @@
 .details-container-content {
   padding: 0 10%;
   position: relative;
+  .tab-content{
+    min-height: 500px;
+    .tab-description{
+      justify-content: center;
+      display: flex;
+      padding: 250px 0;
+    }
+  }
 }
 
 .internal-group {
   height: 500px;
-  .internal-left {
-    float: left;
-  }
-  .internal-right {
-    float: right;
+  .grid-wrapper{
+    display: grid;
+    grid-template-columns: 70% 30%;
   }
   .big-input-box {
-    height: 384px;
-    width: 643px;
+    height: 300px;
+    width: 500px;
     background: #ffffff;
     border: 1px solid #aeafbc;
     box-sizing: border-box;
