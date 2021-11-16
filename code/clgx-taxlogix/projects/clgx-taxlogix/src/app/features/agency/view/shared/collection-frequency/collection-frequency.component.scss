@@ -1,0 +1,58 @@
+.collection-freq {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  .title {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    span {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 22px;
+      color: #000b6c;
+    }
+  }
+  .default-text {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 0 0 0;
+    span {
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 12px;
+      letter-spacing: 0.03em;
+      color: #868686;
+      padding: 15px 15px 8px 15px;
+    }
+  }
+  .input-sections {
+    display: flex;
+    flex-direction: column;
+    .section {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+      padding: 8px 0;
+      .title {
+        span {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 13px;
+          color: #000b6c;
+        }
+      }
+      .checkbox {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 15px;
+        width: 120px;
+        color: white;
+      }
+    }
+  }
+}

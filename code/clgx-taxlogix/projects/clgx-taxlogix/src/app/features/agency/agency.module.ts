@@ -11,11 +11,23 @@ import { AgencyCollectionPracticesComponent } from './view/agency-collection-pra
 import { AgencyProcumentComponent } from './view/agency-procurement/agency-procurement.component';
 import { AgencyPaymentComponent } from './view/agency-payment/agency-payment.component';
 import { AgencyLogsComponent } from './view/agency-logs/agency-logs.component';
+import { CollectionFrequencyComponent } from './view/shared/collection-frequency/collection-frequency.component';
 
 @NgModule({
-  declarations: [AgencyLandingComponent, AgencyDetailsContainerComponent, 
-                AgencyDetailsComponent, AgencyCollectionPracticesComponent, AgencyProcumentComponent,
-              AgencyPaymentComponent, AgencyLogsComponent],
-  imports: [CommonModule, SharedModule, AgencyRoutingModule]
+  declarations: [
+    AgencyLandingComponent,
+    AgencyDetailsContainerComponent,
+    AgencyDetailsComponent,
+    AgencyCollectionPracticesComponent,
+    AgencyProcumentComponent,
+    AgencyPaymentComponent,
+    AgencyLogsComponent,
+    CollectionFrequencyComponent
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    AgencyRoutingModule
+  ]
 })
 export class AgencyModule {}

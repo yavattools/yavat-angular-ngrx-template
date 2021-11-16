@@ -1,65 +1,233 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 pb-3">
-      <mat-card-title  class="welcome-title">
-        Welcome, Sarah!
-      </mat-card-title>
+<div class="details-container">
+  <div class="details-dashboard">
+    <div class="escrow-n-nonescrow">
+      <div class="escrow">
+        <small>Escrow</small>
+        <span>12,345</span>
+      </div>
+      <div class="non-escrow">
+        <small>Non-escrow</small>
+        <span>6,354</span>
+      </div>
+    </div>
+    <div class="collection-frequency-div">
+      <div class="collection-frequency">
+        <clgx-collection-frequency></clgx-collection-frequency>
+      </div>
     </div>
   </div>
-  <div class="row align-items-end">
-    <div *ngFor="let feature of agencies"  class="col-md-3 col-lg-3" [ngClass]="routeAnimationsElements">
-      <mat-card style="height: 150px;"  
-          class="mat-elevation-z1  align-middle" [matBadge]="feature.count" matBadgePosition="after" matBadgeColor="warn">
-        <mat-card-content class="d-flex justify-content-center mb-0 streach-v-100  align-middle">
-          <div class="row d-flex justify-content-center p0 m0 streach-h-100">
-            <div [class.col-4]="isMobile" [class.col-12]="!isMobile" 
-                 class="col-12 d-flex justify-content-center p0 m0 align-middle ">
-                <span class="material-icons feature-icon text-muted pb-2" [class.image-center]="isMobile" >
-                  find_in_page
-                </span>
-            </div>
-            <div [class.col-8]="isMobile" [class.col-12]="!isMobile" 
-                class="col-12 d-flex justify-content-center text-justify">
-                <div class="row d-flex justify-content-center p0 m0">
-                  <div class="col-12 d-flex justify-content-center p0 m0 align-item-middle text-center feature-card-title">
-                    {{ feature.name }}
-                  </div>
-                  <div class="col-12 d-flex justify-content-center p0 m0 ">
-                    <span >
-                      <strong  [class.feature-card-status-green]="feature.status == 'In Progress' || feature.status == 'Next'"
-                              [class.feature-card-status-orange]="feature.status == 'Completed'" >
-                          {{ feature.status }}
-                        </strong>
-                    </span>
-                  </div>
-                </div>
-            </div>
+  <form class="form" [formGroup]="agency_details" (ngSubmit)="show(agency_details)">
+  <div class="agency-details">
+    <div class="details">
+      <div class="detail">
+        <span>Overview</span>
+      </div>
+      <div class="details-inputs">
+          <mat-form-field appearance="outline">
+            <mat-label>Agency Number</mat-label>
+            <input matInput formControlName="agencyNumber">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Agency Name</mat-label>
+            <input matInput formControlName="agencyName">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Agency Website</mat-label>
+            <input matInput formControlName="agencyWebsite">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Lower Level Agency</mat-label>
+            <mat-select formControlName="agencyLowerLevel">
+              <mat-option *ngFor="let option of options" [value]="option.value">
+                {{option.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <div class="toggle">
+            <mat-label>Collecting Agency</mat-label>
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agencyCollecting">
+              <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+            </mat-button-toggle-group>
           </div>
-        </mat-card-content>
-        <!-- <mat-card-actions>
-          <a *ngIf="feature.github" mat-icon-button [href]="feature.github" rel="noopener noreferrer" target="_blank">
-            <fa-icon [icon]="['fab','github']"></fa-icon>
-          </a>
-          <a mat-button [href]="feature.documentation" rel="noopener noreferrer" target="_blank">
-            <fa-icon icon="book"></fa-icon>{{ 'clgx.agencies.documentation' | translate }}
-          </a>
-          <a *ngIf="feature.medium" mat-button [href]="feature.medium" rel="noopener noreferrer" target="_blank">
-            <fa-icon [icon]="['fab','medium-m']"></fa-icon>{{ 'clgx.agencies.guide' | translate }}
-          </a>
-        </mat-card-actions> -->
-      </mat-card>
+          <div class="toggle">
+            <mat-label>Active?</mat-label>
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agencyActive">
+              <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+      </div>
+    </div>
+    <div class="details">
+      <div class="detail">
+        <span>Location</span>
+      </div>
+      <div class="details-inputs">
+          <mat-form-field appearance="outline">
+            <mat-label>Agency Suits Address</mat-label>
+            <input matInput formControlName="agencySuitsAddress">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Agency City</mat-label>
+            <input matInput formControlName="agencyCity">
+          </mat-form-field>
+          <div class="state-zip">
+            <mat-form-field appearance="outline" style="width: 40%;">
+              <mat-label>State</mat-label>
+              <input matInput formControlName="stateId">
+            </mat-form-field>
+            <mat-form-field appearance="outline" style="width : 55%">
+              <mat-label>Zip</mat-label>
+              <input matInput formControlName="zip">
+            </mat-form-field>
+          </div>
+          <mat-form-field appearance="outline">
+            <mat-label>County</mat-label>
+            <input matInput formControlName="countyId">
+          </mat-form-field>
+      </div>
+    </div>
+    <div class="details">
+      <div class="detail">
+        <span>Contact</span>
+      </div>
+      <div class="details-inputs">
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Contact Name</mat-label>
+            <input matInput formControlName="contactName">
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Contact Email</mat-label>
+            <input matInput formControlName="contactEmail">
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Contact Phone</mat-label>
+            <input matInput formControlName="contactPhone">
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Contact Fax</mat-label>
+            <input matInput formControlName="contactFax">
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Parsel Format</mat-label>
+            <input matInput formControlName="parcelFormat">
+          </mat-form-field>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-md-12 pt-3" [ngClass]="routeAnimationsElements">
-      <mat-card class="special-module-card" >
-        <mat-card-title>
-          Special Module
-        </mat-card-title>
-        <p>
-          By default, most components indicate browser focus by changing their background color as described by the Material Design specification. This behavior, however, can fall short of accessibility requirements, such
-        </p>
-      </mat-card>
+  <div class="divider">
+  </div>
+  <div class="agency-details">
+    <div class="details">
+      <div class="detail">
+        <span>Assessor Info</span>
+      </div>
+      <div class="details-inputs">
+        <mat-form-field appearance="outline">
+          <mat-label>Assessor Name</mat-label>
+          <input matInput formControlName="assessorName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Assessor Contact Name</mat-label>
+          <input matInput formControlName="assessorContactName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Assessor Phone</mat-label>
+          <input matInput formControlName="assessorPhoneNumber">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Map Cost</mat-label>
+          <input matInput formControlName="mapCost">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Website Access Cost</mat-label>
+          <input matInput formControlName="websiteAccessCost">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Assessor Website</mat-label>
+          <input matInput formControlName="assessorWebsite">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="details">
+      <div class="detail">
+        <span>Location</span>
+      </div>
+      <div class="details-inputs">
+        <mat-form-field appearance="outline">
+          <mat-label>Assessor Address</mat-label>
+          <input matInput formControlName="assessorAddress">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Assessor City</mat-label>
+          <input matInput formControlName="assessorCity">
+        </mat-form-field>
+        <div class="state-zip">
+          <mat-form-field appearance="outline" style="width: 40%;">
+            <mat-label>State</mat-label>
+            <input matInput formControlName="assessorStateId">
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width : 55%">
+            <mat-label>Zip</mat-label>
+            <input matInput formControlName="assessorZip">
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div class="details">
+      <div class="detail">
+        <span>Tax bill request</span>
+      </div>
+      <div class="details-inputs">
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Billing Request Format</mat-label>
+          <mat-select formControlName="billingRequestId">
+            <mat-option *ngFor="let option of options" [value]="option.value">
+              {{option.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Media Type</mat-label>
+          <mat-select formControlName="mediaTypeId">
+            <mat-option *ngFor="let option of options" [value]="option.value">
+              {{option.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="toggle" style="width: 100%">
+          <mat-label>Type: Paper</mat-label>
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="paperType">
+            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="toggle" style="width: 100%">
+          <mat-label>Excel</mat-label>
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="excelType">
+            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <div class="toggle" style="width: 100%">
+          <mat-label>Mail</mat-label>
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mailType">
+            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+        <mat-form-field appearance="outline" style="width: 100%">
+          <mat-label>Email ID</mat-label>
+          <input matInput formControlName="emailId">
+        </mat-form-field>
+      </div>
     </div>
   </div>
+  <div class="divider">
+  </div>
+  <div class="save-btn">
+    <button>Save</button>
+  </div>
+  </form>
 </div>

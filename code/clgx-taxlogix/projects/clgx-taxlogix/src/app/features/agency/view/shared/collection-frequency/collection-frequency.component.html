@@ -1,0 +1,56 @@
+<div class="collection-freq">
+    <div class="title">
+        <span>Collection Frequency</span>
+    </div>
+    <div class="default-text">
+        <span>Default</span>
+        <span>Non</span>
+    </div>
+    <div class="input-sections">
+        <section class="section">
+            <div class="title">
+                <span>Annual</span>
+            </div>
+            <div class="checkbox">
+                <mat-checkbox class="check-box" [(ngModel)]="annual_default_checked"></mat-checkbox>
+                <mat-checkbox class="check-box" [(ngModel)]="annual_non_checked"></mat-checkbox>
+            </div>
+          </section>
+          <section class="section">
+            <div class="title">
+                <span>Discount Annual</span>
+            </div>
+            <div class="checkbox">
+                <mat-checkbox [(ngModel)]="discount_annual_default_checked"></mat-checkbox>
+                <mat-checkbox [(ngModel)]="discount_annual_non_checked"></mat-checkbox>
+            </div>
+          </section>
+          <section class="section">
+            <div class="title">
+                <span>Semi Annual</span>
+            </div>
+            <div class="checkbox">
+                <mat-checkbox class="check-box" [(ngModel)]="semi_annual_default_checked"></mat-checkbox>
+                <mat-checkbox class="check-box" [(ngModel)]="semi_annual_non_checked"></mat-checkbox>
+            </div>
+          </section>
+          <section class="section">
+            <div class="title">
+                <span>Tri</span>
+            </div>
+            <div class="checkbox">
+                <mat-checkbox class="check-box" [(ngModel)]="tri_default_checked"></mat-checkbox>
+                <mat-checkbox class="check-box" [(ngModel)]="tri_non_checked"></mat-checkbox>
+            </div>
+          </section>
+          <section class="section">
+            <div class="title">
+                <span>Quarterly</span>
+            </div>
+            <div class="checkbox">
+                <mat-checkbox class="check-box" [(ngModel)]="quarterly_default_checked"></mat-checkbox>
+                <mat-checkbox class="check-box" [(ngModel)]="quarterly_non_checked"></mat-checkbox>
+            </div>
+          </section>
+    </div>
+</div>
