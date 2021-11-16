@@ -70,6 +70,7 @@
     "font-awesome": "^4.7.0",
     "json-server": "^0.17.0",
     "lodash-es": "^4.17.21",
+    "ngrx-etc": "^7.0.1",
     "ngx-device-detector": "^2.1.1",
     "ngx-page-scroll-core": "^7.0.5",
     "ngx-scroll-event": "^2.0.2",

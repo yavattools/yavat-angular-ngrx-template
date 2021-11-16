@@ -112,7 +112,7 @@ export function httpLoaderFactory(http: HttpClient) {
     environment.production
       ? []
       : StoreDevtoolsModule.instrument({
-          name: 'Chainlogix - Taxlogix'
+          name: 'Chainlogix - Tax Services'
         }),
 
     // 3rd party

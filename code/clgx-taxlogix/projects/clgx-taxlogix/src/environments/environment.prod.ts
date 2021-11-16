@@ -1,7 +1,7 @@
 const packageJson = require('../../../../package.json');
 
 export const environment = {
-  appName: 'Chainlogix - Taxlogix',
+  appName: 'Chainlogix - Tax Services',
   envName: 'PROD',
   production: true,
   test: false,
