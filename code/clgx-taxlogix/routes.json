@@ -1,9 +1,25 @@
 
 {
-    "/posts/list": "/posts",
-    "/posts/get/:id": "/posts/:id",
-    "/posts/create": "/posts",
-    "/posts/update/:id": "/posts/:id",
-    "/posts/delete/:id": "/posts/:id"
+    "/agencies/list": "/agencies",    
+    "/agencies/create": "/agencies",
+    "/agencies/update/:id": "/agencies/:id",
+    "/agencies/delete/:id": "/agencies/:id",
+    "/getCollectionDates/list":"/getCollectionDates",
+    "/getCollectionDates/create":"/getCollectionDates/:id",
+    "/getCollectionDates/update/:id":"/getCollectionDates/:id",
+    "/getCollectionDates/delete/:id":"/getCollectionDates/:id",
+    "/escrow/list": "/escrow",    
+    "/escrow/create": "/escrow",
+    "/escrow/update/:id": "/escrow/:id",
+    "/escrow/delete/:id": "/escrow/:id",
+    "/nonescrow/list": "/nonescrow",    
+    "/nonescrow/create": "/nonescrow",
+    "/nonescrow/update/:id": "/nonescrow/:id",
+    "/nonescrow/delete/:id": "/nonescrow/:id",
+    "/paymentdetails":"/paymentdetails",
+    "/paymentdetails/create": "/paymentdetails",
+    "/paymentdetails/update/:id": "/paymentdetails/:id",
+    "/paymentdetails/delete/:id": "/paymentdetails/:id"
   }
+  
   
