@@ -29,7 +29,7 @@
       color: mat.get-color-from-palette($accent) !important;
     }
     .feature-card-title {
-      color: mat.get-color-from-palette($accent, 400) !important;
+      color: mat.get-color-from-palette($accent, 400);
       font-weight: 700;
       font-family: 'Barlow', sans-serif !important;
     }
@@ -55,6 +55,48 @@
       );
       color: white;
     }
+
+    .feature-card-enabled {
+      background-color: white;
+      cursor: pointer;
+      span {
+        color: silver;
+      }
+     
+    }
+
+    .feature-card-disabled {
+      background-color: rgba(192, 192, 192, 0.212);
+      span {
+        color: silver;
+      }
+      .feature-card-title {
+        color: rgb(112, 110, 110);
+      }
+    }
+
+    .feature-card-enabled:hover {
+      min-height: 150px;
+      background-color: mat.get-color-from-palette(
+        $primary
+      ); /* For browsers that do not support gradients */
+      background-image: linear-gradient(
+        to top right,
+        mat.get-color-from-palette($accent),
+        mat.get-color-from-palette($primary)
+      );
+      color: white;
+
+      span {
+        color: white;
+      }
+
+      .feature-card-title {
+        color: white;
+      }
+    }
+
+
     .mat-badge-content {
       // min-height: 150px;
       background-color: mat.get-color-from-palette(

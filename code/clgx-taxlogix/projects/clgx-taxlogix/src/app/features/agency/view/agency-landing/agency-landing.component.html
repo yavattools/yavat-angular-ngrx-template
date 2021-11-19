@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="row">
+  <div class="row" [ngClass]="routeAnimationsElements">
 
     <div class="col-md-12 pb-3">
       <div class="page-title">
@@ -29,7 +29,7 @@
   </div>
 
 
-  <div class="row align-items-end" style="height: 300px; overflow-y: scroll;">
+  <div class="row align-items-end" style="height: 300px; overflow-y: scroll;" [ngClass]="routeAnimationsElements">
 
     <table mat-table [dataSource]="agenciesDetails" class="mat-elevation-z8 demo-table" >
       <!-- Number Column -->

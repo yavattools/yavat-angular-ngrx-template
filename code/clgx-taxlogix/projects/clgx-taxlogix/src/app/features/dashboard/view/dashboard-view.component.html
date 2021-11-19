@@ -8,13 +8,14 @@
   </div>
   <div class="row align-items-end">
     <div *ngFor="let feature of features"  class="col-md-3 col-lg-3" [ngClass]="routeAnimationsElements">
-      <mat-card style="height: 150px;"  
+      <mat-card style="height: 150px;"   [class.feature-card-enabled]="feature.enabled"
+          [class.feature-card-disabled]="!feature.enabled" (click)="featureClickHandler($event)"
           class="mat-elevation-z1  align-middle" [matBadge]="feature.count" matBadgePosition="after" >
         <mat-card-content class="d-flex justify-content-center mb-0 streach-v-100  align-middle">
           <div class="row d-flex justify-content-center p0 m0 streach-h-100">
             <div [class.col-4]="isMobile" [class.col-12]="!isMobile" 
                  class="col-12 d-flex justify-content-center p0 m0 align-middle ">
-                <span class="material-icons feature-icon text-muted pb-2" [class.image-center]="isMobile" >
+                <span class="material-icons feature-icon pb-2" [class.image-center]="isMobile" >
                   find_in_page
                 </span>
             </div>

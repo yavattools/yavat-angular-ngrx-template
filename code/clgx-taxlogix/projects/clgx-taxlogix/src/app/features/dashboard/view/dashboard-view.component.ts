@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 
-import { Feature, features } from '../dashboard-view.data';
+import { AgencyFeature, features } from '../dashboard-view.data';
 
 @Component({
   selector: 'clgx-dashboard',
@@ -12,10 +13,10 @@ import { Feature, features } from '../dashboard-view.data';
 })
 export class DashboardViewComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  features: Feature[] = features;
+  features: AgencyFeature[] = features;
 
   isMobile: boolean = false;
-  constructor( public deviceService:DeviceDetectorService){
+  constructor( public deviceService:DeviceDetectorService, private router: Router){
 
   }
 
@@ -29,5 +30,11 @@ export class DashboardViewComponent implements OnInit {
 
   openLink(link: string) {
     window.open(link, '_blank');
+  }
+
+  featureClickHandler($event: MouseEvent){
+    $event.stopPropagation();
+
+    this.router.navigateByUrl('/agency');
   }
 }
