@@ -1,6 +1,15 @@
-import { Agency } from '@app/features/agency/agency-view.data';
 import { createAction, props } from '@ngrx/store';
-import { CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails } from './agency.model';
+import { Agency, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails } from './agency.model';
+
+
+
+export const actionStartActionInProgress = createAction(
+  '[Agency] Start Action In Progress',
+);
+
+export const actionStopActionInProgress = createAction(
+  '[Agency] Stop Action In Progress',
+);
 
 export const actionGetAllActiveAgencies = createAction(
   '[Agency] Get All Active Agencies',
@@ -9,7 +18,7 @@ export const actionGetAllActiveAgencies = createAction(
 
 export const actionGetAllActiveAgenciesSuccess = createAction(
   '[Agency] Get All Active Agencies Success',
-  props<{ agencies: Array<Agency>}>()
+  props<{ agencyList: Array<Agency>}>()
 );
 
 export const actionAgencyApiFailure = createAction(
@@ -17,30 +26,41 @@ export const actionAgencyApiFailure = createAction(
   props<{ error: any }>()
 );
 
-export const actionSaveAgency = createAction(
-  '[Agency] Save Agency',
+export const actionSetSelectedAgency = createAction(
+  '[Agency] Set Selected Agency',
   props<{ agency: Agency}>()
 );
 
-export const actionSaveAgencySuccess = createAction(
-  '[Agency] Save Agency Success',
+export const actionSaveAgencyDetails = createAction(
+  '[Agency] Save Agency Details',
+  props<{ agency: Agency}>()
+);
+
+export const actionSaveAgencyDetailsSuccess = createAction(
+  '[Agency] Save Agency Details Success',
   props<{ agency: Agency}>()
 );
 
 
-export const actionUpdateAgency = createAction(
-  '[Agency] Update Agency',
+export const actionUpdateAgencyDetails = createAction(
+  '[Agency] Update Agency Details',
   props<{ agency: Agency}>()
 );
 
-export const actionUpdateAgencySuccess = createAction(
-  '[Agency] Update Agency Success',
+export const actionUpdateAgencyDetailsSuccess = createAction(
+  '[Agency] Update Agency Details Success',
   props<{ agency: Agency}>()
 );
 
 export const actionGetCollectionDates = createAction(
   '[Agency] Get Collection Dates',
   props<{ request: GetCollectionDatesRequest}>()
+);
+
+
+export const actionGetCollectionDatesSuccess = createAction(
+  '[Agency] Get Collection Dates Success',
+  props<{ collectionDates: Array<CollectionDates>}>()
 );
 
 export const actionSaveCollectionDates = createAction(
@@ -68,6 +88,12 @@ export const actionUpdateCollectionDatesSuccess = createAction(
 export const actionGetEscrowNonEscrowDetails = createAction(
   '[Agency] Get Escrow Non Escrow Details',
   props<{ request: GetEscrowNonEscrowDetailsRequest}>()
+);
+
+
+export const actionGetEscrowNonEscrowDetailsSuccess = createAction(
+  '[Agency] Get Escrow Non Escrow Details Success',
+  props<{ escNonEscs: Array<EscrowNonEscrowDetails>}>()
 );
 
 export const actionSaveEscrowDetails = createAction(
@@ -114,6 +140,10 @@ export const actionUpdateNonEscrowDetailsSuccess = createAction(
 export const actionGetPaymentDetails = createAction(
   '[Agency] Get Payment Details',
   props<{ request: GetPaymentDetailsRequest}>()
+);
+export const actionGetPaymentDetailsSuccess = createAction(
+  '[Agency] Get Payment Details Success',
+  props<{ paymentDetails: PaymentDetails}>()
 );
 
 export const actionSavePaymentDetails = createAction(

@@ -9,141 +9,80 @@ import {
   tap,
   withLatestFrom,
   distinctUntilChanged,
-  filter
+  filter,
+  switchMap,
+  catchError
 } from 'rxjs/operators';
 
-import { selectSettingsState } from '../../core.state';
+import { selectAgencyState } from '../../core.state';
 import { LocalStorageService } from '../../providers/local-storage/local-storage.service';
 import { AnimationsService } from '../../providers/animations/animations.service';
 import { TitleService } from '../../providers/title/title.service';
 
 import {
-  actionSettingsChangeAnimationsElements,
-  actionSettingsChangeAnimationsPage,
-  actionSettingsChangeAnimationsPageDisabled,
-  actionSettingsChangeAutoNightMode,
-  actionSettingsChangeLanguage,
-  actionSettingsChangeTheme,
-  actionSettingsChangeStickyHeader,
-  actionSettingsChangeHour
-} from './settings.actions';
+  actionAgencyApiFailure,
+actionGetAllActiveAgencies,
+actionGetAllActiveAgenciesSuccess,
+actionGetCollectionDates,
+actionGetCollectionDatesSuccess,
+actionGetEscrowNonEscrowDetails,
+actionGetEscrowNonEscrowDetailsSuccess,
+actionGetPaymentDetails,
+actionGetPaymentDetailsSuccess,
+actionSaveAgencyDetails,
+actionSaveAgencyDetailsSuccess,
+actionSaveCollectionDates,
+actionSaveCollectionDatesSuccess,
+actionSaveEscrowDetails,
+actionSaveEscrowDetailsSuccess,
+actionSaveNonEscrowDetails,
+actionSaveNonEscrowDetailsSuccess,
+actionSavePaymentDetails,
+actionSavePaymentDetailsSuccess,
+actionSetSelectedAgency,
+actionStartActionInProgress,
+actionStopActionInProgress,
+actionUpdateAgencyDetails,
+actionUpdateAgencyDetailsSuccess,
+actionUpdateCollectionDates,
+actionUpdateCollectionDatesSuccess,
+actionUpdateEscrowDetails,
+actionUpdateEscrowDetailsSuccess,
+actionUpdateNonEscrowDetails,
+actionUpdateNonEscrowDetailsSuccess,
+actionUpdatePaymentDetails,
+actionUpdatePaymentDetailsSuccess
+} from './agency.actions';
 import {
-  selectEffectiveTheme,
-  selectSettingsLanguage,
-  selectPageAnimations,
-  selectElementsAnimations
-} from './settings.selectors';
-import { State } from './settings.model';
+ selectActionInProgress,
+ selectAgencies,
+ selectAgency,
+ selectAgencyStoreState,
+ selectCollectionDates,
+ selectEscrowNonEscrowDetails,
+ selectPaymentDetails
+} from './agency.selectors';
+import { State } from './agency.model';
+import { AgencyDataService } from './agency-data-api.service';
+import * as agencyActions from './agency.actions';
 
-export const SETTINGS_KEY = 'SETTINGS';
+export const AGENCY_KEY = 'AGENCY';
 
 const INIT = of('clgx-init-effect-trigger');
 
 @Injectable()
-export class SettingsEffects {
-  hour = 0;
-
-  changeHour = this.ngZone.runOutsideAngular(() =>
-    setInterval(() => {
-      const hour = new Date().getHours();
-      if (hour !== this.hour) {
-        this.hour = hour;
-        this.ngZone.run(() =>
-          this.store.dispatch(actionSettingsChangeHour({ hour }))
-        );
-      }
-    }, 60_000)
-  );
-
-  persistSettings = createEffect(
+export class AgencyEffects {
+  
+  getAgencies = createEffect(
     () =>
-      this.actions$.pipe(
-        ofType(
-          actionSettingsChangeAnimationsElements,
-          actionSettingsChangeAnimationsPage,
-          actionSettingsChangeAnimationsPageDisabled,
-          actionSettingsChangeAutoNightMode,
-          actionSettingsChangeLanguage,
-          actionSettingsChangeStickyHeader,
-          actionSettingsChangeTheme
-        ),
-        withLatestFrom(this.store.pipe(select(selectSettingsState))),
-        tap(([action, settings]) =>
-          this.localStorageService.setItem(SETTINGS_KEY, settings)
-        )
-      ),
-    { dispatch: false }
-  );
-
-  updateRouteAnimationType = createEffect(
-    () =>
-      merge(
-        INIT,
-        this.actions$.pipe(
-          ofType(
-            actionSettingsChangeAnimationsElements,
-            actionSettingsChangeAnimationsPage
+        this.actions$.pipe(ofType(actionGetAllActiveAgencies))
+        .pipe(tap((action) => {
+          this.agencyDataService.getAgencies(action.request).pipe(
+            switchMap( agencyList => [
+              agencyActions.actionGetAllActiveAgenciesSuccess({agencyList: agencyList}),
+            ]),
+            catchError(error => of(agencyActions.actionAgencyApiFailure(error)))
           )
-        )
-      ).pipe(
-        withLatestFrom(
-          combineLatest([
-            this.store.pipe(select(selectPageAnimations)),
-            this.store.pipe(select(selectElementsAnimations))
-          ])
-        ),
-        tap(([action, [pageAnimations, elementsAnimations]]) =>
-          this.animationsService.updateRouteAnimationType(
-            pageAnimations,
-            elementsAnimations
-          )
-        )
-      ),
-    { dispatch: false }
-  );
-
-  updateTheme = createEffect(
-    () =>
-      merge(INIT, this.actions$.pipe(ofType(actionSettingsChangeTheme))).pipe(
-        withLatestFrom(this.store.pipe(select(selectEffectiveTheme))),
-        tap(([action, effectiveTheme]) => {
-          const classList =
-            this.overlayContainer.getContainerElement().classList;
-          const toRemove = Array.from(classList).filter((item: string) =>
-            item.includes('-theme')
-          );
-          if (toRemove.length) {
-            classList.remove(...toRemove);
-          }
-          classList.add(effectiveTheme);
-        })
-      ),
-    { dispatch: false }
-  );
-
-  setTranslateServiceLanguage = createEffect(
-    () =>
-      this.store.pipe(
-        select(selectSettingsLanguage),
-        distinctUntilChanged(),
-        tap((language) => this.translateService.use(language))
-      ),
-    { dispatch: false }
-  );
-
-  setTitle = createEffect(
-    () =>
-      merge(
-        this.actions$.pipe(ofType(actionSettingsChangeLanguage)),
-        this.router.events.pipe(
-          filter((event) => event instanceof ActivationEnd)
-        )
-      ).pipe(
-        tap(() => {
-          this.titleService.setTitle(
-            this.router.routerState.snapshot.root,
-            this.translateService
-          );
         })
       ),
     { dispatch: false }
@@ -153,6 +92,7 @@ export class SettingsEffects {
     private actions$: Actions,
     private store: Store<State>,
     private router: Router,
+    private agencyDataService: AgencyDataService,
     private overlayContainer: OverlayContainer,
     private localStorageService: LocalStorageService,
     private titleService: TitleService,

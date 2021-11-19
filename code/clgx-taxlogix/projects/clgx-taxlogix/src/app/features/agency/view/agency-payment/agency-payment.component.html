@@ -20,19 +20,7 @@
             </div>
             <div [class.col-8]="isMobile" [class.col-12]="!isMobile" 
                 class="col-12 d-flex justify-content-center text-justify">
-                <div class="row d-flex justify-content-center p0 m0">
-                  <div class="col-12 d-flex justify-content-center p0 m0 align-item-middle text-center feature-card-title">
-                    {{ feature.name }}
-                  </div>
-                  <div class="col-12 d-flex justify-content-center p0 m0 ">
-                    <span >
-                      <strong  [class.feature-card-status-green]="feature.status == 'In Progress' || feature.status == 'Next'"
-                              [class.feature-card-status-orange]="feature.status == 'Completed'" >
-                          {{ feature.status }}
-                        </strong>
-                    </span>
-                  </div>
-                </div>
+               
             </div>
           </div>
         </mat-card-content>

@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
-import { Agency, agencies } from '../../agency-view.data';
+import { AgencyFeature, agencies } from '../../agency-view.data';
 
 interface Options {
   value: string;
@@ -18,7 +18,7 @@ interface Options {
 })
 export class AgencyDetailsComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  agencies: Agency[] = agencies;
+  agencies: AgencyFeature[] = agencies;
   agency_details: FormGroup = new FormGroup({});
   options: Options[] = [
     { value: 'option1', viewValue: 'option1' },

@@ -1,13 +1,13 @@
 import { environment as env } from '../../../environments/environment';
 
-export interface Agency {
+export interface AgencyFeature {
   name?: string;
   status?: string;
   count?: string;
   description?: string;
 }
 
-export const agencies: Agency[] = [
+export const agencies: AgencyFeature[] = [
   {
     name: 'Security',
     status: '',
