@@ -12,6 +12,8 @@ import { AgencyProcumentComponent } from './view/agency-procurement/agency-procu
 import { AgencyPaymentComponent } from './view/agency-payment/agency-payment.component';
 import { AgencyLogsComponent } from './view/agency-logs/agency-logs.component';
 import { CollectionFrequencyComponent } from './view/shared/collection-frequency/collection-frequency.component';
+import { AgencyPaymentEscrowComponent } from './view/agency-payment/agency-payment-escrow/agency-payment-escrow.component';
+import { AgencyPaymentNonescrowComponent } from './view/agency-payment/agency-payment-nonescrow/agency-payment-nonescrow.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { CollectionFrequencyComponent } from './view/shared/collection-frequency
     AgencyProcumentComponent,
     AgencyPaymentComponent,
     AgencyLogsComponent,
-    CollectionFrequencyComponent
+    CollectionFrequencyComponent,
+    AgencyPaymentEscrowComponent,
+    AgencyPaymentNonescrowComponent
   ],
   imports: [
     CommonModule,
