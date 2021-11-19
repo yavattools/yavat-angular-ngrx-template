@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
-import { Agency, agencies } from '../../agency-view.data';
+import { AgenciesDetails, agenciesDetails } from '../../agency-view.data';
 
 @Component({
   selector: 'clgx-agency-view',
@@ -12,7 +12,16 @@ import { Agency, agencies } from '../../agency-view.data';
 })
 export class AgencyLandingComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  agencies: Agency[] = agencies;
+  agenciesDetails: AgenciesDetails[] = agenciesDetails;
+  clickedRows = new Set<AgenciesDetails>();
+  displayedColumns: string[] = [
+    'number',
+    'name',
+    'address',
+    'city',
+    'state',
+    'phoneNumber'
+  ];
 
   isMobile: boolean = false;
   constructor(public deviceService: DeviceDetectorService) {}

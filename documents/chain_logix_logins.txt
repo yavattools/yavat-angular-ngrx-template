@@ -47,7 +47,7 @@ password:150$%^conVEY150
 
 To Access workspace from web client/application tool:
 
- 
+ Registration Code: SLiad+FW43HV
 
 Web client: https://clients.amazonworkspaces.com/webclient#/main
 

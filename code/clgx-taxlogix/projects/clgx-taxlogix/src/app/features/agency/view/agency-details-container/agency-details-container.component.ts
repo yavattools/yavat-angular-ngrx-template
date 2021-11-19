@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
-import { Agency, agencies } from '../../agency-view.data';
+import { AgencyFeature, agencies } from '../../agency-view.data';
 
 @Component({
   selector: 'clgx-agency-details-container',
@@ -12,7 +12,7 @@ import { Agency, agencies } from '../../agency-view.data';
 })
 export class AgencyDetailsContainerComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  agencies: Agency[] = agencies;
+  agencies: AgencyFeature[] = agencies;
 
   isMobile: Boolean = false;
   constructor( public deviceService:DeviceDetectorService){

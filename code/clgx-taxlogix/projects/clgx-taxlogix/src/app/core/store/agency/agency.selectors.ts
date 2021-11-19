@@ -1,63 +1,40 @@
 import { createSelector } from '@ngrx/store';
 
-import { SettingsState } from './settings.model';
-import { selectSettingsState } from '../../core.state';
+import { AgencyState } from './agency.model';
+import { selectAgencyState } from '../../core.state';
 
-export const selectSettings = createSelector(
-  selectSettingsState,
-  (state: SettingsState) => state
+export const selectAgencyStoreState = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state
 );
 
-export const selectSettingsStickyHeader = createSelector(
-  selectSettings,
-  (state: SettingsState) => state.stickyHeader
+export const selectAgencies = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.agencies
 );
 
-export const selectSettingsLanguage = createSelector(
-  selectSettings,
-  (state: SettingsState) => state.language
+export const selectAgency = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.selectedAgency
 );
 
-export const selectTheme = createSelector(
-  selectSettings,
-  (settings) => settings.theme
+export const selectCollectionDates = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.collectionDates
 );
 
-export const selectPageAnimations = createSelector(
-  selectSettings,
-  (settings) => settings.pageAnimations
+export const selectEscrowNonEscrowDetails = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.escrowNonEscrowDetails
 );
 
-export const selectElementsAnimations = createSelector(
-  selectSettings,
-  (settings) => settings.elementsAnimations
+export const selectPaymentDetails = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.paymentDetails
 );
 
-export const selectAutoNightMode = createSelector(
-  selectSettings,
-  (settings) => settings.autoNightMode
+export const selectActionInProgress = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.actionInProgress
 );
 
-export const selectNightTheme = createSelector(
-  selectSettings,
-  (settings) => settings.nightTheme
-);
-
-export const selectHour = createSelector(
-  selectSettings,
-  (settings) => settings.hour
-);
-
-export const selectIsNightHour = createSelector(
-  selectAutoNightMode,
-  selectHour,
-  (autoNightMode, hour) => autoNightMode && (hour >= 21 || hour <= 7)
-);
-
-export const selectEffectiveTheme = createSelector(
-  selectTheme,
-  selectNightTheme,
-  selectIsNightHour,
-  (theme, nightTheme, isNightHour) =>
-    (isNightHour ? nightTheme : theme).toLowerCase()
-);
