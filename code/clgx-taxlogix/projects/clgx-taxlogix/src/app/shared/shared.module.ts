@@ -42,7 +42,7 @@ import { AlertMessageComponent } from './dialog-model/alert-message/alert-messag
 import { ProgressBarColorDirective } from './dialog-model/alert-message/progress-bar-color.directive';
 import { RegistrationPlansComponent } from './components/registration-plans/registration-plans.component';
 import { LetsconnectDialogComponent } from './dialog-model/letsconnect-dialog/letsconnect-dialog.component';
-
+import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 @NgModule({
   imports: [
     CommonModule,
@@ -51,7 +51,8 @@ import { LetsconnectDialogComponent } from './dialog-model/letsconnect-dialog/le
     Shared3rdPartyModule,
     TranslateModule,
     // NgbModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AnimateOnScrollModule.forRoot()
   ],
   declarations: [
     BigInputComponent,
@@ -71,6 +72,7 @@ import { LetsconnectDialogComponent } from './dialog-model/letsconnect-dialog/le
     FormsModule,
     ReactiveFormsModule,
     Shared3rdPartyModule,
+    AnimateOnScrollModule,
     TranslateModule,
     FontAwesomeModule,
     BigInputComponent,

@@ -18,6 +18,7 @@ import {
   USER_MENUS
 } from '../../../../../src/environments/environment';
 import { GenericService } from '@app/shared/services/generic.service';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core/core.module';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,8 @@ import { GenericService } from '@app/shared/services/generic.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+
   @ViewChild('registrationPlans') public registrationPlans:
     | ElementRef
     | undefined;

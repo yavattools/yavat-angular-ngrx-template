@@ -8,7 +8,7 @@ import { CoreModule } from './core/core.module';
 import { AppComponent } from './app/app.component';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { AnimateOnScrollModule } from "ng2-animate-on-scroll";
 @NgModule({
   imports: [
     // angular
@@ -18,7 +18,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     // core
     CoreModule,
     SharedModule,
-
+    
     // NgbModule,
     // app
     AppRoutingModule

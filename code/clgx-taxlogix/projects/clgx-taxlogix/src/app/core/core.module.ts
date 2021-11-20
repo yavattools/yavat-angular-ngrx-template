@@ -101,7 +101,6 @@ export function httpLoaderFactory(http: HttpClient) {
     CommonModule,
     HttpClientModule,
     FormsModule,
-
     // ngrx
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),

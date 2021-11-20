@@ -16,20 +16,20 @@
 
     <mat-sidenav-content class="wrapper" >
 
-      <div class="toolbar" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'" [class.mat-elevation-z1]="(stickyHeader$ | async) && scrollPosition > 100">
-        <mat-toolbar color="primary" style="background-color: white;height: 4rem;">
+      <div class="toolbar" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'"  [ngClass]="routeAnimationsElements"
+        [class.mat-elevation-z1]="(stickyHeader$ | async) && scrollPosition > 100">
+        <mat-toolbar *ngIf="showNavbar" [ngClass]="routeAnimationsElements" color="primary" style="background-color: white;height: 4rem;">
           <button mat-icon-button class="d-md-none" (click)="sidenav.open()">
             <fa-icon icon="bars"></fa-icon>
-
           </button>
 
-          <span routerLink="" class="branding spacer center d-inline d-sm-none">
+          <span routerLink="" [ngClass]="routeAnimationsElements" class="branding spacer center d-inline d-sm-none">
             <img [src]="logo" [alt]="logo"/></span>
-          <span routerLink="" class="branding spacer center d-none d-sm-inline d-md-none">
+          <span routerLink="" [ngClass]="routeAnimationsElements" class="branding spacer center d-none d-sm-inline d-md-none">
             <img [src]="logo" [alt]="logo"/> 
             <!-- {{'clgx.title.short' | translate }} -->
           </span>
-          <span routerLink="" class="branding spacer d-none d-md-inline">
+          <span routerLink="" [ngClass]="routeAnimationsElements" class="branding spacer d-none d-md-inline">
             <img [src]="logo"[alt]="logo" style="height: 4rem;width: 10rem;" /> 
             <!-- {{ 'clgx.title.long' | translate }} -->
           </span>
@@ -63,7 +63,8 @@
         </mat-toolbar>
       </div>
 
-      <div class="content"  [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.data?.title">
+      <div class="content container-xs"  
+          [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.data?.title">
         <router-outlet #o="outlet"></router-outlet>
       </div>
 

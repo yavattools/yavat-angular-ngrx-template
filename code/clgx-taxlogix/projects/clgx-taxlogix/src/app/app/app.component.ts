@@ -1,5 +1,5 @@
 import browser from 'browser-detect';
-import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, NgZone, OnInit } from '@angular/core';
 import { MatSelectChange } from '@angular/material/select';
 import { Store, select } from '@ngrx/store';
 import { fromEvent, Observable } from 'rxjs';
@@ -15,7 +15,8 @@ import {
   selectSettingsStickyHeader,
   selectSettingsLanguage,
   selectEffectiveTheme,
-  AppState
+  AppState,
+  ROUTE_ANIMATIONS_ELEMENTS
 } from '../core/core.module';
 import {
   actionSettingsChangeAnimationsPageDisabled,
@@ -38,6 +39,8 @@ export enum Direction {
   animations: [routeAnimations]
 })
 export class AppComponent implements OnInit , AfterViewInit{
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+
   isProd = env.production;
   envName = env.envName;
   version = env.versions.app;
@@ -50,6 +53,7 @@ export class AppComponent implements OnInit , AfterViewInit{
   ];
 
   scrollPosition = 0;
+  showNavbar = false;
   isAuthenticated$: Observable<boolean> | undefined;
   stickyHeader$: Observable<boolean> | undefined;
   language$: Observable<string> | undefined;
@@ -104,7 +108,24 @@ ngAfterViewInit() {
       const scrollPosition = cdk.getElementRef().nativeElement.scrollTop;
       console.log("scrolling position: " + scrollPosition);
       this.scrollPosition = scrollPosition;
+      if(scrollPosition > 50){
+        this.showNavbar = true;
+      }else {
+        this.showNavbar = false;
+      }
     });
     });
 }
+
+// @HostListener Decorator
+  @HostListener("window:scroll", [])
+  onWindowScroll() {
+    console.log(' Window Scrolled');
+    let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    if (number >= 40 && window.innerWidth > 400) { 
+      this.showNavbar = true;
+    } else {
+      this.showNavbar = false;
+    }
+  }
 }

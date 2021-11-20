@@ -71,6 +71,7 @@
     "http-client": "^4.3.1",
     "json-server": "^0.17.0",
     "lodash-es": "^4.17.21",
+    "ng2-animate-on-scroll": "^2.3.2",
     "ngrx-etc": "^7.0.1",
     "ngx-device-detector": "^2.1.1",
     "ngx-page-scroll-core": "^7.0.5",

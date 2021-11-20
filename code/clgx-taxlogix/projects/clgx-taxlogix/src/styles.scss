@@ -1,7 +1,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '~@angular/material' as mat;
-
+@import './assets/animate.css';
 @import 'styles-variables';
 
 @import '~bootstrap/scss/bootstrap-reboot';
@@ -77,4 +77,27 @@ body {
 
 .text-left {
   text-align: left !important;
+}
+
+
+
+.animated-delay-1 {
+  animation-delay: 1s;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  -o-animation-delay: 1s;
+}
+
+.animated-delay-2 {
+  animation-delay: 2s;
+  -webkit-animation-delay: 2s;
+  -moz-animation-delay: 2s;
+  -o-animation-delay: 2s;
+}
+
+.animated {
+  visibility: visible !important;
+}
+.hide-on-init {
+  visibility: hidden;
 }
