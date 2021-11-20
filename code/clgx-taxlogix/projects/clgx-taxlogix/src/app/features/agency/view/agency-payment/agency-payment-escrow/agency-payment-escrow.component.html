@@ -9,22 +9,27 @@
           <mat-form-field appearance="outline">
             <mat-label>Contact Name</mat-label>
             <input matInput formControlName="contactName">
+            <mat-error *ngIf="contactName.invalid">{{getErrorMessage(contactName)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Contact Phone</mat-label>
             <input matInput formControlName="contactPhone">
+            <mat-error *ngIf="contactPhone.invalid">{{getErrorMessage(contactPhone)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Contact Fax</mat-label>
             <input matInput formControlName="contactFax">
+            <mat-error *ngIf="contactFax.invalid">{{getErrorMessage(contactFax)}}</mat-error>
           </mat-form-field>
          <mat-form-field appearance="outline">
             <mat-label>Contact Email</mat-label>
             <input matInput formControlName="contactEmail">
+            <mat-error *ngIf="contactEmail.invalid">{{getErrorMessage(contactEmail)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Agency Website</mat-label>
             <input matInput formControlName="agencyWebsite">
+            <mat-error *ngIf="agencyWebsite.invalid">{{getErrorMessage(agencyWebsite)}}</mat-error>
           </mat-form-field>
       </div>        
     </div>
@@ -85,16 +90,21 @@
           <mat-form-field appearance="outline">
             <mat-label>Copy Fee</mat-label>
             <input matInput formControlName="copyFee">
+            <mat-error *ngIf="copyFee.invalid">{{getErrorMessage(copyFee)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Fee for Mail a-Way</mat-label>
             <input matInput formControlName="feeForMailAWay">
+            <mat-error *ngIf="feeForMailAWay.invalid">{{getErrorMessage(feeForMailAWay)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>No. of Parcels per check</mat-label>
             <input matInput formControlName="noOfParcelsPerCheck">
+            <mat-error *ngIf="noOfParcelsPerCheck.invalid">{{getErrorMessage(noOfParcelsPerCheck)}}</mat-error>
           </mat-form-field>         
       </div>        
     </div>
 </div>
 </form>
+
+<mat-divider style="margin-top:30px;margin-bottom:30px;"></mat-divider>
