@@ -1,9 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
+import { Agency } from '@app/core/store/agency/agency.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Observable } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
-
-import { AgencyFeature, agencies } from '../../agency-view.data';
 
 interface Options {
   value: string;
@@ -18,27 +19,34 @@ interface Options {
 })
 export class AgencyDetailsComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  agencies: AgencyFeature[] = agencies;
-  agency_details: FormGroup = new FormGroup({});
+  agency : any;
+  agency$ : Observable<Agency>;
+  agencyDetails: FormGroup = new FormGroup({});
   options: Options[] = [
     { value: 'option1', viewValue: 'option1' },
     { value: 'option2', viewValue: 'option2' },
     { value: 'option3', viewValue: 'option3' }
   ];
 
-  isMobile: boolean = false;
+  isMobile: Boolean = false;
   constructor(
     public deviceService: DeviceDetectorService,
-    private fb: FormBuilder
-  ) {}
+    private fb: FormBuilder,
+    private agencyFacade : AgencyStoreFacade
+  ) {
+    this.agency$ = this.agencyFacade.selectedAgency$;
+  }
 
   ngOnInit() {
+    this.agency$.subscribe(agency =>{
+      this.agency = agency;
+    })
     if (this.deviceService.isMobile()) {
       this.isMobile = true;
     } else {
       this.isMobile = false;
     }
-    this.agency_details = this.fb.group({
+    this.agencyDetails = this.fb.group({
       agencyNumber: [''],
       agencyName: [''],
       agencyWebsite: [''],

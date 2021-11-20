@@ -9,6 +9,8 @@ import { AppComponent } from './app/app.component';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AnimateOnScrollModule } from "ng2-animate-on-scroll";
+import { AgencyStoreModule } from './core/store/agency/agency-store.module';
+
 @NgModule({
   imports: [
     // angular
@@ -18,10 +20,11 @@ import { AnimateOnScrollModule } from "ng2-animate-on-scroll";
     // core
     CoreModule,
     SharedModule,
-    
+
     // NgbModule,
     // app
-    AppRoutingModule
+    AppRoutingModule,
+    AgencyStoreModule.forRoot(),
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent]
