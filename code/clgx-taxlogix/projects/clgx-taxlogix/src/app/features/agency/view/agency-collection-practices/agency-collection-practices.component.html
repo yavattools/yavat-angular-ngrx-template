@@ -1,65 +1,155 @@
-<div class="container">
-  <div class="row">
-    <div class="col-md-12 pb-3">
-      <mat-card-title  class="welcome-title">
-        Welcome, Sarah!
-      </mat-card-title>
-    </div>
-  </div>
-  <div class="row align-items-end">
-    <div *ngFor="let feature of agencies"  class="col-md-3 col-lg-3" [ngClass]="routeAnimationsElements">
-      <mat-card style="height: 150px;"  
-          class="mat-elevation-z1  align-middle" [matBadge]="feature.count" matBadgePosition="after" matBadgeColor="warn">
-        <mat-card-content class="d-flex justify-content-center mb-0 streach-v-100  align-middle">
-          <div class="row d-flex justify-content-center p0 m0 streach-h-100">
-            <div [class.col-4]="isMobile" [class.col-12]="!isMobile" 
-                 class="col-12 d-flex justify-content-center p0 m0 align-middle ">
-                <span class="material-icons feature-icon text-muted pb-2" [class.image-center]="isMobile" >
-                  find_in_page
-                </span>
-            </div>
-            <div [class.col-8]="isMobile" [class.col-12]="!isMobile" 
-                class="col-12 d-flex justify-content-center text-justify">
-                <div class="row d-flex justify-content-center p0 m0">
-                  <div class="col-12 d-flex justify-content-center p0 m0 align-item-middle text-center feature-card-title">
-                    {{ feature.name }}
-                  </div>
-                  <div class="col-12 d-flex justify-content-center p0 m0 ">
-                    <span >
-                      <strong  [class.feature-card-status-green]="feature.status == 'In Progress' || feature.status == 'Next'"
-                              [class.feature-card-status-orange]="feature.status == 'Completed'" >
-                          {{ feature.status }}
-                        </strong>
-                    </span>
-                  </div>
-                </div>
-            </div>
-          </div>
-        </mat-card-content>
-        <!-- <mat-card-actions>
-          <a *ngIf="feature.github" mat-icon-button [href]="feature.github" rel="noopener noreferrer" target="_blank">
-            <fa-icon [icon]="['fab','github']"></fa-icon>
-          </a>
-          <a mat-button [href]="feature.documentation" rel="noopener noreferrer" target="_blank">
-            <fa-icon icon="book"></fa-icon>{{ 'clgx.agencies.documentation' | translate }}
-          </a>
-          <a *ngIf="feature.medium" mat-button [href]="feature.medium" rel="noopener noreferrer" target="_blank">
-            <fa-icon [icon]="['fab','medium-m']"></fa-icon>{{ 'clgx.agencies.guide' | translate }}
-          </a>
-        </mat-card-actions> -->
-      </mat-card>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12 pt-3" [ngClass]="routeAnimationsElements">
-      <mat-card class="special-module-card" >
-        <mat-card-title>
-          Special Module
-        </mat-card-title>
-        <p>
-          By default, most components indicate browser focus by changing their background color as described by the Material Design specification. This behavior, however, can fall short of accessibility requirements, such
-        </p>
-      </mat-card>
-    </div>
-  </div>
-</div>
+<br>
+<br>
+<h2>Collection Dates</h2>
+<br>
+
+<table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="dataSource">
+  <!-- Frequency Column -->
+  <ng-container matColumnDef="frequency" >
+    <th mat-header-cell *matHeaderCellDef> Frequency </th>
+    <td mat-cell *matCellDef="let element">{{element.frequency}}</td>
+  </ng-container>
+
+  <!-- Year Column -->
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef> Year </th>
+    <td mat-cell *matCellDef="let element">{{element.year}}</td>
+  </ng-container>
+
+  <!-- Installment Column -->
+  <ng-container matColumnDef="installment">
+    <th mat-header-cell *matHeaderCellDef>Installment </th>
+    <td mat-cell *matCellDef="let element">{{element.installment}}</td>
+  </ng-container>
+
+  <!-- Base Column -->
+  <ng-container matColumnDef="base">
+    <th mat-header-cell *matHeaderCellDef>Base</th>
+    <td mat-cell *matCellDef="let element">{{element.base}}</td>
+  </ng-container>
+
+<!-- Discount Column -->
+  <ng-container matColumnDef="discount">
+    <th mat-header-cell *matHeaderCellDef> Discount </th>
+    <td mat-cell *matCellDef="let element">{{element.discount}}</td>
+  </ng-container>
+
+<!--  Penalty Column -->
+  <ng-container matColumnDef="penalty">
+    <th mat-header-cell *matHeaderCellDef> Penalty </th>
+    <td mat-cell *matCellDef="let element">{{element.penalty}}</td>
+  </ng-container>
+
+  <!-- Late Release Column -->
+  <ng-container matColumnDef="lateRelease">
+    <th mat-header-cell *matHeaderCellDef>  Late Release </th>
+    <td mat-cell *matCellDef="let element">{{element.lateRelease}}</td>
+  </ng-container>
+
+  <!-- Bill Request Column -->
+  <ng-container matColumnDef="billRequest">
+    <th mat-header-cell *matHeaderCellDef>  Bill Request </th>
+    <td mat-cell *matCellDef="let element">{{element.billRequest}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Action </th>
+    <td mat-cell *matCellDef="let element" style="text-align: center;align-items: center;" > 
+      <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button (click)="editDeal(element)">
+        <i class="fa fa-edit" (click)="editDeal(element)"></i> 
+      </button> 
+      
+       
+    </td>
+  </ng-container>
+ 
+ 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> 
+<br>
+<br>
+<h2>History</h2>
+<h3 style="text-align: center;text-decoration-color: crimson;">Edit the History</h3>
+<table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="dataSource">
+  <!-- Frequency Column -->
+  <ng-container matColumnDef="frequency">
+    <th mat-header-cell *matHeaderCellDef> Frequency </th>
+    <td mat-cell *matCellDef="let element">{{element.frequency}}</td>
+  </ng-container>
+
+  <!-- Year Column -->
+  <ng-container matColumnDef="year">
+    <th mat-header-cell *matHeaderCellDef> Year </th>
+    <td mat-cell *matCellDef="let element">{{element.year}}</td>
+  </ng-container>
+
+  <!-- Installment Column -->
+  <ng-container matColumnDef="installment">
+    <th mat-header-cell *matHeaderCellDef>Installment </th>
+    <td mat-cell *matCellDef="let element">{{element.installment}}</td>
+  </ng-container>
+
+  <!-- Base Column -->
+  <ng-container matColumnDef="base">
+    <th mat-header-cell *matHeaderCellDef>Base</th>
+    <td mat-cell *matCellDef="let element">{{element.base}}</td>
+  </ng-container>
+
+<!-- Discount Column -->
+  <ng-container matColumnDef="discount">
+    <th mat-header-cell *matHeaderCellDef> Discount </th>
+    <td mat-cell *matCellDef="let element">{{element.discount}}</td>
+  </ng-container>
+
+<!--  Penalty Column -->
+  <ng-container matColumnDef="penalty">
+    <th mat-header-cell *matHeaderCellDef> Penalty </th>
+    <td mat-cell *matCellDef="let element">{{element.penalty}}</td>
+  </ng-container>
+
+  <!-- Late Release Column -->
+  <ng-container matColumnDef="lateRelease">
+    <th mat-header-cell *matHeaderCellDef>  Late Release </th>
+    <td mat-cell *matCellDef="let element">{{element.lateRelease}}</td>
+  </ng-container>
+
+  <!-- Bill Request Column -->
+  <ng-container matColumnDef="billRequest">
+    <th mat-header-cell *matHeaderCellDef>  Bill Request </th>
+    <td mat-cell *matCellDef="let element">{{element.billRequest}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Action </th>
+    <td mat-cell *matCellDef="let element" style="text-align: center;align-items: center;" > 
+      <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button (click)="editDeal(element)">
+        <i class="fa fa-edit" (click)="editDeal(element)"></i> 
+      </button> 
+      
+       
+    </td>
+  </ng-container>
+ 
+ 
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table> 
+<mat-paginator [pageSizeOptions]="[5, 10, 20]"
+showFirstLastButtons 
+aria-label="Select page of  elements">
+</mat-paginator>
+<!-- <mat-paginator [length]="100"
+              [pageSize]="10"
+              [pageSizeOptions]="[5, 10, 25, 100]"
+              aria-label="Select page">
+</mat-paginator> -->
+<!-- Angular 8 pagination -->
+<!-- <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator> -->
+
+
+
+
+
+
+
