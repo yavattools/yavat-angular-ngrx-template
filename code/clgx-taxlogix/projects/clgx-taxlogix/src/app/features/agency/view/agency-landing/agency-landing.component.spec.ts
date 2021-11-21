@@ -2,13 +2,13 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '../../../../shared/shared.module';
 
-import { DashboardViewComponent } from './dashboard-view.component';
+import { AgencyLandingComponent } from './agency-landing.component';
 
-describe('DashboardViewComponent', () => {
-  let component: DashboardViewComponent;
-  let fixture: ComponentFixture<DashboardViewComponent>;
+describe('AgencyLandingComponent', () => {
+  let component: AgencyLandingComponent;
+  let fixture: ComponentFixture<AgencyLandingComponent>;
 
   beforeEach(
     waitForAsync(() => {
@@ -18,13 +18,13 @@ describe('DashboardViewComponent', () => {
           NoopAnimationsModule,
           TranslateModule.forRoot()
         ],
-        declarations: [DashboardViewComponent]
+        declarations: [AgencyLandingComponent]
       }).compileComponents();
     })
   );
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DashboardViewComponent);
+    fixture = TestBed.createComponent(AgencyLandingComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

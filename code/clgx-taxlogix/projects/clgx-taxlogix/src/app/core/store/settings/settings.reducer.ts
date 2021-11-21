@@ -20,8 +20,9 @@ export const initialState: SettingsState = {
   autoNightMode: false,
   nightTheme: NIGHT_MODE_THEME,
   stickyHeader: true,
+  stickyShowHeader: true,
   headerShowTime: 'on-scroll',
-  showHeader: false,
+  showHeader: true,
   pageAnimations: true,
   pageAnimationsDisabled: false,
   elementsAnimations: true,
@@ -48,27 +49,18 @@ const reducer = createReducer(
       pageAnimations: false
     })
   ),
-  on(
-    actionSettingsShowHeaderTime,
-    (state, action) => ({
-      ...state,
-      headerShowTime: action.headerShowTime
-    })
-  ),
-  on(
-    actionSettingsShowHeader,
-    (state, action) => ({
-      ...state,
-      showHeader: action.showHeader
-    })
-  ),
-  on(
-    actionSettingsHideHeader,
-    (state, action) => ({
-      ...state,
-      showHeader: action.showHeader
-    })
-  )
+  on(actionSettingsShowHeaderTime, (state, action) => ({
+    ...state,
+    headerShowTime: action.headerShowTime
+  })),
+  on(actionSettingsShowHeader, (state, action) => ({
+    ...state,
+    stickyShowHeader: action.showHeader
+  })),
+  on(actionSettingsHideHeader, (state, action) => ({
+    ...state,
+    stickyShowHeader: action.showHeader
+  }))
 );
 
 export function settingsReducer(

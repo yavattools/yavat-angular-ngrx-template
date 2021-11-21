@@ -1,6 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
+import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
+import { Agency } from '@app/core/store/agency/agency.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Observable } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
 import { AgencyFeature, agencies } from '../../agency-view.data';
@@ -14,21 +17,26 @@ import { AgencyFeature, agencies } from '../../agency-view.data';
 export class AgencyDetailsContainerComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agencies: AgencyFeature[] = agencies;
+  agency$: Observable<Agency>;
 
   isMobile: Boolean = false;
-  constructor( public deviceService:DeviceDetectorService , private router : Router){
-
+  constructor(
+    public deviceService: DeviceDetectorService,
+    private agencyFacade: AgencyStoreFacade,
+    private router: Router
+  ) {
+    this.agency$ = this.agencyFacade.selectedAgency$;
   }
 
   ngOnInit() {
-    if(this.deviceService.isMobile()){
+    if (this.deviceService.isMobile()) {
       this.isMobile = true;
-    }else{
+    } else {
       this.isMobile = false;
     }
   }
 
-  back(){
-    this.router.navigateByUrl('/agency')
+  back() {
+    this.router.navigateByUrl('/agency');
   }
 }

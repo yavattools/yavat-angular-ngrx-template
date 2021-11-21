@@ -10,6 +10,7 @@ export interface SettingsState {
   autoNightMode: boolean;
   nightTheme: string;
   stickyHeader: boolean;
+  stickyShowHeader: boolean;
   showHeader: boolean;
   headerShowTime: string;
   pageAnimations: boolean;

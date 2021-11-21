@@ -8,9 +8,37 @@
   $background: map-get($theme, background);
 
   clgx-agency-details-container {
+    .page-title {
+      color: mat.get-color-from-palette($accent) !important;
+      font-family: Graphik-medium;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 35px;
+    }
+
+    .page-subtitle {
+      font-style: normal;
+      font-weight: normal;
+      font-family: Graphik-regular;
+      font-size: 16px;
+      line-height: 18px;
+      /* or 75% */
+      color: #868686;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.03em;
+    }
+
     .mat-tab-label-content {
-      color: mat.get-color-from-palette($accent, 600) !important;
-      font-weight: 400 !important;
+      color: mat.get-color-from-palette($accent) !important;
+      font-family: Graphik-medium;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 18px;
+      display: flex;
+      align-items: center;
     }
     .tab-label {
       color: mat.get-color-from-palette($accent) !important;
@@ -31,56 +59,6 @@
       color: mat.get-color-from-palette($warning-colors) !important;
       text-transform: capitalize !important;
       text-transform: uppercase !important;
-    }
-    .special-module-card {
-      min-height: 150px;
-      background-color: mat.get-color-from-palette(
-        $primary
-      ); /* For browsers that do not support gradients */
-      background-image: linear-gradient(
-        to top right,
-        mat.get-color-from-palette($accent),
-        mat.get-color-from-palette($primary)
-      );
-      color: white;
-    }
-    .background {
-      color: mat.get-color-from-palette($foreground, text);
-      background-color: mat.get-color-from-palette($background, background);
-
-      .gradient {
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            mat.get-color-from-palette($background, background, 0) 0%,
-            mat.get-color-from-palette($background, background, 1) 100%
-          );
-        }
-      }
-    }
-
-    .follow-releases,
-    .contributors {
-      p {
-        background-color: mat.get-color-from-palette($background, background);
-
-        a {
-          color: mat.get-color-from-palette($accent);
-
-          &:hover {
-            color: mat.get-color-from-palette($accent, darker);
-          }
-        }
-      }
-    }
-
-    .contributors {
-      img {
-        border-color: mat.get-color-from-palette(
-          $background,
-          background
-        ) !important;
-      }
     }
   }
 }

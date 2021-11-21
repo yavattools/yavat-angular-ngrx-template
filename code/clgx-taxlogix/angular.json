@@ -24,6 +24,8 @@
             "polyfills": "projects/clgx-taxlogix/src/polyfills.ts",
             "tsConfig": "projects/clgx-taxlogix/tsconfig.app.json",
             "aot": true,
+            "sourceMap": true,
+            "optimization": false,
             "assets": [
               "projects/clgx-taxlogix/src/favicon.ico",
               "projects/clgx-taxlogix/src/assets"
@@ -38,7 +40,7 @@
             "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"]
           },
           "configurations": {
-            "development":{
+            "development": {
               "sourceMap": true,
               "optimization": false
             },
@@ -98,7 +100,7 @@
             "browserTarget": "clgx-taxlogix:build"
           },
           "configurations": {
-            "development":{
+            "development": {
               "sourceMap": true,
               "optimization": false
             },

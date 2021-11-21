@@ -1,50 +1,50 @@
 
 <div class="container">
-
-<div class="details-container-content">
-  <div class="page-title">
-    <h3>Dealware Country</h3>
-    <p><small>982362341</small></p>
-  </div>
-
-  <mat-tab-group  mat-stretch-tabs mat-align-tabs="start">
-    <mat-tab label="Details">
-        <clgx-agency-details></clgx-agency-details>
-    </mat-tab>
-    <mat-tab label="Collection Practices">
-      <div class="tab-content tab-label">
-        <clgx-agency-collection-practices></clgx-agency-collection-practices>
+  <mat-card>
+    <div class="details-container-content">
+      <div class="agency-details-container-head">
+        <h3 class="page-title">{{(agency$ | async)?.agencyName}}</h3>
+        <span class="page-subtitle">{{(agency$ | async)?.agencyNumber}}</span>
       </div>
-    </mat-tab>
-    <mat-tab label="Procurement">
-      <clgx-agency-procument></clgx-agency-procument>
-    </mat-tab>
-    <mat-tab label="Payment">
-      <div class="tab-content tab-label">
-        <clgx-agency-payment></clgx-agency-payment>
-      </div>
-    </mat-tab>
-    <mat-tab label="Logs">
-      <div class="tab-content tab-label">
-        <small class="tab-description">Logs Tab under Construction</small>
-      </div>
+    <mat-tab-group   mat-align-tabs="start">
+      <mat-tab label="Details">
+          <clgx-agency-details></clgx-agency-details>
       </mat-tab>
-  </mat-tab-group>
+      <mat-tab label="Collection Practices">
+        <div class="tab-content tab-label">
+          <clgx-agency-collection-practices></clgx-agency-collection-practices>
+        </div>
+      </mat-tab>
+      <mat-tab label="Procurement">
+        <clgx-agency-procument></clgx-agency-procument>
+      </mat-tab>
+      <mat-tab label="Payment">
+        <div class="tab-content tab-label">
+          <clgx-agency-payment></clgx-agency-payment>
+        </div>
+      </mat-tab>
+      <mat-tab label="Logs">
+        <div class="tab-content tab-label">
+          <small class="tab-description">Logs Tab under Construction</small>
+        </div>
+        </mat-tab>
+    </mat-tab-group>
 
-  <div class="internal-group">
-    <div class="internal-heading"><h4>Internal</h4></div>
-    <div class="grid-wrapper">
-      <div >
-        <p><small>Comments and notes</small></p>
-        <textarea class="big-input-box" type="text"></textarea>
-      </div>
-      <div>
-        <p><small>Last updated by</small></p>
-        <input type="text">
-        <p><small>Last date updated</small></p>
-        <input type="text">
+    <div class="internal-group">
+      <div class="internal-heading"><h4>Internal</h4></div>
+      <div class="grid-wrapper">
+        <div >
+          <p><small>Comments and notes</small></p>
+          <textarea class="big-input-box" type="text"></textarea>
+        </div>
+        <div>
+          <p><small>Last updated by</small></p>
+          <input type="text">
+          <p><small>Last date updated</small></p>
+          <input type="text">
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    </div>
+  </mat-card>
 </div>

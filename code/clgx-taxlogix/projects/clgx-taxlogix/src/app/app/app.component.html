@@ -15,7 +15,7 @@
 
     <mat-sidenav-content class="wrapper" >
 
-      <div class="toolbar"  *ngIf="showHeader$ | async" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'"  [ngClass]="routeAnimationsElements"
+      <div class="toolbar"  *ngIf="(showHeader$ | async)" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'"  [ngClass]="routeAnimationsElements"
         [class.mat-elevation-z1]="(stickyHeader$ | async) && scrollPosition > 100">
         <mat-toolbar  [ngClass]="routeAnimationsElements"  >
           

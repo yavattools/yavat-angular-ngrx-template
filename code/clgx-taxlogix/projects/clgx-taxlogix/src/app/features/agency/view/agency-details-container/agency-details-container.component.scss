@@ -1,9 +1,15 @@
 @import '../../../../../styles-variables';
 
 .container {
-  margin-top: 0px;
-  max-width: 1056px;
-  background-color: #fff;
+  margin-top: 100px;
+  max-width: 1440px;
+  padding-bottom: 100px;
+  // background-color: #fff;
+}
+
+.agency-details-container-head {
+  height: 150px;
+  padding-top: 50px;
 }
 
 .back-button-group {
@@ -12,11 +18,11 @@
 }
 
 .details-container-content {
-  padding: 0 10%;
+  padding: 0 3%;
   position: relative;
-  .tab-content{
+  .tab-content {
     min-height: 500px;
-    .tab-description{
+    .tab-description {
       justify-content: center;
       display: flex;
       padding: 250px 0;
@@ -26,7 +32,7 @@
 
 .internal-group {
   height: 500px;
-  .grid-wrapper{
+  .grid-wrapper {
     display: grid;
     grid-template-columns: 70% 30%;
   }

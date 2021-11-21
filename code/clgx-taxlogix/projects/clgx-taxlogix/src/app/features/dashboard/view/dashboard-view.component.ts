@@ -17,29 +17,27 @@ export class DashboardViewComponent implements OnInit {
   features: AgencyFeature[] = features;
 
   isMobile: boolean = false;
-  constructor( 
-    public deviceService:DeviceDetectorService, 
+  constructor(
+    public deviceService: DeviceDetectorService,
     public settingsFacadeService: SettingsStoreFacade,
-    private router: Router){
-
-  }
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    if(this.deviceService.isMobile()){
+    if (this.deviceService.isMobile()) {
       this.isMobile = true;
-    }else{
+    } else {
       this.isMobile = false;
     }
-    this.settingsFacadeService.setHeaderShowTime('always');
-
-    this.settingsFacadeService.showHeader();
+    // this.settingsFacadeService.setHeaderShowTime('always');
+    // this.settingsFacadeService.showHeader();
   }
 
   openLink(link: string) {
     window.open(link, '_blank');
   }
 
-  featureClickHandler($event: MouseEvent){
+  featureClickHandler($event: MouseEvent) {
     $event.stopPropagation();
 
     this.router.navigateByUrl('/agency');

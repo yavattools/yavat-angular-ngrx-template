@@ -6,18 +6,49 @@
   $success: map-get($theme, success);
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
-  
 
   clgx-agency-landing {
     mat-form-field.mat-form-field {
       font-size: 12px;
     }
-   
-    .default-theme .mat-form-field-appearance-outline .mat-form-field-infix{
+
+    .mat-row:hover {
+      // background-color: red;
+    }
+    .mat-row:nth-child(even) {
+      background-color: #f0f0f0;
+    }
+
+    .mat-row:nth-child(odd) {
+      // background-color: black;
+    }
+
+    .default-theme .mat-form-field-appearance-outline .mat-form-field-infix {
       padding: 0.4em 0 !important;
     }
 
-    .page-title{
+    .agency-table-header-label {
+      font-family: Graphik-regular;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 18px;
+      /* identical to box height */
+      color: mat.get-color-from-palette($accent) !important;
+      align-items: center;
+      text-align: center;
+    }
+
+    .action-icon {
+      color: gray;
+      cursor: pointer;
+    }
+
+    .action-icon:hover {
+      color: mat.get-color-from-palette($primary) !important;
+    }
+
+    .page-title {
       color: mat.get-color-from-palette($accent) !important;
       font-family: Graphik-medium;
       font-style: normal;
@@ -37,6 +68,5 @@
       align-items: center;
       letter-spacing: 0.03em;
     }
-      
   }
 }

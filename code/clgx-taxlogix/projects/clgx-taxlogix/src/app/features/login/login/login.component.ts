@@ -47,9 +47,8 @@ export class LoginComponent implements OnInit {
     private genericService: GenericService,
     private router: Router,
     public settingsFacadeService: SettingsStoreFacade,
-    public deviceService:DeviceDetectorService
+    public deviceService: DeviceDetectorService
   ) {
-
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -59,16 +58,17 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     sessionStorage.clear();
-    this.settingsFacadeService.hideHeader();
-    // this.getSystemIpAddress();
-    if(this.deviceService.isMobile() || this.deviceService.isTablet()){
+    if (this.deviceService.isMobile() || this.deviceService.isTablet()) {
       this.isMobile = true;
-    }else{
+    } else {
       this.isMobile = false;
     }
     this.getRegistrationPlans();
-    this.settingsFacadeService.setHeaderShowTime('on-scroll');
 
+    this.settingsFacadeService.setHeaderShowTime('on-scroll');
+    setTimeout(() => {
+      this.settingsFacadeService.hideHeader();
+    }, 100);
   }
 
   getSystemIpAddress() {
@@ -189,4 +189,6 @@ export class LoginComponent implements OnInit {
       // );
     }
   }
+
+  ngAfterContentChecked() {}
 }

@@ -5,7 +5,8 @@ import { TaxlogixSpinnerComponent } from './shared/utilities/taxlogix-spinner/ta
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login'
+    redirectTo: 'login',
+    pathMatch: 'full'
   },
   {
     path: 'login',
