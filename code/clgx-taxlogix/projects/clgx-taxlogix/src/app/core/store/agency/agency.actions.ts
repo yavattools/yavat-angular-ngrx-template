@@ -41,6 +41,11 @@ export const actionSaveAgencyDetailsSuccess = createAction(
   props<{ agency: Agency}>()
 );
 
+export const actionSaveAgencyDetailsFailure = createAction(
+  '[Agency] Save Agency Details Failure',
+  props<{ error: any}>()
+);
+
 
 export const actionUpdateAgencyDetails = createAction(
   '[Agency] Update Agency Details',
@@ -50,6 +55,11 @@ export const actionUpdateAgencyDetails = createAction(
 export const actionUpdateAgencyDetailsSuccess = createAction(
   '[Agency] Update Agency Details Success',
   props<{ agency: Agency}>()
+);
+
+export const actionUpdateAgencyDetailsFailure = createAction(
+  '[Agency] Update Agency Details Failure',
+  props<{ error: any}>()
 );
 
 export const actionGetCollectionDates = createAction(

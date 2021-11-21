@@ -35,7 +35,7 @@ export class AgencyDataService {
     const body=JSON.stringify(agency);
     console.log(body)
     
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.AGENCIES_END_POINT, body,{'headers':headers})
+    return this.http.put<any>(this._appConstantService.BASE_API_URL + this._appConstantService.AGENCIES_UPDATE + agency.agencyMasterId, body,{'headers':headers})
   }
 
   getCollectionsDates(): Observable<CollectionDates[]> {

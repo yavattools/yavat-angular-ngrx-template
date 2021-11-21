@@ -40,7 +40,12 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSaveAgencyDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
+    state.agencies = [...state.agencies, action.agency]
     state.selectedAgency = action.agency;
+  }),
+  mutableOn(agencyActions.actionSaveAgencyDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error
   }),
   mutableOn(agencyActions.actionUpdateAgencyDetails, (state, action) => {
     state.actionInProgress = true;
@@ -48,6 +53,10 @@ export const reducer = createReducer(
   mutableOn(agencyActions.actionUpdateAgencyDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
     state.selectedAgency = action.agency;
+  }),
+  mutableOn(agencyActions.actionUpdateAgencyDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error
   }),
   mutableOn(agencyActions.actionGetCollectionDates, (state, action) => {
     state.actionInProgress = true;

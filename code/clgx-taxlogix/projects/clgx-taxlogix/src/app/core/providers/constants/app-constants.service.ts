@@ -28,6 +28,7 @@ export class AppConstantsService {
   public TOKEN_REFRESH_URL: string;
 
   public AGENCIES_END_POINT: string;
+  public AGENCIES_UPDATE: string;
   public COLLECTION_END_POINT: string;
   public ESCROW_END_POINT:string;
   public NONESCROW_END_POINT:string;
@@ -52,6 +53,8 @@ export class AppConstantsService {
       this.AGENCIES_END_POINT = APP_CONTEXT
       ? '/'
       : '' + APP_CONTEXT + '/agencies/';
+
+      this.AGENCIES_UPDATE = this.AGENCIES_END_POINT + 'update/';
 
       this.COLLECTION_END_POINT = APP_CONTEXT
       ? '/'

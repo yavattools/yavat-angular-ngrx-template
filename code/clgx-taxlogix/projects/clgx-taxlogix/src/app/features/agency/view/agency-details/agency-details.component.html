@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <form class="form" [formGroup]="agencyDetails" (ngSubmit)="show(agencyDetails)">
+  <form class="form" [formGroup]="agencyDetails" (ngSubmit)="save(agencyDetails)">
   <div class="agency-details">
     <div class="details">
       <div class="detail">
@@ -26,14 +26,23 @@
           <mat-form-field appearance="outline">
             <mat-label>Agency Number</mat-label>
             <input matInput formControlName="agencyNumber">
+            <mat-error *ngIf="agencyNumber.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Agency Name</mat-label>
             <input matInput formControlName="agencyName">
+            <mat-error *ngIf="agencyName.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Agency Website</mat-label>
             <input matInput formControlName="agencyWebsite">
+            <mat-error *ngIf="agencyWebsite.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Lower Level Agency</mat-label>
@@ -42,19 +51,22 @@
                 {{option.viewValue}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="agencyLowerLevel.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <div class="toggle">
             <mat-label>Collecting Agency</mat-label>
             <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agencyCollecting">
-              <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
-              <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
             </mat-button-toggle-group>
           </div>
           <div class="toggle">
             <mat-label>Active?</mat-label>
             <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agencyActive">
-              <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
-              <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
             </mat-button-toggle-group>
           </div>
       </div>
@@ -67,24 +79,39 @@
           <mat-form-field appearance="outline">
             <mat-label>Agency Suits Address</mat-label>
             <input matInput formControlName="agencySuitsAddress">
+            <mat-error *ngIf="agencySuitsAddress.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Agency City</mat-label>
             <input matInput formControlName="agencyCity">
+            <mat-error *ngIf="agencyCity.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <div class="state-zip">
             <mat-form-field appearance="outline" style="width: 40%;">
               <mat-label>State</mat-label>
               <input matInput formControlName="stateId">
+              <mat-error *ngIf="stateId.errors?.required">
+                Required field
+              </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" style="width : 55%">
               <mat-label>Zip</mat-label>
               <input matInput formControlName="zip">
+              <mat-error *ngIf="zip.errors?.required">
+                Required field
+              </mat-error>
             </mat-form-field>
           </div>
           <mat-form-field appearance="outline">
             <mat-label>County</mat-label>
             <input matInput formControlName="countyId">
+            <mat-error *ngIf="countyId.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
       </div>
     </div>
@@ -96,22 +123,37 @@
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Contact Name</mat-label>
             <input matInput formControlName="contactName">
+            <mat-error *ngIf="contactName.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Contact Email</mat-label>
             <input matInput formControlName="contactEmail">
+            <mat-error *ngIf="contactEmail.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Contact Phone</mat-label>
             <input matInput formControlName="contactPhone">
+            <mat-error *ngIf="contactPhone.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Contact Fax</mat-label>
             <input matInput formControlName="contactFax">
+            <mat-error *ngIf="contactFax.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Parsel Format</mat-label>
             <input matInput formControlName="parcelFormat">
+            <mat-error *ngIf="parcelFormat.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
       </div>
     </div>
@@ -127,26 +169,44 @@
         <mat-form-field appearance="outline">
           <mat-label>Assessor Name</mat-label>
           <input matInput formControlName="assessorName">
+          <mat-error *ngIf="assessorName.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor Contact Name</mat-label>
           <input matInput formControlName="assessorContactName">
+          <mat-error *ngIf="assessorContactName.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor Phone</mat-label>
           <input matInput formControlName="assessorPhoneNumber">
+          <mat-error *ngIf="assessorPhoneNumber.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Map Cost</mat-label>
           <input matInput formControlName="mapCost">
+          <mat-error *ngIf="mapCost.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Website Access Cost</mat-label>
           <input matInput formControlName="websiteAccessCost">
+          <mat-error *ngIf="websiteAccessCost.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor Website</mat-label>
           <input matInput formControlName="assessorWebsite">
+          <mat-error *ngIf="assessorWebsite.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -158,19 +218,31 @@
         <mat-form-field appearance="outline">
           <mat-label>Assessor Address</mat-label>
           <input matInput formControlName="assessorAddress">
+          <mat-error *ngIf="assessorAddress.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor City</mat-label>
           <input matInput formControlName="assessorCity">
+          <mat-error *ngIf="assessorCity.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <div class="state-zip">
           <mat-form-field appearance="outline" style="width: 40%;">
             <mat-label>State</mat-label>
             <input matInput formControlName="assessorStateId">
+            <mat-error *ngIf="assessorStateId.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width : 55%">
             <mat-label>Zip</mat-label>
             <input matInput formControlName="assessorZip">
+            <mat-error *ngIf="assessorZip.errors?.required">
+              Required field
+            </mat-error>
           </mat-form-field>
         </div>
       </div>
@@ -187,6 +259,9 @@
               {{option.viewValue}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="billingRequestId.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Media Type</mat-label>
@@ -195,31 +270,37 @@
               {{option.viewValue}}
             </mat-option>
           </mat-select>
+          <mat-error *ngIf="mediaTypeId.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
         <div class="toggle" style="width: 100%">
           <mat-label>Type: Paper</mat-label>
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="paperType">
-            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
-            <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <div class="toggle" style="width: 100%">
           <mat-label>Excel</mat-label>
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="excelType">
-            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
-            <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <div class="toggle" style="width: 100%">
           <mat-label>Mail</mat-label>
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mailType">
-            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="far fa-thumbs-up"></i></mat-button-toggle>
-            <mat-button-toggle class="mat-button-toggle" value="No"><i class="far fa-thumbs-down"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Email ID</mat-label>
           <input matInput formControlName="emailId">
+          <mat-error *ngIf="emailId.errors?.required">
+            Required field
+          </mat-error>
         </mat-form-field>
       </div>
     </div>
@@ -227,7 +308,7 @@
   <div class="divider">
   </div>
   <div class="save-btn">
-    <button>Save</button>
+    <button [disabled]="agencyDetails.invalid">Save</button>
   </div>
   </form>
 </div>

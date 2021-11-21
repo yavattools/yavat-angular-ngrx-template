@@ -85,6 +85,28 @@ export class AgencyEffects {
         ))
       )
     );
+  addAgency = createEffect(()=>
+  this.actions$.pipe(
+    ofType(actionSaveAgencyDetails),
+    switchMap((action)=>this.agencyDataService.addAgency(action.agency).pipe(
+      mergeMap( agencyDetails=>[
+        agencyActions.actionSaveAgencyDetailsSuccess({agency : agencyDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionSaveAgencyDetailsFailure({error : error})))
+    ))
+  )
+  );
+  updateAgency = createEffect(()=>
+  this.actions$.pipe(
+    ofType(actionUpdateAgencyDetails),
+    switchMap((action)=>this.agencyDataService.updateAgency(action.agency).pipe(
+      mergeMap( agencyDetails=>[
+        agencyActions.actionUpdateAgencyDetailsSuccess({agency : agencyDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionUpdateAgencyDetailsFailure({error : error})))
+    ))
+  )
+  )
 
   constructor(
     private actions$: Actions,
