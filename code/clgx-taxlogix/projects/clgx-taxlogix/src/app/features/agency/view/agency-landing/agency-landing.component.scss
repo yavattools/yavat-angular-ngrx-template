@@ -1,8 +1,20 @@
 @import '../../../../../styles-variables';
 
-.demo-table {
+.container {
+  margin-top: 100px !important;
+  max-width: 1400px !important;
+  height: 100vh;
+  // background-color: #c0c0c01f;
+}
+
+.agency-search-field-div {
+  text-align: right;
+}
+
+.agencies-table {
   width: 100%;
-  height: 300px;
+  height: 68vh;
+  box-shadow: none;
   overflow-y: scroll;
 }
 

@@ -9,12 +9,15 @@ mat-sidenav-container {
   height: 100%;
   width: 100%;
 
+ 
   .toolbar {
     position: fixed;
     width: 100%;
     display: flex;
     z-index: 10;
-    padding-left: 1rem;
+    // padding-left: 1rem;
+    background-color: #f7f7f7;
+
     .nav-button {
       margin: 0 10px 0 0;
     }
@@ -79,7 +82,7 @@ mat-sidenav-container {
       // padding-top: 25px;
       overflow: hidden;
       // background-color: #c0c0c029;
-      background-color: #ffffff;
+      background-color: #f5f5f5;
     }
 
     .footer {

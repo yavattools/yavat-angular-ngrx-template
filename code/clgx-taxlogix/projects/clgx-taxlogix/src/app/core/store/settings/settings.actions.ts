@@ -21,6 +21,21 @@ export const actionSettingsChangeStickyHeader = createAction(
   props<{ stickyHeader: boolean }>()
 );
 
+export const actionSettingsShowHeaderTime = createAction(
+  '[Settings] Show Header Time',
+  props<{ headerShowTime: string }>()
+);
+
+export const actionSettingsShowHeader = createAction(
+  '[Settings] Show Header',
+  props<{ showHeader: boolean }>()
+);
+
+export const actionSettingsHideHeader = createAction(
+  '[Settings] Hide Header',
+  props<{ showHeader: boolean }>()
+);
+
 export const actionSettingsChangeAnimationsPage = createAction(
   '[Settings] Change Animations Page',
   props<{ pageAnimations: boolean }>()

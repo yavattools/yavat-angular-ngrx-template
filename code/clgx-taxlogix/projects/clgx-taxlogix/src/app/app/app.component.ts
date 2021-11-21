@@ -13,6 +13,7 @@ import {
   LocalStorageService,
   selectIsAuthenticated,
   selectSettingsStickyHeader,
+  selectSettingsShowHeader,
   selectSettingsLanguage,
   selectEffectiveTheme,
   AppState,
@@ -24,6 +25,7 @@ import {
 } from '../core/store/settings/settings.actions';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import { distinctUntilChanged, filter, map, pairwise, share, throttleTime } from 'rxjs/operators';
+import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
 
 
 
@@ -56,14 +58,18 @@ export class AppComponent implements OnInit , AfterViewInit{
   showNavbar = false;
   isAuthenticated$: Observable<boolean> | undefined;
   stickyHeader$: Observable<boolean> | undefined;
+  headerShowTime$: Observable<string> | undefined;
+  showHeader$: Observable<boolean> | undefined;
   language$: Observable<string> | undefined;
   theme$: Observable<string> | undefined;
-
+  headerShowTime: string = '';
   constructor(
     private store: Store<AppState>,
     private storageService: LocalStorageService,
+    public settingsFacadeService: SettingsStoreFacade,
     private scrollDispatcher: ScrollDispatcher, private zone: NgZone
-  ) {}
+  ) {
+  }
 
   private static isIEorEdgeOrSafari() {
     return ['ie', 'edge', 'safari'].includes(browser().name || '');
@@ -78,11 +84,17 @@ export class AppComponent implements OnInit , AfterViewInit{
         })
       );
     }
+    this.settingsFacadeService.hideHeader();
 
     this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
     this.stickyHeader$ = this.store.pipe(select(selectSettingsStickyHeader));
+    this.showHeader$ = this.store.pipe(select(selectSettingsShowHeader));
     this.language$ = this.store.pipe(select(selectSettingsLanguage));
     this.theme$ = this.store.pipe(select(selectEffectiveTheme));
+
+    this.settingsFacadeService.headerShowTime$.subscribe(showTime => {
+      this.headerShowTime = showTime;
+    })
   }
 
   onLoginClick() {
@@ -109,23 +121,27 @@ ngAfterViewInit() {
       console.log("scrolling position: " + scrollPosition);
       this.scrollPosition = scrollPosition;
       if(scrollPosition > 50){
-        this.showNavbar = true;
+        if(this.headerShowTime == 'on-scroll'){
+          this.settingsFacadeService.showHeader();
+        }
       }else {
-        this.showNavbar = false;
+        if(this.headerShowTime == 'on-scroll'){
+          this.settingsFacadeService.hideHeader();
+        }
       }
     });
     });
 }
 
 // @HostListener Decorator
-  @HostListener("window:scroll", [])
-  onWindowScroll() {
-    console.log(' Window Scrolled');
-    let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
-    if (number >= 40 && window.innerWidth > 400) { 
-      this.showNavbar = true;
-    } else {
-      this.showNavbar = false;
-    }
-  }
+  // @HostListener("window:scroll", [])
+  // onWindowScroll() {
+  //   console.log(' Window Scrolled');
+  //   let number = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  //   if (number >= 40 && window.innerWidth > 400) { 
+  //     this.showNavbar = true;
+  //   } else {
+  //     this.showNavbar = false;
+  //   }
+  // }
 }

@@ -19,6 +19,8 @@ import {
 } from '../../../../../src/environments/environment';
 import { GenericService } from '@app/shared/services/generic.service';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core/core.module';
+import { DeviceDetectorService } from 'ngx-device-detector';
+import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
 
 @Component({
   selector: 'app-login',
@@ -36,14 +38,18 @@ export class LoginComponent implements OnInit {
   dialogRef: any;
   registartionPlans: any;
   displayProgressSpinner = false;
+  isMobile: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
     private matDialog: MatDialog,
     private genericService: GenericService,
-    private router: Router
+    private router: Router,
+    public settingsFacadeService: SettingsStoreFacade,
+    public deviceService:DeviceDetectorService
   ) {
+
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -53,8 +59,16 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     sessionStorage.clear();
+    this.settingsFacadeService.hideHeader();
     // this.getSystemIpAddress();
+    if(this.deviceService.isMobile() || this.deviceService.isTablet()){
+      this.isMobile = true;
+    }else{
+      this.isMobile = false;
+    }
     this.getRegistrationPlans();
+    this.settingsFacadeService.setHeaderShowTime('on-scroll');
+
   }
 
   getSystemIpAddress() {
@@ -94,84 +108,85 @@ export class LoginComponent implements OnInit {
     });
     if (this.loginForm.valid) {
       this.displayProgressSpinner = true;
-      this.loginService.loginUser(this.loginForm.value).subscribe(
-        (data: any) => {
-          this.displayProgressSpinner = false;
-          if (data?.statusCode === 200 && data?.errorCodeId === 203) {
-            localStorage.setItem(
-              PROCESS_ORG,
-              JSON.stringify(data.processOrgModel)
-            );
-            localStorage.setItem(ACCESS_TOKEN, data.accessToken);
-            localStorage.setItem(USER_MENUS, JSON.stringify(data.usersMenus));
-            localStorage.setItem(PROFILE_NAME, data.username);
-            localStorage.setItem(USER_ID, data.userId);
-            localStorage.setItem(CLIENT_ID, data.loginResponseStatus.clientId);
-            localStorage.setItem(
-              BRANCH_NAME,
-              data.loginResponseStatus.branchName
-            );
-            this.genericService.ClientBranch =
-              data.loginResponseStatus.branchName;
-            localStorage.setItem(BRANCH_ID, data.loginResponseStatus.branchId);
-            localStorage.setItem(
-              PROCESS_ID,
-              data.loginResponseStatus.processId
-            );
-            if (data.profilePic) {
-              sessionStorage.setItem(IMAGE_BASE_PATH, data.profilePic);
-            }
-            localStorage.setItem(
-              SCREEN_MAPPING,
-              JSON.stringify(
-                data.loginResponseStatus.listOfScreenMapping.map(
-                  (item: any) => {
-                    return item.screeName;
-                  }
-                )
-              )
-            );
-            sessionStorage.setItem(
-              'firstTimeLogin',
-              data?.loginResponseStatus?.firstTimeLogin
-            );
-            if (this.genericService.isFeatureEnabled('client selection')) {
-              this.router.navigate(['client-details']);
-            } else {
-              this.router.navigate(['dashboard']);
-            }
-          } else if (data?.statusCode === 200 && data?.errorCodeId === 201) {
-            this.dialogRef = this.matDialog.open(AlertMessageComponent, {
-              panelClass: 'alert-success',
-              position: { top: '35px' },
-              data: {
-                alertType: 'warning',
-                message: data.statusMessage
-              }
-            });
-          } else if (data?.statusCode === 200 && data?.errorCodeId === 202) {
-            this.dialogRef = this.matDialog.open(AlertMessageComponent, {
-              panelClass: 'alert-success',
-              position: { top: '35px' },
-              data: {
-                alertType: 'warning ',
-                message: data.statusMessage
-              }
-            });
-          }
-        },
-        (error) => {
-          this.displayProgressSpinner = false;
-          this.dialogRef = this.matDialog.open(AlertMessageComponent, {
-            panelClass: 'alert-success',
-            position: { top: '35px' },
-            data: {
-              alertType: 'error',
-              message: 'Something went wrong! please try after some time !'
-            }
-          });
-        }
-      );
+      this.router.navigate(['dashboard']);
+      // this.loginService.loginUser(this.loginForm.value).subscribe(
+      //   (data: any) => {
+      //     this.displayProgressSpinner = false;
+      //     if (data?.statusCode === 200 && data?.errorCodeId === 203) {
+      //       localStorage.setItem(
+      //         PROCESS_ORG,
+      //         JSON.stringify(data.processOrgModel)
+      //       );
+      //       localStorage.setItem(ACCESS_TOKEN, data.accessToken);
+      //       localStorage.setItem(USER_MENUS, JSON.stringify(data.usersMenus));
+      //       localStorage.setItem(PROFILE_NAME, data.username);
+      //       localStorage.setItem(USER_ID, data.userId);
+      //       localStorage.setItem(CLIENT_ID, data.loginResponseStatus.clientId);
+      //       localStorage.setItem(
+      //         BRANCH_NAME,
+      //         data.loginResponseStatus.branchName
+      //       );
+      //       this.genericService.ClientBranch =
+      //         data.loginResponseStatus.branchName;
+      //       localStorage.setItem(BRANCH_ID, data.loginResponseStatus.branchId);
+      //       localStorage.setItem(
+      //         PROCESS_ID,
+      //         data.loginResponseStatus.processId
+      //       );
+      //       if (data.profilePic) {
+      //         sessionStorage.setItem(IMAGE_BASE_PATH, data.profilePic);
+      //       }
+      //       localStorage.setItem(
+      //         SCREEN_MAPPING,
+      //         JSON.stringify(
+      //           data.loginResponseStatus.listOfScreenMapping.map(
+      //             (item: any) => {
+      //               return item.screeName;
+      //             }
+      //           )
+      //         )
+      //       );
+      //       sessionStorage.setItem(
+      //         'firstTimeLogin',
+      //         data?.loginResponseStatus?.firstTimeLogin
+      //       );
+      //       if (this.genericService.isFeatureEnabled('client selection')) {
+      //         this.router.navigate(['client-details']);
+      //       } else {
+      //         this.router.navigate(['dashboard']);
+      //       }
+      //     } else if (data?.statusCode === 200 && data?.errorCodeId === 201) {
+      //       this.dialogRef = this.matDialog.open(AlertMessageComponent, {
+      //         panelClass: 'alert-success',
+      //         position: { top: '35px' },
+      //         data: {
+      //           alertType: 'warning',
+      //           message: data.statusMessage
+      //         }
+      //       });
+      //     } else if (data?.statusCode === 200 && data?.errorCodeId === 202) {
+      //       this.dialogRef = this.matDialog.open(AlertMessageComponent, {
+      //         panelClass: 'alert-success',
+      //         position: { top: '35px' },
+      //         data: {
+      //           alertType: 'warning ',
+      //           message: data.statusMessage
+      //         }
+      //       });
+      //     }
+      //   },
+      //   (error) => {
+      //     this.displayProgressSpinner = false;
+      //     this.dialogRef = this.matDialog.open(AlertMessageComponent, {
+      //       panelClass: 'alert-success',
+      //       position: { top: '35px' },
+      //       data: {
+      //         alertType: 'error',
+      //         message: 'Something went wrong! please try after some time !'
+      //       }
+      //     });
+      //   }
+      // );
     }
   }
 }

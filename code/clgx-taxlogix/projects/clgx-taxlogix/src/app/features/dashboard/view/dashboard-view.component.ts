@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
+import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
 
@@ -16,7 +17,10 @@ export class DashboardViewComponent implements OnInit {
   features: AgencyFeature[] = features;
 
   isMobile: boolean = false;
-  constructor( public deviceService:DeviceDetectorService, private router: Router){
+  constructor( 
+    public deviceService:DeviceDetectorService, 
+    public settingsFacadeService: SettingsStoreFacade,
+    private router: Router){
 
   }
 
@@ -26,6 +30,9 @@ export class DashboardViewComponent implements OnInit {
     }else{
       this.isMobile = false;
     }
+    this.settingsFacadeService.setHeaderShowTime('always');
+
+    this.settingsFacadeService.showHeader();
   }
 
   openLink(link: string) {

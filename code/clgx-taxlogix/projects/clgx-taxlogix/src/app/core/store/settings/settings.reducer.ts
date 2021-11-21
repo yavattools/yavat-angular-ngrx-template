@@ -7,7 +7,10 @@ import {
   actionSettingsChangeHour,
   actionSettingsChangeLanguage,
   actionSettingsChangeStickyHeader,
-  actionSettingsChangeTheme
+  actionSettingsChangeTheme,
+  actionSettingsHideHeader,
+  actionSettingsShowHeader,
+  actionSettingsShowHeaderTime
 } from './settings.actions';
 import { Action, createReducer, on } from '@ngrx/store';
 
@@ -17,6 +20,8 @@ export const initialState: SettingsState = {
   autoNightMode: false,
   nightTheme: NIGHT_MODE_THEME,
   stickyHeader: true,
+  headerShowTime: 'on-scroll',
+  showHeader: false,
   pageAnimations: true,
   pageAnimationsDisabled: false,
   elementsAnimations: true,
@@ -41,6 +46,27 @@ const reducer = createReducer(
       ...state,
       pageAnimationsDisabled,
       pageAnimations: false
+    })
+  ),
+  on(
+    actionSettingsShowHeaderTime,
+    (state, action) => ({
+      ...state,
+      headerShowTime: action.headerShowTime
+    })
+  ),
+  on(
+    actionSettingsShowHeader,
+    (state, action) => ({
+      ...state,
+      showHeader: action.showHeader
+    })
+  ),
+  on(
+    actionSettingsHideHeader,
+    (state, action) => ({
+      ...state,
+      showHeader: action.showHeader
     })
   )
 );
