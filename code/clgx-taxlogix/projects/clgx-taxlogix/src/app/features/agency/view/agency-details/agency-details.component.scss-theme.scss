@@ -7,7 +7,7 @@
   $foreground: map-get($theme, foreground);
   $background: map-get($theme, background);
 
-  clgx-agency-view {
+  clgx-agency-details {
     .page-title {
       color: mat.get-color-from-palette($accent) !important;
       font-family: Graphik-medium;
@@ -27,6 +27,49 @@
       display: flex;
       align-items: center;
       letter-spacing: 0.03em;
+    }
+
+    .escrow-data-value{
+      font-family: Graphik-medium;
+      color: mat.get-color-from-palette($accent) !important;
+
+      font-style: normal;
+      font-weight: 500;
+      font-size: 56px;
+      line-height: 56px;
+      /* identical to box height, or 100% */
+      
+      display: flex;
+      align-items: center;
+    }
+
+    .escarow-data-label{
+      font-family: Graphik-regular;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 16px;
+      line-height: 18px;
+      /* identical to box height */
+      color: #868686;
+      display: flex;
+      align-items: center;
+
+    }
+
+    .mat-button-toggle-button {
+
+    }
+
+    .default-theme .mat-button-toggle-checked {
+        // background-color: red;      
+    }
+
+    .mat-button-toggle-group-appearance-standard .mat-button-toggle + .mat-button-toggle-checked{
+      // background-color: rebeccapurple;
+    }
+
+    .mat-tab-body-content{
+      overflow-x: hidden !important;
     }
   }
 }

@@ -1,5 +1,6 @@
 .details-container {
-  display: flex;
+  // display: flex;
+  width: 95%;
   flex-wrap: wrap;
   flex-direction: column;
   margin: 0;
@@ -7,70 +8,81 @@
   min-height: 100vh;
   .details-dashboard {
     background-color: white;
-    display: flex;
+    // display: flex;
     flex-wrap: wrap;
     height: 400px;
-    .escrow-n-nonescrow {
-      align-items: center;
-      justify-content: center;
-      width: 50%;
-      display: flex;
-      flex-direction: column;
-      padding: 1rem 0;
-      .escrow {
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-        justify-content: flex-start;
-        small {
-          font-size: 16px;
-          color: #868686;
-          font-style: normal;
-          font-weight: normal;
-          line-height: 18px;
-        }
-        span {
-          font-style: normal;
-          font-weight: 500;
-          font-size: 56px;
-          color: #000b6c;
-          line-height: 56px;
-        }
-      }
-      .non-escrow {
-        padding: 1rem;
-        display: flex;
-        flex-direction: column;
-        width: 50%;
-        justify-content: flex-start;
-        small {
-          font-size: 16px;
-          color: #868686;
-          font-style: normal;
-          font-weight: normal;
-          line-height: 18px;
-        }
-        span {
-          font-style: normal;
-          font-weight: 500;
-          font-size: 56px;
-          color: #000b6c;
-          line-height: 56px;
-        }
-      }
-    }
-    .collection-frequency-div {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 50%;
+    // .escrow-n-nonescrow {
+    //   align-items: left;
+    //   justify-content:  left;
+    //   width: 50%;
+    //   display: flex;
+    //   flex-direction: column;
+    //   padding: 1rem 0;
+    //   .escrow {
+    //     padding: 1rem;
+    //     display: flex;
+    //     flex-direction: column;
+    //     width: 50%;
+    //     justify-content: flex-start;
+    //     // small {
+    //     //   font-size: 16px;
+    //     //   color: #868686;
+    //     //   font-style: normal;
+    //     //   font-weight: normal;
+    //     //   line-height: 18px;
+    //     // }
+    //     // span {
+    //     //   font-style: normal;
+    //     //   font-weight: 500;
+    //     //   font-size: 56px;
+    //     //   color: #000b6c;
+    //     //   line-height: 56px;
+    //     // }
+    //   }
+    //   .non-escrow {
+    //     padding: 1rem;
+    //     display: flex;
+    //     flex-direction: column;
+    //     width: 50%;
+    //     justify-content: flex-start;
+    //     // small {
+    //     //   font-size: 16px;
+    //     //   color: #868686;
+    //     //   font-style: normal;
+    //     //   font-weight: normal;
+    //     //   line-height: 18px;
+    //     // }
+    //     // span {
+    //     //   font-style: normal;
+    //     //   font-weight: 500;
+    //     //   font-size: 56px;
+    //     //   color: #000b6c;
+    //     //   line-height: 56px;
+    //     // }
+    //   }
+    // }
+    // .collection-frequency-div {
+    //   display: flex;
+    //   justify-content: right;
+    //   align-items: right;
+    //   padding-right: 30px;
+    //   width: 50%;
       .collection-frequency {
         width: 256px;
         height: 313px;
+        float: right;
         background-color: #f6f7f8;
+        margin-top: 50px;
       }
-    }
+
+      .escarow-data-label-div {
+        padding-top: 50px;
+        padding-left: 100px;
+        .bottom-row {
+          margin-top: 50px;
+        }
+      }
+    // }
   }
   .form {
     display: flex;

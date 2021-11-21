@@ -35,6 +35,7 @@
 @import './app/app/app.component.scss-theme';
 @import './app/features/dashboard/view/dashboard-view.component.scss-theme';
 @import './app/features/agency/view/agency-landing/agency-landing.component.scss-theme';
+@import './app/features/agency/view/agency-details/agency-details.component.scss-theme';
 @import './app/features/login/login/login.component.scss-theme';
 @import './app/features/agency/view/agency-details-container/agency-details-container.component.scss-theme.scss';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
@@ -47,6 +48,7 @@
   @include clgx-big-input-component-theme($theme);
   @include clgx-agency-landing-component-theme($theme);
   @include clgx-agency-details-container-component-theme($theme);
+  @include clgx-agency-details-component-theme($theme);
 }
 
 .default-theme {
