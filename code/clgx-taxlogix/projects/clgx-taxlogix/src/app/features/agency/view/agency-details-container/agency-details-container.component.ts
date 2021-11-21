@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
@@ -15,7 +16,7 @@ export class AgencyDetailsContainerComponent implements OnInit {
   agencies: AgencyFeature[] = agencies;
 
   isMobile: Boolean = false;
-  constructor( public deviceService:DeviceDetectorService){
+  constructor( public deviceService:DeviceDetectorService , private router : Router){
 
   }
 
@@ -28,6 +29,6 @@ export class AgencyDetailsContainerComponent implements OnInit {
   }
 
   back(){
-
+    this.router.navigateByUrl('/agency')
   }
 }

@@ -20,6 +20,8 @@ export class AgencyStoreFacade {
   collectionDates$ = this.store.pipe(select(fromSelectors.selectCollectionDates));
   escrowNonEscrowDetails$ = this.store.pipe(select(fromSelectors.selectEscrowNonEscrowDetails));
   paymentDetails$ = this.store.pipe(select(fromSelectors.selectPaymentDetails));
+  escrowDetails$ = this.store.pipe(select(fromSelectors.selectEscrowDetails));
+  nonEscrowDetails$ = this.store.pipe(select(fromSelectors.selectNonEscrowDetails));
 
   constructor(private store: Store<AppState>) {}
 
@@ -63,6 +65,14 @@ export class AgencyStoreFacade {
 
   getEscrowNonEscrowDetails(request: GetEscrowNonEscrowDetailsRequest){
     this.store.dispatch(fromActions.actionGetEscrowNonEscrowDetails({request: request}));
+  }
+
+  getEscrowDetails(request: GetEscrowNonEscrowDetailsRequest){
+    this.store.dispatch(fromActions.actionGetEscrowDetails({request: request}));
+  }
+
+  getNonEscrowDetails(request: GetEscrowNonEscrowDetailsRequest){
+    this.store.dispatch(fromActions.actionGetNonEscrowDetails({request: request}));
   }
 
   saveEscrowDetails(escrow: EscrowDetails){

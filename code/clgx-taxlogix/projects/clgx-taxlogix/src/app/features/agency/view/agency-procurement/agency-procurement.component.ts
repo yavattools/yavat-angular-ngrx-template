@@ -1,6 +1,9 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
+import { EscrowDetails, NonEscrowDetails } from '@app/core/store/agency/agency.model';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Observable } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
 import { AgencyFeature, agencies } from '../../agency-view.data';
@@ -14,37 +17,49 @@ import { AgencyFeature, agencies } from '../../agency-view.data';
 export class AgencyProcumentComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agencies: AgencyFeature[] = agencies;
-  isMobile: boolean = false;
-
-  escrow : FormGroup = new FormGroup({})
-  non_escrow : FormGroup = new FormGroup({})
-  constructor( public deviceService:DeviceDetectorService, private fb : FormBuilder){
-
+  isMobile: Boolean = false;
+  escrowDetails$ : Observable<EscrowDetails> = new Observable<EscrowDetails>();
+  escrowDetails : EscrowDetails = new EscrowDetails();
+  nonEscrowDetails$ : Observable<NonEscrowDetails> = new Observable<NonEscrowDetails>();
+  nonEscrowDetails : NonEscrowDetails = new NonEscrowDetails();
+  escrowForm : FormGroup = new FormGroup({})
+  nonEscrowForm : FormGroup = new FormGroup({})
+  constructor( public deviceService:DeviceDetectorService, private fb : FormBuilder , private agencyFacade : AgencyStoreFacade){
+    this.escrowDetails$ = this.agencyFacade.escrowDetails$;
+    this.nonEscrowDetails$ = this.agencyFacade.nonEscrowDetails$;
+    this.agencyFacade.getEscrowDetails({agencyMasterId : '1' , userId : '1' , processId : '1'});
+    this.agencyFacade.getNonEscrowDetails({agencyMasterId : '1' , userId : '1' , processId : '1'});
   }
 
   ngOnInit() {
+    this.escrowDetails$.subscribe(escrowDetails => {
+      this.escrowDetails = escrowDetails;
+    });
+    this.nonEscrowDetails$.subscribe(nonEscrowDetails => {
+      this.nonEscrowDetails = nonEscrowDetails;
+    });
     if(this.deviceService.isMobile()){
       this.isMobile = true;
     }else{
       this.isMobile = false;
     }
-    this.escrow = this.fb.group({
+    this.escrowForm = this.fb.group({
       contactName : [''],
       contactPhone : [''],
       contactFax : [''],
       contactEmail : [''],
       agencyWebsite : [''],
       amtAvailableOnWebsite : [''],
-      cost_to_pay_using_copy_of_tb : [''],
-      listing_accepted_for_payment : [''],
-      mail_a_way_only_req : [''],
-      agency_expect_web_tb : [''],
-      postmark_accepted : [''],
-      copy_fee : [''],
-      fee_for_mail_a_way : [''],
-      no_of_parcels_per_check : ['']
+      costToPayUsingCopyOfTb : [''],
+      listingAcceptedForPayment : [''],
+      mailAWayOnlyReq : [''],
+      agencyExpectWebTb : [''],
+      postmarkAccepted : [''],
+      copyFee : [''],
+      feeForMailAWay : [''],
+      noOfParcelsPerCheck : ['']
     })
-    this.non_escrow = this.fb.group({
+    this.nonEscrowForm = this.fb.group({
       collectingAgencyName : [''],
       contactName : [''],
       contactPhone : [''],
@@ -54,15 +69,15 @@ export class AgencyProcumentComponent implements OnInit {
       collectedByAgency : [''],
       thirdPartyCollections : [''],
       amtAvailableOnWebsite : [''],
-      mail_a_way_only_req : [''],
-      fee_for_mail_a_way : [''],
+      mailAWayOnlyReq : [''],
+      feeForMailAWay : [''],
       payToName : [''],
       payToAddress : [''],
       payToCity : [''],
       stateId : [''],
       zipId : [''],
-      methodOfPaymentRequired_certifiedCheck : [''],
-      methodOfPaymentRequired_wire : ['']
+      methodOfPaymentRequiredCertifiedCheck : [''],
+      methodOfPaymentRequiredWire : ['']
     })
   }
 
@@ -71,6 +86,6 @@ export class AgencyProcumentComponent implements OnInit {
   }
   show(form : FormGroup){
     console.log(form.controls);
-    
+
   }
 }

@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100%;
 }
-.escrow_taxes{
+.escrow-taxes , .non-escrow-taxes{
   display: grid;
   grid-template-columns: 35% 35% 30%;
   padding: 3rem 0rem;

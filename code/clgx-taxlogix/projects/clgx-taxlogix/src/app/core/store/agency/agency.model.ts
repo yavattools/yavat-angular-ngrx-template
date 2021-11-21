@@ -201,6 +201,8 @@ export interface AgencyState {
   selectedAgency: Agency;
   collectionDates: Array<CollectionDates>;
   escrowNonEscrowDetails: Array<EscrowNonEscrowDetails>;
+  escrowDetails : EscrowDetails;
+  nonEscrowDetails : NonEscrowDetails;
   paymentDetails: PaymentDetails;
   actionInProgress: boolean;
   error: any;

@@ -106,6 +106,43 @@ export const actionGetEscrowNonEscrowDetailsSuccess = createAction(
   props<{ escNonEscs: Array<EscrowNonEscrowDetails>}>()
 );
 
+export const actionGetEscrowNonEscrowDetailsFailure = createAction(
+  '[Agency] Get Escrow Non Escrow Details Failure',
+  props<{ error: any}>()
+);
+
+export const actionGetEscrowDetails = createAction(
+  '[Agency] Get Escrow Details',
+  props<{ request: GetEscrowNonEscrowDetailsRequest}>()
+);
+
+
+export const actionGetEscrowDetailsSuccess = createAction(
+  '[Agency] Get Escrow Details Success',
+  props<{ escrowDetails: EscrowDetails}>()
+);
+
+export const actionGetEscrowDetailsFailure = createAction(
+  '[Agency] Get Escrow Details Failure',
+  props<{ error: any}>()
+);
+
+export const actionGetNonEscrowDetails = createAction(
+  '[Agency] Get Non Escrow Details',
+  props<{ request: GetEscrowNonEscrowDetailsRequest}>()
+);
+
+
+export const actionGetNonEscrowDetailsSuccess = createAction(
+  '[Agency] Get Non Escrow Details Success',
+  props<{ nonEscrowDetails: NonEscrowDetails}>()
+);
+
+export const actionGetNonEscrowDetailsFailure = createAction(
+  '[Agency] Get Non Escrow Details Failure',
+  props<{ error: any}>()
+);
+
 export const actionSaveEscrowDetails = createAction(
   '[Agency] Save Escrow Details',
   props<{ escrowDetails: EscrowDetails}>()

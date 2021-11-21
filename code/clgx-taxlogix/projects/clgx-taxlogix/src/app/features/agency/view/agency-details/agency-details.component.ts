@@ -18,7 +18,7 @@ interface Options {
 })
 export class AgencyDetailsComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  agency : any;
+  agency : Agency = new Agency();;
   newAgencyDetails : any
   agency$ : Observable<Agency>;
   agencyDetails: FormGroup = new FormGroup({});
@@ -41,7 +41,7 @@ export class AgencyDetailsComponent implements OnInit {
     this.agency$.subscribe(agency =>{
       this.agency = agency;
       console.log(agency);
-      
+
     })
     if (this.deviceService.isMobile()) {
       this.isMobile = true;
@@ -61,7 +61,7 @@ export class AgencyDetailsComponent implements OnInit {
         stateId: [this.agency.stateId, Validators.required],
         zip: [this.agency.zip, Validators.required],
         countyId: [this.agency.countyId, Validators.required],
-        contactName: [this.agency.contactName, Validators.required],     
+        contactName: [this.agency.contactName, Validators.required],
         contactEmail: [this.agency.contactEmail, Validators.required],
         contactPhone: [this.agency.contactPhone, Validators.required],
         contactFax: [this.agency.contactFax, Validators.required],
@@ -97,7 +97,7 @@ export class AgencyDetailsComponent implements OnInit {
       stateId: ['', Validators.required],
       zip: ['', Validators.required],
       countyId: ['', Validators.required],
-      contactName: ['', Validators.required],     
+      contactName: ['', Validators.required],
       contactEmail: ['', Validators.required],
       contactPhone: ['', Validators.required],
       contactFax: ['', Validators.required],

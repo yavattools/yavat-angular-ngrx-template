@@ -1,4 +1,4 @@
-import { Agency, AgencyState, CollectionDates, EscrowNonEscrowDetails, PaymentDetails} from './agency.model';
+import { Agency, AgencyState, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, NonEscrowDetails, PaymentDetails} from './agency.model';
 import { Action, createReducer, on } from '@ngrx/store';
 import {mutableOn} from 'ngrx-etc';
 import * as agencyActions from './agency.actions';
@@ -8,6 +8,8 @@ export const initialState: AgencyState = {
   selectedAgency: new Agency(),
   collectionDates: new Array<CollectionDates>(),
   escrowNonEscrowDetails: new Array<EscrowNonEscrowDetails>(),
+  escrowDetails : new EscrowDetails(),
+  nonEscrowDetails : new NonEscrowDetails(),
   paymentDetails: new PaymentDetails(),
   actionInProgress: false,
   error: ''
@@ -87,6 +89,32 @@ export const reducer = createReducer(
   mutableOn(agencyActions.actionGetEscrowNonEscrowDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
     state.escrowNonEscrowDetails = [...action.escNonEscs];
+  }),
+  mutableOn(agencyActions.actionGetEscrowNonEscrowDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error
+  }),
+  mutableOn(agencyActions.actionGetEscrowDetails, (state, action) => {
+    state.actionInProgress = true;
+  }),
+  mutableOn(agencyActions.actionGetEscrowDetailsSuccess, (state, action) => {
+    state.actionInProgress = false;
+    state.escrowDetails = action.escrowDetails;
+  }),
+  mutableOn(agencyActions.actionGetEscrowDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error
+  }),
+  mutableOn(agencyActions.actionGetNonEscrowDetails, (state, action) => {
+    state.actionInProgress = true;
+  }),
+  mutableOn(agencyActions.actionGetNonEscrowDetailsSuccess, (state, action) => {
+    state.actionInProgress = false;
+    state.nonEscrowDetails = action.nonEscrowDetails;
+  }),
+  mutableOn(agencyActions.actionGetNonEscrowDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error
   }),
   mutableOn(agencyActions.actionSaveEscrowDetails, (state, action) => {
     state.actionInProgress = true;

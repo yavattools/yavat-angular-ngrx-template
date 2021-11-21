@@ -28,6 +28,16 @@ export const selectEscrowNonEscrowDetails = createSelector(
   (state: AgencyState) => state.escrowNonEscrowDetails
 );
 
+export const selectEscrowDetails = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.escrowDetails
+);
+
+export const selectNonEscrowDetails = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.nonEscrowDetails
+);
+
 export const selectPaymentDetails = createSelector(
   selectAgencyState,
   (state: AgencyState) => state.paymentDetails

@@ -21,40 +21,6 @@ import { AnimationsService } from '../../providers/animations/animations.service
 import { TitleService } from '../../providers/title/title.service';
 
 import {
-  actionAgencyApiFailure,
-actionGetAllActiveAgencies,
-actionGetAllActiveAgenciesSuccess,
-actionGetCollectionDates,
-actionGetCollectionDatesSuccess,
-actionGetEscrowNonEscrowDetails,
-actionGetEscrowNonEscrowDetailsSuccess,
-actionGetPaymentDetails,
-actionGetPaymentDetailsSuccess,
-actionSaveAgencyDetails,
-actionSaveAgencyDetailsSuccess,
-actionSaveCollectionDates,
-actionSaveCollectionDatesSuccess,
-actionSaveEscrowDetails,
-actionSaveEscrowDetailsSuccess,
-actionSaveNonEscrowDetails,
-actionSaveNonEscrowDetailsSuccess,
-actionSavePaymentDetails,
-actionSavePaymentDetailsSuccess,
-actionSetSelectedAgency,
-actionStartActionInProgress,
-actionStopActionInProgress,
-actionUpdateAgencyDetails,
-actionUpdateAgencyDetailsSuccess,
-actionUpdateCollectionDates,
-actionUpdateCollectionDatesSuccess,
-actionUpdateEscrowDetails,
-actionUpdateEscrowDetailsSuccess,
-actionUpdateNonEscrowDetails,
-actionUpdateNonEscrowDetailsSuccess,
-actionUpdatePaymentDetails,
-actionUpdatePaymentDetailsSuccess
-} from './agency.actions';
-import {
  selectActionInProgress,
  selectAgencies,
  selectAgency,
@@ -76,7 +42,7 @@ export class AgencyEffects {
 
   getAgencies = createEffect(() =>
       this.actions$.pipe(
-        ofType(actionGetAllActiveAgencies),
+        ofType(agencyActions.actionGetAllActiveAgencies),
       switchMap((action) => this.agencyDataService.getAgencies(action.request).pipe(
           mergeMap( agencyList => [
             agencyActions.actionGetAllActiveAgenciesSuccess({agencyList: agencyList}),
@@ -85,9 +51,10 @@ export class AgencyEffects {
         ))
       )
     );
+
   addAgency = createEffect(()=>
   this.actions$.pipe(
-    ofType(actionSaveAgencyDetails),
+    ofType(agencyActions.actionSaveAgencyDetails),
     switchMap((action)=>this.agencyDataService.addAgency(action.agency).pipe(
       mergeMap( agencyDetails=>[
         agencyActions.actionSaveAgencyDetailsSuccess({agency : agencyDetails}),
@@ -96,9 +63,10 @@ export class AgencyEffects {
     ))
   )
   );
+
   updateAgency = createEffect(()=>
   this.actions$.pipe(
-    ofType(actionUpdateAgencyDetails),
+    ofType(agencyActions.actionUpdateAgencyDetails),
     switchMap((action)=>this.agencyDataService.updateAgency(action.agency).pipe(
       mergeMap( agencyDetails=>[
         agencyActions.actionUpdateAgencyDetailsSuccess({agency : agencyDetails}),
@@ -106,7 +74,31 @@ export class AgencyEffects {
       catchError(error => of(agencyActions.actionUpdateAgencyDetailsFailure({error : error})))
     ))
   )
+  );
+
+  getEscrowDetails = createEffect(() =>
+  this.actions$.pipe(
+    ofType(agencyActions.actionGetEscrowDetails),
+    switchMap((action)=>this.agencyDataService.getEscrow(action.request).pipe(
+      mergeMap( escrowDetails=>[
+        agencyActions.actionGetEscrowDetailsSuccess({escrowDetails : escrowDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionGetEscrowDetailsFailure({error : error})))
+    ))
   )
+  );
+
+  getNonEscrowDetails = createEffect(() =>
+  this.actions$.pipe(
+    ofType(agencyActions.actionGetNonEscrowDetails),
+    switchMap((action)=>this.agencyDataService.getNonEscrow(action.request).pipe(
+      mergeMap( nonEscrowDetails=>[
+        agencyActions.actionGetNonEscrowDetailsSuccess({nonEscrowDetails : nonEscrowDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionGetNonEscrowDetailsFailure({error : error})))
+    ))
+  )
+  );
 
   constructor(
     private actions$: Actions,

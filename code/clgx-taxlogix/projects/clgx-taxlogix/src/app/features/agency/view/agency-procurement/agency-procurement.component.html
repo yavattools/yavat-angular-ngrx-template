@@ -1,7 +1,7 @@
 <mat-tab-group  mat-align-tabs="start" style="margin-top: 10rem;">
   <mat-tab label="Escrow Taxes">
-    <form class="form" [formGroup]="escrow" (ngSubmit)="show(escrow)">
-      <div class="escrow_taxes">
+    <form class="form" [formGroup]="escrowForm" (ngSubmit)="show(escrowForm)">
+      <div class="escrow-taxes">
         <div class="details">
           <div class="detail">
             <span>Contact info</span>
@@ -43,35 +43,35 @@
             </div>
             <div class="toggle">
               <mat-label>Cost to Pay Using Copy of TB</mat-label>
-              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="cost_to_pay_using_copy_of_tb">
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="costToPayUsingCopyOfTb">
                 <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                 <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
               </mat-button-toggle-group>
             </div>
             <div class="toggle">
               <mat-label>Listing Accepted for Payment</mat-label>
-              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="listing_accepted_for_payment">
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="listingAcceptedForPayment">
                 <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                 <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
               </mat-button-toggle-group>
             </div>
             <div class="toggle">
               <mat-label>Mail-a-way Only Req</mat-label>
-              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mail_a_way_only_req">
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mailAWayOnlyReq">
                 <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                 <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
               </mat-button-toggle-group>
             </div>
             <div class="toggle">
               <mat-label>Agency Expect Web TB</mat-label>
-              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agency_expect_web_tb">
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agencyExpectWebTb">
                 <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                 <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
               </mat-button-toggle-group>
             </div>
             <div class="toggle">
               <mat-label>Postmark Accepted</mat-label>
-              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="postmark_accepted">
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="postmarkAccepted">
                 <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                 <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
               </mat-button-toggle-group>
@@ -82,15 +82,15 @@
           <div class="details-inputs">
               <mat-form-field appearance="outline" style="width: 100%;margin-top: 20px;">
                 <mat-label>Copy Fee</mat-label>
-                <input matInput formControlName="copy_fee">
+                <input matInput formControlName="copyFee">
               </mat-form-field>
               <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>Fee for Mail-a-Way</mat-label>
-                <input matInput formControlName="fee_for_mail_a_way">
+                <input matInput formControlName="feeForMailAWay">
               </mat-form-field>
               <mat-form-field appearance="outline" style="width: 100%;">
                 <mat-label>No. of Parcels Per Check</mat-label>
-                <input matInput formControlName="no_of_parcels_per_check">
+                <input matInput formControlName="noOfParcelsPerCheck">
               </mat-form-field>
           </div>
         </div>
@@ -103,8 +103,8 @@
       </form>
   </mat-tab>
   <mat-tab label="Non Escrow">
-    <form class="form" [formGroup]="non_escrow" (ngSubmit)="show(non_escrow)">
-      <div class="escrow_taxes">
+    <form class="form" [formGroup]="nonEscrowForm" (ngSubmit)="show(nonEscrowForm)">
+      <div class="non-escrow-taxes">
         <div class="details">
           <div class="detail">
             <span>Contact info</span>
@@ -164,14 +164,14 @@
             </div>
             <div class="toggle">
               <mat-label>Mail-a-way Only Req</mat-label>
-              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mail_a_way_only_req">
+              <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mailAWayOnlyReq">
                 <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                 <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
               </mat-button-toggle-group>
             </div>
             <mat-form-field appearance="outline">
               <mat-label>Fee for Mail-a-Way</mat-label>
-              <input matInput formControlName="fee_for_mail_a_way">
+              <input matInput formControlName="feeForMailAWay">
             </mat-form-field>
           </div>
         </div>
@@ -203,8 +203,8 @@
                 </mat-form-field>
                 <div class="checkbox">
                   <mat-label>Method of Payment Required</mat-label>
-                  <mat-checkbox class="check-box" style="padding-right:10px;" formControlName="methodOfPaymentRequired_certifiedCheck">Certified check</mat-checkbox>
-                  <mat-checkbox class="check-box" style="padding-left:10px;" formControlName="methodOfPaymentRequired_wire">Wire</mat-checkbox>
+                  <mat-checkbox class="check-box" style="padding-right:10px;" formControlName="methodOfPaymentRequiredCertifiedCheck">Certified check</mat-checkbox>
+                  <mat-checkbox class="check-box" style="padding-left:10px;" formControlName="methodOfPaymentRequiredWire">Wire</mat-checkbox>
               </div>
               </div>
           </div>
