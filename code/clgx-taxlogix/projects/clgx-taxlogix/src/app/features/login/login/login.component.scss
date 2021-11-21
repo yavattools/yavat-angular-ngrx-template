@@ -1,18 +1,44 @@
 .login-wrapper {
   background-color: #f5f5f5;
+  margin-right: 0px;
   .intro-block {
     height: 100vh;
     .intro-wrapper {
-      padding: 0px 0px 90px 0px;
+      padding: 0px 0px 50px 0px;
       .login-logo {
         padding: 48px 30px 120px 30px;
       }
-      .introText {
+      .introText-desktop {
         color: #5e5e5e;
         font-size: 16px;
         margin-bottom: 50px;
         padding-right: 50px;
-        padding-left: 60px;
+        padding-left: 50px;
+        div {
+          font-size: 60px;
+          color: #0b0f46;
+          font-weight: bold;
+          span {
+            color: #5e5e5e;
+            font-size: 16px;
+            margin-left: 10px;
+          }
+        }
+        h6 {
+          color: #0b0f46;
+          font-size: 24px;
+          margin: 16px 0 30px 0;
+        }
+        p {
+          color: #646464;
+        }
+      }
+      .introText-mobile {
+        color: #5e5e5e;
+        font-size: 16px;
+        margin-bottom: 50px;
+        padding-right: 50px;
+        padding-left: 50px;
         div {
           font-size: 60px;
           color: #0b0f46;
@@ -38,6 +64,7 @@
   .landinginfo-wrap {
     padding: 6%;
     .landinginfo-row {
+      padding-bottom: 200px;
       .landing-info {
         span {
           color: #0b0f46;
@@ -61,7 +88,7 @@
   clip-path: polygon(0 0, 123% 0%, 78% 202%, -9% -24%, 0 128%);
 
   .parallelogram-wrap {
-    padding: 25px 50px 0 0;
+    // padding: 25px 50px 0 0;
   }
 }
 
@@ -82,21 +109,37 @@
   cursor: pointer;
 }
 
-.forgot-pass-text {
-  margin-top: 10px;
-  cursor: pointer;
+.login-banner1-desktop {
+  position: relative; 
+  margin-right: 20px;
+  height: 13rem;
+  top: -150px;
 }
+
+.login-banner1-mobile {
+  position: relative; 
+  margin-right: 20px;
+  height: 12rem;
+  top: -50px;
+}
+
 .tax-search-img {
-  width: 433px;
-  height: 233px;
+  // width: 433px;
+  // height: 233px;
+  position: relative; 
+  margin-right: 20px;
+  height: 12rem;
+  // top: -150px;
 }
 .municipal-search-img {
-  width: 393px;
-  height: 280px;
+  position: relative; 
+  margin-right: 20px;
+  height: 12rem;
 }
 .automate-workflow-img {
-  width: 326px;
-  height: 302px;
+  position: relative; 
+  margin-right: 20px;
+  height: 12rem;
 }
 .login-banner-img {
   width: 380px;
@@ -105,39 +148,64 @@
   margin-right: 40px;
 }
 
-// responsive styles
-@media only screen and (max-width: 1024px) {
-  .login-wrapper .landinginfo-wrap {
-    padding: 13% 4%;
-  }
-  .tax-search-img {
-    width: 333px;
-    height: 233px;
-  }
-  .login-band > div {
-    margin-left: 15px;
-  }
-  .login-banner-img {
-    width: 300px;
-    height: 213px;
-    margin-top: 60px;
-    margin-right: 20px;
-  }
-  .shape .parallelogram-wrap {
-    padding: 25px 30px 0 0;
-  }
-  .login-wrapper {
-    .intro-block {
-      .intro-wrapper {
-        .introText {
-          div {
-            font-size: 45px;
-          }
-        }
-        .login-logo {
-          padding: 48px 30px 77px 30px;
-        }
-      }
-    }
-  }
+.text-landing-subTitle{
+  color:#7f7f7f !important;
+  font-size: 16px !important;
+  margin-top: 10px !important;
 }
+.text-landing-subTitleInfo{
+  color:#7f7f7f !important;
+  font-size: 16px !important;
+}
+
+.login-form-desktop {
+  position: absolute;
+  top: 50px;
+  right: 50px;
+}
+
+.login-form-mobile {
+  position: absolute;
+  top: 22px;
+  right: -40px;
+}
+
+.login-form-container{
+  margin-bottom: 50px;
+}
+// responsive styles
+// @media only screen and (max-width: 1024px) {
+//   .login-wrapper .landinginfo-wrap {
+//     padding: 13% 4%;
+//   }
+//   .tax-search-img {
+//     width: 333px;
+//     height: 233px;
+//   }
+//   .login-band > div {
+//     margin-left: 15px;
+//   }
+//   .login-banner-img {
+//     width: 300px;
+//     height: 213px;
+//     margin-top: 60px;
+//     margin-right: 20px;
+//   }
+//   .shape .parallelogram-wrap {
+//     // padding: 25px 30px 0 0;
+//   }
+//   .login-wrapper {
+//     .intro-block {
+//       .intro-wrapper {
+//         .introText {
+//           div {
+//             font-size: 45px;
+//           }
+//         }
+//         .login-logo {
+//           padding: 48px 30px 77px 30px;
+//         }
+//       }
+//     }
+//   }
+// }

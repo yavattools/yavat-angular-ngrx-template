@@ -9,26 +9,32 @@
           <mat-form-field appearance="outline" >
             <mat-label>Collecting Agency Name</mat-label>
             <input matInput formControlName="collectingAgencyName">
+             <mat-error *ngIf="collectingAgencyName.invalid">{{getErrorMessage(collectingAgencyName)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Contact Name</mat-label>
             <input matInput formControlName="contactName">
+            <mat-error *ngIf="contactName.invalid">{{getErrorMessage(contactName)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Contact Phone</mat-label>
             <input matInput formControlName="contactPhone">
+            <mat-error *ngIf="contactPhone.invalid">{{getErrorMessage(contactPhone)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Contact Fax</mat-label>
             <input matInput formControlName="contactFax">
+            <mat-error *ngIf="contactFax.invalid">{{getErrorMessage(contactFax)}}</mat-error>
           </mat-form-field>
          <mat-form-field appearance="outline">
             <mat-label>Contact Email</mat-label>
             <input matInput formControlName="contactEmail">
+            <mat-error *ngIf="contactEmail.invalid">{{getErrorMessage(contactEmail)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Agency Website</mat-label>
             <input matInput formControlName="agencyWebsite">
+            <mat-error *ngIf="agencyWebsite.invalid">{{getErrorMessage(agencyWebsite)}}</mat-error>
           </mat-form-field>
       </div>        
     </div>
@@ -65,7 +71,7 @@
               <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
             </mat-button-toggle-group>
         </div>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" style="width:100%">
             <mat-label>Fee for Mail-a-Way</mat-label>
             <input matInput formControlName="feeForMailAWay">
         </mat-form-field>
@@ -73,22 +79,44 @@
     </div>
      <div class="details">
       <div class="detail">
-        <span style="padding-top:1em"> </span>
+        <span>Delinquent contact details</span>
       </div>
       <div class="details-inputs">
           <mat-form-field appearance="outline">
             <mat-label>Pay to Name</mat-label>
             <input matInput formControlName="payToName">
+            <mat-error *ngIf="payToName.invalid">{{getErrorMessage(payToName)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Pay to Address</mat-label>
             <input matInput formControlName="payToAddress">
+            <mat-error *ngIf="payToAddress.invalid">{{getErrorMessage(payToAddress)}}</mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Pay to City</mat-label>
             <input matInput formControlName="payToCity">
-          </mat-form-field>         
+            <mat-error *ngIf="payToCity.invalid">{{getErrorMessage(payToCity)}}</mat-error>
+          </mat-form-field>        
+          <div class="state-zip">
+          <mat-form-field appearance="outline" style="width: 40%;margin-right:20px">
+            <mat-label>State</mat-label>
+            <input matInput formControlName="stateId">
+            <mat-error *ngIf="stateId.invalid">{{getErrorMessage(stateId)}}</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline" style="width : 50%">
+            <mat-label>Zip</mat-label>
+            <input matInput formControlName="zipCode">
+            <mat-error *ngIf="zipCode.invalid">{{getErrorMessage(zipCode)}}</mat-error>
+          </mat-form-field>
+        </div> 
+       <div  [formGroup]="methodOfPayment">
+          <mat-label>Method of Payment Required</mat-label>
+          <mat-checkbox style="margin-right:10px;" formControlName="check">Certified Check</mat-checkbox>
+          <mat-checkbox formControlName="wire">Wire</mat-checkbox>        
+       </div>
       </div>        
     </div>
 </div>
 </form>
+
+<mat-divider style="margin-top:30px;margin-bottom:30px;"></mat-divider>

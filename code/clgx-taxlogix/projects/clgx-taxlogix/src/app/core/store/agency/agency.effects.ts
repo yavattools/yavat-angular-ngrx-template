@@ -11,6 +11,7 @@ import {
   distinctUntilChanged,
   filter,
   switchMap,
+  mergeMap,
   catchError
 } from 'rxjs/operators';
 
@@ -72,21 +73,40 @@ const INIT = of('clgx-init-effect-trigger');
 
 @Injectable()
 export class AgencyEffects {
-  
-  getAgencies = createEffect(
-    () =>
-        this.actions$.pipe(ofType(actionGetAllActiveAgencies))
-        .pipe(tap((action) => {
-          this.agencyDataService.getAgencies(action.request).pipe(
-            switchMap( agencyList => [
-              agencyActions.actionGetAllActiveAgenciesSuccess({agencyList: agencyList}),
-            ]),
-            catchError(error => of(agencyActions.actionAgencyApiFailure(error)))
-          )
-        })
-      ),
-    { dispatch: false }
+
+  getAgencies = createEffect(() =>
+      this.actions$.pipe(
+        ofType(actionGetAllActiveAgencies),
+      switchMap((action) => this.agencyDataService.getAgencies(action.request).pipe(
+          mergeMap( agencyList => [
+            agencyActions.actionGetAllActiveAgenciesSuccess({agencyList: agencyList}),
+          ]),
+          catchError(error => of(agencyActions.actionAgencyApiFailure(error)))
+        ))
+      )
+    );
+  addAgency = createEffect(()=>
+  this.actions$.pipe(
+    ofType(actionSaveAgencyDetails),
+    switchMap((action)=>this.agencyDataService.addAgency(action.agency).pipe(
+      mergeMap( agencyDetails=>[
+        agencyActions.actionSaveAgencyDetailsSuccess({agency : agencyDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionSaveAgencyDetailsFailure({error : error})))
+    ))
+  )
   );
+  updateAgency = createEffect(()=>
+  this.actions$.pipe(
+    ofType(actionUpdateAgencyDetails),
+    switchMap((action)=>this.agencyDataService.updateAgency(action.agency).pipe(
+      mergeMap( agencyDetails=>[
+        agencyActions.actionUpdateAgencyDetailsSuccess({agency : agencyDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionUpdateAgencyDetailsFailure({error : error})))
+    ))
+  )
+  )
 
   constructor(
     private actions$: Actions,
@@ -101,3 +121,5 @@ export class AgencyEffects {
     private ngZone: NgZone
   ) {}
 }
+
+export const effects: any[] = [AgencyEffects];

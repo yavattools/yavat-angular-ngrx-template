@@ -2,7 +2,7 @@ import { AppState } from '../../core.module';
 
 
 
-export class Agency 
+export class Agency
 {
     agencyMasterId: string | undefined;
     agencyName: string | undefined;
@@ -48,7 +48,7 @@ export class Agency
     modifiedByUser: string | undefined;
 
     constructor(){
-      
+
     }
   }
 
@@ -75,11 +75,11 @@ export class CollectionDates{
   modifiedByUser: string | undefined;
   constructor(){}
   }
-  
+
 export interface GetCollectionDatesRequest {
   agencyMasterId: string | undefined;
   userId: string | undefined;
-  ProcessId: string | undefined;
+  processId: string | undefined;
 }
 
 
@@ -110,7 +110,7 @@ export class EscrowDetails {
 }
 
 
-export class NonEscrowDetails 
+export class NonEscrowDetails
 {
     agencyMasterId: string | undefined;
     nonEscrowId: string | undefined;
@@ -140,7 +140,7 @@ export class NonEscrowDetails
 
     constructor(){}
   }
-  
+
 
   export class EscrowNonEscrowDetails {
     escrow: EscrowDetails;
@@ -153,11 +153,11 @@ export class NonEscrowDetails
 
   }
 
-  
+
 export interface GetEscrowNonEscrowDetailsRequest {
   agencyMasterId: string | undefined;
   userId: string | undefined;
-  ProcessId: string | undefined;
+  processId: string | undefined;
 }
 
 
@@ -186,13 +186,13 @@ export class PaymentDetails {
   modifiedByUser: string | undefined;
 
   constructor(){}
-  
+
   }
-  
+
   export interface GetPaymentDetailsRequest {
     agencyMasterId: string | undefined;
     userId: string | undefined;
-    ProcessId: string | undefined;
+    processId: string | undefined;
   }
 
 

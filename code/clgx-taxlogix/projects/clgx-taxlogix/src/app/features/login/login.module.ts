@@ -9,6 +9,7 @@ import {
 import { SharedModule } from '../../shared/shared.module';
 import { ValidateLinkComponent } from './validate-link/validate-link.component';
 import { WelcomeDialogComponent } from '../../shared/dialog-model/welcome-dialog/welcome-dialog.component';
+import { AnimateOnScrollModule } from "ng2-animate-on-scroll";
 
 @NgModule({
   declarations: [

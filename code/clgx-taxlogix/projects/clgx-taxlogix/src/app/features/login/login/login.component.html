@@ -1,161 +1,182 @@
-<div class="login-wrapper">
+<mat-card class="container login-form-container">
 
-    <div fxLayout="column" fxFlex>
-
-        <div fxLayout="row" class="intro-block">
-
-            <div fxFlex="45" class="intro-wrapper">
-                <div class="login-logo pl-2 ">
-                   
-                </div>
-                <div class="introText">
-                    <div> <img src="././assets/icons/taxlogix-logo.svg" style="width:250px;height:64px;" alt="logo"><span>By Chainlogix</span></div>
-                    <h6>Make the change today! leverage our RPA technology </h6>
-                    <p>Taxlogix solve our client's toughest challenges replaces time consuming and manual processes.
-                        Robotic Process Automation (RPA) and experienced team members provides for balance between human
-                        and digital workers. We are the trusted source in real estate tax and the subject matter experts
-                    </p>
-                    <div>
-                        <app-button [btnType]="'primary'" [isRounded]=true [btnText]="'SIGN UP'" [btnSize]="'login'"
-                            (onbtnClick)="moveToRegistattionPlans()"></app-button>
+<div class="login-wrapper " >
+    <div fxLayout="row wrap" fxFlex >
+        <div fxFlex="100" >
+            <div fxLayout="row" class="intro-block" >
+                <div fxFlex="45" class="intro-wrapper">
+                    <div class="login-logo pl-2 ">
+                    
                     </div>
+                    <div [class.introText-desktop]="!isMobile" [class.introText-mobile]="isMobile" >
+                        <div>
+                            <div>
+                                <img animateOnScroll animationName="animated fadeInDown" 
+                                src="././assets/icons/taxlogix-logo.svg" style="width:250px;height:64px;" alt="logo">
+                                <span animateOnScroll animationName="animated fadeInLeft" style="position: relative;left: -20px;" *ngIf="!isMobile">By Chainlogix</span>
+                            </div>
+                            <span *ngIf="isMobile" style="position: relative;top: -50px;" animateOnScroll animationName="animated fadeInDown">By Chainlogix</span>
+                        </div>
+                        <h6 animateOnScroll animationName="animated fadeInDown">Make the change today! leverage our RPA technology </h6>
+                        <p animateOnScroll animationName="animated fadeInDown">Taxlogix solve our client's toughest challenges replaces time consuming and manual processes.
+                            Robotic Process Automation (RPA) and experienced team members provides for balance between human
+                            and digital workers. We are the trusted source in real estate tax and the subject matter experts
+                        </p>
+                        <div>
+                            <app-button [btnType]="'primary'" [isRounded]=true [btnText]="'SIGN UP'" [btnSize]="'login'"
+                                (onbtnClick)="moveToRegistattionPlans()"></app-button>
+                        </div>
+                    </div>
+
                 </div>
-
-            </div>
-            <div fxFlex="55">
-                <div>
-                    <div class="shape">
-                        <div class="parallelogram-wrap " fxLayout="column" fxLayoutAlign="end end">
-
-                            <!-- <div > -->
-                            <form class="login-band" fxLayout="row" [formGroup]="loginForm" (ngSubmit)="submitForm()">
-                                <div>
-                                    <mat-label>Email</mat-label>
-                                    <div>
-                                        <mat-form-field appearance="outline">
-                                            <input matInput formControlName="username">
-                                        </mat-form-field>
-                                    </div>
+                <div fxFlex="55">
+                    <div>
+                        <div class="shape" >
+                            <div class="parallelogram-wrap " fxLayout="row wrap" fxLayoutAlign="center center" 
+                                    animateOnScroll animationName="animated fadeInDown"  style="height: 100vh;">
+                                <div fxFlex="100" fxLayoutAlign="end start" >
+                                    <img animateOnScroll animationName="animated fadeIn" 
+                                            src="././assets/images/login-banner-1.png" alt="banner-1"
+                                        class="img-fluid"  [class.login-banner1-desktop]="!isMobile" [class.login-banner1-mobile]="isMobile">
                                 </div>
-                                <div>
-                                    <mat-label>Password</mat-label>
-                                    <div>
-                                        <mat-form-field appearance="outline">
-                                            <input [type]="hide ? 'password' : 'text'" matInput
-                                                formControlName="password" autocomplete="on">
-                                            <mat-icon class="hide-password-icon" matSuffix (click)="hide = !hide">{{hide
-                                                ? 'visibility_off' : 'visibility'}}</mat-icon>
-                                        </mat-form-field>
-                                    </div>
-                                    <mat-label class="forgot-pass-text" (click)="navigateToForgotPass()">Forgot
-                                        Password?</mat-label>
-                                </div>
-                                <div class="login-btn">
-                                    <app-button [btnType]="'flat'" [isRounded]=true [btnText]="'LOGIN'"
-                                        [btnSize]="'large'"></app-button>
-                                </div>
-                            </form>
-                            <!-- </div> -->
-                            <div><img src="././assets/images/login-banner-1.png" alt="banner-1"
-                                    class="login-banner-img"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="landinginfo-wrap">
-            <div fxLayout="row" fxLayoutAlign="start center" class="landinginfo-row mb-8">
-                <div fxFlex="45" fxLayout="row">
-                    <div><img src="././assets/images/login-banner-2.png" class="tax-search-img" alt="banner-2"></div>
-                </div>
-                <div fxFlex="5"></div>
-                <div fxFlex="45" class="landing-info">
-                    <div>
-                        <span>Where consistency and exceeding our customer’s expectations is a priority!
-                        </span>
-                        <p>Led by several subject matter experts with more than 100 years of experience in developing
-                            and implementation of both Title reporting / Tax servicing with an unwavering demand to
-                            exceeding client expectations.
-                            Faster and accurate searches, simplified reports, instant scalability, web-based tools and
-                            delivery, real-time tax information, and a dedicated support team.
-                        </p>
+        <div fxFlex="100">
+            <div class="landinginfo-wrap">
+                <div fxLayout="row" fxLayoutAlign="start center" class="landinginfo-row mb-8" >
+                    <div fxFlex="45" fxLayout="row"  >
+                        <div >
+                            <img animateOnScroll animationName="animated fadeInLeft" 
+                            class="img-fluid"  src="././assets/images/login-banner-2.png" class="tax-search-img" alt="banner-2">
+                        </div>
                     </div>
-
-                </div>
-            </div>
-
-            <div fxLayout="row" fxLayoutAlign="start center" class="landinginfo-row mt-8 mb-8">
-                <div fxFlex="45" class="landing-info">
-                    <div fxLayout="column">
-                        <span>RPA + AI, not just scraping
-                        </span>
-                        <!-- <p class="font-400 text-landing-subTitle">Value we deliver to our customers </p> -->
-                        <ul class="text-landing-subTitle" style="list-style-type: square;color: #7f7f7f">
-                            <li> Impressive Agency Database</li>
-                            <li>Quality control cross-checks in place</li>
-                            <!-- <li>Over 60% reduction in processing and turn-time</li> -->
-                            <li> Manual tax search cut from 14 minutes to 90 seconds</li>
-                            <!-- <li>Errors eliminated with RPA</li>
-                            <li>Fast completion bot speed report delivery and closing </li> -->
-                        </ul>
-
-
-
+                    <div fxFlex="5"></div>
+                    <div fxFlex="45" class="landing-info">
+                        <div  animateOnScroll animationName="animated fadeInRight" >
+                            <span >Where consistency and exceeding our customer’s expectations is a priority!
+                            </span>
+                            <p animateOnScroll animationName="animated fadeInRight"
+                            >Led by several subject matter experts with more than 100 years of experience in developing
+                                and implementation of both Title reporting / Tax servicing with an unwavering demand to
+                                exceeding client expectations.
+                                Faster and accurate searches, simplified reports, instant scalability, web-based tools and
+                                delivery, real-time tax information, and a dedicated support team.
+                            </p>
+                        </div>
 
                     </div>
                 </div>
-                <div fxFlex="10"></div>
-                <div fxFlex="45" class="mt-4">
-                    <div><img class="municipal-search-img" src="././assets/images/login-banner-3.png"
-                            alt="login-banner-3"></div>
-                </div>
-            </div>
 
-            <div fxLayout="row" fxLayoutAlign="start center" class="landinginfo-row mt-8 pt-2">
-                <div fxFlex="45">
-                    <img class="automate-workflow-img" src="././assets/images/login-banner-4.png" alt="login-banner-4">
+                <div fxLayout="row" fxLayoutAlign="start center" class="landinginfo-row mt-8 mb-8" >
+                    <div fxFlex="45" class="landing-info">
+                        <div fxLayout="column"  animateOnScroll animationName="animated fadeInLeft">
+                            <span >RPA + AI, not just scraping
+                            </span>
+                            <!-- <p class="font-400 text-landing-subTitle">Value we deliver to our customers </p> -->
+                            <ul  class="text-landing-subTitle" style="list-style-type: square;color: #7f7f7f">
+                                <li> Impressive Agency Database</li>
+                                <li>Quality control cross-checks in place</li>
+                                <!-- <li>Over 60% reduction in processing and turn-time</li> -->
+                                <li> Manual tax search cut from 14 minutes to 90 seconds</li>
+                                <!-- <li>Errors eliminated with RPA</li>
+                                <li>Fast completion bot speed report delivery and closing </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <div fxFlex="10"></div>
+                    <div fxFlex="45" class="mt-4">
+                        <div ><img animateOnScroll animationName="animated fadeInRight" 
+                                class="img-fluid municipal-search-img" src="././assets/images/login-banner-3.png"
+                                alt="login-banner-3"></div>
+                    </div>
                 </div>
-                <div fxFlex="10"></div>
-                <div fxFlex="40" class="landing-info ">
-                    <div>
-                        <span>Features</span>
-                        <ul style="list-style-type: square;color: #7f7f7f">
-                            <li>
-                                <p class="text-landing-subTitle">Ease of ordering: 
-                                <span class="text-landing-subTitleInfo" style="margin: 0;"> Ease of access, monitor and track requests</span> </p>
-                            </li>
-                            <li>
-                                <p class="text-landing-subTitle">Manage your profile:
-                                <span class="text-landing-subTitleInfo" style="margin: 0;"> Add users, update payment & company info</span></p>
-                            </li>
-                            <li>
-                                <p class="text-landing-subTitle"> Bulk upload:
-                                <span class="text-landing-subTitleInfo" style="margin: 0;"> Manual request as well as bulk upload</span></p>
-                            </li>
-                            <li>
-                                <p class="text-landing-subTitle">Automatic Report Generation and delivery:
-                                <span class="text-landing-subTitleInfo" style="margin: 0;"> Simple to read form instantly archived for future review
-                                </span></p>
-                            </li>
-                           
-                            <li>
-                                <p class="text-landing-subTitle"> Dashboard Analysis:
-                                <span class="text-landing-subTitleInfo" style="margin: 0;"> State specific demographics information</span></p>
-                            </li>
-                            <li>
-                                <p class="text-landing-subTitle"> Flexible payment:
-                                <span class="text-landing-subTitleInfo" style="margin: 0;">Credit card or ACH</span></p>
-                            </li>
-                        </ul>                                                       
+
+                <div fxLayout="row" fxLayoutAlign="start center" class="landinginfo-row mt-8 pt-2" >
+                    <div fxFlex="45">
+                        <img animateOnScroll animationName="animated fadeInRight" class="automate-workflow-img" 
+                        src="././assets/images/login-banner-4.png" alt="login-banner-4">
+                    </div>
+                    <div fxFlex="10"></div>
+                    <div fxFlex="45" class="landing-info " fxLayoutAlign="center center">
+                        <div  animateOnScroll animationName="animated fadeInLeft">
+                            <span>Features</span>
+                            <ul style="list-style-type: square;color: #7f7f7f">
+                                <li >
+                                    <p class="text-landing-subTitle">Ease of ordering: 
+                                    <span class="text-landing-subTitleInfo" style="margin: 0;"> Ease of access, monitor and track requests</span> </p>
+                                </li>
+                                <li >
+                                    <p class="text-landing-subTitle">Manage your profile:
+                                    <span class="text-landing-subTitleInfo" style="margin: 0;"> Add users, update payment & company info</span></p>
+                                </li>
+                                <li >
+                                    <p class="text-landing-subTitle"> Bulk upload:
+                                    <span class="text-landing-subTitleInfo" style="margin: 0;"> Manual request as well as bulk upload</span></p>
+                                </li>
+                                <li >
+                                    <p class="text-landing-subTitle">Automatic Report Generation and delivery:
+                                    <span class="text-landing-subTitleInfo" style="margin: 0;"> Simple to read form instantly archived for future review
+                                    </span></p>
+                                </li>
+                            
+                                <li >
+                                    <p class="text-landing-subTitle"> Dashboard Analysis:
+                                    <span class="text-landing-subTitleInfo" style="margin: 0;"> State specific demographics information</span></p>
+                                </li>
+                                <li >
+                                    <p class="text-landing-subTitle"> Flexible payment:
+                                    <span class="text-landing-subTitleInfo" style="margin: 0;">Credit card or ACH</span></p>
+                                </li>
+                            </ul>                                                       
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="register-plans-wrap px-6 mx-2 pb-6 mb-3" #registrationPlans>
-            <app-registration-plans *ngIf="registartionPlans" [registartionPlans]="registartionPlans"
-                (selectedPlan)="navigateToRegister($event);"></app-registration-plans>
+        <div fxFlex="100">
+            <div class="register-plans-wrap px-6 mx-2 pb-6 mb-3" #registrationPlans>
+                <app-registration-plans *ngIf="registartionPlans" [registartionPlans]="registartionPlans"
+                    (selectedPlan)="navigateToRegister($event);"></app-registration-plans>
+            </div>
         </div>
     </div>
 
 </div>
+<div    [class.login-form-mobile]="isMobile" 
+        [class.login-form-desktop]="!isMobile" animateOnScroll animationName="animated fadeInDown">
+    <form  fxLayout="row wrap"   fxLayoutAlign="center center"
+            [formGroup]="loginForm" (ngSubmit)="submitForm()">
+        <div fxFlex="37" fxLayoutAlign="center center">
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+        </div>
+        <div fxFlex="37" fxLayoutAlign="center center">
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>Password</mat-label>
+                <input [type]="hide ? 'password' : 'text'" matInput
+                    formControlName="password" autocomplete="on">
+                <mat-icon class="hide-password-icon" matSuffix (click)="hide = !hide">{{hide
+                    ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </mat-form-field>
+        </div>
+        <div fxFlex="20"  fxLayoutAlign="start start">
+            <app-button class="login-button"  [btnType]="'flat'" [isRounded]=true [btnText]="'LOGIN'"
+                [btnSize]="'large'"></app-button>
+        </div>
+        <div fxFlex="40" fxLayoutAlign="center center">
+
+        </div>
+        <div fxFlex="40" fxLayoutAlign="start start">
+            <mat-label class="forgot-pass-text" (click)="navigateToForgotPass()">
+                Forgot Password?
+            </mat-label>
+        </div>
+        </form>
+</div>
+</mat-card>

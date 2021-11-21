@@ -13,6 +13,18 @@ export const selectSettingsStickyHeader = createSelector(
   (state: SettingsState) => state.stickyHeader
 );
 
+
+export const selectSettingsHeaderShowTime = createSelector(
+  selectSettings,
+  (state: SettingsState) => state.headerShowTime
+);
+
+
+export const selectSettingsShowHeader = createSelector(
+  selectSettings,
+  (state: SettingsState) => state.showHeader
+);
+
 export const selectSettingsLanguage = createSelector(
   selectSettings,
   (state: SettingsState) => state.language

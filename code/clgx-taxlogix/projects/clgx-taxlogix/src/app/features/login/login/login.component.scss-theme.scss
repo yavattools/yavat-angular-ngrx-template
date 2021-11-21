@@ -1,0 +1,58 @@
+@use '~@angular/material' as mat;
+
+@mixin clgx-login-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $success: map-get($theme, success);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  app-login {
+  
+   
+.forgot-pass-text {
+  // margin-top: 10px;
+  cursor: pointer;
+}
+
+.forgot-pass-text:hover {
+  // margin-top: 10px;
+  color: mat.get-color-from-palette($primary); 
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.login-button {
+  position: relative;
+  top: -10px;
+  left: 5px;
+}
+
+.login-button:hover {
+  background-color: mat.get-color-from-palette($primary); 
+  color: black;
+}
+
+    .feature-card-enabled:hover {
+      min-height: 150px;
+      background-color: mat.get-color-from-palette(
+        $primary
+      ); /* For browsers that do not support gradients */
+      background-image: linear-gradient(
+        to top right,
+        mat.get-color-from-palette($accent),
+        mat.get-color-from-palette($primary)
+      );
+      color: white;
+
+      span {
+        color: white;
+      }
+
+      .feature-card-title {
+        color: white;
+      }
+    }
+
+  }
+}

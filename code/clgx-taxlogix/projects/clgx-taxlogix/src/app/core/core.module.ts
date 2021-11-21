@@ -46,7 +46,8 @@ import { SettingsEffects } from './store/settings/settings.effects';
 import {
   selectSettingsLanguage,
   selectEffectiveTheme,
-  selectSettingsStickyHeader
+  selectSettingsStickyHeader,
+  selectSettingsShowHeader
 } from './store/settings/settings.selectors';
 import {
   faCog,
@@ -84,7 +85,8 @@ export {
   NotificationService,
   selectEffectiveTheme,
   selectSettingsLanguage,
-  selectSettingsStickyHeader
+  selectSettingsStickyHeader,
+  selectSettingsShowHeader
 };
 
 export function httpLoaderFactory(http: HttpClient) {
@@ -101,7 +103,6 @@ export function httpLoaderFactory(http: HttpClient) {
     CommonModule,
     HttpClientModule,
     FormsModule,
-
     // ngrx
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
