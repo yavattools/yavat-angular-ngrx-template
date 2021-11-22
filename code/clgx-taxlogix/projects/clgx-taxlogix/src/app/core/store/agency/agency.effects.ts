@@ -29,7 +29,7 @@ import {
  selectEscrowNonEscrowDetails,
  selectPaymentDetails
 } from './agency.selectors';
-import { State } from './agency.model';
+import { PaymentDetails, State } from './agency.model';
 import { AgencyDataService } from './agency-data-api.service';
 import * as agencyActions from './agency.actions';
 
@@ -96,6 +96,90 @@ export class AgencyEffects {
         agencyActions.actionGetNonEscrowDetailsSuccess({nonEscrowDetails : nonEscrowDetails}),
       ]),
       catchError(error => of(agencyActions.actionGetNonEscrowDetailsFailure({error : error})))
+    ))
+  )
+  );
+
+  saveEscrowDetails = createEffect(() =>
+  this.actions$.pipe(
+    ofType(agencyActions.actionSaveEscrowDetails),
+    switchMap((action)=>this.agencyDataService.addEscrow(action.escrowDetails).pipe(
+      mergeMap( escrowDetails=>[
+        agencyActions.actionSaveEscrowDetailsSuccess(escrowDetails),
+      ]),
+      catchError(error => of(agencyActions.actionSaveEscrowDetailsFailure({error : error})))
+    ))
+  )
+  );
+
+  saveNonEscrowDetails = createEffect(() =>
+  this.actions$.pipe(
+    ofType(agencyActions.actionSaveNonEscrowDetails),
+    switchMap((action)=>this.agencyDataService.addNonEscrow(action.nonEscrowDetails).pipe(
+      mergeMap( nonEscrowDetails=>[
+        agencyActions.actionSaveNonEscrowDetailsSuccess({nonEscrowDetails : nonEscrowDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionSaveNonEscrowDetailsFailure({error : error})))
+    ))
+  )
+  );
+
+  updateEscrowDetails = createEffect(() =>
+  this.actions$.pipe(
+    ofType(agencyActions.actionUpdateEscrowDetails),
+    switchMap((action)=>this.agencyDataService.updateEscrow(action.escrowDetails).pipe(
+      mergeMap( escrowDetails=>[
+        agencyActions.actionUpdateEscrowDetailsSuccess(escrowDetails),
+      ]),
+      catchError(error => of(agencyActions.actionUpdateEscrowDetailsFailure({error : error})))
+    ))
+  )
+  );
+
+  updateNonEscrowDetails = createEffect(() =>
+  this.actions$.pipe(
+    ofType(agencyActions.actionUpdateNonEscrowDetails),
+    switchMap((action)=>this.agencyDataService.updateNonEscrow(action.nonEscrowDetails).pipe(
+      mergeMap( nonEscrowDetails=>[
+        agencyActions.actionUpdateNonEscrowDetailsSuccess({nonEscrowDetails : nonEscrowDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionUpdateNonEscrowDetailsFailure({error : error})))
+    ))
+  )
+  );
+
+  getPaymentDetails = createEffect(() =>
+  this.actions$.pipe(
+    ofType(agencyActions.actionGetPaymentDetails),
+    switchMap((action)=>this.agencyDataService.getPaymentDetailsByAgencyPaymentId(1).pipe(
+      mergeMap( paymentDetails=>[
+        agencyActions.actionGetPaymentDetailsSuccess({paymentDetails : paymentDetails}),
+      ]),
+      catchError(error => of(agencyActions.actionGetPaymentDetailsFailure({error : error})))
+    ))
+  )
+  );
+
+  savePaymentDetails = createEffect(()=>
+  this.actions$.pipe(
+    ofType(agencyActions.actionSavePaymentDetails),
+    switchMap((action)=>this.agencyDataService.addPaymentDetails(action.details).pipe(
+      mergeMap( paymentDetails=>[
+        agencyActions.actionSavePaymentDetailsSuccess(paymentDetails),
+      ]),
+      catchError(error => of(agencyActions.actionSavePaymentDetailsFailure({error : error})))
+    ))
+  )
+  );
+
+  updatePaymentDetails = createEffect(()=>
+  this.actions$.pipe(
+    ofType(agencyActions.actionUpdatePaymentDetails),
+    switchMap((action)=>this.agencyDataService.updatePaymentDetails(action.details).pipe(
+      mergeMap( paymentDetails=>[
+        agencyActions.actionUpdatePaymentDetailsSuccess(paymentDetails),
+      ]),
+      catchError(error => of(agencyActions.actionUpdatePaymentDetailsFailure({error : error})))
     ))
   )
   );

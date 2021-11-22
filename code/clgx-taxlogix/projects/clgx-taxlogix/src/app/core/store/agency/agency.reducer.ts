@@ -10,6 +10,7 @@ import {
 import { Action, createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
 import * as agencyActions from './agency.actions';
+import { act } from '@ngrx/effects';
 
 export const initialState: AgencyState = {
   agencies: new Array<Agency>(),
@@ -144,6 +145,10 @@ export const reducer = createReducer(
     // state.selectedAgency = action.agency;
     //  JAna: Need to find what to do on Success of Dates
   }),
+  mutableOn(agencyActions.actionSaveEscrowDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error
+  }),
   mutableOn(agencyActions.actionUpdateEscrowDetails, (state, action) => {
     state.actionInProgress = true;
   }),
@@ -151,6 +156,10 @@ export const reducer = createReducer(
     state.actionInProgress = false;
     // state.selectedAgency = action.agency;
     //  JAna: Need to find what to do on Success of Dates
+  }),
+  mutableOn(agencyActions.actionUpdateEscrowDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error
   }),
   mutableOn(agencyActions.actionSaveNonEscrowDetails, (state, action) => {
     state.actionInProgress = true;
@@ -161,6 +170,13 @@ export const reducer = createReducer(
       state.actionInProgress = false;
       // state.selectedAgency = action.agency;
       //  JAna: Need to find what to do on Success of Dates
+    }
+  ),
+  mutableOn(
+    agencyActions.actionSaveNonEscrowDetailsFailure,
+    (state, action) => {
+      state.actionInProgress = false;
+      state.error = action.error
     }
   ),
   mutableOn(agencyActions.actionUpdateNonEscrowDetails, (state, action) => {
@@ -174,6 +190,13 @@ export const reducer = createReducer(
       //  JAna: Need to find what to do on Success of Dates
     }
   ),
+  mutableOn(
+    agencyActions.actionUpdateNonEscrowDetailsFailure,
+    (state, action) => {
+      state.actionInProgress = false;
+      state.error = action.error
+    }
+  ),
 
   mutableOn(agencyActions.actionGetPaymentDetails, (state, action) => {
     state.actionInProgress = true;
@@ -181,6 +204,10 @@ export const reducer = createReducer(
   mutableOn(agencyActions.actionGetPaymentDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
     state.paymentDetails = Object.assign({}, action.paymentDetails);
+  }),
+  mutableOn(agencyActions.actionGetPaymentDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error
   }),
 
   mutableOn(agencyActions.actionSavePaymentDetails, (state, action) => {
@@ -190,6 +217,10 @@ export const reducer = createReducer(
     state.actionInProgress = false;
     // state.selectedAgency = action.agency;
     //  JAna: Need to find what to do on Success of Dates
+  }),
+  mutableOn(agencyActions.actionSavePaymentDetailsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error;
   }),
   mutableOn(agencyActions.actionUpdatePaymentDetails, (state, action) => {
     state.actionInProgress = true;
@@ -201,8 +232,16 @@ export const reducer = createReducer(
       // state.selectedAgency = action.agency;
       //  JAna: Need to find what to do on Success of Dates
     }
+  ),
+  mutableOn(
+    agencyActions.actionUpdatePaymentDetailsFailure,
+    (state, action) => {
+      state.actionInProgress = false;
+      state.error = action.error;
+    }
   )
-);
+  );
+
 
 export function agencyReducer(state: AgencyState | undefined, action: Action) {
   return reducer(state, action);

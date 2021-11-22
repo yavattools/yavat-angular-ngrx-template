@@ -153,6 +153,11 @@ export const actionSaveEscrowDetailsSuccess = createAction(
   props<{ escrowDetails: EscrowDetails}>()
 );
 
+export const actionSaveEscrowDetailsFailure = createAction(
+  '[Agency] Save Escrow Details Failure',
+  props<{ error: any}>()
+);
+
 export const actionUpdateEscrowDetails = createAction(
   '[Agency] Update Escrow Details',
   props<{ escrowDetails: EscrowDetails}>()
@@ -163,6 +168,10 @@ export const actionUpdateEscrowDetailsSuccess = createAction(
   props<{ escrowDetails: EscrowDetails}>()
 );
 
+export const actionUpdateEscrowDetailsFailure = createAction(
+  '[Agency] Update EscrowDetails Failure',
+  props<{ error: any}>()
+);
 
 export const actionSaveNonEscrowDetails = createAction(
   '[Agency] Save Non Escrow Details',
@@ -172,6 +181,11 @@ export const actionSaveNonEscrowDetails = createAction(
 export const actionSaveNonEscrowDetailsSuccess = createAction(
   '[Agency] Save Non Escrow Details Success',
   props<{ nonEscrowDetails: NonEscrowDetails}>()
+);
+
+export const actionSaveNonEscrowDetailsFailure = createAction(
+  '[Agency] Save Non Escrow Details Failure',
+  props<{ error: any}>()
 );
 
 export const actionUpdateNonEscrowDetails = createAction(
@@ -184,6 +198,11 @@ export const actionUpdateNonEscrowDetailsSuccess = createAction(
   props<{ nonEscrowDetails: NonEscrowDetails}>()
 );
 
+export const actionUpdateNonEscrowDetailsFailure = createAction(
+  '[Agency] Update Non Escrow Details Failure',
+  props<{ error: any}>()
+);
+
 export const actionGetPaymentDetails = createAction(
   '[Agency] Get Payment Details',
   props<{ request: GetPaymentDetailsRequest}>()
@@ -191,6 +210,11 @@ export const actionGetPaymentDetails = createAction(
 export const actionGetPaymentDetailsSuccess = createAction(
   '[Agency] Get Payment Details Success',
   props<{ paymentDetails: PaymentDetails}>()
+);
+
+export const actionGetPaymentDetailsFailure = createAction(
+  '[Agency] Get Payment Details Failure',
+  props<{ error: any}>()
 );
 
 export const actionSavePaymentDetails = createAction(
@@ -203,6 +227,11 @@ export const actionSavePaymentDetailsSuccess = createAction(
   props<{ details: PaymentDetails}>()
 );
 
+export const actionSavePaymentDetailsFailure = createAction(
+  '[Agency] Save Payment Details Failure',
+  props<{ error: any}>()
+);
+
 export const actionUpdatePaymentDetails = createAction(
   '[Agency] Update Payment Details',
   props<{ details: PaymentDetails}>()
@@ -211,4 +240,9 @@ export const actionUpdatePaymentDetails = createAction(
 export const actionUpdatePaymentDetailsSuccess = createAction(
   '[Agency] Update Payment Details Success',
   props<{ details: PaymentDetails}>()
+);
+
+export const actionUpdatePaymentDetailsFailure = createAction(
+  '[Agency] Update Payment Details Failure',
+  props<{ error: any}>()
 );

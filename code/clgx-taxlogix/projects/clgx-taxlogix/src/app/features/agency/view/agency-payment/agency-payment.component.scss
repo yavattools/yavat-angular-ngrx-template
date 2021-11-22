@@ -1,5 +1,108 @@
-
-
-.payment-tab-margin {
-  margin-bottom: 40px;
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.payment-tab{
+  display: grid;
+  grid-template-columns: 35% 35% 30%;
+  padding: 3rem 0rem;
+  .details {
+    display: flex;
+    flex-direction: column;
+    .detail {
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 22px;
+      color: #000b6c;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+    }
+    .details-inputs {
+      padding: 1rem 0;
+      display: flex;
+      flex-direction: column;
+      .state-zip {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width: 90%;
+      }
+      mat-form-field {
+        padding: 1rem 0;
+        width: 90%;
+      }
+      .checkbox{
+        width: 90%;
+        margin: 2rem 0 2.7rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        mat-label {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 12px;
+          letter-spacing: 0.03em;
+          padding: 0 0 8px 0;
+          color: #868686;
+          width: 100%;
+        }
+      }
+      .toggle {
+        width: 90%;
+        margin: 0 0 2.7rem 0;
+        display: flex;
+        flex-direction: column;
+        mat-label {
+          font-style: normal;
+          font-weight: normal;
+          font-size: 12px;
+          line-height: 12px;
+          letter-spacing: 0.03em;
+          padding: 0 0 8px 0;
+          color: #868686;
+          width: 100%;
+        }
+        mat-button-toggle-group {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .mat-button-toggle {
+          width: 50%;
+          height: 56px;
+          padding: 0 !important;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          i {
+            font-size: 25px;
+            color: rgba($color: #000000, $alpha: 0.4);
+          }
+        }
+      }
+    }
+  }
+}
+.divider {
+width: 100%;
+height: 1px;
+background-color: rgba($color: #000000, $alpha: 0.2);
+margin-bottom: 2rem;
+}
+.save-btn {
+display: flex;
+justify-content: flex-end;
+align-items: center;
+width: 100%;
+button {
+  background: #00ebcf;
+  border-radius: 4px;
+  width: 256px;
+  height: 48px;
+  border: 0;
+  color: white;
+}
 }

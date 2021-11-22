@@ -67,7 +67,7 @@ export class AgencyDataService {
 
   getEscrow(request : GetEscrowNonEscrowDetailsRequest): Observable<EscrowDetails> {
     console.log('getEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT)
-    return this.http.get<EscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT);
+    return this.http.get<EscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/1');
   }
 
   getEscrowById(escrowId:number): Observable<EscrowDetails> {
@@ -79,20 +79,20 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(escrow);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/' + escrow.agencyMasterId, body,{'headers':headers})
   }
 
   updateEscrow(escrow:EscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(escrow);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/'+ escrow.agencyMasterId, body,{'headers':headers})
   }
 
 
   getNonEscrow(request : GetEscrowNonEscrowDetailsRequest): Observable<NonEscrowDetails> {
     console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT)
-    return this.http.get<NonEscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT);
+    return this.http.get<NonEscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT + '/1');
   }
 
   getNonEscrowById(nonescrowId:number): Observable<NonEscrowDetails> {
@@ -104,14 +104,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(nonescrow);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/' + nonescrow.agencyMasterId, body,{'headers':headers})
   }
 
   updateNonEscrow(nonescrow:NonEscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(nonescrow);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/'+ nonescrow.agencyMasterId, body,{'headers':headers})
   }
 
   getPaymentDetails(): Observable<PaymentDetails[]> {
@@ -128,14 +128,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(payment);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + payment.agencyMasterId, body,{'headers':headers})
   }
 
   updatePaymentDetails(payment:PaymentDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(payment);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + payment.agencyMasterId, body,{'headers':headers})
   }
 
 }

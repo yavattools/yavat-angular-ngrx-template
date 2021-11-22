@@ -6,7 +6,6 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
-import { AgenciesDetails } from '../../agency-view.data';
 
 interface Options {
   value: string;
@@ -23,7 +22,40 @@ export class AgencyDetailsComponent implements OnInit {
   agency!: Agency;
   newAgencyDetails: any;
   agency$: Observable<Agency>;
-  agencyDetails: FormGroup = new FormGroup({});
+  agencyDetails = this.fb.group({
+    agencyNumber: ['', Validators.required],
+    agencyName: ['', Validators.required],
+    agencyWebsite: ['', Validators.required],
+    agencyLowerLevel: ['', Validators.required],
+    agencyCollecting: [false, Validators.required],
+    agencyActive: [false, Validators.required],
+    agencySuitsAddress: ['', Validators.required],
+    agencyCity: ['', Validators.required],
+    stateId: ['', Validators.required],
+    zip: ['', Validators.required],
+    countyId: ['', Validators.required],
+    contactName: ['', Validators.required],
+    contactEmail: ['', Validators.required],
+    contactPhone: ['', Validators.required],
+    contactFax: ['', Validators.required],
+    parcelFormat: ['', Validators.required],
+    assessorName: ['', Validators.required],
+    assessorContactName: ['', Validators.required],
+    assessorPhoneNumber: ['', Validators.required],
+    mapCost: ['', Validators.required],
+    websiteAccessCost: ['', Validators.required],
+    assessorWebsite: ['', Validators.required],
+    assessorAddress: ['', Validators.required],
+    assessorCity: ['', Validators.required],
+    assessorStateId: ['', Validators.required],
+    assessorZip: ['', Validators.required],
+    billingRequestId: ['', Validators.required],
+    mediaTypeId: ['', Validators.required],
+    paperType: [false, Validators.required],
+    excelType: [false, Validators.required],
+    mailType: [false, Validators.required],
+    emailId: ['', Validators.required]
+  });
   options: Options[] = [
     { value: 'option1', viewValue: 'option1' },
     { value: 'option2', viewValue: 'option2' },
@@ -55,85 +87,39 @@ export class AgencyDetailsComponent implements OnInit {
     } else {
       this.isMobile = false;
     }
-    if (this.agency && this.agency.agencyMasterId) {
-      this.agencyDetails = this.fb.group({
-        agencyNumber: [this.agency.agencyNumber, Validators.required],
-        agencyName: [this.agency.agencyName, Validators.required],
-        agencyWebsite: [this.agency.agencyWebsite, Validators.required],
-        agencyLowerLevel: [this.agency.agencyLowerLevel, Validators.required],
-        agencyCollecting: [this.agency.agencyCollecting, Validators.required],
-        agencyActive: [this.agency.agencyActive, Validators.required],
-        agencySuitsAddress: [
-          this.agency.agencySuitsAddress,
-          Validators.required
-        ],
-        agencyCity: [this.agency.agencyCity, Validators.required],
-        stateId: [this.agency.stateId, Validators.required],
-        zip: [this.agency.zip, Validators.required],
-        countyId: [this.agency.countyId, Validators.required],
-        contactName: [this.agency.contactName, Validators.required],
-        contactEmail: [this.agency.contactEmail, Validators.required],
-        contactPhone: [this.agency.contactPhone, Validators.required],
-        contactFax: [this.agency.contactFax, Validators.required],
-        parcelFormat: [this.agency.parcelFormat, Validators.required],
-        assessorName: [this.agency.assessorName, Validators.required],
-        assessorContactName: [
-          this.agency.assessorContactName,
-          Validators.required
-        ],
-        assessorPhoneNumber: [
-          this.agency.assessorPhoneNumber,
-          Validators.required
-        ],
-        mapCost: [this.agency.mapCost, Validators.required],
-        websiteAccessCost: [this.agency.websiteAccessCost, Validators.required],
-        assessorWebsite: [this.agency.assessorWebsite, Validators.required],
-        assessorAddress: [this.agency.assessorAddress, Validators.required],
-        assessorCity: [this.agency.assessorCity, Validators.required],
-        assessorStateId: [this.agency.assessorStateId, Validators.required],
-        assessorZip: [this.agency.assessorZip, Validators.required],
-        billingRequestId: [this.agency.billingRequestId, Validators.required],
-        mediaTypeId: [this.agency.mediaTypeId, Validators.required],
-        paperType: [this.agency.paperType, Validators.required],
-        excelType: [this.agency.excelType, Validators.required],
-        mailType: [this.agency.mailType, Validators.required],
-        emailId: [this.agency.emailId, Validators.required]
-      });
-    } else {
-      this.agencyDetails = this.fb.group({
-        agencyNumber: ['', Validators.required],
-        agencyName: ['', Validators.required],
-        agencyWebsite: ['', Validators.required],
-        agencyLowerLevel: ['', Validators.required],
-        agencyCollecting: [false, Validators.required],
-        agencyActive: [false, Validators.required],
-        agencySuitsAddress: ['', Validators.required],
-        agencyCity: ['', Validators.required],
-        stateId: ['', Validators.required],
-        zip: ['', Validators.required],
-        countyId: ['', Validators.required],
-        contactName: ['', Validators.required],
-        contactEmail: ['', Validators.required],
-        contactPhone: ['', Validators.required],
-        contactFax: ['', Validators.required],
-        parcelFormat: ['', Validators.required],
-        assessorName: ['', Validators.required],
-        assessorContactName: ['', Validators.required],
-        assessorPhoneNumber: ['', Validators.required],
-        mapCost: ['', Validators.required],
-        websiteAccessCost: ['', Validators.required],
-        assessorWebsite: ['', Validators.required],
-        assessorAddress: ['', Validators.required],
-        assessorCity: ['', Validators.required],
-        assessorStateId: ['', Validators.required],
-        assessorZip: ['', Validators.required],
-        billingRequestId: ['', Validators.required],
-        mediaTypeId: ['', Validators.required],
-        paperType: [false, Validators.required],
-        excelType: [false, Validators.required],
-        mailType: [false, Validators.required],
-        emailId: ['', Validators.required]
-      });
+    if(this.agency && this.agency.agencyMasterId) {
+        this.agencyDetails.controls['agencyNumber'].setValue(this.agency.agencyNumber);
+        this.agencyDetails.controls['agencyName'].setValue(this.agency.agencyName); 
+        this.agencyDetails.controls['agencyWebsite'].setValue(this.agency.agencyWebsite);
+        this.agencyDetails.controls['agencyLowerLevel'].setValue(this.agency.agencyLowerLevel)
+        this.agencyDetails.controls['agencyCollecting'].setValue(this.agency.agencyCollecting)
+        this.agencyDetails.controls['agencyActive'].setValue(this.agency.agencyActive)
+        this.agencyDetails.controls['agencySuitsAddress'].setValue(this.agency.agencySuitsAddress)
+        this.agencyDetails.controls['agencyCity'].setValue(this.agency.agencyCity)
+        this.agencyDetails.controls['stateId'].setValue(this.agency.stateId)
+        this.agencyDetails.controls['zip'].setValue(this.agency.zip)
+        this.agencyDetails.controls['countyId'].setValue(this.agency.countyId)
+        this.agencyDetails.controls['contactName'].setValue(this.agency.contactName)
+        this.agencyDetails.controls['contactEmail'].setValue(this.agency.contactEmail)
+        this.agencyDetails.controls['contactPhone'].setValue(this.agency.contactPhone)
+        this.agencyDetails.controls['contactFax'].setValue(this.agency.contactFax)
+        this.agencyDetails.controls['parcelFormat'].setValue(this.agency.parcelFormat)
+        this.agencyDetails.controls['assessorName'].setValue(this.agency.assessorName)
+        this.agencyDetails.controls['assessorContactName'].setValue(this.agency.assessorContactName)
+        this.agencyDetails.controls['assessorPhoneNumber'].setValue(this.assessorPhoneNumber)
+        this.agencyDetails.controls['mapCost'].setValue(this.agency.mapCost)
+        this.agencyDetails.controls['websiteAccessCost'].setValue(this.agency.websiteAccessCost)
+        this.agencyDetails.controls['assessorWebsite'].setValue(this.agency.assessorWebsite)
+        this.agencyDetails.controls['assessorAddress'].setValue(this.agency.assessorAddress)
+        this.agencyDetails.controls['assessorCity'].setValue(this.agency.assessorCity)
+        this.agencyDetails.controls['assessorStateId'].setValue(this.agency.assessorStateId)
+        this.agencyDetails.controls['assessorZip'].setValue(this.agency.assessorZip)
+        this.agencyDetails.controls['billingRequestId'].setValue(this.agency.billingRequestId)
+        this.agencyDetails.controls['mediaTypeId'].setValue(this.agency.mediaTypeId)
+        this.agencyDetails.controls['paperType'].setValue(this.agency.paperType)
+        this.agencyDetails.controls['excelType'].setValue(this.agency.excelType)
+        this.agencyDetails.controls['mailType'].setValue(this.agency.mailType)
+        this.agencyDetails.controls['emailId'].setValue(this.agency.emailId)
     }
   }
 
@@ -258,10 +244,8 @@ export class AgencyDetailsComponent implements OnInit {
     this.newAgencyDetails.contactFax = form.controls['contactFax'].value;
     this.newAgencyDetails.parcelFormat = form.controls['parcelFormat'].value;
     this.newAgencyDetails.assessorName = form.controls['assessorName'].value;
-    this.newAgencyDetails.assessorContactName =
-      form.controls['assessorContactName'].value;
-    this.newAgencyDetails.assessorPhoneNumber =
-      form.controls['assessorPhoneNumber'].value;
+    this.newAgencyDetails.assessorContactName = form.controls['assessorContactName'].value;
+    this.newAgencyDetails.assessorPhoneNumber = form.controls['assessorPhoneNumber'].value;
     this.newAgencyDetails.mapCost = form.controls['mapCost'].value;
     this.newAgencyDetails.websiteAccessCost =
       form.controls['websiteAccessCost'].value;
@@ -281,6 +265,15 @@ export class AgencyDetailsComponent implements OnInit {
     this.newAgencyDetails.mailType = form.controls['mailType'].value;
     this.newAgencyDetails.emailId = form.controls['emailId'].value;
     this.newAgencyDetails.agencyMasterId = this.agency.agencyMasterId;
+    this.newAgencyDetails.agencyAddress = this.agency.agencyAddress;
+    this.newAgencyDetails.agencyState = this.agency.agencyState;
+    this.newAgencyDetails.agencyPhonenumber = this.agency.agencyPhonenumber;
+    this.newAgencyDetails.assessorCountyId = this.agency.assessorCountyId;
+    this.newAgencyDetails.internalNotes = this.agency.internalNotes;
+    this.newAgencyDetails.createdBy = this.agency.createdBy;
+    this.newAgencyDetails.modifiedBy = this.agency.modifiedBy;
+    this.newAgencyDetails.createdByUser = this.agency.createdByUser;
+    this.newAgencyDetails.modifiedByUser = this.agency.modifiedByUser;
     if (this.agency.agencyMasterId) {
       this.agencyFacade.updateAgencyDetails(this.newAgencyDetails);
     } else {
