@@ -599,28 +599,27 @@
   ],
   "escrow": [
     {
-      "id": 1,
-      "agencyMasterId": "1",
-      "escrowId": "1",
       "contactName": "Bill Smith",
-      "contactPhone": "555-555-555",
+      "contactPhone": "555-555-5555",
       "contactFax": "4379-293",
       "contactEmail": "rohtih@chainlogix.com",
       "agencyWebsite": "www.chainlogix.com",
       "amtAvailable": "yes",
-      "costPay": "yes",
+      "costPay": "50",
       "listedPayment": "yes",
       "mailAwayReq": "yes",
       "agencyExpect": "yes",
       "postmarkAccepted": "no",
-      "costFee": "50",
       "mailAwayFee": "60",
       "numOfParcels": "3",
+      "agencyMasterId": "1",
+      "escrowId": "1",
       "internalNotes": "testet",
       "createdBy": "",
       "modifiedBy": "",
       "createdByUser": "",
-      "modifiedByUser": ""
+      "modifiedByUser": "",
+      "id": 1
     }
   ],
   "nonEscrow": [

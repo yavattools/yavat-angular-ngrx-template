@@ -6,8 +6,12 @@ import { AgencyFeature, agencies } from '../../agency-view.data';
 import { AgencyDataService } from '@app/core/store/agency/agency-data-api.service';
 import { CollectionDates } from '@app/core/store/agency/agency.model';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { EditAgencyCollectionPracticeComponent } from './edit-agency-collection-practice/edit-agency-collection-practice.component';
 
-
+export interface DialogData {
+  data: CollectionDates;
+}
 
 @Component({
   selector: 'clgx-agency-collection-practices',
@@ -36,12 +40,22 @@ export class AgencyCollectionPracticesComponent implements OnInit {
 
 
   isMobile: boolean = false;
-  constructor( public deviceService:DeviceDetectorService, private apiDataService: AgencyDataService){
+  constructor( public deviceService:DeviceDetectorService, private apiDataService: AgencyDataService,public dialog: MatDialog){
   }
   
-  editDeal(element:any){
-
+  editDeal(element:CollectionDates){   
+      const dialogRef = this.dialog.open(EditAgencyCollectionPracticeComponent, {
+        width: '600px',
+        height: '800px',
+        data: element
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');        
+      });
   }
+  
+  
    
   ngOnInit() {
     if(this.deviceService.isMobile()){
