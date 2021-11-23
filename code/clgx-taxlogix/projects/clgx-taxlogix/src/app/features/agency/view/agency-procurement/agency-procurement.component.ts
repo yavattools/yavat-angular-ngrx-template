@@ -58,8 +58,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     payToCity : ['',Validators.required],
     stateId : ['',Validators.required],
     zipId : ['',Validators.required],
-    methodOfPaymentRequiredCertifiedCheck : ['',Validators.required],
-    methodOfPaymentRequiredWire : ['',Validators.required]
+    methodOfPaymentRequired : ['',Validators.required]
   });
   // selectedAgency$ : Observable<Agency>;
   // selectedAgency! : Agency;
@@ -110,8 +109,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
         this.nonEscrowForm.controls['payToCity'].setValue(nonEscrowDetails.payCity);
         this.nonEscrowForm.controls['stateId'].setValue(nonEscrowDetails.stateId);
         this.nonEscrowForm.controls['zipId'].setValue(nonEscrowDetails.zip);
-        this.nonEscrowForm.controls['methodOfPaymentRequiredCertifiedCheck'].setValue(nonEscrowDetails.paymentRequiredId);
-        this.nonEscrowForm.controls['methodOfPaymentRequiredWire'].setValue(nonEscrowDetails.paymentRequiredId);
+        this.nonEscrowForm.controls['methodOfPaymentRequired'].setValue(nonEscrowDetails.paymentRequiredId);
     }
     });
     if(this.deviceService.isMobile()){
@@ -212,12 +210,12 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   get zipId(){
     return this.nonEscrowForm.get('zipId');
   }
-  get methodOfPaymentRequiredCertifiedCheck(){
-    return this.nonEscrowForm.get('methodOfPaymentRequiredCertifiedCheck');
+  get methodOfPaymentRequired(){
+    return this.nonEscrowForm.get('methodOfPaymentRequired');
   }
-  get methodOfPaymentRequiredWire(){
-    return this.nonEscrowForm.get('methodOfPaymentRequiredWire');
-  }
+  // get methodOfPaymentRequiredWire(){
+  //   return this.nonEscrowForm.get('methodOfPaymentRequiredWire');
+  // }
 
   ngAfterViewInit(){
     this.selectedTabIndex = 0;
@@ -240,7 +238,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newEscrowForm.mailAwayReq = form.controls['mailAWayOnlyReq'].value;
     this.newEscrowForm.agencyExpect = form.controls['agencyExpectWebTb'].value;
     this.newEscrowForm.postmarkAccepted = form.controls['postmarkAccepted'].value;
-    this.newEscrowForm.costPay = form.controls['copyFee'].value;
+    this.newEscrowForm.costFee = form.controls['copyFee'].value;
     this.newEscrowForm.mailAwayFee = form.controls['feeForMailAWay'].value;
     this.newEscrowForm.numOfParcels = form.controls['noOfParcelsPerCheck'].value;
     this.newEscrowForm.agencyMasterId = this.escrowDetails.agencyMasterId;
@@ -275,8 +273,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newNonEscrowForm.payCity = this.nonEscrowForm.controls['payToCity'].value;
     this.newNonEscrowForm.stateId = this.nonEscrowForm.controls['stateId'].value;
     this.newNonEscrowForm.zip = this.nonEscrowForm.controls['zipId'].value;
-    this.newNonEscrowForm.paymentRequiredId = this.nonEscrowForm.controls['methodOfPaymentRequiredCertifiedCheck'].value;
-    this.newNonEscrowForm.paymentRequiredId = this.nonEscrowForm.controls['methodOfPaymentRequiredWire'].value;
+    this.newNonEscrowForm.paymentRequiredId = this.nonEscrowForm.controls['methodOfPaymentRequired'].value;
     this.newNonEscrowForm.agencyMasterId = this.nonEscrowDetails.agencyMasterId;
     this.newNonEscrowForm.nonEscrowId = this.nonEscrowDetails.nonEscrowId;
     this.newNonEscrowForm.ïnternalNotes = this.nonEscrowDetails.ïnternalNotes;

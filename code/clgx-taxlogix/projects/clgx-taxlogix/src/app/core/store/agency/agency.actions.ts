@@ -62,15 +62,24 @@ export const actionUpdateAgencyDetailsFailure = createAction(
   props<{ error: any}>()
 );
 
+export const actionSetCollectionDates = createAction(
+  '[Agency] Set Collection Dates',
+  props<{ collectionDate : CollectionDates}>()
+);
+
 export const actionGetCollectionDates = createAction(
   '[Agency] Get Collection Dates',
   props<{ request: GetCollectionDatesRequest}>()
 );
 
-
 export const actionGetCollectionDatesSuccess = createAction(
   '[Agency] Get Collection Dates Success',
   props<{ collectionDates: Array<CollectionDates>}>()
+);
+
+export const actionGetCollectionDatesFailure = createAction(
+  '[Agency] Get Collection Dates Failure',
+  props<{ error: any}>()
 );
 
 export const actionSaveCollectionDates = createAction(
@@ -93,7 +102,10 @@ export const actionUpdateCollectionDatesSuccess = createAction(
   props<{ collectionDates: CollectionDates}>()
 );
 
-
+export const actionUpdateCollectionDatesFailure = createAction(
+  '[Agency] Update Collection Dates Failure',
+  props<{ error: any}>()
+);
 
 export const actionGetEscrowNonEscrowDetails = createAction(
   '[Agency] Get Escrow Non Escrow Details',

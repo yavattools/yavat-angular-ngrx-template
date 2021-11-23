@@ -1,12 +1,60 @@
-<h1 mat-dialog-title>Hi {{data.name}}</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <mat-form-field appearance="fill">
-    <mat-label>Favorite Animal</mat-label>
-    <input matInput [(ngModel)]="data.animal">
-  </mat-form-field>
+<div mat-dialog-actions class="closeDialog">
+  <button mat-button (click)="onNoClick()"><i class="fas fa-times"></i></button>
 </div>
-<div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+<div>
+  <form class="collection-dates" [formGroup]="editForm" (ngSubmit)="updateCollectionDate(editForm)">
+    <span>Collection Dates</span>
+    <mat-form-field appearance="outline">
+      <mat-label>Year</mat-label>
+      <input matInput formControlName="year">
+      <mat-error *ngIf="yearFC.errors?.required">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Installment</mat-label>
+      <input matInput formControlName="installment">
+      <mat-error *ngIf="installmentFC.errors?.required">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Base</mat-label>
+      <input matInput formControlName="base">
+      <mat-error *ngIf="baseFC.errors?.required">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Discount</mat-label>
+      <input matInput formControlName="discount">
+      <mat-error *ngIf="discountFC.errors?.required">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Penalty</mat-label>
+      <input matInput formControlName="penalty">
+      <mat-error *ngIf="penaltyFC.errors?.required">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Late Release</mat-label>
+      <input matInput formControlName="lateRelease">
+      <mat-error *ngIf="lateReleaseFC.errors?.required">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Bill Request</mat-label>
+      <input matInput formControlName="billRequest">
+      <mat-error *ngIf="billRequestFC.errors?.required">
+        Required Field
+      </mat-error>
+    </mat-form-field>
+    <div mat-dialog-actions class="closeDialog">
+      <button class="save-btn" mat-button>Save</button>
+    </div>
+  </form>
 </div>

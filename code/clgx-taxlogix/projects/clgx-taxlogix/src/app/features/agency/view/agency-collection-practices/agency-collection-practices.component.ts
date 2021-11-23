@@ -8,6 +8,8 @@ import { CollectionDates } from '@app/core/store/agency/agency.model';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { EditAgencyCollectionPracticeComponent } from './edit-agency-collection-practice/edit-agency-collection-practice.component';
+import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
+import { Observable } from 'rxjs';
 
 export interface DialogData {
   data: CollectionDates;
@@ -30,7 +32,7 @@ export class AgencyCollectionPracticesComponent implements OnInit {
 
   @ViewChild('currentPaginator', { read: MatPaginator })
   currentPaginator!: MatPaginator;
-  
+  collectionDates$ : Observable<CollectionDates[]>
   historyDataSource = new MatTableDataSource<CollectionDates>();
   historyTablelength = 0;
   historyPageSize = 0;
@@ -40,16 +42,19 @@ export class AgencyCollectionPracticesComponent implements OnInit {
 
 
   isMobile: boolean = false;
-  constructor( public deviceService:DeviceDetectorService, private apiDataService: AgencyDataService,public dialog: MatDialog){
+  constructor( public deviceService:DeviceDetectorService, private apiDataService: AgencyDataService,public dialog: MatDialog,
+    private agencyStoreFacade : AgencyStoreFacade){
+      this.collectionDates$ = this.agencyStoreFacade.collectionDates$;
+      this.agencyStoreFacade.getCollectionDates({agencyMasterId : '1', userId : '1',processId:'1'})
   }
   
   editDeal(element:CollectionDates){   
       const dialogRef = this.dialog.open(EditAgencyCollectionPracticeComponent, {
         width: '600px',
-        height: '800px',
+        height:'800px',
         data: element
       });
-  
+      this.agencyStoreFacade.setCollectionDate(element);
       dialogRef.afterClosed().subscribe(result => {
         console.log('The dialog was closed');        
       });
@@ -63,8 +68,10 @@ export class AgencyCollectionPracticesComponent implements OnInit {
     }else{
       this.isMobile = false;
     }
-    this.getCurrentCollectionDates();
-    this.getHistoryCollectionDates();
+    this.collectionDates$.subscribe(data=>{
+      this.currentDataSource.data = data as Array<CollectionDates>;
+      this.historyDataSource.data = data as Array<CollectionDates>;
+    })
     this.currentDataSource.paginator = this.currentPaginator;
     this.currentTablelength = this.currentDataSource.data.length;
     this.currentPageSize = 4; 
@@ -78,19 +85,6 @@ export class AgencyCollectionPracticesComponent implements OnInit {
     this.currentDataSource.paginator = this.currentPaginator;
     this.historyDataSource.paginator = this.historyPaginator;
   }
-
-
-  getCurrentCollectionDates() {
-     this.apiDataService.getCollectionsDates().subscribe(data => {
-        this.currentDataSource.data = data as Array<CollectionDates>;
-     })
-  }
-
-  getHistoryCollectionDates() {
-    this.apiDataService.getCollectionsDates().subscribe(data => {
-       this.historyDataSource.data = data as Array<CollectionDates>;
-    })
- }
 
   openLink(link: string) {
     window.open(link, '_blank');

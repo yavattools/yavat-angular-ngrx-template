@@ -11,11 +11,13 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
 import * as agencyActions from './agency.actions';
 import { act } from '@ngrx/effects';
+import * as _ from 'lodash';
 
 export const initialState: AgencyState = {
   agencies: new Array<Agency>(),
   selectedAgency: Object.create({}),
   collectionDates: new Array<CollectionDates>(),
+  selectedCollectionDate : Object.create({}),
   escrowNonEscrowDetails: new Array<EscrowNonEscrowDetails>(),
   escrowDetails: new EscrowDetails(),
   nonEscrowDetails: new NonEscrowDetails(),
@@ -79,6 +81,14 @@ export const reducer = createReducer(
     state.actionInProgress = false;
     state.collectionDates = [...action.collectionDates];
   }),
+  mutableOn(agencyActions.actionGetCollectionDatesFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error;
+  }),
+  mutableOn(agencyActions.actionSetCollectionDates, (state, action) => {
+    state.actionInProgress = true;
+    state.selectedCollectionDate = action.collectionDate
+  }),
   mutableOn(agencyActions.actionSaveCollectionDates, (state, action) => {
     state.actionInProgress = true;
   }),
@@ -94,8 +104,18 @@ export const reducer = createReducer(
     agencyActions.actionUpdateCollectionDatesSuccess,
     (state, action) => {
       state.actionInProgress = false;
-      // state.selectedAgency = action.agency;
-      //  JAna: Need to find what to do on Success of Dates
+      let index = _.findIndex(state.collectionDates, (e) => {
+        return e.collectionPracticesId == action.collectionDates.collectionPracticesId;
+      }, 0);
+     state.collectionDates = [...state.collectionDates.slice(0,index),action.collectionDates,...state.collectionDates.slice(index+1)];
+     debugger
+    }
+  ),
+  mutableOn(
+    agencyActions.actionUpdateCollectionDatesFailure,
+    (state, action) => {
+      state.actionInProgress = false;
+      state.error =action.error
     }
   ),
   mutableOn(agencyActions.actionGetEscrowNonEscrowDetails, (state, action) => {

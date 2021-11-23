@@ -23,6 +23,11 @@ export const selectCollectionDates = createSelector(
   (state: AgencyState) => state.collectionDates
 );
 
+export const selectSelectedCollectionDate = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.selectedCollectionDate
+);
+
 export const selectEscrowNonEscrowDetails = createSelector(
   selectAgencyState,
   (state: AgencyState) => state.escrowNonEscrowDetails

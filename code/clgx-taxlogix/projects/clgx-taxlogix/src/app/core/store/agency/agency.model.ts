@@ -183,6 +183,7 @@ export interface AgencyState {
   agencies: Array<Agency>;
   selectedAgency: Agency;
   collectionDates: Array<CollectionDates>;
+  selectedCollectionDate : CollectionDates,
   escrowNonEscrowDetails: Array<EscrowNonEscrowDetails>;
   escrowDetails: EscrowDetails;
   nonEscrowDetails: NonEscrowDetails;

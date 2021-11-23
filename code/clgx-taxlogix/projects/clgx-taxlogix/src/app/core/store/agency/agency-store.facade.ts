@@ -18,6 +18,7 @@ export class AgencyStoreFacade {
   agencies$ = this.store.pipe(select(fromSelectors.selectAgencies));
   selectedAgency$ = this.store.pipe(select(fromSelectors.selectAgency));
   collectionDates$ = this.store.pipe(select(fromSelectors.selectCollectionDates));
+  selectedCollectionDate$ = this.store.pipe(select(fromSelectors.selectSelectedCollectionDate));
   escrowNonEscrowDetails$ = this.store.pipe(select(fromSelectors.selectEscrowNonEscrowDetails));
   paymentDetails$ = this.store.pipe(select(fromSelectors.selectPaymentDetails));
   escrowDetails$ = this.store.pipe(select(fromSelectors.selectEscrowDetails));
@@ -52,6 +53,10 @@ export class AgencyStoreFacade {
 
   getCollectionDates(request: GetCollectionDatesRequest){
     this.store.dispatch(fromActions.actionGetCollectionDates({request: request}));
+  }
+
+  setCollectionDate(collectionDate: CollectionDates){
+    this.store.dispatch(fromActions.actionSetCollectionDates({collectionDate: collectionDate}));
   }
 
   saveCollectionDates(collectionDates: CollectionDates){

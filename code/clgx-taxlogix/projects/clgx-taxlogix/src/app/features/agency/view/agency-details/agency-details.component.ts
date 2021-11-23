@@ -106,7 +106,7 @@ export class AgencyDetailsComponent implements OnInit {
         this.agencyDetails.controls['parcelFormat'].setValue(this.agency.parcelFormat)
         this.agencyDetails.controls['assessorName'].setValue(this.agency.assessorName)
         this.agencyDetails.controls['assessorContactName'].setValue(this.agency.assessorContactName)
-        this.agencyDetails.controls['assessorPhoneNumber'].setValue(this.assessorPhoneNumber)
+        this.agencyDetails.controls['assessorPhoneNumber'].setValue(this.agency.assessorPhoneNumber)
         this.agencyDetails.controls['mapCost'].setValue(this.agency.mapCost)
         this.agencyDetails.controls['websiteAccessCost'].setValue(this.agency.websiteAccessCost)
         this.agencyDetails.controls['assessorWebsite'].setValue(this.agency.assessorWebsite)

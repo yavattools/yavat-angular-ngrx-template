@@ -76,6 +76,30 @@ export class AgencyEffects {
   )
   );
 
+  getCollectionDates = createEffect(() =>
+      this.actions$.pipe(
+        ofType(agencyActions.actionGetCollectionDates),
+      switchMap(() => this.agencyDataService.getCollectionsDates().pipe(
+          mergeMap( collectionDates =>[
+            agencyActions.actionGetCollectionDatesSuccess({collectionDates: collectionDates}),
+          ]),
+          catchError(error => of(agencyActions.actionGetCollectionDatesFailure(error)))
+        ))
+      )
+    );
+
+  updateCollectionDate = createEffect(()=>
+  this.actions$.pipe(
+    ofType(agencyActions.actionUpdateCollectionDates),
+    switchMap((action)=>this.agencyDataService.updateCollectionDate(action.collectionDates).pipe(
+      mergeMap( collectionDates=>[
+        agencyActions.actionUpdateCollectionDatesSuccess({collectionDates : collectionDates}),
+      ]),
+      catchError(error => of(agencyActions.actionUpdateCollectionDatesFailure({error : error})))
+    ))
+  )
+  );
+
   getEscrowDetails = createEffect(() =>
   this.actions$.pipe(
     ofType(agencyActions.actionGetEscrowDetails),

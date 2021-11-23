@@ -39,7 +39,6 @@ export class AgencyDataService {
   }
 
   getCollectionsDates(): Observable<CollectionDates[]> {
-
     console.log('getCollectionDates '+this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT)
     return this.http.get<CollectionDates[]>(this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT);
   }
@@ -61,7 +60,7 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(collection);
     console.log(body)
-    return this.http.put( this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT, body,{'headers':headers})
+    return this.http.put( this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT + '/' + collection.collectionPracticesId, body,{'headers':headers})
   }
 
 
@@ -79,14 +78,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(escrow);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/' + escrow.agencyMasterId, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/' + escrow.escrowId, body,{'headers':headers})
   }
 
   updateEscrow(escrow:EscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(escrow);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/'+ escrow.agencyMasterId, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/'+ escrow.escrowId, body,{'headers':headers})
   }
 
 
@@ -104,14 +103,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(nonescrow);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/' + nonescrow.agencyMasterId, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/' + nonescrow.nonEscrowId, body,{'headers':headers})
   }
 
   updateNonEscrow(nonescrow:NonEscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(nonescrow);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/'+ nonescrow.agencyMasterId, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/'+ nonescrow.nonEscrowId, body,{'headers':headers})
   }
 
   getPaymentDetails(): Observable<PaymentDetails[]> {
@@ -128,14 +127,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(payment);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + payment.agencyMasterId, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + payment.agencyPaymentId, body,{'headers':headers})
   }
 
   updatePaymentDetails(payment:PaymentDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(payment);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + payment.agencyMasterId, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + payment.agencyPaymentId, body,{'headers':headers})
   }
 
 }

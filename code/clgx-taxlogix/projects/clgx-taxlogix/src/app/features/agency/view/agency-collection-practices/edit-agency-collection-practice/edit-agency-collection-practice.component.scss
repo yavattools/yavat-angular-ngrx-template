@@ -1,0 +1,28 @@
+.closeDialog{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.collection-dates{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2rem;
+    span{
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 35px;
+        display: flex;
+        align-items: center;
+        color: #000B6C;
+        margin-bottom: 1rem;
+    }
+}
+.save-btn{
+    background: #00ebcf;
+    border-radius: 4px;
+    width: 100px;
+    height: 50px;
+    border: 0;
+    color: white;
+}
