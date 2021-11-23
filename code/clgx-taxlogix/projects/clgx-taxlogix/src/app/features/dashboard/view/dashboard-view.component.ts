@@ -29,8 +29,10 @@ export class DashboardViewComponent implements OnInit {
     } else {
       this.isMobile = false;
     }
-    // this.settingsFacadeService.setHeaderShowTime('always');
-    // this.settingsFacadeService.showHeader();
+    this.settingsFacadeService.setHeaderShowTime('always');
+    setTimeout(() => {
+      this.settingsFacadeService.showHeader();
+    }, 100);
   }
 
   openLink(link: string) {

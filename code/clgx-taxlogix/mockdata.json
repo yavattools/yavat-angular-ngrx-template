@@ -471,7 +471,7 @@
   ],
   "getCollectionDates": [
     {
-      "year": "2000",
+      "year": "2022",
       "installment": "1",
       "base": "17/05/2000",
       "discount": "none",
@@ -488,7 +488,7 @@
       "id": 1
     },
     {
-      "year": "2021",
+      "year": "2022",
       "installment": "1",
       "base": "15/11/1998",
       "discount": "none",

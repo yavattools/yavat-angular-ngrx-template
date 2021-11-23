@@ -1,0 +1,38 @@
+@use '~@angular/material' as mat;
+
+@mixin clgx-edit-agency-collection-practices-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $success: map-get($theme, success);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+  
+
+  clgx-edit-agency-collection-practice {
+
+    .edit-agency-model-header-label {
+      font-family: Graphik-regular;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 24px;
+      line-height: 28px;
+      /* identical to box height */
+      color: mat.get-color-from-palette($accent) !important;
+      align-items: center;
+      text-align: center;
+    }
+
+    .action-icon {
+      color: gray;
+      cursor: pointer;
+      font-size: large;
+    }
+
+    .action-icon:hover {
+      color: mat.get-color-from-palette($warn) !important;
+    }
+
+   
+  }
+}

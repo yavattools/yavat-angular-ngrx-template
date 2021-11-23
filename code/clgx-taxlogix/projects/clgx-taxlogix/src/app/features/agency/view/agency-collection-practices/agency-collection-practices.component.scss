@@ -30,6 +30,13 @@ table {
   overflow: auto;
 }
 
+.collection-history-container {
+  position: relative;
+  min-height: 300px;
+  max-height: 700px;
+  overflow: auto;
+}
+
 
 .collection-loading-shade {
   position: absolute;
@@ -61,4 +68,9 @@ table {
 
 .collection-second-footer-row{
   width: 100%;
+}
+
+.action-column{
+  width: 70px;
+  text-align: center;
 }

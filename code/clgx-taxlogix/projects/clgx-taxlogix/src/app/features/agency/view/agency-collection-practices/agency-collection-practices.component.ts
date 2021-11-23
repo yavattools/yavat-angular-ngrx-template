@@ -51,7 +51,6 @@ export class AgencyCollectionPracticesComponent implements OnInit {
   editDeal(element:CollectionDates){   
       const dialogRef = this.dialog.open(EditAgencyCollectionPracticeComponent, {
         width: '600px',
-        height:'800px',
         data: element
       });
       this.agencyStoreFacade.setCollectionDate(element);
@@ -69,7 +68,9 @@ export class AgencyCollectionPracticesComponent implements OnInit {
       this.isMobile = false;
     }
     this.collectionDates$.subscribe(data=>{
-      this.currentDataSource.data = data as Array<CollectionDates>;
+      // this.currentDataSource.data = data as Array<CollectionDates>;
+      this.currentDataSource.data = (data as Array<CollectionDates>).slice(0, 4);
+
       this.historyDataSource.data = data as Array<CollectionDates>;
     })
     this.currentDataSource.paginator = this.currentPaginator;

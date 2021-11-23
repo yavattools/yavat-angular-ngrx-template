@@ -1,12 +1,13 @@
-.closeDialog{
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+.action-section{
+    padding: 20px;
+    text-align: right;
+    margin-bottom: 10px;
 }
 .collection-dates{
     display: flex;
     flex-direction: column;
     margin-top: 2rem;
+    overflow: hidden;
     span{
         font-style: normal;
         font-weight: 500;
@@ -19,10 +20,14 @@
     }
 }
 .save-btn{
-    background: #00ebcf;
-    border-radius: 4px;
-    width: 100px;
-    height: 50px;
-    border: 0;
-    color: white;
+    // background: #00ebcf;
+    // border-radius: 4px;
+    // // width: 100px;
+    // // height: 50px;
+    // border: 0;
+    // color: white;
+}
+
+.text-right{
+    text-align: right;
 }

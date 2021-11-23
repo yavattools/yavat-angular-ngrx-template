@@ -37,6 +37,7 @@
 @import './app/features/agency/view/agency-landing/agency-landing.component.scss-theme';
 @import './app/features/agency/view/agency-details/agency-details.component.scss-theme';
 @import './app/features/agency/view/agency-collection-practices/agency-collection-practices.component.scss-theme.scss';
+@import './app/features/agency/view/agency-collection-practices/edit-agency-collection-practice/edit-agency-collection-practices.component.scss-theme.scss';
 @import './app/features/login/login/login.component.scss-theme';
 @import './app/features/agency/view/agency-details-container/agency-details-container.component.scss-theme.scss';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
@@ -51,6 +52,7 @@
   @include clgx-agency-details-container-component-theme($theme);
   @include clgx-agency-details-component-theme($theme);
   @include  clgx-agency-collection-practices-component-theme($theme);
+  @include  clgx-edit-agency-collection-practices-component-theme($theme);
 }
 
 .default-theme {
