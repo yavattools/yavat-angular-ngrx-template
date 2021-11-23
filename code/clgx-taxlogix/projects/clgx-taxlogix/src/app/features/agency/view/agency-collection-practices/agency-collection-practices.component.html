@@ -3,7 +3,7 @@
 <h2>Collection Dates</h2>
 <br>
 
-<table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="dataSource">
+<table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="currentDataSource">
   <!-- Frequency Column -->
   <ng-container matColumnDef="frequency" >
     <th mat-header-cell *matHeaderCellDef> Frequency </th>
@@ -57,21 +57,22 @@
     <td mat-cell *matCellDef="let element" style="text-align: center;align-items: center;" > 
       <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button (click)="editDeal(element)">
         <i class="fa fa-edit" (click)="editDeal(element)"></i> 
-      </button> 
-      
+      </button>       
        
     </td>
-  </ng-container>
- 
+  </ng-container> 
  
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table> 
+<mat-paginator #currentPaginator [length]="currentTablelength" [pageSize]="currentPageSize" showFirstLastButtons></mat-paginator>
+
+
 <br>
 <br>
 <h2>History</h2>
 <h3 style="text-align: center;text-decoration-color: crimson;">Edit the History</h3>
-<table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="dataSource">
+<table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="historyDataSource">
   <!-- Frequency Column -->
   <ng-container matColumnDef="frequency">
     <th mat-header-cell *matHeaderCellDef> Frequency </th>
@@ -126,27 +127,12 @@
       <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button (click)="editDeal(element)">
         <i class="fa fa-edit" (click)="editDeal(element)"></i> 
       </button> 
-      
-       
     </td>
-  </ng-container>
- 
- 
+  </ng-container> 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table> 
-<mat-paginator [pageSizeOptions]="[5, 10, 20]"
-showFirstLastButtons 
-aria-label="Select page of  elements">
-</mat-paginator>
-<!-- <mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]"
-              aria-label="Select page">
-</mat-paginator> -->
-<!-- Angular 8 pagination -->
-<!-- <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator> -->
-
+<mat-paginator #historyPaginator [pageSizeOptions]="[10, 20, 50]" [length]="historyTablelength" [pageSize]="historyPageSize" showFirstLastButtons></mat-paginator>
 
 
 
