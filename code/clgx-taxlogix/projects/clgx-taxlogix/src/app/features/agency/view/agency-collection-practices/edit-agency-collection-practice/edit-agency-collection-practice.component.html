@@ -20,7 +20,7 @@
             <mat-label>Year</mat-label>
             <input matInput formControlName="year">
             <mat-error *ngIf="yearFC.errors?.required">
-              Required Field
+              Required 
             </mat-error>
           </mat-form-field>
         </div>
@@ -29,16 +29,18 @@
             <mat-label>Installment</mat-label>
             <input matInput formControlName="installment">
             <mat-error *ngIf="installmentFC.errors?.required">
-              Required Field
+              Required 
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Base</mat-label>
-            <input matInput formControlName="base">
+             <input [matDatepicker]="baseDatePicker" matInput formControlName="base">
+            <mat-datepicker-toggle matSuffix [for]="baseDatePicker"></mat-datepicker-toggle>
+            <mat-datepicker #baseDatePicker></mat-datepicker>
             <mat-error *ngIf="baseFC.errors?.required">
-              Required Field
+              Required 
             </mat-error>
           </mat-form-field>
         </div>
@@ -47,16 +49,18 @@
             <mat-label>Discount</mat-label>
             <input matInput formControlName="discount">
             <mat-error *ngIf="discountFC.errors?.required">
-              Required Field
+              Required 
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Penalty</mat-label>
-            <input matInput formControlName="penalty">
+              <input [matDatepicker]="penaltyDatePicker" matInput formControlName="penalty">
+              <mat-datepicker-toggle matSuffix [for]="penaltyDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #penaltyDatePicker></mat-datepicker>
             <mat-error *ngIf="penaltyFC.errors?.required">
-              Required Field
+              Required 
             </mat-error>
           </mat-form-field>
         </div>
@@ -65,16 +69,18 @@
             <mat-label>Late Release</mat-label>
             <input matInput formControlName="lateRelease">
             <mat-error *ngIf="lateReleaseFC.errors?.required">
-              Required Field
+              Required 
             </mat-error>
           </mat-form-field>
         </div>
         <div class="col-6">
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>Bill Request</mat-label>
-            <input matInput formControlName="billRequest">
+              <input [matDatepicker]="billRequestDatePicker" matInput formControlName="billRequest">
+              <mat-datepicker-toggle matSuffix [for]="billRequestDatePicker"></mat-datepicker-toggle>
+              <mat-datepicker #billRequestDatePicker></mat-datepicker>
             <mat-error *ngIf="billRequestFC.errors?.required">
-              Required Field
+              Required 
             </mat-error>
           </mat-form-field>
         </div>
