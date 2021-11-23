@@ -34,14 +34,14 @@ export const features: AgencyFeature[] = [
     name: 'Loan Boarding',
     status: 'Completed',
     description: 'Security',
-    count: '11',
+    count: '',
     enabled: false
   },
   {
     name: 'Search',
     status: 'Completed',
     description: 'Security',
-    count: '20',
+    count: '',
     enabled: false
   },
   {
@@ -55,7 +55,7 @@ export const features: AgencyFeature[] = [
     name: 'Non Escrow',
     status: 'In Progress',
     description: 'Security',
-    count: '23',
+    count: '',
     enabled: false
   },
   {
@@ -83,14 +83,14 @@ export const features: AgencyFeature[] = [
     name: 'Payment Processing',
     status: 'In Progress',
     description: 'Security',
-    count: '20',
+    count: '',
     enabled: false
   },
   {
     name: 'Invoicing',
     status: 'Next',
     description: 'Security',
-    count: '24',
+    count: '',
     enabled: false
   },
   {
@@ -118,7 +118,7 @@ export const features: AgencyFeature[] = [
     name: 'Reports',
     status: '',
     description: 'Security',
-    count: '15',
+    count: '',
     enabled: false
   }
  

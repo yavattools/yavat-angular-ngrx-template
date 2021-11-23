@@ -1,34 +1,37 @@
 <div class="container">
   <mat-card style="height: 85vh;">
-    <div class="row" [ngClass]="routeAnimationsElements">
-      <div class="col-3 pb-3">
+    <mat-card-header >
+      <button mat-button color="primary" (click)="goToFeaturesHandler($event)"><i class="fa fa-chevron-left"></i> Dashboard</button>
+    </mat-card-header>
+    <div class="row agencies-header-div" [ngClass]="routeAnimationsElements">
+      <div class="col-3 p-10">
         <div >
           <h3 class="page-title">Agencies</h3>
-          <span class="page-subtitle">{{agencies?.length}} Agencies</span>
+          <span class="page-subtitle">{{filterAgencies?.length}} Agencies</span>
         </div>
       </div>
       <div class="col-9 pb-3 agency-search-field-div" >
-        <mat-form-field appearance="outline">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Name" value="">
+        <mat-form-field  class="name-filter-input">
+          <input matInput placeholder="Name" value="" [(ngModel)]="agencyFilter.name">
+          <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
         </mat-form-field>
   
-        <mat-form-field appearance="outline">
-          <mat-label>Number</mat-label>
-          <input matInput placeholder="Number" value="">
+        <mat-form-field class="number-filter-input">
+          <input matInput placeholder="Number" value="" [(ngModel)]="agencyFilter.number">
+          <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
         </mat-form-field>
   
-        <mat-form-field appearance="outline">
-          <mat-label>State</mat-label>
-          <input matInput placeholder="State" value="">
+        <mat-form-field class="state-filter-input">
+          <input matInput placeholder="State" value="" [(ngModel)]="agencyFilter.state">
+          <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
         </mat-form-field>
-        <button mat-raised-button color="primary">Search</button>
+        <button mat-raised-button color="primary" (click)="searchAgency($event)" >Search</button>
       </div>
     </div>
   
     <div class="row align-items-end"  [ngClass]="routeAnimationsElements">
   
-       <div class=" mat-elevation-z8 agencies-table" style="overflow: auto;">
+       <div class=" mat-elevation-z1 agencies-table" style="overflow: auto;">
         <table mat-table [dataSource]="agencyDataSource" style="width: 100%;" 
               matSort (matSortChange)="agenciesSortChange($event)">
           <ng-container matColumnDef="agencyNumber" sticky>

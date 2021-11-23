@@ -1,12 +1,15 @@
 
 <div class="container">
-  <mat-card>
+  <mat-card [ngClass]="routeAnimationsElements">
+    <mat-card-header >
+      <button mat-button color="primary" (click)="goToDashboardHandler($event)"><i class="fa fa-chevron-left"></i> Agencies</button>
+    </mat-card-header>
     <div class="details-container-content">
       <div class="agency-details-container-head">
         <h3 class="page-title">{{(agency$ | async)?.agencyName}}</h3>
         <span class="page-subtitle">{{(agency$ | async)?.agencyNumber}}</span>
       </div>
-    <mat-tab-group   mat-align-tabs="start">
+    <mat-tab-group   mat-align-tabs="start" [(selectedIndex)]="selectedTabIndex">
       <mat-tab label="Details">
           <clgx-agency-details></clgx-agency-details>
       </mat-tab>
@@ -30,25 +33,39 @@
         </mat-tab>
     </mat-tab-group>
 
-    <div class="internal-group">
-      <div class="internal-heading"><h4>Internal</h4></div>
+    <div class="internal-group" *ngIf="selectedTabIndex !== 1">
+      <div class="internal-heading">
+        <span class="internal-label">Internal</span>
+      </div>
       <div class="grid-wrapper">
-        <div >
-          <small>Comments and notes</small>
+        <mat-form-field class="big-input-box" appearance="fill">
+          <mat-label>Comments and notes</mat-label>
+          <textarea matInput style="height: 260px"></textarea>
+        </mat-form-field>
+        <!-- <div >
+          <small></small>
           <textarea class="big-input-box" type="text"></textarea>
-        </div>
+        </div> -->
         <div class="row" style="height: 200px;">
           <div class="col-12 pb-3">
-            <div>
+            <!-- <div>
               <small>Last updated by</small>
             </div>
-            <input type="text">
+            <input type="text"> -->
+            <mat-form-field >
+              <mat-label>Last updated by</mat-label>
+              <input matInput >
+            </mat-form-field>
           </div>
           <div class="col-12 pb-3">
-            <div>
+            <!-- <div>
               <small>Last date updated</small>
             </div>
-            <input type="text">
+            <input type="text"> -->
+            <mat-form-field >
+              <mat-label>Last date updated</mat-label>
+              <input matInput >
+            </mat-form-field>
           </div>
         </div>
       </div>

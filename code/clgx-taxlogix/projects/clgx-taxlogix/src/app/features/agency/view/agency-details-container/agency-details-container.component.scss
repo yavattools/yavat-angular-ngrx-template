@@ -1,7 +1,7 @@
 @import '../../../../../styles-variables';
 
 .container {
-  margin-top: 100px;
+  margin-top: 80px;
   max-width: 1440px;
   padding-bottom: 100px;
   // background-color: #fff;
@@ -42,6 +42,6 @@
     background: #ffffff;
     border: 1px solid #aeafbc;
     box-sizing: border-box;
-    box-shadow: inset 0px 2px 2px rgba(134, 134, 134, 0.25);
+    // box-shadow: inset 0px 2px 2px rgba(134, 134, 134, 0.25);
   }
 }

@@ -37,9 +37,10 @@ export class DashboardViewComponent implements OnInit {
     window.open(link, '_blank');
   }
 
-  featureClickHandler($event: MouseEvent) {
+  featureClickHandler($event: MouseEvent, feature: any) {
     $event.stopPropagation();
-
-    this.router.navigateByUrl('/agency');
+    if(feature.enabled){
+      this.router.navigateByUrl('/agency');
+    }
   }
 }

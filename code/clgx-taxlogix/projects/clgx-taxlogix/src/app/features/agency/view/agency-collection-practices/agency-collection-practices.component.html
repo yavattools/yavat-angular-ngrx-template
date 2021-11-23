@@ -1,62 +1,82 @@
-<br>
-<br>
-<h2>Collection Dates</h2>
-<br>
 
-<table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="dataSource">
+<div style="overflow-x: hidden;margin-bottom: 100px;" [ngClass]="routeAnimationsElements">
+<div class="page-title-div">
+  <span class="page-title"  animateOnScroll animationName="animated fadeInDown">Collection Dates</span>
+</div>
+<table class="collection-dates-table mat-elevation-z8"   animateOnScroll animationName="animated fadeIn"
+  mat-table recycleRows [dataSource]="collectionDatesDataSource">
   <!-- Frequency Column -->
   <ng-container matColumnDef="frequency" >
-    <th mat-header-cell *matHeaderCellDef> Frequency </th>
+    <th mat-header-cell *matHeaderCellDef> 
+      <span class="agency-table-header-label">Frequency</span>   
+    </th>
     <td mat-cell *matCellDef="let element">{{element.frequency}}</td>
   </ng-container>
 
   <!-- Year Column -->
   <ng-container matColumnDef="year">
-    <th mat-header-cell *matHeaderCellDef> Year </th>
+    <th mat-header-cell *matHeaderCellDef> 
+      <span class="agency-table-header-label">Year</span>   
+    </th>
     <td mat-cell *matCellDef="let element">{{element.year}}</td>
   </ng-container>
 
   <!-- Installment Column -->
   <ng-container matColumnDef="installment">
-    <th mat-header-cell *matHeaderCellDef>Installment </th>
+    <th mat-header-cell *matHeaderCellDef>
+      <span class="agency-table-header-label">Installment</span>   
+    </th>
     <td mat-cell *matCellDef="let element">{{element.installment}}</td>
   </ng-container>
 
   <!-- Base Column -->
   <ng-container matColumnDef="base">
-    <th mat-header-cell *matHeaderCellDef>Base</th>
+    <th mat-header-cell *matHeaderCellDef>
+      <span class="agency-table-header-label">Base</span>   
+    </th>
     <td mat-cell *matCellDef="let element">{{element.base}}</td>
   </ng-container>
 
 <!-- Discount Column -->
   <ng-container matColumnDef="discount">
-    <th mat-header-cell *matHeaderCellDef> Discount </th>
+    <th mat-header-cell *matHeaderCellDef> 
+      <span class="agency-table-header-label">Discount</span>   
+    </th>
     <td mat-cell *matCellDef="let element">{{element.discount}}</td>
   </ng-container>
 
 <!--  Penalty Column -->
   <ng-container matColumnDef="penalty">
-    <th mat-header-cell *matHeaderCellDef> Penalty </th>
+    <th mat-header-cell *matHeaderCellDef> 
+      <span class="agency-table-header-label">Penalty</span>   
+    </th>
     <td mat-cell *matCellDef="let element">{{element.penalty}}</td>
   </ng-container>
 
   <!-- Late Release Column -->
   <ng-container matColumnDef="lateRelease">
-    <th mat-header-cell *matHeaderCellDef>  Late Release </th>
+    <th mat-header-cell *matHeaderCellDef>  
+      <span class="agency-table-header-label">Late Release </span>   
+    </th>
     <td mat-cell *matCellDef="let element">{{element.lateRelease}}</td>
   </ng-container>
 
   <!-- Bill Request Column -->
   <ng-container matColumnDef="billRequest">
-    <th mat-header-cell *matHeaderCellDef>  Bill Request </th>
+    <th mat-header-cell *matHeaderCellDef>  
+      <span class="agency-table-header-label">Bill Request </span>   
+    </th>
     <td mat-cell *matCellDef="let element">{{element.billRequest}}</td>
   </ng-container>
 
   <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Action </th>
+    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 
+      <span class="agency-table-header-label">Action</span>   
+    </th>
     <td mat-cell *matCellDef="let element" style="text-align: center;align-items: center;" > 
-      <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button (click)="editDeal(element)">
-        <i class="fa fa-edit" (click)="editDeal(element)"></i> 
+      <button  mat-button 
+              (click)="editDeal($event, element)">
+        <mat-icon class="action-icon" >edit</mat-icon>
       </button> 
       
        
@@ -67,78 +87,115 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table> 
-<br>
-<br>
-<h2>History</h2>
-<h3 style="text-align: center;text-decoration-color: crimson;">Edit the History</h3>
-<table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="dataSource">
-  <!-- Frequency Column -->
-  <ng-container matColumnDef="frequency">
-    <th mat-header-cell *matHeaderCellDef> Frequency </th>
-    <td mat-cell *matCellDef="let element">{{element.frequency}}</td>
-  </ng-container>
 
-  <!-- Year Column -->
-  <ng-container matColumnDef="year">
-    <th mat-header-cell *matHeaderCellDef> Year </th>
-    <td mat-cell *matCellDef="let element">{{element.year}}</td>
-  </ng-container>
+<div class="page-second-section-div">
+  <div class="row">
+    <div class="col-md-4 text-left">
+      <span  animateOnScroll animationName="animated fadeIn" class="page-title">History</span>
+    </div>
+    <div class="col-md-8 text-right">
+      <span  animateOnScroll animationName="animated fadeIn" class="edit-this-table-label">Edit the History</span>
+    </div>
+  </div>
+</div>
+<div class="collection-container mat-elevation-z8">
+  <div class="collection-container">
+    <table class="collection-table "   animateOnScroll animationName="animated fadeIn"
+      mat-table recycleRows [dataSource]="collectionDatesHistoryDataSource">
+    <!-- Frequency Column -->
+    <ng-container matColumnDef="frequency">
+      <th mat-header-cell *matHeaderCellDef> 
+        <span class="agency-table-header-label">Frequency</span>   
+      </th>
+      <td mat-cell *matCellDef="let element">{{element.frequency}}</td>
+    </ng-container>
 
-  <!-- Installment Column -->
-  <ng-container matColumnDef="installment">
-    <th mat-header-cell *matHeaderCellDef>Installment </th>
-    <td mat-cell *matCellDef="let element">{{element.installment}}</td>
-  </ng-container>
+    <!-- Year Column -->
+    <ng-container matColumnDef="year">
+      <th mat-header-cell *matHeaderCellDef> 
+        <span class="agency-table-header-label">Year</span>   
+      </th>
+      <td mat-cell *matCellDef="let element">{{element.year}}</td>
+    </ng-container>
 
-  <!-- Base Column -->
-  <ng-container matColumnDef="base">
-    <th mat-header-cell *matHeaderCellDef>Base</th>
-    <td mat-cell *matCellDef="let element">{{element.base}}</td>
-  </ng-container>
+    <!-- Installment Column -->
+    <ng-container matColumnDef="installment">
+      <th mat-header-cell *matHeaderCellDef>
+        <span class="agency-table-header-label">Installment</span>   
+      </th>
+      <td mat-cell *matCellDef="let element">{{element.installment}}</td>
+    </ng-container>
 
-<!-- Discount Column -->
-  <ng-container matColumnDef="discount">
-    <th mat-header-cell *matHeaderCellDef> Discount </th>
-    <td mat-cell *matCellDef="let element">{{element.discount}}</td>
-  </ng-container>
+    <!-- Base Column -->
+    <ng-container matColumnDef="base">
+      <th mat-header-cell *matHeaderCellDef>
+        <span class="agency-table-header-label">Base</span>   
+      </th>
+      <td mat-cell *matCellDef="let element">{{element.base}}</td>
+    </ng-container>
 
-<!--  Penalty Column -->
-  <ng-container matColumnDef="penalty">
-    <th mat-header-cell *matHeaderCellDef> Penalty </th>
-    <td mat-cell *matCellDef="let element">{{element.penalty}}</td>
-  </ng-container>
+  <!-- Discount Column -->
+    <ng-container matColumnDef="discount">
+      <th mat-header-cell *matHeaderCellDef> 
+        <span class="agency-table-header-label">Discount</span>   
+      </th>
+      <td mat-cell *matCellDef="let element">{{element.discount}}</td>
+    </ng-container>
 
-  <!-- Late Release Column -->
-  <ng-container matColumnDef="lateRelease">
-    <th mat-header-cell *matHeaderCellDef>  Late Release </th>
-    <td mat-cell *matCellDef="let element">{{element.lateRelease}}</td>
-  </ng-container>
+  <!--  Penalty Column -->
+    <ng-container matColumnDef="penalty">
+      <th mat-header-cell *matHeaderCellDef> 
+        <span class="agency-table-header-label">Penalty</span>   
+      </th>
+      <td mat-cell *matCellDef="let element">{{element.penalty}}</td>
+    </ng-container>
 
-  <!-- Bill Request Column -->
-  <ng-container matColumnDef="billRequest">
-    <th mat-header-cell *matHeaderCellDef>  Bill Request </th>
-    <td mat-cell *matCellDef="let element">{{element.billRequest}}</td>
-  </ng-container>
+    <!-- Late Release Column -->
+    <ng-container matColumnDef="lateRelease">
+      <th mat-header-cell *matHeaderCellDef>  
+        <span class="agency-table-header-label">Late Release</span>   
+      </th>
+      <td mat-cell *matCellDef="let element">{{element.lateRelease}}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="action">
-    <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Action </th>
-    <td mat-cell *matCellDef="let element" style="text-align: center;align-items: center;" > 
-      <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button (click)="editDeal(element)">
-        <i class="fa fa-edit" (click)="editDeal(element)"></i> 
-      </button> 
-      
-       
-    </td>
-  </ng-container>
- 
- 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table> 
-<mat-paginator [pageSizeOptions]="[5, 10, 20]"
-showFirstLastButtons 
-aria-label="Select page of  elements">
-</mat-paginator>
+    <!-- Bill Request Column -->
+    <ng-container matColumnDef="billRequest">
+      <th mat-header-cell *matHeaderCellDef> 
+        <span class="agency-table-header-label">Bill Request </span>   
+        </th>
+      <td mat-cell *matCellDef="let element">{{element.billRequest}}</td>
+    </ng-container>
+      <!-- Disclaimer column -->
+      <!-- <ng-container matColumnDef="disclaimer">
+        <td mat-footer-cell *matFooterCellDef colspan="2">
+          Please note that the cost of items displayed are completely and totally made up.
+        </td>
+      </ng-container> -->
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 
+        <span class="agency-table-header-label">Action</span>   
+      </th>
+      <td mat-cell *matCellDef="let element" style="text-align: center;align-items: center;" > 
+        <button  mat-button 
+              (click)="editDeal($event, element)">
+            <mat-icon class="action-icon" >edit</mat-icon>
+        </button> 
+      </td>
+    </ng-container>
+  
+  
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <!-- <tr mat-footer-row *matFooterRowDef="['disclaimer'];sticky: true" class="example-second-footer-row"></tr> -->
+    </table> 
+   
+  </div>
+  <!-- <mat-paginator [length]="resultsLength" [pageSizeOptions]="[5, 10, 20]"
+  showFirstLastButtons 
+  aria-label="Select page of  elements">
+</mat-paginator> -->
+</div>
+</div>
 <!-- <mat-paginator [length]="100"
               [pageSize]="10"
               [pageSizeOptions]="[5, 10, 25, 100]"

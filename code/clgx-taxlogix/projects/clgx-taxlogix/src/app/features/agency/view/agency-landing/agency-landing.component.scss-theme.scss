@@ -8,9 +8,9 @@
   $background: map-get($theme, background);
 
   clgx-agency-landing {
-    mat-form-field.mat-form-field {
-      font-size: 12px;
-    }
+    // mat-form-field.mat-form-field {
+    //   font-size: 12px;
+    // }
 
     .mat-row:hover {
       // background-color: red;
@@ -67,6 +67,10 @@
       display: flex;
       align-items: center;
       letter-spacing: 0.03em;
+    }
+
+    .mat-card-header-text{
+      margin: 0px;
     }
   }
 }
