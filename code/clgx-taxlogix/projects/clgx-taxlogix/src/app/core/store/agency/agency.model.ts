@@ -56,16 +56,20 @@ export class CollectionDates {
   frequency?: string | undefined;
   year?: string | undefined;
   installment?: string | undefined;
-  base?: string | undefined;
+  base: string;
   discount?: string | undefined;
-  penalty?: string | undefined;
+  penalty: string;
   lateRelease?: string | undefined;
-  billRequest?: string | undefined;
+  billRequest: string;
   createdBy?: string | undefined;
   modifiedBy?: string | undefined;
   createdByUser?: string | undefined;
   modifiedByUser?: string | undefined;
-  constructor() {}
+  constructor() {
+    this.base = '';
+    this.penalty = '';
+    this.billRequest = '';
+  }
 }
 
 export interface GetCollectionDatesRequest {

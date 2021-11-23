@@ -471,13 +471,13 @@
   ],
   "getCollectionDates": [
     {
+      "base": "11/26/2021",
+      "penalty": "11/26/2021",
+      "billRequest": "11/30/2021",
       "year": "2022",
       "installment": "1",
-      "base": "17/05/2000",
       "discount": "none",
-      "penalty": "03/01/2021",
       "lateRelease": "none",
-      "billRequest": "17/05/2000",
       "collectionPracticesId": 1,
       "agencyMasterId": "1",
       "frequency": "Quarterly",

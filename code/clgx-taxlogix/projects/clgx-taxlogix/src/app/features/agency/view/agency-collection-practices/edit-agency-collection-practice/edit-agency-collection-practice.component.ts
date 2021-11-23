@@ -46,11 +46,11 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
       if(collectionDate){
         this.editForm.controls['year'].setValue(collectionDate.year);
         this.editForm.controls['installment'].setValue(collectionDate.installment);
-        this.editForm.controls['base'].setValue(collectionDate.base);
+        this.editForm.controls['base'].setValue(new Date(collectionDate.base));
         this.editForm.controls['discount'].setValue(collectionDate.discount);
-        this.editForm.controls['penalty'].setValue(collectionDate.penalty);
+        this.editForm.controls['penalty'].setValue(new Date(collectionDate.penalty));
         this.editForm.controls['lateRelease'].setValue(collectionDate.lateRelease);
-        this.editForm.controls['billRequest'].setValue(collectionDate.billRequest);
+        this.editForm.controls['billRequest'].setValue(new Date(collectionDate.billRequest));
       }
     })
   }
@@ -63,11 +63,11 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     this.newCollectionDateForm = new CollectionDates();
     this.newCollectionDateForm.year = form.controls['year'].value;
     this.newCollectionDateForm.installment = form.controls['installment'].value;
-    this.newCollectionDateForm.base = form.controls['base'].value;
+    this.newCollectionDateForm.base = new Date(form.controls['base'].value).toLocaleDateString("en-US");
     this.newCollectionDateForm.discount = form.controls['discount'].value;
-    this.newCollectionDateForm.penalty = form.controls['penalty'].value;
+    this.newCollectionDateForm.penalty = new Date(form.controls['penalty'].value).toLocaleDateString("en-US");
     this.newCollectionDateForm.lateRelease = form.controls['lateRelease'].value;
-    this.newCollectionDateForm.billRequest = form.controls['billRequest'].value;
+    this.newCollectionDateForm.billRequest = new Date(form.controls['billRequest'].value).toLocaleDateString("en-US");
     this.newCollectionDateForm.collectionPracticesId = this.collectionDate.collectionPracticesId;
     this.newCollectionDateForm.agencyMasterId = this.collectionDate.agencyMasterId;
     this.newCollectionDateForm.frequency = this.collectionDate.frequency;
