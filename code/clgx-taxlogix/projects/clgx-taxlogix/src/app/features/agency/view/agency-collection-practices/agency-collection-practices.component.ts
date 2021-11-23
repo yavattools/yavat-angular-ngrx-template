@@ -39,7 +39,7 @@ export class AgencyCollectionPracticesComponent implements OnInit {
   constructor( public deviceService:DeviceDetectorService, private apiDataService: AgencyDataService){
   }
   
-  editDeal($event:MouseEvent ,element:Element){
+  editDeal(element:any){
 
   }
    

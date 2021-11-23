@@ -1,4 +1,8 @@
 
+<br>
+<br>
+<h2>Collection Dates</h2>
+
 <table class="example-table mat-elevation-z8" mat-table recycleRows [dataSource]="currentDataSource">
   <!-- Frequency Column -->
   <ng-container matColumnDef="frequency" >
@@ -69,7 +73,7 @@
       <span class="agency-table-header-label">Action</span>   
     </th>
     <td mat-cell *matCellDef="let element" style="text-align: center;align-items: center;" > 
-      <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button (click)="editDeal(element)">
+      <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button>
         <i class="fa fa-edit" (click)="editDeal(element)"></i> 
       </button>       
        
@@ -138,7 +142,7 @@
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef style="text-align: center;"> Action </th>
     <td mat-cell *matCellDef="let element" style="text-align: center;align-items: center;" > 
-      <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button (click)="editDeal(element)">
+      <button color="primary" style="padding-left: 9px;padding-right: 9px;min-width: 20px;cursor: pointer;" mat-raised-button >
         <i class="fa fa-edit" (click)="editDeal(element)"></i> 
       </button> 
     </td>
