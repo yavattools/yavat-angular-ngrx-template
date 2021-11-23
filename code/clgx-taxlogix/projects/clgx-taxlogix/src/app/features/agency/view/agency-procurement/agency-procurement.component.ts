@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import { Agency, EscrowDetails, NonEscrowDetails } from '@app/core/store/agency/agency.model';
@@ -11,10 +11,9 @@ import { AgencyFeature, agencies } from '../../agency-view.data';
 @Component({
   selector: 'clgx-agency-procument',
   templateUrl: './agency-procurement.component.html',
-  styleUrls: ['./agency-procurement.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrls: ['./agency-procurement.component.scss']
 })
-export class AgencyProcumentComponent implements OnInit {
+export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agencies: AgencyFeature[] = agencies;
   isMobile: Boolean = false;
@@ -24,6 +23,8 @@ export class AgencyProcumentComponent implements OnInit {
   nonEscrowDetails : NonEscrowDetails = new NonEscrowDetails();
   newEscrowForm : any;
   newNonEscrowForm : any;
+  selectedTabIndex = 0;
+
   escrowForm = this.fb.group({
     contactName : ['',Validators.required],
     contactPhone : ['',Validators.required],
@@ -218,6 +219,9 @@ export class AgencyProcumentComponent implements OnInit {
     return this.nonEscrowForm.get('methodOfPaymentRequiredWire');
   }
 
+  ngAfterViewInit(){
+    this.selectedTabIndex = 0;
+  }
 
   openLink(link: string) {
     window.open(link, '_blank');

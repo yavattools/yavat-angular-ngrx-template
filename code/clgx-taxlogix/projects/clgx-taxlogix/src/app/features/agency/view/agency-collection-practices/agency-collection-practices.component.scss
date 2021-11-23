@@ -1,3 +1,64 @@
 table {
   width: 100%;
 }
+.table-history{
+  overflow: hidden;
+}
+.collection-dates-table{
+  box-shadow: none;
+}
+.page-title-div{
+  height: 70px;
+  padding-top: 30px;
+}
+
+.page-second-section-div{
+  height: 125px;
+  padding-top: 75px;
+}
+
+
+/* Structure */
+.collection-container {
+  position: relative;
+}
+
+.collection-container {
+  position: relative;
+  min-height: 400px;
+  max-height: 700px;
+  overflow: auto;
+}
+
+
+.collection-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collection-rate-limit-reached {
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+.collection-second-footer-row{
+  width: 100%;
+}

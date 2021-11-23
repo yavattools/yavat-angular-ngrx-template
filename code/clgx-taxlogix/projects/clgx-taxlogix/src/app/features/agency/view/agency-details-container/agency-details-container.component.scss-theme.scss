@@ -40,6 +40,9 @@
       display: flex;
       align-items: center;
     }
+    .mat-card-header-text{
+      margin: 0px;
+    }
     .tab-label {
       color: mat.get-color-from-palette($accent) !important;
     }
@@ -60,5 +63,31 @@
       text-transform: capitalize !important;
       text-transform: uppercase !important;
     }
+
+    .mat-row:nth-child(even) {
+      background-color: #f0f0f0;
+    }
+
+    .mat-row:nth-child(odd) {
+      // background-color: black;
+    }
+
+    .default-theme .mat-form-field-appearance-outline .mat-form-field-infix {
+      padding: 0.4em 0 !important;
+    }
+
+    .internal-label {
+      font-family: Graphik-regular;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 22px;
+      /* identical to box height */
+      color: mat.get-color-from-palette($accent, 400) !important;
+
+      display: flex;
+      align-items: center;
+    }
+   
   }
 }

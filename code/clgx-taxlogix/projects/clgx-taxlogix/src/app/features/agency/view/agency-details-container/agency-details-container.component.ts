@@ -18,7 +18,7 @@ export class AgencyDetailsContainerComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agencies: AgencyFeature[] = agencies;
   agency$: Observable<Agency>;
-
+  selectedTabIndex = 0;
   isMobile: Boolean = false;
   constructor(
     public deviceService: DeviceDetectorService,
@@ -36,7 +36,8 @@ export class AgencyDetailsContainerComponent implements OnInit {
     }
   }
 
-  back() {
+
+  goToDashboardHandler($event:MouseEvent){
     this.router.navigateByUrl('/agency');
   }
 }

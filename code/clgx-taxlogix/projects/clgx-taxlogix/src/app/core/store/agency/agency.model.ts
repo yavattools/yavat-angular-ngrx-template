@@ -51,20 +51,20 @@ export interface GetActiveAgenciesRequest {
 }
 
 export class CollectionDates {
-  collectionPracticesId: string | undefined;
-  agencyMasterId: string | undefined;
-  frequency: string | undefined;
-  year: string | undefined;
-  installment: string | undefined;
-  base: string | undefined;
-  discount: string | undefined;
-  penalty: string | undefined;
-  lateRelease: string | undefined;
-  billRequest: string | undefined;
-  createdBy: string | undefined;
-  modifiedBy: string | undefined;
-  createdByUser: string | undefined;
-  modifiedByUser: string | undefined;
+  collectionPracticesId?: string | undefined;
+  agencyMasterId?: string | undefined;
+  frequency?: string | undefined;
+  year?: string | undefined;
+  installment?: string | undefined;
+  base?: string | undefined;
+  discount?: string | undefined;
+  penalty?: string | undefined;
+  lateRelease?: string | undefined;
+  billRequest?: string | undefined;
+  createdBy?: string | undefined;
+  modifiedBy?: string | undefined;
+  createdByUser?: string | undefined;
+  modifiedByUser?: string | undefined;
   constructor() {}
 }
 
