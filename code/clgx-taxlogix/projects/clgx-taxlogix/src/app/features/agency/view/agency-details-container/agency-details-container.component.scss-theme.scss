@@ -46,23 +46,32 @@
     .tab-label {
       color: mat.get-color-from-palette($accent) !important;
     }
-    .welcome-title {
-      color: mat.get-color-from-palette($accent) !important;
+
+    .mat-button-toggle-checked {
+      background-color: mat.get-color-from-palette($primary, 400) !important;
+      color: mat.get-color-from-palette($primary, 800) !important;
+      i {
+        color: mat.get-color-from-palette($accent, 400) !important;
+      }
     }
-    .feature-card-title {
-      color: mat.get-color-from-palette($accent, 400) !important;
-      font-weight: 700;
-    }
-    .feature-card-status-green {
-      color: mat.get-color-from-palette($success-colors) !important;
-      text-transform: capitalize !important;
-      text-transform: uppercase !important;
-    }
-    .feature-card-status-orange {
-      color: mat.get-color-from-palette($warning-colors) !important;
-      text-transform: capitalize !important;
-      text-transform: uppercase !important;
-    }
+
+    // .welcome-title {
+    //   color: mat.get-color-from-palette($accent) !important;
+    // }
+    // .feature-card-title {
+    //   color: mat.get-color-from-palette($accent, 400) !important;
+    //   font-weight: 700;
+    // }
+    // .feature-card-status-green {
+    //   color: mat.get-color-from-palette($success-colors) !important;
+    //   text-transform: capitalize !important;
+    //   text-transform: uppercase !important;
+    // }
+    // .feature-card-status-orange {
+    //   color: mat.get-color-from-palette($warning-colors) !important;
+    //   text-transform: capitalize !important;
+    //   text-transform: uppercase !important;
+    // }
 
     .mat-row:nth-child(even) {
       background-color: #f0f0f0;
