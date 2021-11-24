@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
+import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../core/core.module';
@@ -20,8 +21,11 @@ export class DashboardViewComponent implements OnInit {
   constructor(
     public deviceService: DeviceDetectorService,
     public settingsFacadeService: SettingsStoreFacade,
+    public agencyStoreFacadeService: AgencyStoreFacade,
     private router: Router
-  ) {}
+  ) {
+
+  }
 
   ngOnInit() {
     if (this.deviceService.isMobile()) {

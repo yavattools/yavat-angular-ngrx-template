@@ -68,6 +68,9 @@ import { httpInterceptorProviders } from './providers/http-interceptors';
 import { AppConstantsService } from './providers/constants';
 import { HttpWrapperService } from './providers/http-wrapper';
 import { LoggerService } from './providers/logger';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
 
 export {
   TitleService,
@@ -118,6 +121,9 @@ export function httpLoaderFactory(http: HttpClient) {
 
     // 3rd party
     FontAwesomeModule,
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -143,7 +149,9 @@ export function httpLoaderFactory(http: HttpClient) {
     // 3rd party
     FontAwesomeModule,
     TranslateModule,
-
+    LoadingBarHttpClientModule,
+    LoadingBarRouterModule,
+    LoadingBarModule,
   ]
 })
 export class CoreModule {

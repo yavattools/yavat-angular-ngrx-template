@@ -1,5 +1,5 @@
 <!--footer section -->
-<footer [class]="class">
+<footer [class]="class" [ngClass]="routeAnimationsElements">
 	<div class="light-layout" >
 		<div class="container" style="border-bottom: 1px dotted silver;padding-bottom: 10px;">
 			<section class="small-section border-section border-top-0 pt-4">
@@ -7,8 +7,8 @@
 					<div class="col-lg-6">
 						<div class="subscribe">
 							<div>
-								<h4>KNOW IT ALL FIRST!</h4>
-								<p>Never Miss Anything From Taxlogix By Signing Up To Our Newsletter. </p>
+								<h4 animateOnScroll animationName="animated fadeInDown">KNOW IT ALL FIRST!</h4>
+								<p animateOnScroll animationName="animated fadeInDown">Never Miss Anything From Taxlogix By Signing Up To Our Newsletter. </p>
 							</div>
 						</div>
 					</div>
@@ -17,7 +17,7 @@
 							<div class="row">
 								<div class="col-lg-10  col-sm-9 align-items-end mr-0 pr-0">
 									<div class="form-group">
-										<input type="email" formControlName="email" class="form-control" placeholder="Enter your email">
+										<input animateOnScroll animationName="animated fadeInDown" type="email" formControlName="email" class="form-control" placeholder="Enter your email">
 										<div *ngIf ="(email?.invalid && email?.touched) || email?.dirty" class="text-left">
 										<small class="error" *ngIf="email?.errors?.required">Email is Required</small>
 										<small class="error" *ngIf="email?.errors?.pattern">Enter Valid email</small>
@@ -25,7 +25,7 @@
 									</div>
 								</div>
 								<div class="col-lg-2 col-sm-2 align-items-start ml-0 pl-0">
-									<button type="submit" mat-raised-button color="primary" (click)="subscribeForm()" 
+									<button animateOnScroll animationName="animated fadeInDown" type="submit" mat-raised-button color="primary" (click)="subscribeForm()" 
 											[disabled]="email?.errors?.required || email?.errors?.pattern">subscribe</button>
 								</div>
 							</div>
@@ -43,16 +43,16 @@
 				<div class="col-lg-4 col-md-6">
 					<div class="footer-contant">
 						<div class="footer-logo" >
-							<img style="height: 80px;" [src]="themeLogo" alt="logo">
+							<img animateOnScroll animationName="animated fadeInDown" style="height: 80px;" [src]="themeLogo" alt="logo">
 						</div>
-						<p>Explore Taxlogix to uncover the services provided by Chainlogix.</p>
+						<p animateOnScroll animationName="animated fadeInDown">Explore Taxlogix to uncover the services provided by Chainlogix.</p>
 						<div class="footer-social">
                            
                         </div>
 					</div>
 				</div>
 				<div class="col offset-xl-1">
-					<div class="sub-title">
+					<div class="sub-title" animateOnScroll animationName="animated fadeInDown">
 						<div class="footer-title">
                             <h4>About</h4>
                         </div>
@@ -64,7 +64,7 @@
 					</div>
 				</div>
 				<div class="col">
-					<div class="sub-title">
+					<div class="sub-title" animateOnScroll animationName="animated fadeInDown">
 						<div class="footer-title">
                             <h4>Legal & More</h4>
                         </div>

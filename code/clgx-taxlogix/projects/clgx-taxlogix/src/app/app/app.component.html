@@ -15,7 +15,8 @@
 
     <mat-sidenav-content class="wrapper" >
 
-      <div class="toolbar"  *ngIf="(showHeader$ | async)" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'"  [ngClass]="routeAnimationsElements"
+      <div class="toolbar"  *ngIf="(showHeader$ | async)" [style.position]="(stickyHeader$ | async) ? 'fixed' : 'inherit'" 
+          [ngClass]="routeAnimationsElements"
         [class.mat-elevation-z1]="(stickyHeader$ | async) && scrollPosition > 100">
         <mat-toolbar  [ngClass]="routeAnimationsElements"  >
           
@@ -34,17 +35,20 @@
             <!-- {{ 'clgx.title.long' | translate }} -->
           </span>
         </mat-toolbar>
+       
       </div>
-
+      <ngx-loading-bar></ngx-loading-bar>
       <div class="content container-xs"  
           [@routeAnimations]="o.isActivated && o.activatedRoute.routeConfig?.data?.title">
+        
         <router-outlet #o="outlet"></router-outlet>
+        <!-- <app-taxlogix-spinner [displayProgressSpinner]="actionInProgress"></app-taxlogix-spinner> -->
       </div>
 
       <div class="footer">
         <app-footer-lg></app-footer-lg>
         <div class="row">
-          <div class="col-12 signature">
+          <div class="col-12 signature" animateOnScroll animationName="animated fadeInDown">
             &#169; <span class="year">{{year}}</span> - ChainLogix
             <br class="d-block d-sm-none">
           </div>

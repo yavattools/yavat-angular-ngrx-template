@@ -192,7 +192,7 @@ export interface AgencyState {
   escrowDetails: EscrowDetails;
   nonEscrowDetails: NonEscrowDetails;
   paymentDetails: PaymentDetails;
-  actionInProgress: boolean;
+  actionInProgress: boolean ;
   error: any;
 }
 

@@ -36,7 +36,9 @@
 @import './app/features/dashboard/view/dashboard-view.component.scss-theme';
 @import './app/features/agency/view/agency-landing/agency-landing.component.scss-theme';
 @import './app/features/agency/view/agency-details/agency-details.component.scss-theme';
+@import './app/features/agency/view/agency-logs/agency-logs.component.scss-theme.scss';
 @import './app/features/agency/view/agency-collection-practices/agency-collection-practices.component.scss-theme.scss';
+@import './app/features/agency/view/agency-procurement/agency-procurement.component.scss-theme.scss';
 @import './app/features/agency/view/agency-collection-practices/edit-agency-collection-practice/edit-agency-collection-practices.component.scss-theme.scss';
 @import './app/features/login/login/login.component.scss-theme';
 @import './app/features/agency/view/agency-details-container/agency-details-container.component.scss-theme.scss';
@@ -53,6 +55,8 @@
   @include clgx-agency-details-component-theme($theme);
   @include  clgx-agency-collection-practices-component-theme($theme);
   @include  clgx-edit-agency-collection-practices-component-theme($theme);
+  @include clgx-agency-logs-component-theme($theme);
+  @include clgx-agency-procurement-component-theme($theme);
 }
 
 .default-theme {

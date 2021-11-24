@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core/core.module';
 
 @Component({
   selector: 'app-footer-lg',
@@ -7,6 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./footer-lg.component.scss']
 })
 export class FooterLgComponent implements OnInit, OnDestroy {
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
 
   @Input() class: string = 'footer-light' // Default class 
   @Input() themeLogo: string = 'assets/logo.svg' // Default Logo

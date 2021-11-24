@@ -31,14 +31,19 @@ import {
 } from '../core/store/settings/settings.actions';
 import { CdkScrollable, ScrollDispatcher } from '@angular/cdk/scrolling';
 import {
+  delay,
   distinctUntilChanged,
   filter,
   map,
   pairwise,
   share,
-  throttleTime
+  throttleTime,
+  withLatestFrom
 } from 'rxjs/operators';
 import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
+import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 export enum Direction {
   Up = 'Up',
@@ -53,6 +58,12 @@ export enum Direction {
 })
 export class AppComponent implements OnInit, AfterViewInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+ // For Progressbar
+ loaders = this.loader.value$.pipe(
+  delay(1000),
+  withLatestFrom(this.loader.value$),
+  map(v => v[1]),
+);
 
   isProd = env.production;
   envName = env.envName;
@@ -73,11 +84,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   theme$: Observable<string> | undefined;
   headerShowTime: string = '';
   showHeader: boolean = false;
+  actionInProgress: boolean = false;
   constructor(
     private store: Store<AppState>,
     private storageService: LocalStorageService,
+    public agencyFacadeService: AgencyStoreFacade,
     public settingsFacadeService: SettingsStoreFacade,
     private scrollDispatcher: ScrollDispatcher,
+    private loader: LoadingBarService, 
+    private router: Router,
     private zone: NgZone
   ) {
     this.isAuthenticated$ = this.store.pipe(select(selectIsAuthenticated));
@@ -104,6 +119,10 @@ export class AppComponent implements OnInit, AfterViewInit {
         })
       );
     }
+
+    this.agencyFacadeService.actionInProgress$.subscribe(p => {
+      this.actionInProgress = p;
+    })
   }
 
   onLoginClick() {

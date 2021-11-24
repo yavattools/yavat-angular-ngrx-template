@@ -27,6 +27,13 @@
 
     .welcome-title {
       color: mat.get-color-from-palette($accent) !important;
+      font-family: Graphik-medium;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 35px;
+      display: flex;
+      align-items: center;
     }
     .feature-card-title {
       color: mat.get-color-from-palette($accent, 400);
