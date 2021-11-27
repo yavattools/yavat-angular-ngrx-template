@@ -13,7 +13,6 @@ export const actionStopActionInProgress = createAction(
 
 export const actionGetAllActiveAgencies = createAction(
   '[Agency] Get All Active Agencies',
-  props<{ request: GetActiveAgenciesRequest}>()
 );
 
 export const actionGetAllActiveAgenciesSuccess = createAction(

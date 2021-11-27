@@ -30,9 +30,8 @@
     </div>
   
     <div class="row align-items-end"  [ngClass]="routeAnimationsElements">
-  
        <div class=" mat-elevation-z1 agencies-table" style="overflow: auto;">
-        <table mat-table [dataSource]="agencyDataSource" style="width: 100%;" 
+        <!-- <table mat-table [dataSource]="agencyDataSource" style="width: 100%;" 
               matSort (matSortChange)="agenciesSortChange($event)">
           <ng-container matColumnDef="agencyNumber" sticky>
             <th mat-header-cell *matHeaderCellDef mat-sort-header> 
@@ -61,12 +60,6 @@
             </th>
             <td mat-cell *matCellDef="let element"> {{element.agencyCity}} </td>
           </ng-container>
-
-          <!-- <ng-container matColumnDef="state">
-            <th mat-header-cell *matHeaderCellDef> State </th>
-            <td mat-cell *matCellDef="let element"> {{element.state}} </td>
-          </ng-container> -->
-
           <ng-container matColumnDef="assessorPhoneNumber">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> 
              <span class="agency-table-header-label">Phone Number</span>   
@@ -84,8 +77,72 @@
       
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-          <!-- <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr> -->
-        </table>
+        </table> -->
+        <ngx-datatable
+            class="material"
+            [rows]="filterAgencies"
+            [columns]="ngxDisplayedColumns"
+            [columnMode]="'force'"
+            [messages]="dataTableMessage"
+            [loadingIndicator]="(agencyFacade.actionInProgress$ | async) || false"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [rowHeight]="50"
+            [scrollbarV]="true"
+            style="height: 100%;margin-left: 15px;margin-right: 15px;"
+            (page)="onPage($event)"
+      >
+        <ngx-datatable-column name="agencyMasterId" [width]="70">
+          <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
+            <span class="agency-table-header-label">Number</span> 
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{ value }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="agencyName" [width]="250">
+          <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
+            <span class="agency-table-header-label">Name</span>   
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="payName" [width]="300">
+          <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
+            <span class="agency-table-header-label">Payee Name</span>   
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="emailId" [width]="300">
+          <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
+            <span class="agency-table-header-label">Email Id</span>   
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="phoneNumber" [width]="300">
+          <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
+            <span class="agency-table-header-label">Phone Number</span>   
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="actions" [width]="100" [resizeable]="false" frozenRight="true">
+          <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
+            <span class="agency-table-header-label">Actions</span>   
+          </ng-template>
+          <ng-template let-row="row"   ngx-datatable-cell-template>
+            <div style="text-align: center;cursor: pointer;">
+              <mat-icon class="action-icon" (click)="navigateToDetails($event, row)">edit</mat-icon>
+            </div>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
       </div>
     </div>
   </mat-card>

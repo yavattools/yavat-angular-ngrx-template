@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { AppConstantsService } from '@app/core/providers/constants';
 import { Agency, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetEscrowNonEscrowDetailsRequest, NonEscrowDetails, PaymentDetails } from '@app/core/store/agency/agency.model';
 import { Observable } from 'rxjs';
+import { API_BASE_URL } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +14,8 @@ export class AgencyDataService {
   constructor(private http: HttpClient, private _appConstantService: AppConstantsService) { }
 
   getAgencies(request: GetActiveAgenciesRequest ): Observable<Agency[]> {
-    console.log('getAgencies '+ this._appConstantService.BASE_API_URL + this._appConstantService.AGENCIES_END_POINT)
-    return this.http.get<Agency[]>(this._appConstantService.BASE_API_URL + this._appConstantService.AGENCIES_END_POINT);
+    console.log('getAgencies '+ this._appConstantService.BASE_API_URL + this._appConstantService.AGENCY_MASTER_LIST);
+    return this.http.get<Agency[]>(API_BASE_URL + this._appConstantService.AGENCY_MASTER_LIST + '?userId=' + +request.userId + '&processId=' + +request.processId);
   }
 
   getAgenciesByMasterId(agencyMasterid:number): Observable<Agency> {

@@ -19,6 +19,7 @@ import { map, catchError } from 'rxjs/operators';
 import { LoggerService } from '@core/providers/logger';
 import { LocalStorageService } from '@app/core/core.module';
 import { Platform } from '@angular/cdk/platform';
+import { LoginResponse } from '@app/core/store/auth/auth.models';
 
 const TOKEN_HEADER_KEY = 'Authorization';
 
@@ -67,11 +68,11 @@ export class StandardHeaderInterceptor implements HttpInterceptor {
         } else if (response instanceof HttpHeaderResponse) {
           console.log(response);
           const token: any = response.headers.get('authorization');
-          localStorage.setItem('authToken', JSON.stringify(token));
+          this.storageService.setItem('authToken', JSON.stringify(token));
         } else if (response instanceof HttpResponse) {
-          const token: any = response.headers.get('authorization');
-          if (token) {
-            localStorage.setItem('authToken', JSON.stringify(token));
+          const token: LoginResponse = response.body as LoginResponse;
+          if (token.accessToken) {
+            this.storageService.setItem('authToken', JSON.stringify(token.accessToken));
           }
         }
         return response;

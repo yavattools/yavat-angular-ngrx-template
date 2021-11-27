@@ -17,6 +17,8 @@ import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.fac
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { first } from 'rxjs/operators';
 
 export class AgencyFilter {
   name: string;
@@ -27,6 +29,18 @@ export class AgencyFilter {
     this.name = '';
     this.number = '';
     this.state = '';
+  }
+}
+
+export class NGXDataTableMessages {
+
+  emptyMessage!: string;
+  totalMessage!: string;
+  selectedMessage!: string;
+
+  constructor(){
+    this.emptyMessage = 'No Agencies Found';
+    this.totalMessage = 'Total Agencies';
   }
 }
 
@@ -53,6 +67,10 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     'assessorPhoneNumber',
     'actions'
   ];
+  ngxDisplayedColumns = [
+    { name: 'agencyNumber' }, { name: 'agencyName' }, { name: 'agencySuitsAddress' }, { name: 'agencyCity' }
+    , { name: 'assessorPhoneNumber' }, { name: 'assessorPhoneNumber' }
+  ];
   agencyDataSource!: MatTableDataSource<Agency>;
 
   @ViewChild(MatPaginator)
@@ -61,15 +79,36 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
   @ViewChild(MatSort)
   sort: MatSort = new MatSort();
 
+  dataTableMessage: NGXDataTableMessages;
+
+  @ViewChild('myTable') table: any;
+
+  rows: any[] = [];
+  expanded: any = {};
+  timeout: any;
+
+  // ColumnMode = ColumnMode;
+
+
   constructor(
     public deviceService: DeviceDetectorService,
-    private agencyFacade: AgencyStoreFacade,
+    public agencyFacade: AgencyStoreFacade,
     private cd: ChangeDetectorRef,
     public settingsFacadeService: SettingsStoreFacade,
     private router: Router
   ) {
+    this.dataTableMessage = new NGXDataTableMessages();
+    this.dataTableMessage.emptyMessage = 'Loading Agencies Please wait!!';
+    this.dataTableMessage.totalMessage = ' Agencies';
+
     this.agencies$ = this.agencyFacade.agencies$;
-    this.agencyFacade.getAgencies({ userId: '1', processId: '2' });
+    this.agencies$.pipe(first())
+          .subscribe((agencies) => {
+            if(!agencies.length){
+              this.agencyFacade.getAgencies();
+            }
+          });
+   
     this.agencyFilter = new AgencyFilter();
     
   }
@@ -80,8 +119,6 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
       this.agencies = [...agencies];
       this.filterAgencies = [...agencies];
       this.agencyDataSource = new MatTableDataSource(agencies);
-      this.cd ? this.cd.detectChanges() : '';
-      console.log(this.agencies);
     });
     if (this.deviceService.isMobile()) {
       this.isMobile = true;
@@ -92,6 +129,13 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     this.settingsFacadeService.setHeaderShowTime('always');
     setTimeout(() => {
       this.settingsFacadeService.showHeader();
+    }, 100);
+  }
+
+  onPage(event: MouseEvent) {
+    clearTimeout(this.timeout);
+    this.timeout = setTimeout(() => {
+      console.log('paged!', event);
     }, 100);
   }
 

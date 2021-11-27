@@ -31,6 +31,10 @@
 @import './themes/black-theme';
 @import './themes/nature-theme';
 
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.scss';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
 @import 'styles-reset.scss-theme';
 @import './app/app/app.component.scss-theme';
 @import './app/features/dashboard/view/dashboard-view.component.scss-theme';

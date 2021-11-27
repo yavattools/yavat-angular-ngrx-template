@@ -38,8 +38,8 @@ export class AgencyStoreFacade {
     this.store.dispatch(fromActions.actionStopActionInProgress());
   }
 
-  getAgencies(request: GetActiveAgenciesRequest){
-    this.store.dispatch(fromActions.actionGetAllActiveAgencies({request: request}));
+  getAgencies(){
+    this.store.dispatch(fromActions.actionGetAllActiveAgencies());
   }
 
 

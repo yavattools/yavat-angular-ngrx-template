@@ -19,6 +19,7 @@ import { selectAgencyState } from '../../core.state';
 import { LocalStorageService } from '../../providers/local-storage/local-storage.service';
 import { AnimationsService } from '../../providers/animations/animations.service';
 import { TitleService } from '../../providers/title/title.service';
+import * as fromSelectors from '@app/core/store/auth/auth.selectors';
 
 import {
  selectActionInProgress,
@@ -33,7 +34,7 @@ import { PaymentDetails, State } from './agency.model';
 import { AgencyDataService } from './agency-data-api.service';
 import * as agencyActions from './agency.actions';
 
-export const AGENCY_KEY = 'AGENCY';
+export const AGENCY_KEY = 'agency';
 
 const INIT = of('clgx-init-effect-trigger');
 
@@ -43,7 +44,11 @@ export class AgencyEffects {
   getAgencies = createEffect(() =>
       this.actions$.pipe(
         ofType(agencyActions.actionGetAllActiveAgencies),
-      switchMap((action) => this.agencyDataService.getAgencies(action.request).pipe(
+        withLatestFrom(
+          this.store.pipe(select(fromSelectors.getLoginProfile))
+        ),
+        switchMap(([action, profile]) => this.agencyDataService.
+          getAgencies({userId: profile.processOrgModel.userId, processId: profile.processOrgModel.processId }).pipe(
           mergeMap( agencyList => [
             agencyActions.actionGetAllActiveAgenciesSuccess({agencyList: agencyList}),
           ]),

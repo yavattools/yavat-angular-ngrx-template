@@ -43,6 +43,8 @@ import { ProgressBarColorDirective } from './dialog-model/alert-message/progress
 import { RegistrationPlansComponent } from './components/registration-plans/registration-plans.component';
 import { LetsconnectDialogComponent } from './dialog-model/letsconnect-dialog/letsconnect-dialog.component';
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 @NgModule({
   imports: [
     CommonModule,
@@ -52,7 +54,9 @@ import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
     TranslateModule,
     // NgbModule,
     FontAwesomeModule,
-    AnimateOnScrollModule.forRoot()
+    AnimateOnScrollModule.forRoot(),
+    ScrollingModule,
+    NgxDatatableModule
   ],
   declarations: [
     BigInputComponent,
@@ -73,8 +77,10 @@ import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
     ReactiveFormsModule,
     Shared3rdPartyModule,
     AnimateOnScrollModule,
+    ScrollingModule,
     TranslateModule,
     FontAwesomeModule,
+    NgxDatatableModule,
     BigInputComponent,
     BigInputActionComponent,
     RtlSupportDirective,

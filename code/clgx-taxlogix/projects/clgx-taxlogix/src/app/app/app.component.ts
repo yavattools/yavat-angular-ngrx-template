@@ -58,10 +58,13 @@ export enum Direction {
 export class AppComponent implements OnInit, AfterViewInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
  // For Progressbar
- loaders = this.loader.value$.pipe(
+ public loaders = this.loadingService.value$.pipe(
   delay(1000),
-  withLatestFrom(this.loader.value$),
-  map(v => v[1]),
+  withLatestFrom(this.loadingService.value$),
+  map(v => {
+    debugger
+    v[1]
+    }),
 );
 
   isProd = env.production;
@@ -84,13 +87,14 @@ export class AppComponent implements OnInit, AfterViewInit {
   headerShowTime: string = '';
   showHeader: boolean = false;
   actionInProgress: boolean = false;
+  displayProgressSpinner: boolean = true;
   constructor(
     private store: Store<AppState>,
     private storageService: LocalStorageService,
     public agencyFacadeService: AgencyStoreFacade,
     public settingsFacadeService: SettingsStoreFacade,
     private scrollDispatcher: ScrollDispatcher,
-    private loader: LoadingBarService, 
+    public loadingService: LoadingBarService, 
     private router: Router,
     private zone: NgZone
   ) {
@@ -103,6 +107,17 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.settingsFacadeService.headerShowTime$.subscribe((showTime) => {
       this.headerShowTime = showTime;
     });
+    
+    this.loadingService.value$.
+    subscribe(r => {
+      if(r != 0){
+        this.displayProgressSpinner = true;
+      }else{
+        setTimeout(() => {
+          this.displayProgressSpinner = false;
+        }, 1000);
+      }
+    })
   }
 
   private static isIEorEdgeOrSafari() {
