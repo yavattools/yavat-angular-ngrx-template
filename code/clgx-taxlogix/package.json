@@ -4,6 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
+    "dev" : "npx ng run clgx-taxlogix:serve --configuration=development",
     "start": "ng serve --open",
     "mockserver": "json-server --watch mockdata.json --routes routes.json",
     "app": "concurrently \"npm run mockserver\"  \"npm run start\" ",
