@@ -29,7 +29,7 @@ export const environment = {
 
 //QA URL
 export const API_BASE_URL =
-  'https://mytaxlogix.com:8882/omschaingatewayservice/api';
+'https://taxservices.chainlogix.net:8082/omschaingatewayservice/api';
 //Prod URL
 // export const API_BASE_URL = 'https://mytaxlogix.com:9092/omschaingatewayservice/api';
 export const API_BASE_URL_LOCAL = 'http://localhost:8082/api';

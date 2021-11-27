@@ -46,7 +46,13 @@ export class LocalStorageService {
   }
 
   getItem(key: string) {
-    return JSON.parse(localStorage.getItem(`${APP_PREFIX}${key}`) || '{}');
+    let returnValue = localStorage.getItem(`${APP_PREFIX}${key}`);
+    if(returnValue){
+      returnValue = JSON.parse(returnValue) 
+    }else{
+      returnValue = '';
+    }
+    return returnValue;
   }
 
   removeItem(key: string) {

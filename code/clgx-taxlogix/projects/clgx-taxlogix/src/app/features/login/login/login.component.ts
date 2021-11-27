@@ -21,6 +21,9 @@ import { GenericService } from '@app/shared/services/generic.service';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core/core.module';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
+import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
+import { Observable } from 'rxjs';
+import { LoginRequest } from '@app/core/store/auth/auth.models';
 
 @Component({
   selector: 'app-login',
@@ -39,12 +42,14 @@ export class LoginComponent implements OnInit {
   registartionPlans: any;
   displayProgressSpinner = false;
   isMobile: boolean = false;
+  isLoginActionInProgress$!: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,
     private loginService: LoginService,
     private matDialog: MatDialog,
     private genericService: GenericService,
+    private authStoreFacade: AuthStoreFacade,
     private router: Router,
     public settingsFacadeService: SettingsStoreFacade,
     public deviceService: DeviceDetectorService
@@ -54,6 +59,8 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required],
       ipaddress: [{ ip: '1.1.1.1' }]
     });
+
+    this.isLoginActionInProgress$ = this.authStoreFacade.actionInProgress$;
   }
 
   ngOnInit(): void {
@@ -63,7 +70,7 @@ export class LoginComponent implements OnInit {
     } else {
       this.isMobile = false;
     }
-    this.getRegistrationPlans();
+    // this.getRegistrationPlans();
 
     this.settingsFacadeService.setHeaderShowTime('on-scroll');
     setTimeout(() => {
@@ -107,8 +114,12 @@ export class LoginComponent implements OnInit {
       this.loginForm.get(key)?.markAsTouched();
     });
     if (this.loginForm.valid) {
-      this.displayProgressSpinner = true;
-      this.router.navigate(['dashboard']);
+      // this.displayProgressSpinner = true;
+      let request: LoginRequest = new LoginRequest();
+     request.usernameOrEmail = this.loginForm.controls['username'].value;
+     request.password = this.loginForm.controls['password'].value;
+    this.authStoreFacade.login(request);
+      // this.router.navigate(['dashboard']);
       // this.loginService.loginUser(this.loginForm.value).subscribe(
       //   (data: any) => {
       //     this.displayProgressSpinner = false;

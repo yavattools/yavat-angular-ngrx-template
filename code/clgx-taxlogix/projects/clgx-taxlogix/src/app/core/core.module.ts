@@ -30,7 +30,6 @@ import {
 } from './core.state';
 import { AuthEffects } from './store/auth/auth.effects';
 import { selectIsAuthenticated, selectAuth } from './store/auth/auth.selectors';
-import { authLogin, authLogout } from './store/auth/auth.actions';
 import { AuthGuardService } from './store/auth/auth-guard.service';
 import { TitleService } from './providers/title/title.service';
 import {
@@ -71,12 +70,11 @@ import { LoggerService } from './providers/logger';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { AgencyEffects } from './store/agency/agency.effects';
 
 export {
   TitleService,
   selectAuth,
-  authLogin,
-  authLogout,
   routeAnimations,
   AppState,
   LocalStorageService,
@@ -110,6 +108,7 @@ export function httpLoaderFactory(http: HttpClient) {
     StoreModule.forRoot(reducers, { metaReducers }),
     StoreRouterConnectingModule.forRoot(),
     EffectsModule.forRoot([
+      AgencyEffects,
       AuthEffects,
       SettingsEffects
     ]),

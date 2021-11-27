@@ -13,8 +13,6 @@ import { fromEvent, Observable, of } from 'rxjs';
 import { environment as env } from '../../environments/environment';
 
 import {
-  authLogin,
-  authLogout,
   routeAnimations,
   LocalStorageService,
   selectIsAuthenticated,
@@ -44,6 +42,7 @@ import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.fac
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { LoadingBarService } from '@ngx-loading-bar/core';
+import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
 
 export enum Direction {
   Up = 'Up',
@@ -123,14 +122,6 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.agencyFacadeService.actionInProgress$.subscribe(p => {
       this.actionInProgress = p;
     })
-  }
-
-  onLoginClick() {
-    this.store.dispatch(authLogin());
-  }
-
-  onLogoutClick() {
-    this.store.dispatch(authLogout());
   }
 
   ngAfterViewInit() {

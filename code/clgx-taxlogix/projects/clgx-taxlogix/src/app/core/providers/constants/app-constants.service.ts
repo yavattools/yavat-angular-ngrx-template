@@ -27,6 +27,8 @@ export class AppConstantsService {
   public GET_ACCOUNT_INFO_URL: string;
   public TOKEN_REFRESH_URL: string;
 
+  public AGENCY_MASTER_LIST!: string;
+
   public AGENCIES_END_POINT: string;
   public AGENCIES_UPDATE: string;
   public COLLECTION_END_POINT: string;
@@ -42,7 +44,8 @@ export class AppConstantsService {
     this.BASE_API_URL = 'http://localhost:3000';
 
     this.SIGN_IN_URL =
-      (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/api/authenticate';
+      (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/auth/signin';
+      
     this.GET_ACCOUNT_INFO_URL =
       (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/api/account';
 
@@ -50,27 +53,31 @@ export class AppConstantsService {
       ? '/'
       : '' + APP_CONTEXT + '/api/account/refreshToken';
 
-      this.AGENCIES_END_POINT = APP_CONTEXT
-      ? '/'
-      : '' + APP_CONTEXT + '/agencies/';
+    this.AGENCY_MASTER_LIST = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/agency/agencyMasterList';
+      
+    this.AGENCIES_END_POINT = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/agencies/';
 
-      this.AGENCIES_UPDATE = this.AGENCIES_END_POINT + 'update/';
+    this.AGENCIES_UPDATE = this.AGENCIES_END_POINT + 'update/';
 
-      this.COLLECTION_END_POINT = APP_CONTEXT
-      ? '/'
-      : '' + APP_CONTEXT + '/getCollectionDates';
+    this.COLLECTION_END_POINT = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/getCollectionDates';
 
-      this.ESCROW_END_POINT = APP_CONTEXT
-      ? '/'
-      : '' + APP_CONTEXT + '/escrow';
+    this.ESCROW_END_POINT = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/escrow';
 
-      this.NONESCROW_END_POINT = APP_CONTEXT
-      ? '/'
-      : '' + APP_CONTEXT + '/nonescrow';
+    this.NONESCROW_END_POINT = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/nonescrow';
 
-      this.PAYMENTDETAILS_END_POINT = APP_CONTEXT
-      ? '/'
-      : '' + APP_CONTEXT + '/paymentdetails';
+    this.PAYMENTDETAILS_END_POINT = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/paymentdetails';
 
     this.snackbarType = new SnackTypes();
   }
