@@ -1,0 +1,16 @@
+
+
+
+Status: able to integrate with API. 
+here are few observations which needs to discuss.
+
+1. Login API is working and need some details about how to use
+  - Menu List.
+2. Agencies Master List is able to connect and getting 27k Records.
+  - The fields what we are getting are very few and not matching to the 
+    API contract document which shared earlier. 
+  - thse are not having many of the table columns data.
+  
+3. Escrow apis are expecting Escrow ID, but not able to find it in Agency Master data.
+4. Need other API details.
+

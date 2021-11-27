@@ -25,7 +25,7 @@ export const environment = {
 
 //Prod URL
 export const API_BASE_URL =
-  'https://mytaxlogix.com:9092/omschaingatewayservice/api';
+  'https://taxservices.chainlogix.net:8082/omschaingatewayservice/api';
 export const API_BASE_URL_LOCAL = 'http://localhost:8082/api';
 export const IMAGE_BASE_URL = 'https://mytaxlogix.com:9092/';
 export const IMAGE_BASE_PATH = 'imageBasePath';
