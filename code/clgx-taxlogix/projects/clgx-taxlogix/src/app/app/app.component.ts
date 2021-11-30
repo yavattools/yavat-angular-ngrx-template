@@ -145,7 +145,7 @@ export class AppComponent implements OnInit, AfterViewInit {
         //Here you can add what to happen when scroll changed
         //I want to display the scroll position for example
         const scrollPosition = cdk.getElementRef().nativeElement.scrollTop;
-        console.log('scrolling position: ' + scrollPosition);
+        // console.log('scrolling position: ' + scrollPosition);
         this.scrollPosition = scrollPosition;
         if (scrollPosition > 50) {
           if (this.headerShowTime == 'on-scroll') {

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+import { AuthGuardService } from './core/core.module';
 import { TaxlogixSpinnerComponent } from './shared/utilities/taxlogix-spinner/taxlogix-spinner.component';
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
+    canActivateChild: [AuthGuardService],
     loadChildren: () =>
       import('./features/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
@@ -22,6 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'agency',
+    canActivateChild: [AuthGuardService],
     loadChildren: () =>
       import('./features/agency/agency.module').then((m) => m.AgencyModule)
   },
@@ -38,6 +41,7 @@ const routes: Routes = [
   },
   {
     path: 'home',
+    canActivateChild: [AuthGuardService],
     loadChildren: () =>
       import('./features/dashboard/dashboard.module').then(
         (m) => m.DashboardModule

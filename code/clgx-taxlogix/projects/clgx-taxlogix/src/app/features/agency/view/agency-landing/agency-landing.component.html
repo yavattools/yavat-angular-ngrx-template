@@ -7,7 +7,8 @@
       <div class="col-3 p-10">
         <div >
           <h3 class="page-title">Agencies</h3>
-          <span class="page-subtitle">{{filterAgencies?.length}} Agencies</span>
+          <span class="page-subtitle"
+          *ngIf="!(agencyFacade.actionInProgress$ | async) || false">{{filterAgencies?.length}} Agencies</span>
         </div>
       </div>
       <div class="col-9 pb-3 agency-search-field-div" >
@@ -92,7 +93,15 @@
             style="height: 100%;margin-left: 15px;margin-right: 15px;"
             (page)="onPage($event)"
       >
-        <ngx-datatable-column name="agencyMasterId" [width]="70">
+        <ngx-datatable-column name="agencyMasterId" [width]="50">
+          <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
+            <span class="agency-table-header-label">Id</span> 
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <strong>{{ value }}</strong>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="agencyNumber" [width]="120">
           <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
             <span class="agency-table-header-label">Number</span> 
           </ng-template>
@@ -108,23 +117,23 @@
             {{ value }}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="payName" [width]="300">
+        <ngx-datatable-column name="agencySuitsAddress" [width]="350">
           <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
-            <span class="agency-table-header-label">Payee Name</span>   
+            <span class="agency-table-header-label">Address</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
             {{ value }}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="emailId" [width]="300">
+        <ngx-datatable-column name="agencyCity" [width]="175">
           <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
-            <span class="agency-table-header-label">Email Id</span>   
+            <span class="agency-table-header-label">City</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
             {{ value }}
           </ng-template>
         </ngx-datatable-column>
-        <ngx-datatable-column name="phoneNumber" [width]="300">
+        <ngx-datatable-column name="assessorPhoneNumber" [width]="125">
           <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
             <span class="agency-table-header-label">Phone Number</span>   
           </ng-template>
@@ -143,6 +152,10 @@
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
+      <div *ngIf="(agencyFacade.actionInProgress$ | async) || false" 
+        style="position: absolute;top: 500px;width: 100%;text-align: center;">
+        <span>Loading Agencies Please wait!!</span>
+      </div>
       </div>
     </div>
   </mat-card>

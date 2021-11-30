@@ -43,6 +43,17 @@ export interface Agency {
   modifiedBy: string | undefined;
   createdByUser: string | undefined;
   modifiedByUser: string | undefined;
+  phoneNumber:string | undefined;
+  faxNumber:string | undefined;
+  payName:string | undefined;
+  payZip:string | undefined;
+  lowLevelAgencyId:string | undefined;
+  collectingAgency:string | undefined;
+  agencySitusAddress:string | undefined;
+  assessorPhoneNum:string | undefined;
+  exceltype:string | undefined;
+  assessorEmailId:string | undefined;
+  internalComments:string | undefined;
 }
 
 export interface GetActiveAgenciesRequest {

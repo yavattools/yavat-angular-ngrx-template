@@ -48,7 +48,7 @@ export class NGXDataTableMessages {
   selector: 'clgx-agency-landing',
   templateUrl: './agency-landing.component.html',
   styleUrls: ['./agency-landing.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgencyLandingComponent implements OnInit, AfterViewInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
@@ -68,8 +68,8 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     'actions'
   ];
   ngxDisplayedColumns = [
-    { name: 'agencyNumber' }, { name: 'agencyName' }, { name: 'agencySuitsAddress' }, { name: 'agencyCity' }
-    , { name: 'assessorPhoneNumber' }, { name: 'assessorPhoneNumber' }
+    { name: 'agencyMasterId' }, { name: 'agencyNumber' }, { name: 'agencyName' }, { name: 'agencySuitsAddress' }, { name: 'agencyCity' }
+    , { name: 'assessorPhoneNumber' }
   ];
   agencyDataSource!: MatTableDataSource<Agency>;
 
@@ -98,7 +98,7 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     private router: Router
   ) {
     this.dataTableMessage = new NGXDataTableMessages();
-    this.dataTableMessage.emptyMessage = 'Loading Agencies Please wait!!';
+    this.dataTableMessage.emptyMessage = '';
     this.dataTableMessage.totalMessage = ' Agencies';
 
     this.agencies$ = this.agencyFacade.agencies$;
@@ -106,6 +106,8 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
           .subscribe((agencies) => {
             if(!agencies.length){
               this.agencyFacade.getAgencies();
+              this.dataTableMessage.emptyMessage = '';
+              this.dataTableMessage.totalMessage = ' Agencies';
             }
           });
    
