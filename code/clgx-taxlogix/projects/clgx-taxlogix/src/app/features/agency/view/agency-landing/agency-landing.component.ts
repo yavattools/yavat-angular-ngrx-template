@@ -145,6 +145,12 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     window.open(link, '_blank');
   }
 
+  addNewAgency(event: MouseEvent) {
+    let newAgency: Agency = new Agency();
+    this.agencyFacade.setSelectedAgency(newAgency);
+    this.router.navigateByUrl('/agency/agency-details');
+  }
+
   navigateToDetails(event: MouseEvent, agency: Agency) {
     this.agencyFacade.setSelectedAgency(agency);
     this.router.navigateByUrl('/agency/agency-details');

@@ -80,6 +80,7 @@
           <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         </table> -->
         <ngx-datatable
+            [ngClass]="routeAnimationsElements"
             class="material"
             [rows]="filterAgencies"
             [columns]="ngxDisplayedColumns"
@@ -144,6 +145,7 @@
         <ngx-datatable-column name="actions" [width]="100" [resizeable]="false" frozenRight="true">
           <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
             <span class="agency-table-header-label">Actions</span>   
+            
           </ng-template>
           <ng-template let-row="row"   ngx-datatable-cell-template>
             <div style="text-align: center;cursor: pointer;">
@@ -152,6 +154,14 @@
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
+      <button mat-icon-button color="primary" 
+      [ngClass]="routeAnimationsElements"
+        [disabled]="(agencyFacade.actionInProgress$ | async) || false"
+        matTooltip="Add New Agency"
+        (click)="addNewAgency($event)"
+        style="position: absolute;top: 160px;right: 15px; cursor: pointer;">
+        <i class="fa fa-plus fa-2x"></i>
+      </button>
       <div *ngIf="(agencyFacade.actionInProgress$ | async) || false" 
         style="position: absolute;top: 500px;width: 100%;text-align: center;">
         <span>Loading Agencies Please wait!!</span>

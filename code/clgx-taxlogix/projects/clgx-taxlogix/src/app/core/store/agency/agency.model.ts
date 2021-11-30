@@ -1,13 +1,13 @@
 import { AppState } from '../../core.module';
 
-export interface Agency {
-  agencyMasterId: string;
+export class Agency {
+  agencyMasterId!: string;
   agencyName: string | undefined;
   agencyAddress: string | undefined;
   agencyCity: string | undefined;
   agencyState: string | undefined;
   agencyPhonenumber: string | undefined;
-  agencyNumber: string;
+  agencyNumber!: string;
   agencyWebsite: string | undefined;
   agencyLowerLevel: string | undefined;
   agencyCollecting: string | undefined;
@@ -54,6 +54,8 @@ export interface Agency {
   exceltype:string | undefined;
   assessorEmailId:string | undefined;
   internalComments:string | undefined;
+
+  constructor(){}
 }
 
 export interface GetActiveAgenciesRequest {
