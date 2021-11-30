@@ -19,6 +19,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, Sort } from '@angular/material/sort';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { first } from 'rxjs/operators';
+import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
 
 export class AgencyFilter {
   name: string;
@@ -86,6 +87,7 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
   rows: any[] = [];
   expanded: any = {};
   timeout: any;
+  loginData : any
 
   // ColumnMode = ColumnMode;
 
@@ -95,17 +97,20 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     public agencyFacade: AgencyStoreFacade,
     private cd: ChangeDetectorRef,
     public settingsFacadeService: SettingsStoreFacade,
-    private router: Router
+    private router: Router,
+    private authStoreFacade : AuthStoreFacade
   ) {
     this.dataTableMessage = new NGXDataTableMessages();
     this.dataTableMessage.emptyMessage = '';
     this.dataTableMessage.totalMessage = ' Agencies';
-
+    this.authStoreFacade.loginProfile$.subscribe(data=>{
+      this.loginData = data;
+    })
     this.agencies$ = this.agencyFacade.agencies$;
     this.agencies$.pipe(first())
           .subscribe((agencies) => {
             if(!agencies.length){
-              this.agencyFacade.getAgencies();
+              this.agencyFacade.getAgencies({userId : this.loginData.processOrgModel.userId, processId : this.loginData.processOrgModel.processId, agencyMasterId : undefined});
               this.dataTableMessage.emptyMessage = '';
               this.dataTableMessage.totalMessage = ' Agencies';
             }

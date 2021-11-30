@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import { PaymentDetails } from '@app/core/store/agency/agency.model';
+import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
@@ -35,6 +36,8 @@ export class AgencyPaymentComponent implements OnInit {
 
   paymentDetails$!: Observable<PaymentDetails>;
   paymentDetails : any;
+  loginData : any
+  agencyMasterId : string | undefined
 
   paymentForm : FormGroup = new FormGroup({
     payName : this.payNameFC,     
@@ -54,9 +57,17 @@ export class AgencyPaymentComponent implements OnInit {
   })
 
   isMobile: boolean = false;
-  constructor( public deviceService:DeviceDetectorService,private agencyStoreFacade : AgencyStoreFacade){
+  constructor( public deviceService:DeviceDetectorService,private agencyStoreFacade : AgencyStoreFacade, private authStoreFacade : AuthStoreFacade){
     this.paymentDetails$ = this.agencyStoreFacade.paymentDetails$;
-    this.agencyStoreFacade.getPayments({agencyMasterId : '1',userId : '1', processId :'1'});
+    this.authStoreFacade.loginProfile$.subscribe(data=>{
+      this.loginData = data;
+    });
+    this.agencyStoreFacade.selectedAgency$.subscribe(data=>{
+      this.agencyMasterId = data.agencyMasterId;
+    });
+    if(this.agencyMasterId){
+    this.agencyStoreFacade.getPayments({userId : this.loginData.processOrgModel.userId, agencyMasterId : this.agencyMasterId, agencypaymentmasterId : undefined});
+    }
   }
 
   ngOnInit() {

@@ -118,23 +118,6 @@ export const reducer = createReducer(
       state.error =action.error
     }
   ),
-  mutableOn(agencyActions.actionGetEscrowNonEscrowDetails, (state, action) => {
-    state.actionInProgress = true;
-  }),
-  mutableOn(
-    agencyActions.actionGetEscrowNonEscrowDetailsSuccess,
-    (state, action) => {
-      state.actionInProgress = false;
-      state.escrowNonEscrowDetails = [...action.escNonEscs];
-    }
-  ),
-  mutableOn(
-    agencyActions.actionGetEscrowNonEscrowDetailsFailure,
-    (state, action) => {
-      state.actionInProgress = false;
-      state.error = action.error;
-    }
-  ),
   mutableOn(agencyActions.actionGetEscrowDetails, (state, action) => {
     state.actionInProgress = true;
   }),

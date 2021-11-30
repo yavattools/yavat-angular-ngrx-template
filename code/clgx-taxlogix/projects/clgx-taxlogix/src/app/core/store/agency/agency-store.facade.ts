@@ -8,7 +8,7 @@ import { select, Store } from '@ngrx/store';
 import * as fromActions from './agency.actions';
 import * as fromSelectors from './agency.selectors';
 import { Agency, CollectionDates, EscrowDetails, GetActiveAgenciesRequest,
-      GetCollectionDatesRequest, GetEscrowNonEscrowDetailsRequest,
+      GetCollectionDatesRequest,GetEscrowRequest,GetNonEscrowDetailsRequest,
       GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails } from './agency.model';
 import { AppState } from '@app/core/core.state';
 
@@ -38,8 +38,8 @@ export class AgencyStoreFacade {
     this.store.dispatch(fromActions.actionStopActionInProgress());
   }
 
-  getAgencies(){
-    this.store.dispatch(fromActions.actionGetAllActiveAgencies());
+  getAgencies(request : GetActiveAgenciesRequest){
+    this.store.dispatch(fromActions.actionGetAllActiveAgencies({request : request}));
   }
 
 
@@ -67,16 +67,11 @@ export class AgencyStoreFacade {
     this.store.dispatch(fromActions.actionUpdateCollectionDates({collectionDates: collectionDates}));
   }
 
-
-  getEscrowNonEscrowDetails(request: GetEscrowNonEscrowDetailsRequest){
-    this.store.dispatch(fromActions.actionGetEscrowNonEscrowDetails({request: request}));
-  }
-
-  getEscrowDetails(request: GetEscrowNonEscrowDetailsRequest){
+  getEscrowDetails(request: GetEscrowRequest){
     this.store.dispatch(fromActions.actionGetEscrowDetails({request: request}));
   }
 
-  getNonEscrowDetails(request: GetEscrowNonEscrowDetailsRequest){
+  getNonEscrowDetails(request: GetNonEscrowDetailsRequest){
     this.store.dispatch(fromActions.actionGetNonEscrowDetails({request: request}));
   }
 

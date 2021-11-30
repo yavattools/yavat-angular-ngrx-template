@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AppConstantsService } from '@app/core/providers/constants';
-import { Agency, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetEscrowNonEscrowDetailsRequest, NonEscrowDetails, PaymentDetails } from '@app/core/store/agency/agency.model';
+import { Agency, CollectionDates, EscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowRequest, GetNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails } from '@app/core/store/agency/agency.model';
 import { Observable } from 'rxjs';
 import { API_BASE_URL } from '@env/environment';
 
@@ -18,9 +18,9 @@ export class AgencyDataService {
     return this.http.get<Agency[]>(API_BASE_URL + this._appConstantService.AGENCY_MASTER_LIST + '?userId=' + +request.userId + '&processId=' + +request.processId);
   }
 
-  getAgenciesByMasterId(agencyMasterid:number): Observable<Agency> {
-    console.log('getAgencies '+this._appConstantService.BASE_API_URL + this._appConstantService.AGENCIES_END_POINT + agencyMasterid)
-    return this.http.get<Agency>(this._appConstantService.BASE_API_URL + this._appConstantService.AGENCIES_END_POINT + agencyMasterid);
+  getAgenciesByMasterId(request : GetActiveAgenciesRequest): Observable<Agency> {
+    console.log('getAgencies '+this._appConstantService.BASE_API_URL + this._appConstantService.AGENCY_MASTER_LIST  + '?userId=' +request.userId + '&processId=' +request.processId + '&agencyMasterId=' + request.agencyMasterId);
+    return this.http.get<Agency>(this._appConstantService.BASE_API_URL + this._appConstantService.AGENCY_MASTER_LIST + '?userId=' +request.userId + '&processId=' +request.processId + '&agencyMasterId=' + request.agencyMasterId);
   }
 
   addAgency(agency:Agency): Observable<any> {
@@ -28,7 +28,7 @@ export class AgencyDataService {
     const body=JSON.stringify(agency);
     console.log(body)
 
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.AGENCIES_END_POINT, body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_AGENCIES, body,{'headers':headers})
   }
 
   updateAgency(agency:Agency): Observable<any> {
@@ -36,106 +36,105 @@ export class AgencyDataService {
     const body=JSON.stringify(agency);
     console.log(body)
 
-    return this.http.put<any>(this._appConstantService.BASE_API_URL + this._appConstantService.AGENCIES_UPDATE + agency.agencyMasterId, body,{'headers':headers})
+    return this.http.put<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_AGENCIES, body,{'headers':headers})
   }
 
-  getCollectionsDates(): Observable<CollectionDates[]> {
-    console.log('getCollectionDates '+this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT)
-    return this.http.get<CollectionDates[]>(this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT);
+  getCollectionsDates(request : GetCollectionDatesRequest): Observable<CollectionDates[]> {
+    console.log('getCollectionDates '+this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId);
+    return this.http.get<CollectionDates[]>(this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId);
   }
 
-  getCollectionsDatesBycollectionPracticesId(collectionPracticesId:number): Observable<Agency> {
-
-    console.log('getCollectionDates '+this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT + '/' +collectionPracticesId)
-    return this.http.get<Agency>(this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT + collectionPracticesId);
+  getCollectionsDatesBycollectionPracticesId(request:GetCollectionDatesRequest): Observable<Agency> {
+    console.log('getCollectionDates '+this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId + '&agencyCollectionDatesId=' + request.agencyCollectionDatesId);
+    return this.http.get<Agency>(this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT + '?agencyCollectionDatesId='+'&agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId + '&agencyCollectionDatesId=' + request.agencyCollectionDatesId);
   }
 
   addCollectionDate(collection:CollectionDates): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(collection);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_COLLECTION, body,{'headers':headers})
   }
 
   updateCollectionDate(collection:CollectionDates): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(collection);
     console.log(body)
-    return this.http.put( this._appConstantService.BASE_API_URL + this._appConstantService.COLLECTION_END_POINT + '/' + collection.collectionPracticesId, body,{'headers':headers})
+    return this.http.put( this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_COLLECTION , body,{'headers':headers})
   }
 
 
-  getEscrow(request : GetEscrowNonEscrowDetailsRequest): Observable<EscrowDetails> {
-    console.log('getEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT)
-    return this.http.get<EscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/1');
+  getEscrow(request : GetEscrowRequest): Observable<EscrowDetails> {
+    console.log('getEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId);
+    return this.http.get<EscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId);
   }
 
-  getEscrowById(escrowId:number): Observable<EscrowDetails> {
-    console.log('getEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT +'/' +escrowId)
-    return this.http.get<EscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/' + escrowId);
+  getEscrowById(request:GetEscrowRequest): Observable<EscrowDetails> {
+    console.log('getEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId + '&escrowId=' + request.escrowId);
+    return this.http.get<EscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId + '&escrowId=' + request.escrowId);
   }
 
   addEscrow(escrow:EscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(escrow);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/' + escrow.escrowId, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_ESCROW_DETAILS , body,{'headers':headers})
   }
 
   updateEscrow(escrow:EscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(escrow);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.ESCROW_END_POINT + '/'+ escrow.escrowId, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_ESCROW_DETAILS , body,{'headers':headers})
   }
 
 
-  getNonEscrow(request : GetEscrowNonEscrowDetailsRequest): Observable<NonEscrowDetails> {
-    console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT)
-    return this.http.get<NonEscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT + '/1');
+  getNonEscrow(request : GetNonEscrowDetailsRequest): Observable<NonEscrowDetails> {
+    console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId);
+    return this.http.get<NonEscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId);
   }
 
-  getNonEscrowById(nonescrowId:number): Observable<NonEscrowDetails> {
-    console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/' + nonescrowId)
-    return this.http.get<NonEscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT + '/' + nonescrowId);
+  getNonEscrowById(request:GetNonEscrowDetailsRequest): Observable<NonEscrowDetails> {
+    console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId + '&nonEscrowId='+request.nonEscrowId)
+    return this.http.get<NonEscrowDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId+ '&nonEscrowId=' + request.nonEscrowId);
   }
 
   addNonEscrow(nonescrow:NonEscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(nonescrow);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/' + nonescrow.nonEscrowId, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_NONESCROW_DETAILS , body,{'headers':headers})
   }
 
   updateNonEscrow(nonescrow:NonEscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(nonescrow);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.NONESCROW_END_POINT +'/'+ nonescrow.nonEscrowId, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_NONESCROW_DETAILS, body,{'headers':headers})
   }
 
-  getPaymentDetails(): Observable<PaymentDetails[]> {
-    console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT)
-    return this.http.get<PaymentDetails[]>(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT);
+  getPaymentDetails(request : GetPaymentDetailsRequest): Observable<PaymentDetails> {
+    console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId);
+    return this.http.get<PaymentDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId);
   }
 
-  getPaymentDetailsByAgencyPaymentId(agencyPaymentId:number): Observable<PaymentDetails> {
-    console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + agencyPaymentId)
-    return this.http.get<PaymentDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + agencyPaymentId);
+  getPaymentDetailsByAgencyPaymentId(request:GetPaymentDetailsRequest): Observable<PaymentDetails> {
+    console.log('getNonEscrow '+this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId + '&agencypaymentmasterId=' + request.agencypaymentmasterId);
+    return this.http.get<PaymentDetails>(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '?agencyMasterId='+request.agencyMasterId + '&userId=' + request.userId + '&agencypaymentmasterId=' + request.agencypaymentmasterId);
   }
 
   addPaymentDetails(payment:PaymentDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(payment);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + payment.agencyPaymentId, body,{'headers':headers})
+    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_PAYMENTDETAILS , body,{'headers':headers})
   }
 
   updatePaymentDetails(payment:PaymentDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(payment);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.PAYMENTDETAILS_END_POINT + '/' + payment.agencyPaymentId, body,{'headers':headers})
+    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_PAYMENTDETAILS, body,{'headers':headers})
   }
 
 }

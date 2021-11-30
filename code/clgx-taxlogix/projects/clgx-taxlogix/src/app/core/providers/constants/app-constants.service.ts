@@ -29,19 +29,22 @@ export class AppConstantsService {
 
   public AGENCY_MASTER_LIST!: string;
 
-  public AGENCIES_END_POINT: string;
-  public AGENCIES_UPDATE: string;
+  public SAVE_AGENCIES: string;
   public COLLECTION_END_POINT: string;
+  public SAVE_COLLECTION : string;
   public ESCROW_END_POINT:string;
+  public SAVE_ESCROW_DETAILS : string;
   public NONESCROW_END_POINT:string;
+  public SAVE_NONESCROW_DETAILS : string;
   public PAYMENTDETAILS_END_POINT:string;
+  public SAVE_PAYMENTDETAILS : string;
 
 
   public snackbarType: SnackTypes;
 
   constructor() {
     this.CONFIG_URL = 'assets/config/web.config.json';
-    this.BASE_API_URL = 'http://localhost:3000';
+    this.BASE_API_URL = 'https://taxservices.chainlogix.net:8082/omschaingatewayservice';
 
     this.SIGN_IN_URL =
       (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/auth/signin';
@@ -57,27 +60,41 @@ export class AppConstantsService {
     ? '/'
     : '' + APP_CONTEXT + '/agency/agencyMasterList';
       
-    this.AGENCIES_END_POINT = APP_CONTEXT
+    this.SAVE_AGENCIES = APP_CONTEXT
     ? '/'
-    : '' + APP_CONTEXT + '/agencies/';
-
-    this.AGENCIES_UPDATE = this.AGENCIES_END_POINT + 'update/';
+    : '' + APP_CONTEXT + '/api/agency/agencyMaster';
 
     this.COLLECTION_END_POINT = APP_CONTEXT
     ? '/'
-    : '' + APP_CONTEXT + '/getCollectionDates';
+    : '' + APP_CONTEXT + '/api/agency/collectionDateList';
+
+    this.SAVE_COLLECTION = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/api/agency/createCollectionDate';
 
     this.ESCROW_END_POINT = APP_CONTEXT
     ? '/'
-    : '' + APP_CONTEXT + '/escrow';
+    : '' + APP_CONTEXT + '/api/agency/escrowList';
+
+    this.SAVE_ESCROW_DETAILS = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/api/agency/saveEscrow';
 
     this.NONESCROW_END_POINT = APP_CONTEXT
     ? '/'
-    : '' + APP_CONTEXT + '/nonescrow';
+    : '' + APP_CONTEXT + '/api/agency/nonEscrowList';
+
+    this.SAVE_NONESCROW_DETAILS = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/api/agency/saveNonEscrow';
 
     this.PAYMENTDETAILS_END_POINT = APP_CONTEXT
     ? '/'
-    : '' + APP_CONTEXT + '/paymentdetails';
+    : '' + APP_CONTEXT + '/api/agency/fetchAgencyPayDetls';
+
+    this.SAVE_PAYMENTDETAILS = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/api/agency/createAgencyPayDetls';
 
     this.snackbarType = new SnackTypes();
   }

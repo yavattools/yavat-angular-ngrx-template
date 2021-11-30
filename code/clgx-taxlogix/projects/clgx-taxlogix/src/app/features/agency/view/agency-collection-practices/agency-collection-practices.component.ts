@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditAgencyCollectionPracticeComponent } from './edit-agency-collection-practice/edit-agency-collection-practice.component';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import { Observable } from 'rxjs';
+import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
 
 export interface DialogData {
   data: CollectionDates;
@@ -29,6 +30,8 @@ export class AgencyCollectionPracticesComponent implements OnInit {
   currentDataSource = new MatTableDataSource<CollectionDates>();
   currentTablelength = 0;
   currentPageSize = 0;
+  loginData : any
+  agencyMasterId : string | undefined
 
   @ViewChild('currentPaginator', { read: MatPaginator })
   currentPaginator!: MatPaginator;
@@ -43,9 +46,18 @@ export class AgencyCollectionPracticesComponent implements OnInit {
 
   isMobile: boolean = false;
   constructor( public deviceService:DeviceDetectorService, private apiDataService: AgencyDataService,public dialog: MatDialog,
-    private agencyStoreFacade : AgencyStoreFacade){
+    private agencyStoreFacade : AgencyStoreFacade,
+    private authStoreFacade : AuthStoreFacade){
       this.collectionDates$ = this.agencyStoreFacade.collectionDates$;
-      this.agencyStoreFacade.getCollectionDates({agencyMasterId : '1', userId : '1',processId:'1'})
+      this.authStoreFacade.loginProfile$.subscribe(data=>{
+        this.loginData = data;
+      });
+      this.agencyStoreFacade.selectedAgency$.subscribe(data=>{
+        this.agencyMasterId = data.agencyMasterId;
+      });
+      if(this.agencyMasterId){
+      this.agencyStoreFacade.getCollectionDates({userId : this.loginData.processOrgModel.userId, agencyMasterId : this.agencyMasterId, agencyCollectionDatesId : undefined});
+      }
   }
   
   editDeal(element:CollectionDates){   

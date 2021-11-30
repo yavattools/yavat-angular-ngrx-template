@@ -61,6 +61,7 @@ export class Agency {
 export interface GetActiveAgenciesRequest {
   userId: string;
   processId: string;
+  agencyMasterId : string | undefined;
 }
 
 export class CollectionDates {
@@ -74,6 +75,7 @@ export class CollectionDates {
   penalty: string;
   lateRelease?: string | undefined;
   billRequest: string;
+  isDeleted : any;
   createdBy?: string | undefined;
   modifiedBy?: string | undefined;
   createdByUser?: string | undefined;
@@ -88,7 +90,7 @@ export class CollectionDates {
 export interface GetCollectionDatesRequest {
   agencyMasterId: string | undefined;
   userId: string | undefined;
-  processId: string | undefined;
+  agencyCollectionDatesId: string | undefined;
 }
 
 export class EscrowDetails {
@@ -105,7 +107,7 @@ export class EscrowDetails {
   mailAwayReq: string | undefined;
   agencyExpect: string | undefined;
   postmarkAccepted: string | undefined;
-  costFee: string | undefined;
+  copyFee: string | undefined;
   mailAwayFee: string | undefined;
   numOfParcels: string | undefined;
   internalNotes: string | undefined;
@@ -157,10 +159,16 @@ export class EscrowNonEscrowDetails {
   }
 }
 
-export interface GetEscrowNonEscrowDetailsRequest {
+export interface GetEscrowRequest {
   agencyMasterId: string | undefined;
   userId: string | undefined;
-  processId: string | undefined;
+  escrowId: string | undefined;
+}
+
+export interface GetNonEscrowDetailsRequest{
+  agencyMasterId: string | undefined;
+  userId: string | undefined;
+  nonEscrowId: string | undefined;
 }
 
 export class PaymentDetails {
@@ -193,7 +201,7 @@ export class PaymentDetails {
 export interface GetPaymentDetailsRequest {
   agencyMasterId: string | undefined;
   userId: string | undefined;
-  processId: string | undefined;
+  agencypaymentmasterId: string | undefined;
 }
 
 export interface AgencyState {

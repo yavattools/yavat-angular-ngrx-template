@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit } from '@angu
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import { Agency, EscrowDetails, NonEscrowDetails } from '@app/core/store/agency/agency.model';
+import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
@@ -24,6 +25,8 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   newEscrowForm : any;
   newNonEscrowForm : any;
   selectedTabIndex = 0;
+  loginData : any
+  agencyMasterId : string | undefined
 
   escrowForm = this.fb.group({
     contactName : ['',Validators.required],
@@ -62,12 +65,20 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   });
   // selectedAgency$ : Observable<Agency>;
   // selectedAgency! : Agency;
-  constructor( public deviceService:DeviceDetectorService, private fb : FormBuilder , private agencyFacade : AgencyStoreFacade){
+  constructor( public deviceService:DeviceDetectorService, private fb : FormBuilder , private agencyFacade : AgencyStoreFacade,
+    private authStoreFacade : AuthStoreFacade){
     this.escrowDetails$ = this.agencyFacade.escrowDetails$;
     this.nonEscrowDetails$ = this.agencyFacade.nonEscrowDetails$;
-    // this.selectedAgency$ = this.agencyFacade.selectedAgency$;
-    this.agencyFacade.getEscrowDetails({agencyMasterId : '1' , userId : '1' , processId : '1'});
-    this.agencyFacade.getNonEscrowDetails({agencyMasterId : '1' , userId : '1' , processId : '1'});
+    this.authStoreFacade.loginProfile$.subscribe(data=>{
+      this.loginData = data;
+    });
+    this.agencyFacade.selectedAgency$.subscribe(data=>{
+      this.agencyMasterId = data.agencyMasterId;
+    });
+    if(this.agencyMasterId){
+      this.agencyFacade.getEscrowDetails({agencyMasterId : this.agencyMasterId , userId : this.loginData.processOrgModel.userId , escrowId : undefined});
+      this.agencyFacade.getNonEscrowDetails({agencyMasterId : this.agencyMasterId , userId : this.loginData.processOrgModel.userId , nonEscrowId : undefined});
+    }
   }
 
   ngOnInit() {
@@ -85,7 +96,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
         this.escrowForm.controls['mailAWayOnlyReq'].setValue(escrowDetails.mailAwayReq);
         this.escrowForm.controls['agencyExpectWebTb'].setValue(escrowDetails.agencyExpect);
         this.escrowForm.controls['postmarkAccepted'].setValue(escrowDetails.postmarkAccepted);
-        this.escrowForm.controls['copyFee'].setValue(escrowDetails.costFee);
+        this.escrowForm.controls['copyFee'].setValue(escrowDetails.copyFee);
         this.escrowForm.controls['feeForMailAWay'].setValue(escrowDetails.mailAwayFee);
         this.escrowForm.controls['noOfParcelsPerCheck'].setValue(escrowDetails.numOfParcels);
     }
@@ -238,7 +249,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newEscrowForm.mailAwayReq = form.controls['mailAWayOnlyReq'].value;
     this.newEscrowForm.agencyExpect = form.controls['agencyExpectWebTb'].value;
     this.newEscrowForm.postmarkAccepted = form.controls['postmarkAccepted'].value;
-    this.newEscrowForm.costFee = form.controls['copyFee'].value;
+    this.newEscrowForm.copyFee = form.controls['copyFee'].value;
     this.newEscrowForm.mailAwayFee = form.controls['feeForMailAWay'].value;
     this.newEscrowForm.numOfParcels = form.controls['noOfParcelsPerCheck'].value;
     this.newEscrowForm.agencyMasterId = this.escrowDetails.agencyMasterId;

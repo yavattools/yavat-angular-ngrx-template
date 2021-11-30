@@ -31,7 +31,7 @@ export const getUserAccount = createSelector(
 
 export const getLoginProfile = createSelector( 
   selectAuthState, 
-  (state: AuthState) => state.account.loginProfile
+  (state: AuthState) => state.loginResponse
 );
 
 export const getUserMenus = createSelector( 

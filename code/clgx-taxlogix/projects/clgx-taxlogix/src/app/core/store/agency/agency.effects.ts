@@ -2,7 +2,7 @@ import { ActivationEnd, Router } from '@angular/router';
 import { Injectable, NgZone } from '@angular/core';
 import { OverlayContainer } from '@angular/cdk/overlay';
 import { select, Store } from '@ngrx/store';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { act, Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { combineLatest, merge, of } from 'rxjs';
 import {
@@ -44,11 +44,8 @@ export class AgencyEffects {
   getAgencies = createEffect(() =>
       this.actions$.pipe(
         ofType(agencyActions.actionGetAllActiveAgencies),
-        withLatestFrom(
-          this.store.pipe(select(fromSelectors.getLoginProfile))
-        ),
-        switchMap(([action, profile]) => this.agencyDataService.
-          getAgencies({userId: profile.processOrgModel.userId, processId: profile.processOrgModel.processId }).pipe(
+        switchMap(action => this.agencyDataService.
+          getAgencies(action.request).pipe(
           mergeMap( agencyList => [
             agencyActions.actionGetAllActiveAgenciesSuccess({agencyList: agencyList}),
           ]),
@@ -84,7 +81,7 @@ export class AgencyEffects {
   getCollectionDates = createEffect(() =>
       this.actions$.pipe(
         ofType(agencyActions.actionGetCollectionDates),
-      switchMap(() => this.agencyDataService.getCollectionsDates().pipe(
+      switchMap((action) => this.agencyDataService.getCollectionsDates(action.request).pipe(
           mergeMap( collectionDates =>[
             agencyActions.actionGetCollectionDatesSuccess({collectionDates: collectionDates}),
           ]),
@@ -180,7 +177,7 @@ export class AgencyEffects {
   getPaymentDetails = createEffect(() =>
   this.actions$.pipe(
     ofType(agencyActions.actionGetPaymentDetails),
-    switchMap((action)=>this.agencyDataService.getPaymentDetailsByAgencyPaymentId(1).pipe(
+    switchMap((action)=>this.agencyDataService.getPaymentDetails(action.request).pipe(
       mergeMap( paymentDetails=>[
         agencyActions.actionGetPaymentDetailsSuccess({paymentDetails : paymentDetails}),
       ]),

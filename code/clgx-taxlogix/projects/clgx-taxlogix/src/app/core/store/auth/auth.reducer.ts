@@ -24,9 +24,9 @@ const reducer = createReducer(
   }),
   mutableOn(LoginSuccessAction, (state, action) => {
     state.actionInProgress = false;
-    let uAccount =  _.cloneDeep(state.account);
-    uAccount.loginProfile = _.cloneDeep(action.loginResponse);
-    state.account = uAccount;
+    // let uAccount =  _.cloneDeep(state.account);
+    state.loginResponse = action.loginResponse;
+    // state.account.loginProfile = action.loginResponse;
     // if(state.account.loginProfile.statusCode){
       state.isAuthenticated = true;
     // }else{

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Agency, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails } from './agency.model';
+import { Agency, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowRequest,GetNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails } from './agency.model';
 
 
 
@@ -13,6 +13,7 @@ export const actionStopActionInProgress = createAction(
 
 export const actionGetAllActiveAgencies = createAction(
   '[Agency] Get All Active Agencies',
+  props<{ request : GetActiveAgenciesRequest}>()
 );
 
 export const actionGetAllActiveAgenciesSuccess = createAction(
@@ -106,25 +107,9 @@ export const actionUpdateCollectionDatesFailure = createAction(
   props<{ error: any}>()
 );
 
-export const actionGetEscrowNonEscrowDetails = createAction(
-  '[Agency] Get Escrow Non Escrow Details',
-  props<{ request: GetEscrowNonEscrowDetailsRequest}>()
-);
-
-
-export const actionGetEscrowNonEscrowDetailsSuccess = createAction(
-  '[Agency] Get Escrow Non Escrow Details Success',
-  props<{ escNonEscs: Array<EscrowNonEscrowDetails>}>()
-);
-
-export const actionGetEscrowNonEscrowDetailsFailure = createAction(
-  '[Agency] Get Escrow Non Escrow Details Failure',
-  props<{ error: any}>()
-);
-
 export const actionGetEscrowDetails = createAction(
   '[Agency] Get Escrow Details',
-  props<{ request: GetEscrowNonEscrowDetailsRequest}>()
+  props<{ request: GetEscrowRequest}>()
 );
 
 
@@ -140,7 +125,7 @@ export const actionGetEscrowDetailsFailure = createAction(
 
 export const actionGetNonEscrowDetails = createAction(
   '[Agency] Get Non Escrow Details',
-  props<{ request: GetEscrowNonEscrowDetailsRequest}>()
+  props<{ request: GetNonEscrowDetailsRequest}>()
 );
 
 
