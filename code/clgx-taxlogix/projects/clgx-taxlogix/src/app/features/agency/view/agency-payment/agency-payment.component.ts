@@ -32,7 +32,7 @@ export class AgencyPaymentComponent implements OnInit {
   emailWireFC = new FormControl('',[Validators.required]);
   overNightFC = new FormControl('',[Validators.required]);
   postmarkAcceptedFC = new FormControl('',[Validators.required]);
-  paymentRequiredIdFC = new FormControl('',[Validators.required]);
+  paymentRequiredIdFC = new FormControl('');
 
   paymentDetails$!: Observable<PaymentDetails>;
   paymentDetails : any;
@@ -104,7 +104,7 @@ export class AgencyPaymentComponent implements OnInit {
 
 
   save(form : FormGroup){
-    this.newPaymentDetails = Object.create({});
+    this.newPaymentDetails = new PaymentDetails();
     this.newPaymentDetails.payName = form.controls['payName'].value;
     this.newPaymentDetails.payAddress = form.controls['payAddress'].value;
     this.newPaymentDetails.payCity = form.controls['payCity'].value;
@@ -119,14 +119,14 @@ export class AgencyPaymentComponent implements OnInit {
     this.newPaymentDetails.overNight = form.controls['overNight'].value;
     this.newPaymentDetails.postmarkAccepted = form.controls['postmarkAccepted'].value;
     this.newPaymentDetails.paymentRequiredId = form.controls['paymentRequiredId'].value;
-    this.newPaymentDetails.agencyPaymentId = this.paymentDetails.agencyPaymentId
-    this.newPaymentDetails.agencyMasterId = this.paymentDetails.agencyMasterId;
-    this.newPaymentDetails.countyId = this.paymentDetails.countyId;
-    this.newPaymentDetails.internalNotes = this.paymentDetails.internalNotes;
-    this.newPaymentDetails.createdBy = this.paymentDetails.createdBy;
-    this.newPaymentDetails.modifiedBy = this.paymentDetails.modifiedBy;
-    this.newPaymentDetails.createdByUser = this.paymentDetails.createdByUser;
-    this.newPaymentDetails.modifiedByUser = this.paymentDetails.modifiedByUser;
+    this.newPaymentDetails.agencyPaymentId = this.paymentDetails.agencyPaymentId?this.paymentDetails.agencyPaymentId : '';
+    this.newPaymentDetails.agencyMasterId = this.paymentDetails.agencyMasterId?this.paymentDetails.agencyMasterId : '';
+    this.newPaymentDetails.countyId = this.paymentDetails.countyId?this.paymentDetails.countyId : '';
+    this.newPaymentDetails.internalNotes = this.paymentDetails.internalNotes?this.paymentDetails.internalNotes : '';
+    this.newPaymentDetails.createdBy = this.paymentDetails.createdBy?this.paymentDetails.createdBy : '';
+    this.newPaymentDetails.modifiedBy = this.paymentDetails.modifiedBy?this.paymentDetails.modifiedBy : '';
+    this.newPaymentDetails.createdByUser = this.paymentDetails.createdByUser?this.paymentDetails.createdByUser : '';
+    this.newPaymentDetails.modifiedByUser = this.paymentDetails.modifiedByUser?this.paymentDetails.modifiedByUser : '';
 
     if(this.paymentDetails){
       this.agencyStoreFacade.updatePayments(this.newPaymentDetails);

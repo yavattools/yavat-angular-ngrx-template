@@ -61,7 +61,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     payToCity : ['',Validators.required],
     stateId : ['',Validators.required],
     zipId : ['',Validators.required],
-    methodOfPaymentRequired : ['',Validators.required]
+    methodOfPaymentRequired : ['']
   });
   // selectedAgency$ : Observable<Agency>;
   // selectedAgency! : Agency;
@@ -91,11 +91,11 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
         this.escrowForm.controls['contactEmail'].setValue(escrowDetails.contactEmail);
         this.escrowForm.controls['agencyWebsite'].setValue(escrowDetails.agencyWebsite);
         this.escrowForm.controls['amtAvailableOnWebsite'].setValue(escrowDetails.amtAvailable);
-        this.escrowForm.controls['costToPayUsingCopyOfTb'].setValue(escrowDetails.costPay);
-        this.escrowForm.controls['listingAcceptedForPayment'].setValue(escrowDetails.listedPayment);
-        this.escrowForm.controls['mailAWayOnlyReq'].setValue(escrowDetails.mailAwayReq);
-        this.escrowForm.controls['agencyExpectWebTb'].setValue(escrowDetails.agencyExpect);
-        this.escrowForm.controls['postmarkAccepted'].setValue(escrowDetails.postmarkAccepted);
+        this.escrowForm.controls['costToPayUsingCopyOfTb'].setValue(escrowDetails.costToPay);
+        this.escrowForm.controls['listingAcceptedForPayment'].setValue(escrowDetails.isListingAccepted);
+        this.escrowForm.controls['mailAWayOnlyReq'].setValue(escrowDetails.mailawayRegistered);
+        this.escrowForm.controls['agencyExpectWebTb'].setValue(escrowDetails.isAgencyWebExpect);
+        this.escrowForm.controls['postmarkAccepted'].setValue(escrowDetails.postMarkAccepted);
         this.escrowForm.controls['copyFee'].setValue(escrowDetails.copyFee);
         this.escrowForm.controls['feeForMailAWay'].setValue(escrowDetails.mailAwayFee);
         this.escrowForm.controls['noOfParcelsPerCheck'].setValue(escrowDetails.numOfParcels);
@@ -104,23 +104,23 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.nonEscrowDetails$.subscribe(nonEscrowDetails => {
       this.nonEscrowDetails = nonEscrowDetails;
       if(nonEscrowDetails){
-        this.nonEscrowForm.controls['collectingAgencyName'].setValue(nonEscrowDetails.collectingAgencyName);
+        this.nonEscrowForm.controls['collectingAgencyName'].setValue(nonEscrowDetails.nameCollecting);
         this.nonEscrowForm.controls['contactName'].setValue(nonEscrowDetails.contactName);
         this.nonEscrowForm.controls['contactPhone'].setValue(nonEscrowDetails.contactPhone);
         this.nonEscrowForm.controls['contactFax'].setValue(nonEscrowDetails.contactFax);
         this.nonEscrowForm.controls['contactEmail'].setValue(nonEscrowDetails.contactEmail);
         this.nonEscrowForm.controls['agencyWebsite'].setValue(nonEscrowDetails.agencyWebsite);
-        this.nonEscrowForm.controls['collectedByAgency'].setValue(nonEscrowDetails.agencyCollection);
-        this.nonEscrowForm.controls['thirdPartyCollections'].setValue(nonEscrowDetails.thirdPartyCollection);
+        this.nonEscrowForm.controls['collectedByAgency'].setValue(nonEscrowDetails.agencyCollectedBy);
+        this.nonEscrowForm.controls['thirdPartyCollections'].setValue(nonEscrowDetails.thirdPartyCollections);
         this.nonEscrowForm.controls['amtAvailableOnWebsite'].setValue(nonEscrowDetails.amtAvailable);
         this.nonEscrowForm.controls['mailAWayOnlyReq'].setValue(nonEscrowDetails.mailAwayReq);
         this.nonEscrowForm.controls['feeForMailAWay'].setValue(nonEscrowDetails.mailAwayFee);
         this.nonEscrowForm.controls['payToName'].setValue(nonEscrowDetails.payName);
         this.nonEscrowForm.controls['payToAddress'].setValue(nonEscrowDetails.payAddress);
         this.nonEscrowForm.controls['payToCity'].setValue(nonEscrowDetails.payCity);
-        this.nonEscrowForm.controls['stateId'].setValue(nonEscrowDetails.stateId);
-        this.nonEscrowForm.controls['zipId'].setValue(nonEscrowDetails.zip);
-        this.nonEscrowForm.controls['methodOfPaymentRequired'].setValue(nonEscrowDetails.paymentRequiredId);
+        this.nonEscrowForm.controls['stateId'].setValue(nonEscrowDetails.payStateId);
+        this.nonEscrowForm.controls['zipId'].setValue(nonEscrowDetails.payZip);
+        this.nonEscrowForm.controls['methodOfPaymentRequired'].setValue(nonEscrowDetails.paymentMethodId);
     }
     });
     if(this.deviceService.isMobile()){
@@ -244,21 +244,21 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newEscrowForm.contactEmail = form.controls['contactEmail'].value;
     this.newEscrowForm.agencyWebsite = form.controls['agencyWebsite'].value;
     this.newEscrowForm.amtAvailable = form.controls['amtAvailableOnWebsite'].value;
-    this.newEscrowForm.costPay = form.controls['costToPayUsingCopyOfTb'].value;
-    this.newEscrowForm.listedPayment = form.controls['listingAcceptedForPayment'].value;
-    this.newEscrowForm.mailAwayReq = form.controls['mailAWayOnlyReq'].value;
-    this.newEscrowForm.agencyExpect = form.controls['agencyExpectWebTb'].value;
-    this.newEscrowForm.postmarkAccepted = form.controls['postmarkAccepted'].value;
+    this.newEscrowForm.costToPay = form.controls['costToPayUsingCopyOfTb'].value;
+    this.newEscrowForm.isListingAccepted = form.controls['listingAcceptedForPayment'].value;
+    this.newEscrowForm.mailawayRegistered = form.controls['mailAWayOnlyReq'].value;
+    this.newEscrowForm.isAgencyWebExpect = form.controls['agencyExpectWebTb'].value;
+    this.newEscrowForm.postMarkAccepted = form.controls['postmarkAccepted'].value;
     this.newEscrowForm.copyFee = form.controls['copyFee'].value;
     this.newEscrowForm.mailAwayFee = form.controls['feeForMailAWay'].value;
     this.newEscrowForm.numOfParcels = form.controls['noOfParcelsPerCheck'].value;
-    this.newEscrowForm.agencyMasterId = this.escrowDetails.agencyMasterId;
-    this.newEscrowForm.escrowId = this.escrowDetails.escrowId;
-    this.newEscrowForm.internalNotes = this.escrowDetails.internalNotes;
-    this.newEscrowForm.createdBy = this.escrowDetails.createdBy;
-    this.newEscrowForm.modifiedBy = this.escrowDetails.modifiedBy;
-    this.newEscrowForm.createdByUser = this.escrowDetails.createdByUser;
-    this.newEscrowForm.modifiedByUser = this.escrowDetails.modifiedByUser;
+    this.newEscrowForm.agencyMasterId = this.escrowDetails.agencyMasterId?this.escrowDetails.agencyMasterId : '';
+    this.newEscrowForm.agencyEscrowId = this.escrowDetails.agencyEscrowId?this.escrowDetails.agencyEscrowId : '';
+    this.newEscrowForm.comments = this.escrowDetails.comments?this.escrowDetails.comments : '';
+    this.newEscrowForm.createdBy = this.escrowDetails.createdBy?this.escrowDetails.createdBy : '';
+    this.newEscrowForm.modifiedBy = this.escrowDetails.modifiedBy?this.escrowDetails.modifiedBy : '';
+    this.newEscrowForm.createdByUser = this.escrowDetails.createdByUser?this.escrowDetails.createdByUser : '';
+    this.newEscrowForm.modifiedByUser = this.escrowDetails.modifiedByUser?this.escrowDetails.modifiedByUser : '';
     if(this.escrowDetails){
       this.agencyFacade.updateEscrowDetails(this.newEscrowForm);
     }
@@ -268,30 +268,33 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   }
   saveOrUpdateNonEscrowDetails(form : FormGroup){
     this.newNonEscrowForm = Object.create({});
-    this.newNonEscrowForm.collectingAgencyName = this.nonEscrowForm.controls['collectingAgencyName'].value;
+    this.newNonEscrowForm.nameCollecting = this.nonEscrowForm.controls['collectingAgencyName'].value;
     this.newNonEscrowForm.contactName = this.nonEscrowForm.controls['contactName'].value;
     this.newNonEscrowForm.contactPhone = this.nonEscrowForm.controls['contactPhone'].value;
     this.newNonEscrowForm.contactFax = this.nonEscrowForm.controls['contactFax'].value;
     this.newNonEscrowForm.contactEmail = this.nonEscrowForm.controls['contactEmail'].value;
     this.newNonEscrowForm.agencyWebsite = this.nonEscrowForm.controls['agencyWebsite'].value;
-    this.newNonEscrowForm.agencyCollection = this.nonEscrowForm.controls['collectedByAgency'].value;
-    this.newNonEscrowForm.thirdPartyCollection = this.nonEscrowForm.controls['thirdPartyCollections'].value;
+    this.newNonEscrowForm.agencyCollectedBy = this.nonEscrowForm.controls['collectedByAgency'].value;
+    this.newNonEscrowForm.thirdPartyCollections = this.nonEscrowForm.controls['thirdPartyCollections'].value;
     this.newNonEscrowForm.amtAvailable = this.nonEscrowForm.controls['amtAvailableOnWebsite'].value;
     this.newNonEscrowForm.mailAwayReq = this.nonEscrowForm.controls['mailAWayOnlyReq'].value;
     this.newNonEscrowForm.mailAwayFee = this.nonEscrowForm.controls['feeForMailAWay'].value;
     this.newNonEscrowForm.payName = this.nonEscrowForm.controls['payToName'].value;
     this.newNonEscrowForm.payAddress = this.nonEscrowForm.controls['payToAddress'].value;
     this.newNonEscrowForm.payCity = this.nonEscrowForm.controls['payToCity'].value;
-    this.newNonEscrowForm.stateId = this.nonEscrowForm.controls['stateId'].value;
-    this.newNonEscrowForm.zip = this.nonEscrowForm.controls['zipId'].value;
-    this.newNonEscrowForm.paymentRequiredId = this.nonEscrowForm.controls['methodOfPaymentRequired'].value;
-    this.newNonEscrowForm.agencyMasterId = this.nonEscrowDetails.agencyMasterId;
-    this.newNonEscrowForm.nonEscrowId = this.nonEscrowDetails.nonEscrowId;
-    this.newNonEscrowForm.ïnternalNotes = this.nonEscrowDetails.ïnternalNotes;
-    this.newNonEscrowForm.createdBy = this.nonEscrowDetails.createdBy;
-    this.newNonEscrowForm.modifiedBy = this.nonEscrowDetails.modifiedBy;
-    this.newNonEscrowForm.createdByUser = this.nonEscrowDetails.createdByUser;
-    this.newNonEscrowForm.modifiedByUser = this.nonEscrowDetails.modifiedByUser;
+    this.newNonEscrowForm.payStateId = this.nonEscrowForm.controls['stateId'].value;
+    this.newNonEscrowForm.payZip = this.nonEscrowForm.controls['zipId'].value;
+    this.newNonEscrowForm.paymentMethodId = this.nonEscrowForm.controls['methodOfPaymentRequired'].value;
+    this.newNonEscrowForm.agencyMasterId = this.nonEscrowDetails.agencyMasterId?this.nonEscrowDetails.agencyMasterId : '';
+    this.newNonEscrowForm.agencyNonEscrowId = this.nonEscrowDetails.agencyNonEscrowId?this.nonEscrowDetails.agencyNonEscrowId : '';
+    this.newNonEscrowForm.internalComments = this.nonEscrowDetails.internalComments?this.nonEscrowDetails.internalComments : '';
+    this.newNonEscrowForm.createdBy = this.nonEscrowDetails.createdBy?this.nonEscrowDetails.createdBy : '';
+    this.newNonEscrowForm.modifiedBy = this.nonEscrowDetails.modifiedBy?this.nonEscrowDetails.modifiedBy : '';
+    this.newNonEscrowForm.createdByUser = this.nonEscrowDetails.createdByUser?this.nonEscrowDetails.createdByUser : '';
+    this.newNonEscrowForm.modifiedByUser = this.nonEscrowDetails.modifiedByUser?this.nonEscrowDetails.modifiedByUser : '';
+    this.newNonEscrowForm.payCountyId = this.nonEscrowDetails.payCountyId?this.nonEscrowDetails.payCountyId : '';
+    this.newEscrowForm.isDeleted = this.nonEscrowDetails.isDeleted?this.nonEscrowDetails.isDeleted : '';
+
     if(this.nonEscrowDetails){
       this.agencyFacade.updateNonEscrowDetails(this.newNonEscrowForm);
     }

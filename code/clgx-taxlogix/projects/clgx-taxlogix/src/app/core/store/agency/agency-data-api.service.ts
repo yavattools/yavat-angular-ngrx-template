@@ -36,7 +36,7 @@ export class AgencyDataService {
     const body=JSON.stringify(agency);
     console.log(body)
 
-    return this.http.put<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_AGENCIES, body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_AGENCIES, body,{'headers':headers})
   }
 
   getCollectionsDates(request : GetCollectionDatesRequest): Observable<CollectionDates[]> {
@@ -53,14 +53,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(collection);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_COLLECTION, body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_COLLECTION, body,{'headers':headers})
   }
 
   updateCollectionDate(collection:CollectionDates): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(collection);
     console.log(body)
-    return this.http.put( this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_COLLECTION , body,{'headers':headers})
+    return this.http.post<any>( this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_COLLECTION , body,{'headers':headers})
   }
 
 
@@ -78,14 +78,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(escrow);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_ESCROW_DETAILS , body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_ESCROW_DETAILS , body,{'headers':headers})
   }
 
   updateEscrow(escrow:EscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(escrow);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_ESCROW_DETAILS , body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_ESCROW_DETAILS , body,{'headers':headers})
   }
 
 
@@ -103,14 +103,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(nonescrow);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_NONESCROW_DETAILS , body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_NONESCROW_DETAILS , body,{'headers':headers})
   }
 
   updateNonEscrow(nonescrow:NonEscrowDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(nonescrow);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_NONESCROW_DETAILS, body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_NONESCROW_DETAILS, body,{'headers':headers})
   }
 
   getPaymentDetails(request : GetPaymentDetailsRequest): Observable<PaymentDetails> {
@@ -127,14 +127,14 @@ export class AgencyDataService {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(payment);
     console.log(body)
-    return this.http.post(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_PAYMENTDETAILS , body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_PAYMENTDETAILS , body,{'headers':headers})
   }
 
   updatePaymentDetails(payment:PaymentDetails): Observable<any> {
     const headers = { 'content-type': 'application/json'}
     const body=JSON.stringify(payment);
     console.log(body)
-    return this.http.put(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_PAYMENTDETAILS, body,{'headers':headers})
+    return this.http.post<any>(this._appConstantService.BASE_API_URL + this._appConstantService.SAVE_PAYMENTDETAILS, body,{'headers':headers})
   }
 
 }

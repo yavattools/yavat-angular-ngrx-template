@@ -91,10 +91,10 @@ export class AgencyDetailsComponent implements OnInit {
         this.agencyDetailsGroup.controls['agencyNumber'].setValue(this.agency.agencyNumber);
         this.agencyDetailsGroup.controls['agencyName'].setValue(this.agency.agencyName); 
         this.agencyDetailsGroup.controls['agencyWebsite'].setValue(this.agency.agencyWebsite);
-        this.agencyDetailsGroup.controls['agencyLowerLevel'].setValue(this.agency.agencyLowerLevel)
-        this.agencyDetailsGroup.controls['agencyCollecting'].setValue(this.agency.agencyCollecting)
+        this.agencyDetailsGroup.controls['agencyLowerLevel'].setValue(this.agency.lowLevelAgencyId)
+        this.agencyDetailsGroup.controls['agencyCollecting'].setValue(this.agency.collectingAgency)
         this.agencyDetailsGroup.controls['agencyActive'].setValue(this.agency.agencyActive)
-        this.agencyDetailsGroup.controls['agencySuitsAddress'].setValue(this.agency.agencySuitsAddress)
+        this.agencyDetailsGroup.controls['agencySuitsAddress'].setValue(this.agency.agencySitusAddress)
         this.agencyDetailsGroup.controls['agencyCity'].setValue(this.agency.agencyCity)
         this.agencyDetailsGroup.controls['stateId'].setValue(this.agency.stateId)
         this.agencyDetailsGroup.controls['zip'].setValue(this.agency.zip)
@@ -102,11 +102,11 @@ export class AgencyDetailsComponent implements OnInit {
         this.agencyDetailsGroup.controls['contactName'].setValue(this.agency.contactName)
         this.agencyDetailsGroup.controls['contactEmail'].setValue(this.agency.contactEmail)
         this.agencyDetailsGroup.controls['contactPhone'].setValue(this.agency.contactPhone)
-        this.agencyDetailsGroup.controls['contactFax'].setValue(this.agency.contactFax)
+        this.agencyDetailsGroup.controls['contactFax'].setValue(this.agency.faxNumber)
         this.agencyDetailsGroup.controls['parcelFormat'].setValue(this.agency.parcelFormat)
         this.agencyDetailsGroup.controls['assessorName'].setValue(this.agency.assessorName)
         this.agencyDetailsGroup.controls['assessorContactName'].setValue(this.agency.assessorContactName)
-        this.agencyDetailsGroup.controls['assessorPhoneNumber'].setValue(this.agency.assessorPhoneNumber)
+        this.agencyDetailsGroup.controls['assessorPhoneNumber'].setValue(this.agency.assessorPhoneNum)
         this.agencyDetailsGroup.controls['mapCost'].setValue(this.agency.mapCost)
         this.agencyDetailsGroup.controls['websiteAccessCost'].setValue(this.agency.websiteAccessCost)
         this.agencyDetailsGroup.controls['assessorWebsite'].setValue(this.agency.assessorWebsite)
@@ -117,7 +117,7 @@ export class AgencyDetailsComponent implements OnInit {
         this.agencyDetailsGroup.controls['billingRequestId'].setValue(this.agency.billingRequestId)
         this.agencyDetailsGroup.controls['mediaTypeId'].setValue(this.agency.mediaTypeId)
         this.agencyDetailsGroup.controls['paperType'].setValue(this.agency.paperType)
-        this.agencyDetailsGroup.controls['excelType'].setValue(this.agency.excelType)
+        this.agencyDetailsGroup.controls['excelType'].setValue(this.agency.exceltype)
         this.agencyDetailsGroup.controls['mailType'].setValue(this.agency.mailType)
         this.agencyDetailsGroup.controls['emailId'].setValue(this.agency.emailId)
     }
@@ -229,12 +229,12 @@ export class AgencyDetailsComponent implements OnInit {
     this.newAgencyDetails.agencyNumber = form.controls['agencyNumber'].value;
     this.newAgencyDetails.agencyName = form.controls['agencyName'].value;
     this.newAgencyDetails.agencyWebsite = form.controls['agencyWebsite'].value;
-    this.newAgencyDetails.agencyLowerLevel =
+    this.newAgencyDetails.lowLevelAgencyId =
       form.controls['agencyLowerLevel'].value;
-    this.newAgencyDetails.agencyCollecting =
+    this.newAgencyDetails.collectingAgency =
       form.controls['agencyCollecting'].value;
     this.newAgencyDetails.agencyActive = form.controls['agencyActive'].value;
-    this.newAgencyDetails.agencySuitsAddress =
+    this.newAgencyDetails.agencySitusAddress =
       form.controls['agencySuitsAddress'].value;
     this.newAgencyDetails.agencyCity = form.controls['agencyCity'].value;
     this.newAgencyDetails.stateId = form.controls['stateId'].value;
@@ -243,11 +243,11 @@ export class AgencyDetailsComponent implements OnInit {
     this.newAgencyDetails.contactName = form.controls['contactName'].value;
     this.newAgencyDetails.contactEmail = form.controls['contactEmail'].value;
     this.newAgencyDetails.contactPhone = form.controls['contactPhone'].value;
-    this.newAgencyDetails.contactFax = form.controls['contactFax'].value;
+    this.newAgencyDetails.faxNumber = form.controls['contactFax'].value;
     this.newAgencyDetails.parcelFormat = form.controls['parcelFormat'].value;
     this.newAgencyDetails.assessorName = form.controls['assessorName'].value;
     this.newAgencyDetails.assessorContactName = form.controls['assessorContactName'].value;
-    this.newAgencyDetails.assessorPhoneNumber = form.controls['assessorPhoneNumber'].value;
+    this.newAgencyDetails.assessorPhoneNum = form.controls['assessorPhoneNumber'].value;
     this.newAgencyDetails.mapCost = form.controls['mapCost'].value;
     this.newAgencyDetails.websiteAccessCost =
       form.controls['websiteAccessCost'].value;
@@ -263,19 +263,19 @@ export class AgencyDetailsComponent implements OnInit {
       form.controls['billingRequestId'].value;
     this.newAgencyDetails.mediaTypeId = form.controls['mediaTypeId'].value;
     this.newAgencyDetails.paperType = form.controls['paperType'].value;
-    this.newAgencyDetails.excelType = form.controls['excelType'].value;
+    this.newAgencyDetails.exceltype = form.controls['excelType'].value;
     this.newAgencyDetails.mailType = form.controls['mailType'].value;
     this.newAgencyDetails.emailId = form.controls['emailId'].value;
     this.newAgencyDetails.agencyMasterId = this.agency.agencyMasterId?this.agency.agencyMasterId: "";
-    this.newAgencyDetails.agencyAddress = this.agency.agencyAddress;
-    this.newAgencyDetails.agencyState = this.agency.agencyState;
-    this.newAgencyDetails.agencyPhonenumber = this.agency.agencyPhonenumber;
-    this.newAgencyDetails.assessorCountyId = this.agency.assessorCountyId;
-    this.newAgencyDetails.internalNotes = this.agency.internalNotes;
-    this.newAgencyDetails.createdBy = this.agency.createdBy;
-    this.newAgencyDetails.modifiedBy = this.agency.modifiedBy;
-    this.newAgencyDetails.createdByUser = this.agency.createdByUser;
-    this.newAgencyDetails.modifiedByUser = this.agency.modifiedByUser;
+    this.newAgencyDetails.agencyAddress = this.agency.agencyAddress?this.agency.agencyAddress: "";
+    this.newAgencyDetails.agencyState = this.agency.agencyState?this.agency.agencyState: "";
+    this.newAgencyDetails.phoneNumber = this.agency.phoneNumber?this.agency.phoneNumber: "";
+    this.newAgencyDetails.assessorCountyId = this.agency.assessorCountyId?this.agency.assessorCountyId: "";
+    this.newAgencyDetails.internalComments = this.agency.internalComments?this.agency.internalComments: "";
+    this.newAgencyDetails.createdBy = this.agency.createdBy?this.agency.createdBy: "";
+    this.newAgencyDetails.modifiedBy = this.agency.modifiedBy?this.agency.modifiedBy: "";
+    this.newAgencyDetails.createdByUser = this.agency.createdByUser?this.agency.createdByUser: "";
+    this.newAgencyDetails.modifiedByUser = this.agency.modifiedByUser?this.agency.modifiedByUser: "";
     if (this.agency.agencyMasterId) {
       this.agencyFacade.updateAgencyDetails(this.newAgencyDetails);
     } else {

@@ -68,13 +68,13 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     this.newCollectionDateForm.penalty = new Date(form.controls['penalty'].value).toLocaleDateString("en-US");
     this.newCollectionDateForm.lateRelease = form.controls['lateRelease'].value;
     this.newCollectionDateForm.billRequest = new Date(form.controls['billRequest'].value).toLocaleDateString("en-US");
-    this.newCollectionDateForm.collectionPracticesId = this.collectionDate.collectionPracticesId;
-    this.newCollectionDateForm.agencyMasterId = this.collectionDate.agencyMasterId;
-    this.newCollectionDateForm.frequency = this.collectionDate.frequency;
-    this.newCollectionDateForm.createdBy = this.collectionDate.createdBy;
-    this.newCollectionDateForm.modifiedBy = this.collectionDate.modifiedBy;
-    this.newCollectionDateForm.createdByUser = this.collectionDate.createdByUser;
-    this.newCollectionDateForm.modifiedByUser = this.collectionDate.modifiedByUser;
+    this.newCollectionDateForm.collectionPracticesId = this.collectionDate.collectionPracticesId?this.collectionDate.collectionPracticesId : '';
+    this.newCollectionDateForm.agencyMasterId = this.collectionDate.agencyMasterId?this.collectionDate.agencyMasterId : '';
+    this.newCollectionDateForm.frequency = this.collectionDate.frequency?this.collectionDate.frequency : '';
+    this.newCollectionDateForm.createdBy = this.collectionDate.createdBy?this.collectionDate.createdBy : '';
+    this.newCollectionDateForm.modifiedBy = this.collectionDate.modifiedBy?this.collectionDate.modifiedBy : '';
+    this.newCollectionDateForm.createdByUser = this.collectionDate.createdByUser?this.collectionDate.createdByUser : '';
+    this.newCollectionDateForm.modifiedByUser = this.collectionDate.modifiedByUser?this.collectionDate.modifiedByUser : '';
     if(this.collectionDate.collectionPracticesId){
       this.agencyStoreFacade.updateCollectionDates(this.newCollectionDateForm);
     }else{
