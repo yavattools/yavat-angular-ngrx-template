@@ -252,7 +252,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newEscrowForm.copyFee = form.controls['copyFee'].value;
     this.newEscrowForm.mailAwayFee = form.controls['feeForMailAWay'].value;
     this.newEscrowForm.numOfParcels = form.controls['noOfParcelsPerCheck'].value;
-    this.newEscrowForm.agencyMasterId = this.escrowDetails.agencyMasterId?this.escrowDetails.agencyMasterId : '';
+    this.newEscrowForm.agencyMasterId = this.agencyMasterId;
     this.newEscrowForm.agencyEscrowId = this.escrowDetails.agencyEscrowId?this.escrowDetails.agencyEscrowId : '';
     this.newEscrowForm.comments = this.escrowDetails.comments?this.escrowDetails.comments : '';
     this.newEscrowForm.createdBy = this.escrowDetails.createdBy?this.escrowDetails.createdBy : '';
@@ -285,7 +285,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newNonEscrowForm.payStateId = this.nonEscrowForm.controls['stateId'].value;
     this.newNonEscrowForm.payZip = this.nonEscrowForm.controls['zipId'].value;
     this.newNonEscrowForm.paymentMethodId = this.nonEscrowForm.controls['methodOfPaymentRequired'].value;
-    this.newNonEscrowForm.agencyMasterId = this.nonEscrowDetails.agencyMasterId?this.nonEscrowDetails.agencyMasterId : '';
+    this.newNonEscrowForm.agencyMasterId = this.agencyMasterId;
     this.newNonEscrowForm.agencyNonEscrowId = this.nonEscrowDetails.agencyNonEscrowId?this.nonEscrowDetails.agencyNonEscrowId : '';
     this.newNonEscrowForm.internalComments = this.nonEscrowDetails.internalComments?this.nonEscrowDetails.internalComments : '';
     this.newNonEscrowForm.createdBy = this.nonEscrowDetails.createdBy?this.nonEscrowDetails.createdBy : '';

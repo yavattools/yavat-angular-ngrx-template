@@ -16,6 +16,7 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
 
   collectionDate : CollectionDates = new CollectionDates
   newCollectionDateForm : any
+  agencyMasterId : string | undefined
   yearFC = new FormControl('',[Validators.required]);
   installmentFC = new FormControl('',[Validators.required]);
   baseFC = new FormControl('',[Validators.required]);
@@ -52,7 +53,10 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
         this.editForm.controls['lateRelease'].setValue(collectionDate.lateRelease);
         this.editForm.controls['billRequest'].setValue(new Date(collectionDate.billRequest));
       }
-    })
+    });
+    this.agencyStoreFacade.selectedAgency$.subscribe(data=>{
+      this.agencyMasterId = data.agencyMasterId;
+    });
   }
 
   onNoClick(): void {
@@ -69,7 +73,7 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     this.newCollectionDateForm.lateRelease = form.controls['lateRelease'].value;
     this.newCollectionDateForm.billRequest = new Date(form.controls['billRequest'].value).toLocaleDateString("en-US");
     this.newCollectionDateForm.collectionPracticesId = this.collectionDate.collectionPracticesId?this.collectionDate.collectionPracticesId : '';
-    this.newCollectionDateForm.agencyMasterId = this.collectionDate.agencyMasterId?this.collectionDate.agencyMasterId : '';
+    this.newCollectionDateForm.agencyMasterId = this.agencyMasterId;
     this.newCollectionDateForm.frequency = this.collectionDate.frequency?this.collectionDate.frequency : '';
     this.newCollectionDateForm.createdBy = this.collectionDate.createdBy?this.collectionDate.createdBy : '';
     this.newCollectionDateForm.modifiedBy = this.collectionDate.modifiedBy?this.collectionDate.modifiedBy : '';

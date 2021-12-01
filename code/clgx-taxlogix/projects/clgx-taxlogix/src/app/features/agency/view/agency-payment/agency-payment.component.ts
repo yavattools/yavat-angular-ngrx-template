@@ -18,7 +18,7 @@ import { AgencyFeature, agencies } from '../../agency-view.data';
 export class AgencyPaymentComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agencies: AgencyFeature[] = agencies;
-  newPaymentDetails: PaymentDetails = new PaymentDetails;
+  newPaymentDetails:any;
   payNameFC :FormControl = new FormControl('',[Validators.required]);
   payAddressFC = new FormControl('',[Validators.required]);
   payCityFC = new FormControl('',[Validators.required]);
@@ -104,7 +104,7 @@ export class AgencyPaymentComponent implements OnInit {
 
 
   save(form : FormGroup){
-    this.newPaymentDetails = new PaymentDetails();
+    this.newPaymentDetails = Object.create({});
     this.newPaymentDetails.payName = form.controls['payName'].value;
     this.newPaymentDetails.payAddress = form.controls['payAddress'].value;
     this.newPaymentDetails.payCity = form.controls['payCity'].value;
@@ -120,7 +120,7 @@ export class AgencyPaymentComponent implements OnInit {
     this.newPaymentDetails.postmarkAccepted = form.controls['postmarkAccepted'].value;
     this.newPaymentDetails.paymentRequiredId = form.controls['paymentRequiredId'].value;
     this.newPaymentDetails.agencyPaymentId = this.paymentDetails.agencyPaymentId?this.paymentDetails.agencyPaymentId : '';
-    this.newPaymentDetails.agencyMasterId = this.paymentDetails.agencyMasterId?this.paymentDetails.agencyMasterId : '';
+    this.newPaymentDetails.agencyId = this.agencyMasterId;
     this.newPaymentDetails.countyId = this.paymentDetails.countyId?this.paymentDetails.countyId : '';
     this.newPaymentDetails.internalNotes = this.paymentDetails.internalNotes?this.paymentDetails.internalNotes : '';
     this.newPaymentDetails.createdBy = this.paymentDetails.createdBy?this.paymentDetails.createdBy : '';
