@@ -86,7 +86,6 @@ export const reducer = createReducer(
     state.error = action.error;
   }),
   mutableOn(agencyActions.actionSetCollectionDates, (state, action) => {
-    state.actionInProgress = true;
     state.selectedCollectionDate = action.collectionDate
   }),
   mutableOn(agencyActions.actionSaveCollectionDates, (state, action) => {
@@ -94,6 +93,7 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSaveCollectionDatesSuccess, (state, action) => {
     state.actionInProgress = false;
+    state.collectionDates = [...state.collectionDates, action.collectionDates];
     // state.selectedAgency = action.agency;
     //  JAna: Need to find what to do on Success of Dates
   }),

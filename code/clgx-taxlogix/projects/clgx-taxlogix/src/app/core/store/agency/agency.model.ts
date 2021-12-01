@@ -1,7 +1,7 @@
 import { AppState } from '../../core.module';
 
 export class Agency {
-  agencyMasterId!: string;
+  agencyMasterId: string | undefined;
   agencyName: string | undefined;
   agencyAddress: string | undefined;
   agencyCity: string | undefined;

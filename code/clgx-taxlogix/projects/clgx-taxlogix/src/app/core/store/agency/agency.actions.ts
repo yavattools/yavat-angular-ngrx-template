@@ -92,6 +92,12 @@ export const actionSaveCollectionDatesSuccess = createAction(
   props<{ collectionDates: CollectionDates}>()
 );
 
+
+export const actionSaveCollectionDatesFailure = createAction(
+  '[Agency] Save Collection Dates Failure',
+  props<{ error: any}>()
+);
+
 export const actionUpdateCollectionDates = createAction(
   '[Agency] Update Collection Dates',
   props<{ collectionDates: CollectionDates}>()

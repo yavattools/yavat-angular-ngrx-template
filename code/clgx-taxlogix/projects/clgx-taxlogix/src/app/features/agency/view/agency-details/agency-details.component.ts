@@ -22,39 +22,39 @@ export class AgencyDetailsComponent implements OnInit {
   agency!: Agency;
   newAgencyDetails: any;
   agency$: Observable<Agency>;
-  agencyDetails = this.fb.group({
+  agencyDetailsGroup = this.fb.group({
     agencyNumber: ['', Validators.required],
     agencyName: ['', Validators.required],
-    agencyWebsite: ['', Validators.required],
-    agencyLowerLevel: ['', Validators.required],
-    agencyCollecting: [false, Validators.required],
+    agencyWebsite: [''],
+    agencyLowerLevel: [''],
+    agencyCollecting: [false],
     agencyActive: [false, Validators.required],
-    agencySuitsAddress: ['', Validators.required],
+    agencySuitsAddress: [''],
     agencyCity: ['', Validators.required],
     stateId: ['', Validators.required],
     zip: ['', Validators.required],
-    countyId: ['', Validators.required],
-    contactName: ['', Validators.required],
-    contactEmail: ['', Validators.required],
-    contactPhone: ['', Validators.required],
-    contactFax: ['', Validators.required],
-    parcelFormat: ['', Validators.required],
-    assessorName: ['', Validators.required],
-    assessorContactName: ['', Validators.required],
-    assessorPhoneNumber: ['', Validators.required],
-    mapCost: ['', Validators.required],
-    websiteAccessCost: ['', Validators.required],
-    assessorWebsite: ['', Validators.required],
-    assessorAddress: ['', Validators.required],
-    assessorCity: ['', Validators.required],
-    assessorStateId: ['', Validators.required],
-    assessorZip: ['', Validators.required],
-    billingRequestId: ['', Validators.required],
-    mediaTypeId: ['', Validators.required],
-    paperType: [false, Validators.required],
-    excelType: [false, Validators.required],
-    mailType: [false, Validators.required],
-    emailId: ['', Validators.required]
+    countyId: [''],
+    contactName: [''],
+    contactEmail: [''],
+    contactPhone: [''],
+    contactFax: [''],
+    parcelFormat: [''],
+    assessorName: [''],
+    assessorContactName: [''],
+    assessorPhoneNumber: [''],
+    mapCost: [''],
+    websiteAccessCost: [''],
+    assessorWebsite: [''],
+    assessorAddress: [''],
+    assessorCity: [''],
+    assessorStateId: [''],
+    assessorZip: [''],
+    billingRequestId: [''],
+    mediaTypeId: [''],
+    paperType: [false],
+    excelType: [false],
+    mailType: [false],
+    emailId: ['']
   });
   options: Options[] = [
     { value: 'option1', viewValue: 'option1' },
@@ -88,141 +88,143 @@ export class AgencyDetailsComponent implements OnInit {
       this.isMobile = false;
     }
     if(this.agency && this.agency.agencyMasterId) {
-        this.agencyDetails.controls['agencyNumber'].setValue(this.agency.agencyNumber);
-        this.agencyDetails.controls['agencyName'].setValue(this.agency.agencyName); 
-        this.agencyDetails.controls['agencyWebsite'].setValue(this.agency.agencyWebsite);
-        this.agencyDetails.controls['agencyLowerLevel'].setValue(this.agency.agencyLowerLevel)
-        this.agencyDetails.controls['agencyCollecting'].setValue(this.agency.agencyCollecting)
-        this.agencyDetails.controls['agencyActive'].setValue(this.agency.agencyActive)
-        this.agencyDetails.controls['agencySuitsAddress'].setValue(this.agency.agencySuitsAddress)
-        this.agencyDetails.controls['agencyCity'].setValue(this.agency.agencyCity)
-        this.agencyDetails.controls['stateId'].setValue(this.agency.stateId)
-        this.agencyDetails.controls['zip'].setValue(this.agency.zip)
-        this.agencyDetails.controls['countyId'].setValue(this.agency.countyId)
-        this.agencyDetails.controls['contactName'].setValue(this.agency.contactName)
-        this.agencyDetails.controls['contactEmail'].setValue(this.agency.contactEmail)
-        this.agencyDetails.controls['contactPhone'].setValue(this.agency.contactPhone)
-        this.agencyDetails.controls['contactFax'].setValue(this.agency.contactFax)
-        this.agencyDetails.controls['parcelFormat'].setValue(this.agency.parcelFormat)
-        this.agencyDetails.controls['assessorName'].setValue(this.agency.assessorName)
-        this.agencyDetails.controls['assessorContactName'].setValue(this.agency.assessorContactName)
-        this.agencyDetails.controls['assessorPhoneNumber'].setValue(this.agency.assessorPhoneNumber)
-        this.agencyDetails.controls['mapCost'].setValue(this.agency.mapCost)
-        this.agencyDetails.controls['websiteAccessCost'].setValue(this.agency.websiteAccessCost)
-        this.agencyDetails.controls['assessorWebsite'].setValue(this.agency.assessorWebsite)
-        this.agencyDetails.controls['assessorAddress'].setValue(this.agency.assessorAddress)
-        this.agencyDetails.controls['assessorCity'].setValue(this.agency.assessorCity)
-        this.agencyDetails.controls['assessorStateId'].setValue(this.agency.assessorStateId)
-        this.agencyDetails.controls['assessorZip'].setValue(this.agency.assessorZip)
-        this.agencyDetails.controls['billingRequestId'].setValue(this.agency.billingRequestId)
-        this.agencyDetails.controls['mediaTypeId'].setValue(this.agency.mediaTypeId)
-        this.agencyDetails.controls['paperType'].setValue(this.agency.paperType)
-        this.agencyDetails.controls['excelType'].setValue(this.agency.excelType)
-        this.agencyDetails.controls['mailType'].setValue(this.agency.mailType)
-        this.agencyDetails.controls['emailId'].setValue(this.agency.emailId)
+        this.agencyDetailsGroup.controls['agencyNumber'].setValue(this.agency.agencyNumber);
+        this.agencyDetailsGroup.controls['agencyName'].setValue(this.agency.agencyName); 
+        this.agencyDetailsGroup.controls['agencyWebsite'].setValue(this.agency.agencyWebsite);
+        this.agencyDetailsGroup.controls['agencyLowerLevel'].setValue(this.agency.agencyLowerLevel)
+        this.agencyDetailsGroup.controls['agencyCollecting'].setValue(this.agency.agencyCollecting)
+        this.agencyDetailsGroup.controls['agencyActive'].setValue(this.agency.agencyActive)
+        this.agencyDetailsGroup.controls['agencySuitsAddress'].setValue(this.agency.agencySuitsAddress)
+        this.agencyDetailsGroup.controls['agencyCity'].setValue(this.agency.agencyCity)
+        this.agencyDetailsGroup.controls['stateId'].setValue(this.agency.stateId)
+        this.agencyDetailsGroup.controls['zip'].setValue(this.agency.zip)
+        this.agencyDetailsGroup.controls['countyId'].setValue(this.agency.countyId)
+        this.agencyDetailsGroup.controls['contactName'].setValue(this.agency.contactName)
+        this.agencyDetailsGroup.controls['contactEmail'].setValue(this.agency.contactEmail)
+        this.agencyDetailsGroup.controls['contactPhone'].setValue(this.agency.contactPhone)
+        this.agencyDetailsGroup.controls['contactFax'].setValue(this.agency.contactFax)
+        this.agencyDetailsGroup.controls['parcelFormat'].setValue(this.agency.parcelFormat)
+        this.agencyDetailsGroup.controls['assessorName'].setValue(this.agency.assessorName)
+        this.agencyDetailsGroup.controls['assessorContactName'].setValue(this.agency.assessorContactName)
+        this.agencyDetailsGroup.controls['assessorPhoneNumber'].setValue(this.agency.assessorPhoneNumber)
+        this.agencyDetailsGroup.controls['mapCost'].setValue(this.agency.mapCost)
+        this.agencyDetailsGroup.controls['websiteAccessCost'].setValue(this.agency.websiteAccessCost)
+        this.agencyDetailsGroup.controls['assessorWebsite'].setValue(this.agency.assessorWebsite)
+        this.agencyDetailsGroup.controls['assessorAddress'].setValue(this.agency.assessorAddress)
+        this.agencyDetailsGroup.controls['assessorCity'].setValue(this.agency.assessorCity)
+        this.agencyDetailsGroup.controls['assessorStateId'].setValue(this.agency.assessorStateId)
+        this.agencyDetailsGroup.controls['assessorZip'].setValue(this.agency.assessorZip)
+        this.agencyDetailsGroup.controls['billingRequestId'].setValue(this.agency.billingRequestId)
+        this.agencyDetailsGroup.controls['mediaTypeId'].setValue(this.agency.mediaTypeId)
+        this.agencyDetailsGroup.controls['paperType'].setValue(this.agency.paperType)
+        this.agencyDetailsGroup.controls['excelType'].setValue(this.agency.excelType)
+        this.agencyDetailsGroup.controls['mailType'].setValue(this.agency.mailType)
+        this.agencyDetailsGroup.controls['emailId'].setValue(this.agency.emailId)
     }
   }
 
   get agencyNumber() {
-    return this.agencyDetails.controls['agencyNumber'];
+    return this.agencyDetailsGroup.controls['agencyNumber'];
   }
   get agencyName() {
-    return this.agencyDetails.controls['agencyName'];
+    return this.agencyDetailsGroup.controls['agencyName'];
   }
   get agencyWebsite() {
-    return this.agencyDetails.controls['agencyWebsite'];
+    return this.agencyDetailsGroup.controls['agencyWebsite'];
   }
   get agencyLowerLevel() {
-    return this.agencyDetails.controls['agencyLowerLevel'];
+    return this.agencyDetailsGroup.controls['agencyLowerLevel'];
   }
   get agencyCollecting() {
-    return this.agencyDetails.controls['agencyCollecting'];
+    return this.agencyDetailsGroup.controls['agencyCollecting'];
   }
   get agencyActive() {
-    return this.agencyDetails.controls['agencyActive'];
+    return this.agencyDetailsGroup.controls['agencyActive'];
   }
   get agencySuitsAddress() {
-    return this.agencyDetails.controls['agencySuitsAddress'];
+    return this.agencyDetailsGroup.controls['agencySuitsAddress'];
   }
   get agencyCity() {
-    return this.agencyDetails.controls['agencyCity'];
+    return this.agencyDetailsGroup.controls['agencyCity'];
   }
   get stateId() {
-    return this.agencyDetails.controls['stateId'];
+    return this.agencyDetailsGroup.controls['stateId'];
   }
   get zip() {
-    return this.agencyDetails.controls['zip'];
+    return this.agencyDetailsGroup.controls['zip'];
   }
   get countyId() {
-    return this.agencyDetails.controls['countyId'];
+    return this.agencyDetailsGroup.controls['countyId'];
   }
   get contactName() {
-    return this.agencyDetails.controls['contactName'];
+    return this.agencyDetailsGroup.controls['contactName'];
   }
   get contactEmail() {
-    return this.agencyDetails.controls['contactEmail'];
+    return this.agencyDetailsGroup.controls['contactEmail'];
   }
   get contactPhone() {
-    return this.agencyDetails.controls['contactPhone'];
+    return this.agencyDetailsGroup.controls['contactPhone'];
   }
   get contactFax() {
-    return this.agencyDetails.controls['contactFax'];
+    return this.agencyDetailsGroup.controls['contactFax'];
   }
   get parcelFormat() {
-    return this.agencyDetails.controls['parcelFormat'];
+    return this.agencyDetailsGroup.controls['parcelFormat'];
   }
   get assessorName() {
-    return this.agencyDetails.controls['assessorName'];
+    return this.agencyDetailsGroup.controls['assessorName'];
   }
   get assessorContactName() {
-    return this.agencyDetails.controls['assessorContactName'];
+    return this.agencyDetailsGroup.controls['assessorContactName'];
   }
   get assessorPhoneNumber() {
-    return this.agencyDetails.controls['assessorPhoneNumber'];
+    return this.agencyDetailsGroup.controls['assessorPhoneNumber'];
   }
   get mapCost() {
-    return this.agencyDetails.controls['mapCost'];
+    return this.agencyDetailsGroup.controls['mapCost'];
   }
   get websiteAccessCost() {
-    return this.agencyDetails.controls['websiteAccessCost'];
+    return this.agencyDetailsGroup.controls['websiteAccessCost'];
   }
   get assessorWebsite() {
-    return this.agencyDetails.controls['assessorWebsite'];
+    return this.agencyDetailsGroup.controls['assessorWebsite'];
   }
   get assessorAddress() {
-    return this.agencyDetails.controls['assessorAddress'];
+    return this.agencyDetailsGroup.controls['assessorAddress'];
   }
   get assessorCity() {
-    return this.agencyDetails.controls['assessorCity'];
+    return this.agencyDetailsGroup.controls['assessorCity'];
   }
   get assessorStateId() {
-    return this.agencyDetails.controls['assessorStateId'];
+    return this.agencyDetailsGroup.controls['assessorStateId'];
   }
   get assessorZip() {
-    return this.agencyDetails.controls['assessorZip'];
+    return this.agencyDetailsGroup.controls['assessorZip'];
   }
   get billingRequestId() {
-    return this.agencyDetails.controls['billingRequestId'];
+    return this.agencyDetailsGroup.controls['billingRequestId'];
   }
   get mediaTypeId() {
-    return this.agencyDetails.controls['mediaTypeId'];
+    return this.agencyDetailsGroup.controls['mediaTypeId'];
   }
   get paperType() {
-    return this.agencyDetails.controls['paperType'];
+    return this.agencyDetailsGroup.controls['paperType'];
   }
   get excelType() {
-    return this.agencyDetails.controls['excelType'];
+    return this.agencyDetailsGroup.controls['excelType'];
   }
   get mailType() {
-    return this.agencyDetails.controls['mailType'];
+    return this.agencyDetailsGroup.controls['mailType'];
   }
   get emailId() {
-    return this.agencyDetails.controls['emailId'];
+    return this.agencyDetailsGroup.controls['emailId'];
   }
   openLink(link: string) {
     window.open(link, '_blank');
   }
+
   save(form: FormGroup) {
+    debugger;
     this.newAgencyDetails = Object.create({});
     this.newAgencyDetails.agencyNumber = form.controls['agencyNumber'].value;
     this.newAgencyDetails.agencyName = form.controls['agencyName'].value;
@@ -264,7 +266,7 @@ export class AgencyDetailsComponent implements OnInit {
     this.newAgencyDetails.excelType = form.controls['excelType'].value;
     this.newAgencyDetails.mailType = form.controls['mailType'].value;
     this.newAgencyDetails.emailId = form.controls['emailId'].value;
-    this.newAgencyDetails.agencyMasterId = this.agency.agencyMasterId;
+    this.newAgencyDetails.agencyMasterId = this.agency.agencyMasterId?this.agency.agencyMasterId: "";
     this.newAgencyDetails.agencyAddress = this.agency.agencyAddress;
     this.newAgencyDetails.agencyState = this.agency.agencyState;
     this.newAgencyDetails.agencyPhonenumber = this.agency.agencyPhonenumber;
@@ -279,5 +281,9 @@ export class AgencyDetailsComponent implements OnInit {
     } else {
       this.agencyFacade.saveAgencyDetails(this.newAgencyDetails);
     }
+  }
+
+  isRequired(name: string): boolean {
+    return this.agencyDetailsGroup.get(name)?.hasValidator(Validators.required) ?? false;
   }
 }

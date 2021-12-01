@@ -136,4 +136,8 @@ export class AgencyPaymentComponent implements OnInit {
     }
   }
 
+  isPaymentFormFieldRequired(name: string): boolean {
+    return this.paymentForm.get(name)?.hasValidator(Validators.required) ?? false;
+  }
+
 }

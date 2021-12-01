@@ -98,7 +98,7 @@
       <div class="col-6">
         <mat-form-field class="w-100">
           <mat-label>Year</mat-label>
-          <input matInput formControlName="year">
+          <input matInput formControlName="year" [required]="isRequired('year')">
           <mat-error *ngIf="yearFC.errors?.required">
             Required 
           </mat-error>
@@ -107,7 +107,7 @@
       <div class="col-6">
         <mat-form-field  class="w-100">
           <mat-label>Installment</mat-label>
-          <input matInput formControlName="installment">
+          <input matInput formControlName="installment" [required]="isRequired('installment')">
           <mat-error *ngIf="installmentFC.errors?.required">
             Required 
           </mat-error>
@@ -116,7 +116,7 @@
       <div class="col-6">
         <mat-form-field  class="w-100">
           <mat-label>Base</mat-label>
-          <input [matDatepicker]="baseDatePicker" matInput formControlName="base">
+          <input [matDatepicker]="baseDatePicker" matInput formControlName="base" [required]="isRequired('base')">
           <mat-datepicker-toggle matSuffix [for]="baseDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #baseDatePicker></mat-datepicker>
           <mat-error *ngIf="baseFC.errors?.required">
@@ -127,7 +127,7 @@
       <div class="col-6">
         <mat-form-field  class="w-100">
           <mat-label>Discount</mat-label>
-          <input matInput formControlName="discount">
+          <input matInput formControlName="discount" [required]="isRequired('discount')">
           <mat-error *ngIf="discountFC.errors?.required">
             Required 
           </mat-error>
@@ -136,7 +136,8 @@
       <div class="col-6">
         <mat-form-field  class="w-100">
           <mat-label>Penalty</mat-label>
-          <input [matDatepicker]="penaltyDatePicker" matInput formControlName="penalty">
+          <input [matDatepicker]="penaltyDatePicker" matInput formControlName="penalty" 
+          [required]="isRequired('penalty')">
           <mat-datepicker-toggle matSuffix [for]="penaltyDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #penaltyDatePicker></mat-datepicker>
           <mat-error *ngIf="penaltyFC.errors?.required">
@@ -147,7 +148,7 @@
       <div class="col-6">
         <mat-form-field  class="w-100">
           <mat-label>Late Release</mat-label>
-          <input matInput formControlName="lateRelease">
+          <input matInput formControlName="lateRelease" [required]="isRequired('lateRelease')">
           <mat-error *ngIf="lateReleaseFC.errors?.required">
             Required 
           </mat-error>
@@ -156,7 +157,8 @@
       <div class="col-6">
         <mat-form-field  class="w-100">
           <mat-label>Bill Request</mat-label>
-          <input [matDatepicker]="billRequestDatePicker" matInput formControlName="billRequest">
+          <input [matDatepicker]="billRequestDatePicker" matInput formControlName="billRequest" 
+          [required]="isRequired('billRequest')">
           <mat-datepicker-toggle matSuffix [for]="billRequestDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #billRequestDatePicker></mat-datepicker>
           <mat-error *ngIf="billRequestFC.errors?.required">

@@ -8,11 +8,12 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 
 /** Passes HttpErrorResponse to application-wide error handler */
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-  constructor(private injector: Injector) {}
+  constructor(private injector: Injector, public agencyStoreFacade:AgencyStoreFacade) {}
 
   intercept(
     request: HttpRequest<any>,
@@ -25,6 +26,8 @@ export class HttpErrorInterceptor implements HttpInterceptor {
             const appErrorHandler = this.injector.get(ErrorHandler);
             appErrorHandler.handleError(err);
           }
+
+          this.agencyStoreFacade.stopActionProgress();
         }
       })
     );

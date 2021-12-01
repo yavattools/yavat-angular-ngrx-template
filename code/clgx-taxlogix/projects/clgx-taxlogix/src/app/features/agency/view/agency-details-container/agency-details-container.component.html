@@ -6,10 +6,15 @@
         <i class="fa fa-chevron-left"></i> Agencies</button>
     </mat-card-header>
     <div class="details-container-content">
-      <div class="agency-details-container-head">
+      <div class="agency-details-container-head" *ngIf="(agency$ | async)?.agencyName">
         <h3 class="page-title">{{(agency$ | async)?.agencyName}}</h3>
         <span class="page-subtitle">{{(agency$ | async)?.agencyNumber}}</span>
       </div>
+      <div class="agency-details-container-head" *ngIf="!(agency$ | async)?.agencyName">
+        <h3 class="page-title">New Agency</h3>
+        <span class="page-subtitle">Fill Details and Submit</span>
+      </div>
+    <mat-progress-bar mode="indeterminate" *ngIf="(agencyFacade.actionInProgress$ | async) || false"></mat-progress-bar>
     <mat-tab-group   mat-align-tabs="start" [(selectedIndex)]="selectedTabIndex">
       <mat-tab label="Details">
           <clgx-agency-details></clgx-agency-details>

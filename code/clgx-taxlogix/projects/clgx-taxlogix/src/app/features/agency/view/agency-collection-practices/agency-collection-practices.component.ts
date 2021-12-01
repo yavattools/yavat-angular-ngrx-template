@@ -46,7 +46,7 @@ export class AgencyCollectionPracticesComponent implements OnInit {
 
   isMobile: boolean = false;
   constructor( public deviceService:DeviceDetectorService, private apiDataService: AgencyDataService,public dialog: MatDialog,
-    private agencyStoreFacade : AgencyStoreFacade,
+    public agencyStoreFacade : AgencyStoreFacade,
     private authStoreFacade : AuthStoreFacade){
       this.collectionDates$ = this.agencyStoreFacade.collectionDates$;
       this.authStoreFacade.loginProfile$.subscribe(data=>{
@@ -60,7 +60,7 @@ export class AgencyCollectionPracticesComponent implements OnInit {
       }
   }
   
-  editDeal(element:CollectionDates){   
+  editDates(element:CollectionDates){   
       const dialogRef = this.dialog.open(EditAgencyCollectionPracticeComponent, {
         width: '600px',
         data: element
@@ -70,6 +70,19 @@ export class AgencyCollectionPracticesComponent implements OnInit {
         console.log('The dialog was closed');        
       });
   }
+
+  addCollectionDates($event: MouseEvent){  
+    let neDates: CollectionDates = new CollectionDates();
+
+    const dialogRef = this.dialog.open(EditAgencyCollectionPracticeComponent, {
+      width: '600px',
+      data: neDates
+    });
+    this.agencyStoreFacade.setCollectionDate(neDates);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');        
+    });
+}
   
   
    

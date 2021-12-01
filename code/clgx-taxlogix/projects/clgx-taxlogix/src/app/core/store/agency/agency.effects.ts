@@ -90,6 +90,20 @@ export class AgencyEffects {
       )
     );
 
+    saveCollectionDates = createEffect(() =>
+    this.actions$.pipe(
+      ofType(agencyActions.actionSaveCollectionDates),
+      switchMap((action)=>this.agencyDataService.addCollectionDate(action.collectionDates).pipe(
+        mergeMap( collectioNDates=>[
+          agencyActions.actionSaveCollectionDatesSuccess(collectioNDates),
+        ]),
+        catchError(error => of(agencyActions.actionSaveCollectionDatesFailure({error : error})))
+      ))
+    )
+    );
+  
+  
+
   updateCollectionDate = createEffect(()=>
   this.actions$.pipe(
     ofType(agencyActions.actionUpdateCollectionDates),

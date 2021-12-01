@@ -11,35 +11,35 @@
             <div class="details-inputs">
                 <mat-form-field appearance="outline">
                   <mat-label>Contact Name</mat-label>
-                  <input matInput formControlName="contactName">
+                  <input matInput formControlName="contactName" [required]="isescrowFormRequired('contactName')">
                   <mat-error *ngIf="contactName?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Contact Phone</mat-label>
-                  <input matInput formControlName="contactPhone">
+                  <input matInput formControlName="contactPhone" [required]="isescrowFormRequired('contactPhone')">
                   <mat-error *ngIf="contactPhone?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Contact Fax</mat-label>
-                  <input matInput formControlName="contactFax">
+                  <input matInput formControlName="contactFax" [required]="isescrowFormRequired('contactFax')">
                   <mat-error *ngIf="contactFax?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Contact Email</mat-label>
-                  <input matInput formControlName="contactEmail">
+                  <input matInput formControlName="contactEmail" [required]="isescrowFormRequired('contactEmail')">
                   <mat-error *ngIf="contactEmail?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Agency Website</mat-label>
-                  <input matInput formControlName="agencyWebsite">
+                  <input matInput formControlName="agencyWebsite" [required]="isescrowFormRequired('agencyWebsite')">
                   <mat-error *ngIf="agencyWebsite?.errors?.required">
                     Required Field
                   </mat-error>
@@ -53,42 +53,48 @@
             <div class="details-inputs">
               <div class="toggle">
                 <mat-label>AMT Available on Website</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="amtAvailableOnWebsite">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isescrowFormRequired('amtAvailableOnWebsite')" formControlName="amtAvailableOnWebsite">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div class="toggle">
                 <mat-label>Cost to Pay Using Copy of TB</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="costToPayUsingCopyOfTb">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isescrowFormRequired('costToPayUsingCopyOfTb')" formControlName="costToPayUsingCopyOfTb">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div class="toggle">
                 <mat-label>Listing Accepted for Payment</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="listingAcceptedForPayment">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isescrowFormRequired('listingAcceptedForPayment')" formControlName="listingAcceptedForPayment">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div class="toggle">
                 <mat-label>Mail-a-way Only Req</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mailAWayOnlyReq">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isescrowFormRequired('mailAWayOnlyReq')" formControlName="mailAWayOnlyReq">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div class="toggle">
                 <mat-label>Agency Expect Web TB</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agencyExpectWebTb">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style"
+                [required]="isescrowFormRequired('agencyExpectWebTb')"  formControlName="agencyExpectWebTb">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div class="toggle">
                 <mat-label>Postmark Accepted</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="postmarkAccepted">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isescrowFormRequired('postmarkAccepted')"  formControlName="postmarkAccepted">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
@@ -99,21 +105,21 @@
             <div class="details-inputs">
                 <mat-form-field appearance="outline" style="width: 100%;margin-top: 20px;">
                   <mat-label>Copy Fee</mat-label>
-                  <input matInput formControlName="copyFee">
+                  <input matInput formControlName="copyFee" [required]="isescrowFormRequired('copyFee')" >
                   <mat-error *ngIf="copyFee?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" style="width: 100%;">
                   <mat-label>Fee for Mail-a-Way</mat-label>
-                  <input matInput formControlName="feeForMailAWay">
+                  <input matInput formControlName="feeForMailAWay" [required]="isescrowFormRequired('feeForMailAWay')">
                   <mat-error *ngIf="feeForMailAWay?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" style="width: 100%;">
                   <mat-label>No. of Parcels Per Check</mat-label>
-                  <input matInput formControlName="noOfParcelsPerCheck">
+                  <input matInput formControlName="noOfParcelsPerCheck" [required]="isescrowFormRequired('noOfParcelsPerCheck')">
                   <mat-error *ngIf="noOfParcelsPerCheck?.errors?.required">
                     Required Field
                   </mat-error>
@@ -124,7 +130,7 @@
         <div class="divider">
         </div>
         <div class="save-btn">
-          <button>Save</button>
+          <button  [disabled]="escrowForm.invalid">Save</button>
         </div>
         </form>
     </mat-tab>
@@ -138,42 +144,42 @@
             <div class="details-inputs">
                 <mat-form-field appearance="outline">
                   <mat-label>Collecting Agency Name</mat-label>
-                  <input matInput formControlName="collectingAgencyName">
+                  <input matInput formControlName="collectingAgencyName"  [required]="isnonEscrowFormRequired('collectingAgencyName')">
                   <mat-error *ngIf="collectingAgencyName?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Contact Name</mat-label>
-                  <input matInput formControlName="contactName">
+                  <input matInput formControlName="contactName" [required]="isnonEscrowFormRequired('contactName')">
                   <mat-error *ngIf="contactNameNonEscrow?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Contact Phone</mat-label>
-                  <input matInput formControlName="contactPhone">
+                  <input matInput formControlName="contactPhone" [required]="isnonEscrowFormRequired('contactPhone')">
                   <mat-error *ngIf="contactPhoneNonEscrow?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Contact Fax</mat-label>
-                  <input matInput formControlName="contactFax">
+                  <input matInput formControlName="contactFax" [required]="isnonEscrowFormRequired('contactFax')">
                   <mat-error *ngIf="contactFaxNonEscrow?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Contact Email</mat-label>
-                  <input matInput formControlName="contactEmail">
+                  <input matInput formControlName="contactEmail" [required]="isnonEscrowFormRequired('contactEmail')">
                   <mat-error *ngIf="contactEmailNonEscrow?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Agency Website</mat-label>
-                  <input matInput formControlName="agencyWebsite">
+                  <input matInput formControlName="agencyWebsite" [required]="isnonEscrowFormRequired('agencyWebsite')">
                   <mat-error *ngIf="agencyWebsiteNonEscrow?.errors?.required">
                     Required Field
                   </mat-error>
@@ -187,35 +193,39 @@
             <div class="details-inputs">
               <div class="toggle">
                 <mat-label>Collected by Agency</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="collectedByAgency">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isnonEscrowFormRequired('collectedByAgency')" formControlName="collectedByAgency">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div class="toggle">
                 <mat-label>Third Party Collections</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="thirdPartyCollections">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isnonEscrowFormRequired('thirdPartyCollections')" formControlName="thirdPartyCollections">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div class="toggle">
                 <mat-label>AMT Available on Website</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="amtAvailableOnWebsite">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isnonEscrowFormRequired('amtAvailableOnWebsite')" formControlName="amtAvailableOnWebsite">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <div class="toggle">
                 <mat-label>Mail-a-way Only Req</mat-label>
-                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mailAWayOnlyReq">
+                <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+                [required]="isnonEscrowFormRequired('mailAWayOnlyReq')" formControlName="mailAWayOnlyReq">
                   <mat-button-toggle class="mat-button-toggle" value="yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="no"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <mat-form-field appearance="outline">
                 <mat-label>Fee for Mail-a-Way</mat-label>
-                <input matInput formControlName="feeForMailAWay">
+                <input matInput formControlName="feeForMailAWay" [required]="isnonEscrowFormRequired('feeForMailAWay')">
                 <mat-error *ngIf="feeForMailAWayNonEscrow?.errors?.required">
                   Required Field
                 </mat-error>
@@ -229,21 +239,21 @@
             <div class="details-inputs">
                 <mat-form-field appearance="outline" style="width: 100%">
                   <mat-label>Pay to Name</mat-label>
-                  <input matInput formControlName="payToName">
+                  <input matInput formControlName="payToName" [required]="isnonEscrowFormRequired('payToName')">
                   <mat-error *ngIf="payToName?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" style="width: 100%;">
                   <mat-label>Pay to Address</mat-label>
-                  <input matInput formControlName="payToAddress">
+                  <input matInput formControlName="payToAddress" [required]="isnonEscrowFormRequired('payToAddress')">
                   <mat-error *ngIf="payToAddress?.errors?.required">
                     Required Field
                   </mat-error>
                 </mat-form-field>
                 <mat-form-field appearance="outline" style="width: 100%;">
                   <mat-label>Pay to City</mat-label>
-                  <input matInput formControlName="payToCity">
+                  <input matInput formControlName="payToCity" [required]="isnonEscrowFormRequired('payToCity')">
                   <mat-error *ngIf="payToCity?.errors?.required">
                     Required Field
                   </mat-error>
@@ -251,14 +261,14 @@
                 <div class="state-zip" style="width: 100%;">
                   <mat-form-field appearance="outline" style="width: 40%;">
                     <mat-label>State</mat-label>
-                    <input matInput formControlName="stateId">
+                    <input matInput formControlName="stateId" [required]="isnonEscrowFormRequired('stateId')">
                     <mat-error *ngIf="stateId?.errors?.required">
                       Required Field
                     </mat-error>
                   </mat-form-field>
                   <mat-form-field appearance="outline" style="width : 55%">
                     <mat-label>Zip</mat-label>
-                    <input matInput formControlName="zipId">
+                    <input matInput formControlName="zipId" [required]="isnonEscrowFormRequired('zipId')">
                     <mat-error *ngIf="zipId?.errors?.required">
                       Required Field
                     </mat-error>
@@ -275,7 +285,7 @@
         <div class="divider">
         </div>
         <div class="save-btn">
-          <button>Save</button>
+          <button [disabled]="nonEscrowForm.invalid">Save</button>
         </div>
         </form>
     </mat-tab>

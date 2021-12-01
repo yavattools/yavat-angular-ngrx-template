@@ -300,4 +300,12 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     }
   }
 
+  isescrowFormRequired(name: string): boolean {
+    return this.escrowForm.get(name)?.hasValidator(Validators.required) ?? false;
+  }
+
+  isnonEscrowFormRequired(name: string): boolean {
+    return this.nonEscrowForm.get(name)?.hasValidator(Validators.required) ?? false;
+  }
+
 }

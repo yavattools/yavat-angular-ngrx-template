@@ -150,6 +150,13 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     window.open(link, '_blank');
   }
 
+  clearNameFilter($event: MouseEvent){
+    $event.stopPropagation();
+    this.agencyFilter.name = ''; 
+
+    this.searchAgency($event);
+  }
+  
   addNewAgency(event: MouseEvent) {
     let newAgency: Agency = new Agency();
     this.agencyFacade.setSelectedAgency(newAgency);

@@ -16,7 +16,7 @@
       </div>
     </div>
   </div>
-  <form class="form" [formGroup]="agencyDetails" (ngSubmit)="save(agencyDetails)">
+  <form class="form" [formGroup]="agencyDetailsGroup" (ngSubmit)="save(agencyDetailsGroup)">
   <div class="agency-details">
     <div class="details">
       <div class="detail">
@@ -25,28 +25,28 @@
       <div class="details-inputs">
           <mat-form-field appearance="outline">
             <mat-label>Agency Number</mat-label>
-            <input matInput formControlName="agencyNumber">
+            <input matInput formControlName="agencyNumber"  [required]="isRequired('agencyNumber')">
             <mat-error *ngIf="agencyNumber.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Agency Name</mat-label>
-            <input matInput formControlName="agencyName">
+            <input matInput formControlName="agencyName" [required]="isRequired('agencyName')">
             <mat-error *ngIf="agencyName.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Agency Website</mat-label>
-            <input matInput formControlName="agencyWebsite">
+            <input matInput formControlName="agencyWebsite" [required]="isRequired('agencyWebsite')">
             <mat-error *ngIf="agencyWebsite.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Lower Level Agency</mat-label>
-            <mat-select formControlName="agencyLowerLevel">
+            <mat-select formControlName="agencyLowerLevel" [required]="isRequired('agencyLowerLevel')">
               <mat-option *ngFor="let option of options" [value]="option.value">
                 {{option.viewValue}}
               </mat-option>
@@ -57,14 +57,16 @@
           </mat-form-field>
           <div class="toggle">
             <mat-label>Collecting Agency</mat-label>
-            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agencyCollecting">
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+            [required]="isRequired('agencyCollecting')" formControlName="agencyCollecting">
               <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
               <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
             </mat-button-toggle-group>
           </div>
           <div class="toggle">
             <mat-label>Active?</mat-label>
-            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="agencyActive">
+            <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+            [required]="isRequired('agencyActive')" formControlName="agencyActive">
               <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
               <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
             </mat-button-toggle-group>
@@ -78,14 +80,14 @@
       <div class="details-inputs">
           <mat-form-field appearance="outline">
             <mat-label>Agency Suits Address</mat-label>
-            <input matInput formControlName="agencySuitsAddress">
+            <input matInput formControlName="agencySuitsAddress" [required]="isRequired('agencySuitsAddress')">
             <mat-error *ngIf="agencySuitsAddress.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Agency City</mat-label>
-            <input matInput formControlName="agencyCity">
+            <input matInput formControlName="agencyCity" [required]="isRequired('agencyCity')">
             <mat-error *ngIf="agencyCity.errors?.required">
               Required field
             </mat-error>
@@ -93,14 +95,14 @@
           <div class="state-zip">
             <mat-form-field appearance="outline" style="width: 40%;">
               <mat-label>State</mat-label>
-              <input matInput formControlName="stateId">
+              <input matInput formControlName="stateId" [required]="isRequired('stateId')">
               <mat-error *ngIf="stateId.errors?.required">
                 Required field
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" style="width : 55%">
               <mat-label>Zip</mat-label>
-              <input matInput formControlName="zip">
+              <input matInput formControlName="zip" [required]="isRequired('zip')">
               <mat-error *ngIf="zip.errors?.required">
                 Required field
               </mat-error>
@@ -108,7 +110,7 @@
           </div>
           <mat-form-field appearance="outline">
             <mat-label>County</mat-label>
-            <input matInput formControlName="countyId">
+            <input matInput formControlName="countyId" [required]="isRequired('countyId')">
             <mat-error *ngIf="countyId.errors?.required">
               Required field
             </mat-error>
@@ -122,35 +124,35 @@
       <div class="details-inputs">
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Contact Name</mat-label>
-            <input matInput formControlName="contactName">
+            <input matInput formControlName="contactName" [required]="isRequired('contactName')">
             <mat-error *ngIf="contactName.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Contact Email</mat-label>
-            <input matInput formControlName="contactEmail">
+            <input matInput formControlName="contactEmail" [required]="isRequired('contactEmail')">
             <mat-error *ngIf="contactEmail.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Contact Phone</mat-label>
-            <input matInput formControlName="contactPhone">
+            <input matInput formControlName="contactPhone" [required]="isRequired('contactPhone')">
             <mat-error *ngIf="contactPhone.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Contact Fax</mat-label>
-            <input matInput formControlName="contactFax">
+            <input matInput formControlName="contactFax" [required]="isRequired('contactFax')">
             <mat-error *ngIf="contactFax.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%">
             <mat-label>Parsel Format</mat-label>
-            <input matInput formControlName="parcelFormat">
+            <input matInput formControlName="parcelFormat" [required]="isRequired('parcelFormat')">
             <mat-error *ngIf="parcelFormat.errors?.required">
               Required field
             </mat-error>
@@ -168,42 +170,42 @@
       <div class="details-inputs">
         <mat-form-field appearance="outline">
           <mat-label>Assessor Name</mat-label>
-          <input matInput formControlName="assessorName">
+          <input matInput formControlName="assessorName" [required]="isRequired('assessorName')">
           <mat-error *ngIf="assessorName.errors?.required">
             Required field
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor Contact Name</mat-label>
-          <input matInput formControlName="assessorContactName">
+          <input matInput formControlName="assessorContactName" [required]="isRequired('assessorContactName')">
           <mat-error *ngIf="assessorContactName.errors?.required">
             Required field
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor Phone</mat-label>
-          <input matInput formControlName="assessorPhoneNumber">
+          <input matInput formControlName="assessorPhoneNumber" [required]="isRequired('assessorPhoneNumber')">
           <mat-error *ngIf="assessorPhoneNumber.errors?.required">
             Required field
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Map Cost</mat-label>
-          <input matInput formControlName="mapCost">
+          <input matInput formControlName="mapCost" [required]="isRequired('mapCost')">
           <mat-error *ngIf="mapCost.errors?.required">
             Required field
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Website Access Cost</mat-label>
-          <input matInput formControlName="websiteAccessCost">
+          <input matInput formControlName="websiteAccessCost" [required]="isRequired('websiteAccessCost')">
           <mat-error *ngIf="websiteAccessCost.errors?.required">
             Required field
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor Website</mat-label>
-          <input matInput formControlName="assessorWebsite">
+          <input matInput formControlName="assessorWebsite" [required]="isRequired('assessorWebsite')">
           <mat-error *ngIf="assessorWebsite.errors?.required">
             Required field
           </mat-error>
@@ -217,14 +219,14 @@
       <div class="details-inputs">
         <mat-form-field appearance="outline">
           <mat-label>Assessor Address</mat-label>
-          <input matInput formControlName="assessorAddress">
+          <input matInput formControlName="assessorAddress" [required]="isRequired('assessorAddress')">
           <mat-error *ngIf="assessorAddress.errors?.required">
             Required field
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor City</mat-label>
-          <input matInput formControlName="assessorCity">
+          <input matInput formControlName="assessorCity" [required]="isRequired('assessorCity')">
           <mat-error *ngIf="assessorCity.errors?.required">
             Required field
           </mat-error>
@@ -232,14 +234,14 @@
         <div class="state-zip">
           <mat-form-field appearance="outline" style="width: 40%;">
             <mat-label>State</mat-label>
-            <input matInput formControlName="assessorStateId">
+            <input matInput formControlName="assessorStateId" [required]="isRequired('assessorStateId')">
             <mat-error *ngIf="assessorStateId.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width : 55%">
             <mat-label>Zip</mat-label>
-            <input matInput formControlName="assessorZip">
+            <input matInput formControlName="assessorZip" [required]="isRequired('assessorZip')">
             <mat-error *ngIf="assessorZip.errors?.required">
               Required field
             </mat-error>
@@ -254,7 +256,7 @@
       <div class="details-inputs">
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Billing Request Format</mat-label>
-          <mat-select formControlName="billingRequestId">
+          <mat-select formControlName="billingRequestId" [required]="isRequired('billingRequestId')">
             <mat-option *ngFor="let option of options" [value]="option.value">
               {{option.viewValue}}
             </mat-option>
@@ -265,7 +267,7 @@
         </mat-form-field>
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Media Type</mat-label>
-          <mat-select formControlName="mediaTypeId">
+          <mat-select formControlName="mediaTypeId" [required]="isRequired('mediaTypeId')">
             <mat-option *ngFor="let option of options" [value]="option.value">
               {{option.viewValue}}
             </mat-option>
@@ -276,28 +278,31 @@
         </mat-form-field>
         <div class="toggle" style="width: 100%">
           <mat-label>Type: Paper</mat-label>
-          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="paperType">
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+              [required]="isRequired('paperType')" formControlName="paperType">
             <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
             <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <div class="toggle" style="width: 100%">
           <mat-label>Excel</mat-label>
-          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="excelType">
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+          [required]="isRequired('excelType')" formControlName="excelType">
             <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
             <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <div class="toggle" style="width: 100%">
           <mat-label>Mail</mat-label>
-          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" formControlName="mailType">
+          <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
+          [required]="isRequired('mailType')" formControlName="mailType">
             <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
             <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Email ID</mat-label>
-          <input matInput formControlName="emailId">
+          <input matInput formControlName="emailId" [required]="isRequired('emailId')">
           <mat-error *ngIf="emailId.errors?.required">
             Required field
           </mat-error>
@@ -308,7 +313,7 @@
   <div class="divider">
   </div>
   <div class="save-btn">
-    <button [disabled]="agencyDetails.invalid">Save</button>
+    <button mat-raised-button color="primary" [disabled]="agencyDetailsGroup.invalid">Save</button>
   </div>
   </form>
 </div>

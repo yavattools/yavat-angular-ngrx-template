@@ -75,7 +75,15 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     this.newCollectionDateForm.modifiedBy = this.collectionDate.modifiedBy;
     this.newCollectionDateForm.createdByUser = this.collectionDate.createdByUser;
     this.newCollectionDateForm.modifiedByUser = this.collectionDate.modifiedByUser;
-    this.agencyStoreFacade.updateCollectionDates(this.newCollectionDateForm);
+    if(this.collectionDate.collectionPracticesId){
+      this.agencyStoreFacade.updateCollectionDates(this.newCollectionDateForm);
+    }else{
+      this.agencyStoreFacade.saveCollectionDates(this.newCollectionDateForm);
+    }
     this.dialogRef.close();
+  }
+
+  isRequired(name: string): boolean {
+    return this.editForm.get(name)?.hasValidator(Validators.required) ?? false;
   }
 }

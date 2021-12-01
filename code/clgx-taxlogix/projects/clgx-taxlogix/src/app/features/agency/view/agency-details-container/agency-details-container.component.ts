@@ -22,7 +22,7 @@ export class AgencyDetailsContainerComponent implements OnInit {
   isMobile: Boolean = false;
   constructor(
     public deviceService: DeviceDetectorService,
-    private agencyFacade: AgencyStoreFacade,
+    public agencyFacade: AgencyStoreFacade,
     private router: Router
   ) {
     this.agency$ = this.agencyFacade.selectedAgency$;

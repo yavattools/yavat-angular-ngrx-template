@@ -1,0 +1,35 @@
+
+
+1. get Agency details - working
+2. get Escrow  - working - with data
+3. get Non Escrow - working - with data
+4. get collections - 200 with no fileds.
+5. get payements - 200 with no fileds
+
+1. post - agency details - Postman - working. UI - Failing 500
+2. post - escrow - working.
+3. post non escrow - working.
+4. post collection - working.
+5. post payment - working - immediate get working.
+
+1. put - agency details - working
+2. put escrow - success - immediate get is getting 500.
+3. put non escrow - 500
+4. put collection - 500
+5. put payements - success - immediate get is   not getting empty.
+
+history & log api are needed.
+
+
+UI to be updated or need clarity
+1. Agency Details - Lower level agency - options 
+   - Phone number validations.
+2. Billing Request formt - options
+3. Media Type - Options
+
+4 Need more clarity on New Agency - what to display and 
+   what are the mandatory details to create Agency.??
+5. Dont see Add collection Dates Option? where do we keep?
+6. Edit/Add Collection Dates Model window Validations what kind of ???
+
+   
