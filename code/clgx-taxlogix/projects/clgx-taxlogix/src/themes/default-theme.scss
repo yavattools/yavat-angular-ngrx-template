@@ -1,138 +1,71 @@
 @use '~@angular/material' as mat;
 
 /* For use in src/lib/core/theming/_palette.scss */
-$md-cl-primary-p: (
-  50: #e7faf9,
-  100: #c2f2f0,
-  200: #9ae9e7,
-  300: #71e0dd,
-  400: #52dad5,
-  500: #34d3ce,
-  600: #2fcec9,
-  700: #27c8c2,
-  800: #21c2bc,
-  900: #15b7b0,
-  A100: #e9fffe,
-  A200: #b6fffb,
-  A400: #83fff9,
-  A700: #69fff8,
+$clgx-primary-p: (
+  50 : #e4fffc,
+  100 : #bcfff7,
+  200 : #8ffff2,
+  300 : #62ffec,
+  400 : #41ffe8,
+  500 : #1fffe4,
+  600 : #1bffe1,
+  700 : #17ffdd,
+  800 : #12ffd9,
+  900 : #0affd1,
+  A100 : #ffffff,
+  A200 : #f5fffd,
+  A400 : #c2fff2,
+  A700 : #a8ffed,
   contrast: (
-    50: #000000,
-    100: #000000,
-    200: #000000,
-    300: #000000,
-    400: #000000,
-    500: #000000,
-    600: #000000,
-    700: #000000,
-    800: #000000,
-    900: #000000,
-    A100: #000000,
-    A200: #000000,
-    A400: #000000,
-    A700: #000000
-  )
-);
-
-$md-cl-primary: (
-    50 : #e0fdf9,
-    100 : #b3f9f1,
-    200 : #80f5e7,
-    300 : #4df1dd,
-    400 : #26eed6,
-    500 : #00ebcf,
-    600 : #00e9ca,
-    700 : #00e5c3,
-    800 : #00e2bd,
-    900 : #00ddb2,
-    A100 : #ffffff,
-    A200 : #d1fff5,
-    A400 : #9effe9,
-    A700 : #85ffe4,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #000000,
-        400 : #000000,
-        500 : #000000,
-        600 : #000000,
-        700 : #000000,
-        800 : #000000,
-        900 : #000000,
-        A100 : #000000,
-        A200 : #000000,
-        A400 : #000000,
-        A700 : #000000,
-    )
-);
-
-$md-cl-accent-p: (
-  50: #e0e2ed,
-  100: #b3b6d3,
-  200: #8085b6,
-  300: #4d5498,
-  400: #263082,
-  500: #000b6c,
-  600: #000a64,
-  700: #000859,
-  800: #00064f,
-  900: #00033d,
-  A100: #7373ff,
-  A200: #4040ff,
-  A400: #0d0dff,
-  A700: #0000f2,
-  contrast: (
-    50: #000000,
-    100: #000000,
-    200: #000000,
-    300: #ffffff,
-    400: #ffffff,
-    500: #ffffff,
-    600: #ffffff,
-    700: #ffffff,
-    800: #ffffff,
-    900: #ffffff,
-    A100: #000000,
-    A200: #ffffff,
-    A400: #ffffff,
-    A700: #ffffff
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #000000,
+      500 : #000000,
+      600 : #000000,
+      700 : #000000,
+      800 : #000000,
+      900 : #000000,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #000000,
   )
 );
 
 
-/* For use in src/lib/core/theming/_palette.scss */
-$md-cl-accent: (
-    50 : #e0e2ed,
-    100 : #b3b6d3,
-    200 : #8085b6,
-    300 : #4d5498,
-    400 : #263082,
-    500 : #000b6c,
-    600 : #000a64,
-    700 : #000859,
-    800 : #00064f,
-    900 : #00033d,
-    A100 : #7373ff,
-    A200 : #4040ff,
-    A400 : #0d0dff,
-    A700 : #0000f2,
-    contrast: (
-        50 : #000000,
-        100 : #000000,
-        200 : #000000,
-        300 : #ffffff,
-        400 : #ffffff,
-        500 : #ffffff,
-        600 : #ffffff,
-        700 : #ffffff,
-        800 : #ffffff,
-        900 : #ffffff,
-        A100 : #000000,
-        A200 : #ffffff,
-        A400 : #ffffff,
-        A700 : #ffffff,
-    )
+$clgx-accent-p: (
+  50 : #e7e9f9,
+  100 : #c3c8f0,
+  200 : #9ba3e6,
+  300 : #737edc,
+  400 : #5562d5,
+  500 : #3746cd,
+  600 : #313fc8,
+  700 : #2a37c1,
+  800 : #232fba,
+  900 : #1620ae,
+  A100 : #e1e3ff,
+  A200 : #aeb2ff,
+  A400 : #7b82ff,
+  A700 : #626aff,
+  contrast: (
+      50 : #000000,
+      100 : #000000,
+      200 : #000000,
+      300 : #000000,
+      400 : #ffffff,
+      500 : #ffffff,
+      600 : #ffffff,
+      700 : #ffffff,
+      800 : #ffffff,
+      900 : #ffffff,
+      A100 : #000000,
+      A200 : #000000,
+      A400 : #000000,
+      A700 : #ffffff,
+  )
 );
 
 
@@ -141,8 +74,8 @@ $clgx-typography: mat.define-typography-config(
   $font-family: '"Barlow", sans-serif'
 );
 
-$clgx-primary: mat.define-palette($md-cl-primary, 800, 300, 900);
-$clgx-accent: mat.define-palette($md-cl-accent, 500, 300, 900);
+$clgx-primary: mat.define-palette($clgx-primary-p, 500, 300, 900);
+$clgx-accent: mat.define-palette($clgx-accent-p, 500, 300, 900);
 $clgx-warn: mat.define-palette(mat.$pink-palette, 600);
 $clgx-success: mat.define-palette(mat.$green-palette, 600);
 

@@ -58,7 +58,7 @@
             <span class="agency-table-header-label">Id</span> 
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <strong>{{ value }}</strong>
+            <span class="agency-table-cell-data">{{ value }}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="agencyNumber" [width]="120">
@@ -66,7 +66,7 @@
             <span class="agency-table-header-label">Number</span> 
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <strong>{{ value }}</strong>
+            <span class="agency-table-cell-data">{{ value }}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="agencyName" [width]="250">
@@ -74,7 +74,7 @@
             <span class="agency-table-header-label">Name</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            {{ value }}
+            <span class="agency-table-cell-data">{{ value }}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="agencySuitsAddress" [width]="350">
@@ -82,7 +82,7 @@
             <span class="agency-table-header-label">Address</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            {{ value }}
+            <span class="agency-table-cell-data">{{ value }}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="agencyCity" [width]="175">
@@ -90,7 +90,7 @@
             <span class="agency-table-header-label">City</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            {{ value }}
+            <span class="agency-table-cell-data">{{ value }}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="assessorPhoneNumber" [width]="125">
@@ -98,7 +98,7 @@
             <span class="agency-table-header-label">Phone Number</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            {{ value }}
+            <span class="agency-table-cell-data">{{ value }}</span>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="actions" [width]="100" [resizeable]="false" frozenRight="true">
@@ -114,7 +114,7 @@
         </ngx-datatable-column>
       </ngx-datatable>
       <button mat-icon-button color="primary" 
-      [ngClass]="routeAnimationsElements"
+       [ngClass]="routeAnimationsElements"
         [disabled]="(agencyFacade.actionInProgress$ | async) || false"
         matTooltip="Add New Agency"
         (click)="addNewAgency($event)"

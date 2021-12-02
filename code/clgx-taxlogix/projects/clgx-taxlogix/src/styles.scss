@@ -27,9 +27,7 @@
 @include mat.core();
 
 @import './themes/default-theme';
-@import './themes/light-theme';
 @import './themes/black-theme';
-@import './themes/nature-theme';
 
 @import '~@swimlane/ngx-datatable/index.css';
 @import '~@swimlane/ngx-datatable/themes/material.scss';
@@ -58,8 +56,8 @@
   @include clgx-agency-landing-component-theme($theme);
   @include clgx-agency-details-container-component-theme($theme);
   @include clgx-agency-details-component-theme($theme);
-  @include  clgx-agency-collection-practices-component-theme($theme);
-  @include  clgx-edit-agency-collection-practices-component-theme($theme);
+  @include clgx-agency-collection-practices-component-theme($theme);
+  @include clgx-edit-agency-collection-practices-component-theme($theme);
   @include clgx-agency-logs-component-theme($theme);
   @include clgx-agency-procurement-component-theme($theme);
   @include clgx-agency-payment-component-theme($theme);
@@ -70,19 +68,9 @@
   @include custom-components-theme($clgx-theme);
 }
 
-.light-theme {
-  @include mat.all-component-themes($clgx-light-theme);
-  @include custom-components-theme($clgx-light-theme);
-}
-
 .black-theme {
   @include mat.all-component-themes($clgx-black-theme);
   @include custom-components-theme($clgx-black-theme);
-}
-
-.nature-theme {
-  @include mat.all-component-themes($clgx-nature-theme);
-  @include custom-components-theme($clgx-nature-theme);
 }
 
 body {

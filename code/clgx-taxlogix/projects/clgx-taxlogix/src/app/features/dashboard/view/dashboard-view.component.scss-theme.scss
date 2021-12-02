@@ -55,11 +55,16 @@
       background-color: mat.get-color-from-palette(
         $primary
       ); /* For browsers that do not support gradients */
-      background-image: linear-gradient(
-        to top right,
-        mat.get-color-from-palette($accent),
-        mat.get-color-from-palette($primary)
-      );
+      // background-image: linear-gradient(
+      //   to top right,
+      //   mat.get-color-from-palette($accent),
+      //   mat.get-color-from-palette($primary)
+      // );
+
+      background: linear-gradient(46.28deg, #3746CD 40%, #1FFFE4 98.78%);
+      opacity: 0.6;
+      border-radius: 16px;
+
       color: white;
     }
 
@@ -87,11 +92,13 @@
       background-color: mat.get-color-from-palette(
         $primary
       ); /* For browsers that do not support gradients */
-      background-image: linear-gradient(
-        to top right,
-        mat.get-color-from-palette($accent),
-        mat.get-color-from-palette($primary)
-      );
+      // background-image: linear-gradient(
+      //   to top right,
+      //   mat.get-color-from-palette($accent),
+      //   mat.get-color-from-palette($primary)
+      // );
+      background: linear-gradient(46.28deg, #3746CD 40%, #1FFFE4 98.78%);
+      opacity: 0.6;
       color: white;
 
       span {
@@ -109,51 +116,53 @@
       background-color: mat.get-color-from-palette(
         $primary
       ); /* For browsers that do not support gradients */
-      background-image: linear-gradient(
-        to top right,
-        mat.get-color-from-palette($accent),
-        mat.get-color-from-palette($primary)
-      );
+      // background-image: linear-gradient(
+      //   to top right,
+      //   mat.get-color-from-palette($accent),
+      //   mat.get-color-from-palette($primary)
+      // );
+      background: linear-gradient(46.28deg, #3746CD 40%, #1FFFE4 98.78%);
+      opacity: 0.6;
       color: white;
     }
 
-    .background {
-      color: mat.get-color-from-palette($foreground, text);
-      background-color: mat.get-color-from-palette($background, background);
+    // .background {
+    //   color: mat.get-color-from-palette($foreground, text);
+    //   background-color: mat.get-color-from-palette($background, background);
 
-      .gradient {
-        &::before {
-          background: linear-gradient(
-            to bottom,
-            mat.get-color-from-palette($background, background, 0) 0%,
-            mat.get-color-from-palette($background, background, 1) 100%
-          );
-        }
-      }
-    }
+    //   .gradient {
+    //     &::before {
+    //       background: linear-gradient(
+    //         to bottom,
+    //         mat.get-color-from-palette($background, background, 0) 0%,
+    //         mat.get-color-from-palette($background, background, 1) 100%
+    //       );
+    //     }
+    //   }
+    // }
 
-    .follow-releases,
-    .contributors {
-      p {
-        background-color: mat.get-color-from-palette($background, background);
+    // .follow-releases,
+    // .contributors {
+    //   p {
+    //     background-color: mat.get-color-from-palette($background, background);
 
-        a {
-          color: mat.get-color-from-palette($accent);
+    //     a {
+    //       color: mat.get-color-from-palette($accent);
 
-          &:hover {
-            color: mat.get-color-from-palette($accent, darker);
-          }
-        }
-      }
-    }
+    //       &:hover {
+    //         color: mat.get-color-from-palette($accent, darker);
+    //       }
+    //     }
+    //   }
+    // }
 
-    .contributors {
-      img {
-        border-color: mat.get-color-from-palette(
-          $background,
-          background
-        ) !important;
-      }
-    }
+    // .contributors {
+    //   img {
+    //     border-color: mat.get-color-from-palette(
+    //       $background,
+    //       background
+    //     ) !important;
+    //   }
+    // }
   }
 }
