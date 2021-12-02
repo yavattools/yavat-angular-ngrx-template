@@ -13,6 +13,11 @@ export const selectAgencies = createSelector(
   (state: AgencyState) => state.agencies
 );
 
+export const selectStateOptions = createSelector(
+  selectAgencyState,
+  (state : AgencyState) => state.stateOptions
+)
+
 export const selectAgency = createSelector(
   selectAgencyState,
   (state: AgencyState) => state.selectedAgency

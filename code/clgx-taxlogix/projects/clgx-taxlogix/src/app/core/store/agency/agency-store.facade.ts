@@ -23,6 +23,7 @@ export class AgencyStoreFacade {
   paymentDetails$ = this.store.pipe(select(fromSelectors.selectPaymentDetails));
   escrowDetails$ = this.store.pipe(select(fromSelectors.selectEscrowDetails));
   nonEscrowDetails$ = this.store.pipe(select(fromSelectors.selectNonEscrowDetails));
+  stateOptions$ = this.store.pipe(select(fromSelectors.selectStateOptions));
 
   constructor(private store: Store<AppState>) {}
 
@@ -36,6 +37,10 @@ export class AgencyStoreFacade {
 
   stopActionProgress(){
     this.store.dispatch(fromActions.actionStopActionInProgress());
+  }
+
+  getStateOptions(){
+    this.store.dispatch(fromActions.actionGetStateOptions());
   }
 
   getAgencies(request : GetActiveAgenciesRequest){

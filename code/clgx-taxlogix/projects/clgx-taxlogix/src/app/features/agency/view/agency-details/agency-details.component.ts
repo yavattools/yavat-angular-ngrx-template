@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
-import { Agency } from '@app/core/store/agency/agency.model';
+import { Agency, StateOptions } from '@app/core/store/agency/agency.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable } from 'rxjs';
@@ -62,6 +62,9 @@ export class AgencyDetailsComponent implements OnInit {
     { value: 'option3', viewValue: 'option3' }
   ];
 
+  stateOptions$ : Observable<StateOptions[]>;
+  stateOptions : Array<StateOptions> = new Array<StateOptions>();
+
   isMobile: Boolean = false;
   constructor(
     public deviceService: DeviceDetectorService,
@@ -70,6 +73,7 @@ export class AgencyDetailsComponent implements OnInit {
     public settingsFacadeService: SettingsStoreFacade
   ) {
     this.agency$ = this.agencyFacade.selectedAgency$;
+    this.stateOptions$ = this.agencyFacade.stateOptions$;
   }
 
   ngOnInit() {
@@ -82,6 +86,9 @@ export class AgencyDetailsComponent implements OnInit {
       this.agency = agency;
       console.log(agency);
     });
+    this.stateOptions$.subscribe((response)=>{
+      this.stateOptions = response;
+    })
     if (this.deviceService.isMobile()) {
       this.isMobile = true;
     } else {

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Agency, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowRequest,GetNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails } from './agency.model';
+import { Agency, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowRequest,GetNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails, StateOptions } from './agency.model';
 
 
 
@@ -10,6 +10,20 @@ export const actionStartActionInProgress = createAction(
 export const actionStopActionInProgress = createAction(
   '[Agency] Stop Action In Progress',
 );
+
+export const actionGetStateOptions = createAction(
+  '[Agency] Get State Options'
+)
+
+export const actionGetStateOptionsSuccess = createAction(
+  '[Agency] Get State Options Success',
+  props<{ response : Array<StateOptions>}>()
+)
+
+export const actionGetStateOptionsFailure = createAction(
+  '[Agency] Get State Options Failure',
+  props<{error : any}>()
+)
 
 export const actionGetAllActiveAgencies = createAction(
   '[Agency] Get All Active Agencies',

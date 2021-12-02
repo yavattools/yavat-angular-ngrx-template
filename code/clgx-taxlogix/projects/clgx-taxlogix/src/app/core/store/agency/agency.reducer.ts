@@ -5,7 +5,8 @@ import {
   EscrowDetails,
   EscrowNonEscrowDetails,
   NonEscrowDetails,
-  PaymentDetails
+  PaymentDetails,
+  StateOptions
 } from './agency.model';
 import { Action, createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
@@ -22,6 +23,7 @@ export const initialState: AgencyState = {
   escrowDetails: new EscrowDetails(),
   nonEscrowDetails: new NonEscrowDetails(),
   paymentDetails: new PaymentDetails(),
+  stateOptions : new Array<StateOptions>(),
   actionInProgress: false,
   error: ''
 };
@@ -35,6 +37,17 @@ export const reducer = createReducer(
     state.actionInProgress = false;
   }),
   mutableOn(agencyActions.actionAgencyApiFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error;
+  }),
+  mutableOn(agencyActions.actionGetStateOptions, (state, action) => {
+    state.actionInProgress = false;
+  }),
+  mutableOn(agencyActions.actionGetStateOptionsSuccess, (state, action) => {
+    state.actionInProgress = false;
+    state.stateOptions = [...action.response];
+  }),
+  mutableOn(agencyActions.actionGetStateOptionsFailure, (state, action) => {
     state.actionInProgress = false;
     state.error = action.error;
   }),

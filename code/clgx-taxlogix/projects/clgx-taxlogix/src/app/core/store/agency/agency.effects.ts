@@ -41,6 +41,19 @@ const INIT = of('clgx-init-effect-trigger');
 @Injectable()
 export class AgencyEffects {
 
+  getStateOptions = createEffect(() =>
+      this.actions$.pipe(
+        ofType(agencyActions.actionGetStateOptions),
+        switchMap(() => this.agencyDataService.
+          getStateInputFieldOptions().pipe(
+          mergeMap( stateOptions => [
+            agencyActions.actionGetStateOptionsSuccess({response: stateOptions}),
+          ]),
+          catchError(error => of(agencyActions.actionGetStateOptionsFailure(error)))
+        ))
+      )
+    );
+
   getAgencies = createEffect(() =>
       this.actions$.pipe(
         ofType(agencyActions.actionGetAllActiveAgencies),

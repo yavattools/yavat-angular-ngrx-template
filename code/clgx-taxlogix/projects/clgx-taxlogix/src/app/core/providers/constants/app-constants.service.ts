@@ -28,6 +28,7 @@ export class AppConstantsService {
   public TOKEN_REFRESH_URL: string;
 
   public AGENCY_MASTER_LIST!: string;
+  public StateOptions : string;
 
   public SAVE_AGENCIES: string;
   public COLLECTION_END_POINT: string;
@@ -45,6 +46,10 @@ export class AppConstantsService {
   constructor() {
     this.CONFIG_URL = 'assets/config/web.config.json';
     this.BASE_API_URL = 'https://taxservices.chainlogix.net:8082/omschaingatewayservice';
+
+    this.StateOptions = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/common/states';
 
     this.SIGN_IN_URL =
       (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/auth/signin';

@@ -93,14 +93,18 @@
             </mat-error>
           </mat-form-field>
           <div class="state-zip">
-            <mat-form-field appearance="outline" style="width: 40%;">
+            <mat-form-field appearance="outline" style="width: 57%;">
               <mat-label>State</mat-label>
-              <input matInput formControlName="stateId" [required]="isRequired('stateId')">
+              <mat-select formControlName="stateId" [required]="isRequired('stateId')">
+                <mat-option *ngFor="let option of stateOptions" [value]="option.stateId">
+                  {{option.stateName}}
+                </mat-option>
+              </mat-select>
               <mat-error *ngIf="stateId.errors?.required">
                 Required field
               </mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" style="width : 55%">
+            <mat-form-field appearance="outline" style="width : 40%">
               <mat-label>Zip</mat-label>
               <input matInput formControlName="zip" [required]="isRequired('zip')">
               <mat-error *ngIf="zip.errors?.required">

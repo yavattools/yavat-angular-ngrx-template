@@ -13,6 +13,10 @@ export class AgencyDataService {
 
   constructor(private http: HttpClient, private _appConstantService: AppConstantsService) { }
 
+  getStateInputFieldOptions() : Observable<any>{
+    return this.http.get<any>(API_BASE_URL + this._appConstantService.StateOptions)
+  }
+
   getAgencies(request: GetActiveAgenciesRequest ): Observable<Agency[]> {
     console.log('getAgencies '+ this._appConstantService.BASE_API_URL + this._appConstantService.AGENCY_MASTER_LIST);
     return this.http.get<Agency[]>(API_BASE_URL + this._appConstantService.AGENCY_MASTER_LIST + '?userId=' + +request.userId + '&processId=' + +request.processId);

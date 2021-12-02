@@ -115,9 +115,8 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
               this.dataTableMessage.totalMessage = ' Agencies';
             }
           });
-   
+    this.agencyFacade.getStateOptions();
     this.agencyFilter = new AgencyFilter();
-    
   }
 
   ngOnInit() {

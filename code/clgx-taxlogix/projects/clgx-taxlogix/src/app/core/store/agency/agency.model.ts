@@ -197,6 +197,12 @@ export interface GetPaymentDetailsRequest {
   agencypaymentmasterId: string | undefined;
 }
 
+export interface StateOptions {
+  stateId : number | undefined,
+  stateName : string | undefined,
+  stateCode : string | undefined
+}
+
 export interface AgencyState {
   agencies: Array<Agency>;
   selectedAgency: Agency;
@@ -206,6 +212,7 @@ export interface AgencyState {
   escrowDetails: EscrowDetails;
   nonEscrowDetails: NonEscrowDetails;
   paymentDetails: PaymentDetails;
+  stateOptions : Array<StateOptions>;
   actionInProgress: boolean ;
   error: any;
 }
