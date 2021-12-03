@@ -52,7 +52,7 @@ export const actionSaveAgencyDetails = createAction(
 
 export const actionSaveAgencyDetailsSuccess = createAction(
   '[Agency] Save Agency Details Success',
-  props<{ agency: Agency}>()
+  props<{ agency: Agency, response : any}>()
 );
 
 export const actionSaveAgencyDetailsFailure = createAction(
@@ -103,7 +103,7 @@ export const actionSaveCollectionDates = createAction(
 
 export const actionSaveCollectionDatesSuccess = createAction(
   '[Agency] Save Collection Dates Success',
-  props<{ collectionDates: CollectionDates}>()
+  props<{ collectionDates: CollectionDates, response : any}>()
 );
 
 
@@ -166,7 +166,7 @@ export const actionSaveEscrowDetails = createAction(
 
 export const actionSaveEscrowDetailsSuccess = createAction(
   '[Agency] Save Escrow Details Success',
-  props<{ escrowDetails: EscrowDetails}>()
+  props<{ escrowDetails: EscrowDetails, response : any}>()
 );
 
 export const actionSaveEscrowDetailsFailure = createAction(
@@ -196,7 +196,7 @@ export const actionSaveNonEscrowDetails = createAction(
 
 export const actionSaveNonEscrowDetailsSuccess = createAction(
   '[Agency] Save Non Escrow Details Success',
-  props<{ nonEscrowDetails: NonEscrowDetails}>()
+  props<{ nonEscrowDetails: NonEscrowDetails, response : any}>()
 );
 
 export const actionSaveNonEscrowDetailsFailure = createAction(
@@ -240,7 +240,7 @@ export const actionSavePaymentDetails = createAction(
 
 export const actionSavePaymentDetailsSuccess = createAction(
   '[Agency] Save Payment Details Success',
-  props<{ details: PaymentDetails}>()
+  props<{ details: PaymentDetails, response : any}>()
 );
 
 export const actionSavePaymentDetailsFailure = createAction(

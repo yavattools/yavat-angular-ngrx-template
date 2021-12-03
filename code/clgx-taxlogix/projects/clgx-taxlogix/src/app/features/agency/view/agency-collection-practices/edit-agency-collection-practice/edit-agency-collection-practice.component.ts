@@ -45,13 +45,13 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     this.agencyStoreFacade.selectedCollectionDate$.subscribe(collectionDate =>{
       this.collectionDate = collectionDate;
       if(collectionDate){
-        this.editForm.controls['year'].setValue(collectionDate.year);
-        this.editForm.controls['installment'].setValue(collectionDate.installment);
-        this.editForm.controls['base'].setValue(new Date(collectionDate.base));
-        this.editForm.controls['discount'].setValue(collectionDate.discount);
-        this.editForm.controls['penalty'].setValue(new Date(collectionDate.penalty));
-        this.editForm.controls['lateRelease'].setValue(collectionDate.lateRelease);
-        this.editForm.controls['billRequest'].setValue(new Date(collectionDate.billRequest));
+        this.editForm.controls['year'].setValue(collectionDate.collectionYear);
+        this.editForm.controls['installment'].setValue(collectionDate.collectionInstallment);
+        this.editForm.controls['base'].setValue(new Date(collectionDate.collectionBase));
+        this.editForm.controls['discount'].setValue(collectionDate.collectionDiscount);
+        this.editForm.controls['penalty'].setValue(new Date(collectionDate.collectionPenalty));
+        this.editForm.controls['lateRelease'].setValue(collectionDate.collectionLastRelease);
+        this.editForm.controls['billRequest'].setValue(new Date(collectionDate.collectionBillRequest));
       }
     });
     this.agencyStoreFacade.selectedAgency$.subscribe(data=>{
@@ -65,21 +65,22 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
 
   updateCollectionDate(form : FormGroup){
     this.newCollectionDateForm = new CollectionDates();
-    this.newCollectionDateForm.year = form.controls['year'].value;
-    this.newCollectionDateForm.installment = form.controls['installment'].value;
-    this.newCollectionDateForm.base = new Date(form.controls['base'].value).toLocaleDateString("en-US");
-    this.newCollectionDateForm.discount = form.controls['discount'].value;
-    this.newCollectionDateForm.penalty = new Date(form.controls['penalty'].value).toLocaleDateString("en-US");
-    this.newCollectionDateForm.lateRelease = form.controls['lateRelease'].value;
-    this.newCollectionDateForm.billRequest = new Date(form.controls['billRequest'].value).toLocaleDateString("en-US");
-    this.newCollectionDateForm.collectionPracticesId = this.collectionDate.collectionPracticesId?this.collectionDate.collectionPracticesId : '';
+    this.newCollectionDateForm.collectionYear = form.controls['year'].value;
+    this.newCollectionDateForm.collectionInstallment = form.controls['installment'].value;
+    this.newCollectionDateForm.collectionBase = new Date(form.controls['base'].value).toLocaleDateString("en-US");
+    this.newCollectionDateForm.collectionDiscount = form.controls['discount'].value;
+    this.newCollectionDateForm.collectionPenalty = new Date(form.controls['penalty'].value).toLocaleDateString("en-US");
+    this.newCollectionDateForm.collectionLastRelease = form.controls['lateRelease'].value;
+    this.newCollectionDateForm.collectionBillRequest = new Date(form.controls['billRequest'].value).toLocaleDateString("en-US");
+    this.newCollectionDateForm.agencyCollectionDatesId = this.collectionDate.agencyCollectionDatesId?this.collectionDate.agencyCollectionDatesId : '';
     this.newCollectionDateForm.agencyMasterId = this.agencyMasterId;
-    this.newCollectionDateForm.frequency = this.collectionDate.frequency?this.collectionDate.frequency : '';
+    this.newCollectionDateForm.collectionFrequency = this.collectionDate.collectionFrequency?this.collectionDate.collectionFrequency : '';
     this.newCollectionDateForm.createdBy = this.collectionDate.createdBy?this.collectionDate.createdBy : '';
     this.newCollectionDateForm.modifiedBy = this.collectionDate.modifiedBy?this.collectionDate.modifiedBy : '';
     this.newCollectionDateForm.createdByUser = this.collectionDate.createdByUser?this.collectionDate.createdByUser : '';
     this.newCollectionDateForm.modifiedByUser = this.collectionDate.modifiedByUser?this.collectionDate.modifiedByUser : '';
-    if(this.collectionDate.collectionPracticesId){
+    this.newCollectionDateForm.isDeleted = this.collectionDate.isDeleted?this.collectionDate.isDeleted : '';
+    if(this.collectionDate.agencyCollectionDatesId){
       this.agencyStoreFacade.updateCollectionDates(this.newCollectionDateForm);
     }else{
       this.agencyStoreFacade.saveCollectionDates(this.newCollectionDateForm);

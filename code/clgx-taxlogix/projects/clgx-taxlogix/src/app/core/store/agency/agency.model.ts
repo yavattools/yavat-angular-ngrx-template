@@ -58,25 +58,25 @@ export interface GetActiveAgenciesRequest {
 }
 
 export class CollectionDates {
-  collectionPracticesId?: string | undefined;
+  agencyCollectionDatesId?: string | undefined;
   agencyMasterId?: string | undefined;
-  frequency?: string | undefined;
-  year?: string | undefined;
-  installment?: string | undefined;
-  base: string;
-  discount?: string | undefined;
-  penalty: string;
-  lateRelease?: string | undefined;
-  billRequest: string;
+  collectionFrequency?: string | undefined;
+  collectionYear?: string | undefined;
+  collectionInstallment?: string | undefined;
+  collectionBase: string;
+  collectionDiscount?: string | undefined;
+  collectionPenalty: string;
+  collectionLastRelease?: string | undefined;
+  collectionBillRequest : string;
   isDeleted : any;
   createdBy?: string | undefined;
   modifiedBy?: string | undefined;
   createdByUser?: string | undefined;
   modifiedByUser?: string | undefined;
   constructor() {
-    this.base = '';
-    this.penalty = '';
-    this.billRequest = '';
+    this.collectionBase = '';
+    this.collectionPenalty = '';
+    this.collectionBillRequest = '';
   }
 }
 

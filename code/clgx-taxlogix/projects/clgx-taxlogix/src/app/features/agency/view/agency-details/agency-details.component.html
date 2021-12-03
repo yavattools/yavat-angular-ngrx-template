@@ -59,16 +59,16 @@
             <mat-label>Collecting Agency</mat-label>
             <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
             [required]="isRequired('agencyCollecting')" formControlName="agencyCollecting">
-              <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
-              <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
             </mat-button-toggle-group>
           </div>
           <div class="toggle">
             <mat-label>Active?</mat-label>
             <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
             [required]="isRequired('agencyActive')" formControlName="agencyActive">
-              <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
-              <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+              <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
             </mat-button-toggle-group>
           </div>
       </div>
@@ -106,8 +106,8 @@
             </mat-form-field>
             <mat-form-field appearance="outline" style="width : 40%">
               <mat-label>Zip</mat-label>
-              <input matInput formControlName="zip" [required]="isRequired('zip')">
-              <mat-error *ngIf="zip.errors?.required">
+              <input matInput formControlName="payZip" [required]="isRequired('payZip')">
+              <mat-error *ngIf="payZip.errors?.required">
                 Required field
               </mat-error>
             </mat-form-field>
@@ -142,8 +142,8 @@
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Contact Phone</mat-label>
-            <input matInput formControlName="contactPhone" [required]="isRequired('contactPhone')">
-            <mat-error *ngIf="contactPhone.errors?.required">
+            <input matInput formControlName="phoneNumber" [required]="isRequired('phoneNumber')">
+            <mat-error *ngIf="phoneNumber.errors?.required">
               Required field
             </mat-error>
           </mat-form-field>
@@ -284,30 +284,30 @@
           <mat-label>Type: Paper</mat-label>
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
               [required]="isRequired('paperType')" formControlName="paperType">
-            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
-            <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <div class="toggle" style="width: 100%">
           <mat-label>Excel</mat-label>
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
           [required]="isRequired('excelType')" formControlName="excelType">
-            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
-            <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <div class="toggle" style="width: 100%">
           <mat-label>Mail</mat-label>
           <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
           [required]="isRequired('mailType')" formControlName="mailType">
-            <mat-button-toggle class="mat-button-toggle" value="Yes"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
-            <mat-button-toggle class="mat-button-toggle" value="No"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
+            <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
         <mat-form-field appearance="outline" style="width: 100%">
           <mat-label>Email ID</mat-label>
-          <input matInput formControlName="emailId" [required]="isRequired('emailId')">
-          <mat-error *ngIf="emailId.errors?.required">
+          <input matInput formControlName="assessorEmailId" [required]="isRequired('assessorEmailId')">
+          <mat-error *ngIf="assessorEmailId.errors?.required">
             Required field
           </mat-error>
         </mat-form-field>

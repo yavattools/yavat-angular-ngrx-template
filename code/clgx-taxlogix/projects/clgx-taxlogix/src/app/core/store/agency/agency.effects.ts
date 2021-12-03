@@ -71,8 +71,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionSaveAgencyDetails),
     switchMap((action)=>this.agencyDataService.addAgency(action.agency).pipe(
-      mergeMap( agencyDetails=>[
-        agencyActions.actionSaveAgencyDetailsSuccess({agency : agencyDetails}),
+      mergeMap( (response)=>[
+        agencyActions.actionSaveAgencyDetailsSuccess({agency : action.agency, response : response}),
       ]),
       catchError(error => of(agencyActions.actionSaveAgencyDetailsFailure({error : error})))
     ))
@@ -83,8 +83,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionUpdateAgencyDetails),
     switchMap((action)=>this.agencyDataService.updateAgency(action.agency).pipe(
-      mergeMap( agencyDetails=>[
-        agencyActions.actionUpdateAgencyDetailsSuccess({agency : agencyDetails}),
+      mergeMap( ()=>[
+        agencyActions.actionUpdateAgencyDetailsSuccess({agency : action.agency}),
       ]),
       catchError(error => of(agencyActions.actionUpdateAgencyDetailsFailure({error : error})))
     ))
@@ -107,8 +107,8 @@ export class AgencyEffects {
     this.actions$.pipe(
       ofType(agencyActions.actionSaveCollectionDates),
       switchMap((action)=>this.agencyDataService.addCollectionDate(action.collectionDates).pipe(
-        mergeMap( collectioNDates=>[
-          agencyActions.actionSaveCollectionDatesSuccess(collectioNDates),
+        mergeMap( (response)=>[
+          agencyActions.actionSaveCollectionDatesSuccess({collectionDates : action.collectionDates, response : response}),
         ]),
         catchError(error => of(agencyActions.actionSaveCollectionDatesFailure({error : error})))
       ))
@@ -121,8 +121,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionUpdateCollectionDates),
     switchMap((action)=>this.agencyDataService.updateCollectionDate(action.collectionDates).pipe(
-      mergeMap( collectionDates=>[
-        agencyActions.actionUpdateCollectionDatesSuccess({collectionDates : collectionDates}),
+      mergeMap( ()=>[
+        agencyActions.actionUpdateCollectionDatesSuccess({collectionDates : action.collectionDates}),
       ]),
       catchError(error => of(agencyActions.actionUpdateCollectionDatesFailure({error : error})))
     ))
@@ -157,8 +157,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionSaveEscrowDetails),
     switchMap((action)=>this.agencyDataService.addEscrow(action.escrowDetails).pipe(
-      mergeMap( escrowDetails=>[
-        agencyActions.actionSaveEscrowDetailsSuccess(escrowDetails),
+      mergeMap( (response)=>[
+        agencyActions.actionSaveEscrowDetailsSuccess({escrowDetails : action.escrowDetails, response : response}),
       ]),
       catchError(error => of(agencyActions.actionSaveEscrowDetailsFailure({error : error})))
     ))
@@ -169,8 +169,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionSaveNonEscrowDetails),
     switchMap((action)=>this.agencyDataService.addNonEscrow(action.nonEscrowDetails).pipe(
-      mergeMap( nonEscrowDetails=>[
-        agencyActions.actionSaveNonEscrowDetailsSuccess({nonEscrowDetails : nonEscrowDetails}),
+      mergeMap( (response)=>[
+        agencyActions.actionSaveNonEscrowDetailsSuccess({nonEscrowDetails : action.nonEscrowDetails, response : response}),
       ]),
       catchError(error => of(agencyActions.actionSaveNonEscrowDetailsFailure({error : error})))
     ))
@@ -181,8 +181,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionUpdateEscrowDetails),
     switchMap((action)=>this.agencyDataService.updateEscrow(action.escrowDetails).pipe(
-      mergeMap( escrowDetails=>[
-        agencyActions.actionUpdateEscrowDetailsSuccess(escrowDetails),
+      mergeMap( ()=>[
+        agencyActions.actionUpdateEscrowDetailsSuccess({escrowDetails : action.escrowDetails}),
       ]),
       catchError(error => of(agencyActions.actionUpdateEscrowDetailsFailure({error : error})))
     ))
@@ -193,8 +193,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionUpdateNonEscrowDetails),
     switchMap((action)=>this.agencyDataService.updateNonEscrow(action.nonEscrowDetails).pipe(
-      mergeMap( nonEscrowDetails=>[
-        agencyActions.actionUpdateNonEscrowDetailsSuccess({nonEscrowDetails : nonEscrowDetails}),
+      mergeMap( ()=>[
+        agencyActions.actionUpdateNonEscrowDetailsSuccess({nonEscrowDetails : action.nonEscrowDetails}),
       ]),
       catchError(error => of(agencyActions.actionUpdateNonEscrowDetailsFailure({error : error})))
     ))
@@ -217,8 +217,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionSavePaymentDetails),
     switchMap((action)=>this.agencyDataService.addPaymentDetails(action.details).pipe(
-      mergeMap( paymentDetails=>[
-        agencyActions.actionSavePaymentDetailsSuccess(paymentDetails),
+      mergeMap( (response)=>[
+        agencyActions.actionSavePaymentDetailsSuccess({details : action.details , response : response}),
       ]),
       catchError(error => of(agencyActions.actionSavePaymentDetailsFailure({error : error})))
     ))
@@ -229,8 +229,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionUpdatePaymentDetails),
     switchMap((action)=>this.agencyDataService.updatePaymentDetails(action.details).pipe(
-      mergeMap( paymentDetails=>[
-        agencyActions.actionUpdatePaymentDetailsSuccess(paymentDetails),
+      mergeMap( ()=>[
+        agencyActions.actionUpdatePaymentDetailsSuccess({details : action.details}),
       ]),
       catchError(error => of(agencyActions.actionUpdatePaymentDetailsFailure({error : error})))
     ))
