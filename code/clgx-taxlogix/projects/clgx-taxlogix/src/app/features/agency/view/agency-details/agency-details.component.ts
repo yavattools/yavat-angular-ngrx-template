@@ -22,21 +22,23 @@ export class AgencyDetailsComponent implements OnInit {
   agency!: Agency;
   newAgencyDetails: any;
   agency$: Observable<Agency>;
+  defFreqSelected: string = '';
+  nonFreqSelected: string = '';
   agencyDetailsGroup = this.fb.group({
     agencyNumber: ['', Validators.required],
     agencyName: ['', Validators.required],
     agencyWebsite: [''],
     agencyLowerLevel: [''],
     agencyCollecting: [false],
-    agencyActive: [false, Validators.required],
-    agencySuitsAddress: [''],
+    agencyActive: [false],
+    agencySuitsAddress: ['', Validators.required],
     agencyCity: ['', Validators.required],
     stateId: ['', Validators.required],
     payZip: ['', Validators.required],
-    countyId: [''],
+    countyId: ['', Validators.required],
     contactName: [''],
     contactEmail: [''],
-    phoneNumber: [''],
+    phoneNumber: ['', Validators.required],
     contactFax: [''],
     parcelFormat: [''],
     assessorName: [''],
@@ -284,4 +286,14 @@ export class AgencyDetailsComponent implements OnInit {
   isRequired(name: string): boolean {
     return this.agencyDetailsGroup.get(name)?.hasValidator(Validators.required) ?? false;
   }
+
+  defaultFreqSelectedHandler($event: string){
+    debugger;
+    this.defFreqSelected = $event;
+  }
+  nonFreqSelectedHandler($event: string){
+    debugger;
+    this.nonFreqSelected = $event;
+  }
+
 }

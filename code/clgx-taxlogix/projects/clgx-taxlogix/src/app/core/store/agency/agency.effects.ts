@@ -83,8 +83,8 @@ export class AgencyEffects {
   this.actions$.pipe(
     ofType(agencyActions.actionUpdateAgencyDetails),
     switchMap((action)=>this.agencyDataService.updateAgency(action.agency).pipe(
-      mergeMap( ()=>[
-        agencyActions.actionUpdateAgencyDetailsSuccess({agency : action.agency}),
+      mergeMap( (response)=>[
+        agencyActions.actionUpdateAgencyDetailsSuccess({agency : action.agency, response: response}),
       ]),
       catchError(error => of(agencyActions.actionUpdateAgencyDetailsFailure({error : error})))
     ))

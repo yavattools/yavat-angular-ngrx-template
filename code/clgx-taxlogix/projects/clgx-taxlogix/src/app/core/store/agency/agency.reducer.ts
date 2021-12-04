@@ -83,10 +83,18 @@ export const reducer = createReducer(
   mutableOn(agencyActions.actionUpdateAgencyDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
     state.selectedAgency = action.agency;
-    let index = _.findIndex(state.agencies, (e) => {
-      return e.agencyMasterId == action.agency.agencyMasterId;
-    }, 0);
-   state.agencies = [...state.agencies.slice(0,index),action.agency,...state.agencies.slice(index+1)];
+    let uAgencies = state.agencies.filter(a => {
+      if(a.agencyMasterId === action.response.agencyMasterId){
+        return action.agency;
+      }else{
+        return a;
+      }
+    });
+    state.agencies = [...uAgencies];
+  //   let index = _.findIndex(state.agencies, (e) => {
+  //     return e.agencyMasterId == action.agency.agencyMasterId;
+  //   }, 0);
+  //  state.agencies = [...state.agencies.slice(0,index),action.agency,...state.agencies.slice(index+1)];
   }),
   mutableOn(agencyActions.actionUpdateAgencyDetailsFailure, (state, action) => {
     state.actionInProgress = false;

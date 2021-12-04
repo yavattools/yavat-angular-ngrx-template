@@ -68,7 +68,7 @@ export const actionUpdateAgencyDetails = createAction(
 
 export const actionUpdateAgencyDetailsSuccess = createAction(
   '[Agency] Update Agency Details Success',
-  props<{ agency: Agency}>()
+  props<{ agency: Agency, response: any}>()
 );
 
 export const actionUpdateAgencyDetailsFailure = createAction(

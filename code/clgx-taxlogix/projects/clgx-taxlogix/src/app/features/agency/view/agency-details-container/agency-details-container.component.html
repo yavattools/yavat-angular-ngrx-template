@@ -58,7 +58,7 @@
             <input type="text"> -->
             <mat-form-field >
               <mat-label>Last updated by</mat-label>
-              <input matInput >
+              <input [ngModel]="(agency$ | async)?.modifiedBy" readonly matInput >
             </mat-form-field>
           </div>
           <div class="col-12 pb-3">
@@ -68,7 +68,7 @@
             <input type="text"> -->
             <mat-form-field >
               <mat-label>Last date updated</mat-label>
-              <input matInput >
+              <input readonly [ngModel]="(agency$ | async)?.modifiedBy" matInput >
             </mat-form-field>
           </div>
         </div>

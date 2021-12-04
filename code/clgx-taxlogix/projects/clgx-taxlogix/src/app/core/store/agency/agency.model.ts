@@ -203,6 +203,44 @@ export interface StateOptions {
   stateCode : string | undefined
 }
 
+export enum FrequencyType{
+  DEFAULT_ANNUAL = 'default_annual',
+  DEFAULT_DISCOUNT_ANNUAL = 'default_discount_annual',
+  DEFAULT_SEMI_ANNUAL = 'default_semi_annual',
+  DEFAULT_TRI = 'default_tri',
+  DEFAULT_QUARTELY = 'default_quarterly',
+  NON_ANNUAL = 'non_annual',
+  NON_DISCOUNT_ANNUAL = 'non_discount_annual',
+  NON_SEMI_ANNUAL = 'non_semi_annual',
+  NON_TRI = 'non_tri',
+  NON_QUARTELY = 'non_quarterly'
+}
+
+export interface AgencyDefaultFrequency{
+  default_annual: Boolean;
+  default_discount_annual: Boolean;
+  default_semi_annual: Boolean;
+  default_tri: Boolean;
+  default_quarterly: Boolean;
+}
+
+
+export class AgencyNonFrequency{
+  non_annual!: Boolean;
+  non_discount_annual!: Boolean;
+  non_semi_annual!: Boolean;
+  non_tri!: Boolean;
+  non_quarterly!: Boolean;
+
+  constructor(){
+    this.non_annual = false;
+    this.non_discount_annual = false;
+    this.non_quarterly = false;
+    this.non_semi_annual = false;
+    this.non_tri = false;
+  }
+}
+
 export interface AgencyState {
   agencies: Array<Agency>;
   selectedAgency: Agency;

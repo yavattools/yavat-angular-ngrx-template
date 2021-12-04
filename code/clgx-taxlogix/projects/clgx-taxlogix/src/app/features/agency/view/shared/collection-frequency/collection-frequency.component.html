@@ -12,8 +12,8 @@
                 <span>Annual</span>
             </div>
             <div class="checkbox">
-                <mat-checkbox class="check-box" [(ngModel)]="annual_default_checked"></mat-checkbox>
-                <mat-checkbox class="check-box" [(ngModel)]="annual_non_checked"></mat-checkbox>
+                <mat-checkbox class="check-box" (change)="defaultChangeHandler('default_annual')" [(ngModel)]="agDefaultFreq.default_annual"></mat-checkbox>
+                <mat-checkbox class="check-box" (change)="nonChangeHandler('non_annual')" [(ngModel)]="agNonFreq.non_annual"></mat-checkbox>
             </div>
           </section>
           <section class="section">
@@ -21,8 +21,8 @@
                 <span>Discount Annual</span>
             </div>
             <div class="checkbox">
-                <mat-checkbox [(ngModel)]="discount_annual_default_checked"></mat-checkbox>
-                <mat-checkbox [(ngModel)]="discount_annual_non_checked"></mat-checkbox>
+                <mat-checkbox (change)="defaultChangeHandler('default_discount_annual')" [(ngModel)]="agDefaultFreq.default_discount_annual"></mat-checkbox>
+                <mat-checkbox (change)="nonChangeHandler('non_discount_annual')" [(ngModel)]="agNonFreq.non_discount_annual"></mat-checkbox>
             </div>
           </section>
           <section class="section">
@@ -30,8 +30,8 @@
                 <span>Semi Annual</span>
             </div>
             <div class="checkbox">
-                <mat-checkbox class="check-box" [(ngModel)]="semi_annual_default_checked"></mat-checkbox>
-                <mat-checkbox class="check-box" [(ngModel)]="semi_annual_non_checked"></mat-checkbox>
+                <mat-checkbox class="check-box" (change)="defaultChangeHandler('default_semi_annual')" [(ngModel)]="agDefaultFreq.default_semi_annual"></mat-checkbox>
+                <mat-checkbox class="check-box" (change)="nonChangeHandler('non_semi_annual')" [(ngModel)]="agNonFreq.non_semi_annual"></mat-checkbox>
             </div>
           </section>
           <section class="section">
@@ -39,8 +39,8 @@
                 <span>Tri</span>
             </div>
             <div class="checkbox">
-                <mat-checkbox class="check-box" [(ngModel)]="tri_default_checked"></mat-checkbox>
-                <mat-checkbox class="check-box" [(ngModel)]="tri_non_checked"></mat-checkbox>
+                <mat-checkbox class="check-box" (change)="defaultChangeHandler('default_tri')" [(ngModel)]="agDefaultFreq.default_tri"></mat-checkbox>
+                <mat-checkbox class="check-box" (change)="nonChangeHandler('non_tri')" [(ngModel)]="agNonFreq.non_tri"></mat-checkbox>
             </div>
           </section>
           <section class="section">
@@ -48,8 +48,8 @@
                 <span>Quarterly</span>
             </div>
             <div class="checkbox">
-                <mat-checkbox class="check-box" [(ngModel)]="quarterly_default_checked"></mat-checkbox>
-                <mat-checkbox class="check-box" [(ngModel)]="quarterly_non_checked"></mat-checkbox>
+                <mat-checkbox class="check-box" (change)="defaultChangeHandler('default_quarterly')" [(ngModel)]="agDefaultFreq.default_quarterly"></mat-checkbox>
+                <mat-checkbox class="check-box" (change)="nonChangeHandler('non_quarterly')" [(ngModel)]="agNonFreq.non_quarterly"></mat-checkbox>
             </div>
           </section>
     </div>

@@ -67,11 +67,13 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     this.newCollectionDateForm = new CollectionDates();
     this.newCollectionDateForm.collectionYear = form.controls['year'].value;
     this.newCollectionDateForm.collectionInstallment = form.controls['installment'].value;
-    this.newCollectionDateForm.collectionBase = new Date(form.controls['base'].value).toLocaleDateString("en-US");
-    this.newCollectionDateForm.collectionDiscount = form.controls['discount'].value;
-    this.newCollectionDateForm.collectionPenalty = new Date(form.controls['penalty'].value).toLocaleDateString("en-US");
-    this.newCollectionDateForm.collectionLastRelease = form.controls['lateRelease'].value;
-    this.newCollectionDateForm.collectionBillRequest = new Date(form.controls['billRequest'].value).toLocaleDateString("en-US");
+
+    this.newCollectionDateForm.collectionBase = new Date(form.controls['base'].value).toLocaleDateString("en-US").split('/').join('-');
+    this.newCollectionDateForm.collectionDiscount =  new Date(form.controls['discount'].value).toLocaleDateString("en-US").split('/').join('-');
+    this.newCollectionDateForm.collectionPenalty = new Date(form.controls['penalty'].value).toLocaleDateString("en-US").split('/').join('-');
+    this.newCollectionDateForm.collectionLastRelease = new Date(form.controls['lateRelease'].value).toLocaleDateString("en-US").split('/').join('-');
+    this.newCollectionDateForm.collectionBillRequest = new Date(form.controls['billRequest'].value).toLocaleDateString("en-US").split('/').join('-');
+    
     this.newCollectionDateForm.agencyCollectionDatesId = this.collectionDate.agencyCollectionDatesId?this.collectionDate.agencyCollectionDatesId : '';
     this.newCollectionDateForm.agencyMasterId = this.agencyMasterId;
     this.newCollectionDateForm.collectionFrequency = this.collectionDate.collectionFrequency?this.collectionDate.collectionFrequency : '';
