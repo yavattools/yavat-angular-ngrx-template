@@ -16,18 +16,39 @@
       <div class="col-6">
         <mat-form-field class="w-100">
           <mat-label>Year</mat-label>
-          <input matInput formControlName="year" [required]="isRequired('year')">
+          <mat-select formControlName="year" [required]="isRequired('year')">
+            <mat-option *ngFor="let year of years" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
           <mat-error *ngIf="yearFC.errors?.required">
-            Required 
+            Required field
           </mat-error>
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100">
+        <mat-form-field class="w-100">
           <mat-label>Installment</mat-label>
-          <input matInput formControlName="installment" [required]="isRequired('installment')">
+          <mat-select formControlName="installment" [required]="isRequired('installment')">
+            <mat-option *ngFor="let installment of installmentsValues" [value]="installment">
+              {{installment}}
+            </mat-option>
+          </mat-select>
           <mat-error *ngIf="installmentFC.errors?.required">
-            Required 
+            Required field
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field class="w-100">
+          <mat-label>Frequency</mat-label>
+          <mat-select formControlName="frequency" (ngModelChange)="frequencyValue()" [required]="isRequired('frequency')">
+            <mat-option *ngFor="let fre of frequency" [value]="fre.id">
+              {{fre.frequency}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="frequencyFC.errors?.required">
+            Required field
           </mat-error>
         </mat-form-field>
       </div>

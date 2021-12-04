@@ -29,8 +29,8 @@ export class AgencyDetailsComponent implements OnInit {
     agencyName: ['', Validators.required],
     agencyWebsite: [''],
     agencyLowerLevel: [''],
-    agencyCollecting: [false],
-    agencyActive: [false],
+    agencyCollecting: ['0'],
+    agencyActive: ['0'],
     agencySuitsAddress: ['', Validators.required],
     agencyCity: ['', Validators.required],
     stateId: ['', Validators.required],
@@ -53,9 +53,9 @@ export class AgencyDetailsComponent implements OnInit {
     assessorZip: [''],
     billingRequestId: [''],
     mediaTypeId: [''],
-    paperType: [false],
-    excelType: [false],
-    mailType: [false],
+    paperType: ['0'],
+    excelType: ['0'],
+    mailType: ['0'],
     assessorEmailId: ['']
   });
   options: Options[] = [
