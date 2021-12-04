@@ -167,6 +167,7 @@ export interface GetNonEscrowDetailsRequest{
 export class PaymentDetails {
   agencyPaymentId: string | undefined;
   agencyMasterId: string | undefined;
+  agencyId: string | undefined;
   payName: string | undefined;
   payAddress: string | undefined;
   payCity: string | undefined;
@@ -201,6 +202,13 @@ export interface StateOptions {
   stateId : number | undefined,
   stateName : string | undefined,
   stateCode : string | undefined
+}
+
+
+export interface County {
+  countyId : number | undefined,
+  countyName : string | undefined,
+  countyCode : string | undefined
 }
 
 export enum FrequencyType{
@@ -251,6 +259,7 @@ export interface AgencyState {
   nonEscrowDetails: NonEscrowDetails;
   paymentDetails: PaymentDetails;
   stateOptions : Array<StateOptions>;
+  counties : Array<County>;
   actionInProgress: boolean ;
   error: any;
 }

@@ -32,16 +32,17 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
   public agDefaultFreq: AgencyDefaultFrequency;
   public agNonFreq: AgencyNonFrequency;
 
-  annual_default_checked: Boolean = false;
-  annual_non_checked: Boolean = false;
-  discount_annual_default_checked: Boolean = false;
-  discount_annual_non_checked: Boolean = false;
-  semi_annual_default_checked: Boolean = false;
-  semi_annual_non_checked: Boolean = false;
-  tri_default_checked: Boolean = false;
-  tri_non_checked: Boolean = false;
-  quarterly_default_checked: Boolean = false;
-  quarterly_non_checked: Boolean = false;
+  // annual_default_checked: Boolean = false;
+  // annual_non_checked: Boolean = false;
+  // discount_annual_default_checked: Boolean = false;
+  // discount_annual_non_checked: Boolean = false;
+  // semi_annual_default_checked: Boolean = false;
+  // semi_annual_non_checked: Boolean = false;
+  // tri_default_checked: Boolean = false;
+  // tri_non_checked: Boolean = false;
+  // quarterly_default_checked: Boolean = false;
+  // quarterly_non_checked: Boolean = false;
+
   constructor() {
     this.agDefaultFreq = Object.create({});
     this.agNonFreq = new AgencyNonFrequency();

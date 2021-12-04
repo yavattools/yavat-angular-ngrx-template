@@ -1,10 +1,10 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
-import { PaymentDetails } from '@app/core/store/agency/agency.model';
+import { PaymentDetails, StateOptions } from '@app/core/store/agency/agency.model';
 import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
 import { AgencyFeature, agencies } from '../../agency-view.data';
@@ -13,51 +13,45 @@ import { AgencyFeature, agencies } from '../../agency-view.data';
   selector: 'clgx-agency-payment',
   templateUrl: './agency-payment.component.html',
   styleUrls: ['./agency-payment.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgencyPaymentComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agencies: AgencyFeature[] = agencies;
-  newPaymentDetails:any;
-  payNameFC :FormControl = new FormControl('',[Validators.required]);
-  payAddressFC = new FormControl('',[Validators.required]);
-  payCityFC = new FormControl('',[Validators.required]);
-  stateIdFC = new FormControl('',[Validators.required]);
-  zipFC = new FormControl('',[Validators.required]);
-  emailFileIdFC = new FormControl('',[Validators.required]);
-  numOfParcelsFC = new FormControl('',[Validators.required]);
-  orginalTBFC = new FormControl('',[Validators.required]);
-  feeWithoutOrginalTBFC = new FormControl('',[Validators.required]);
-  listedPaymentFC = new FormControl('',[Validators.required]);
-  emailWireFC = new FormControl('',[Validators.required]);
-  overNightFC = new FormControl('',[Validators.required]);
-  postmarkAcceptedFC = new FormControl('',[Validators.required]);
-  paymentRequiredIdFC = new FormControl('');
-
   paymentDetails$!: Observable<PaymentDetails>;
   paymentDetails : any;
   loginData : any
   agencyMasterId : string | undefined
+  newPaymentDetails!: PaymentDetails;
+ 
 
-  paymentForm : FormGroup = new FormGroup({
-    payName : this.payNameFC,     
-    payAddress : this.payAddressFC,
-    payCity : this.payCityFC,
-    stateId : this.stateIdFC,
-    zip : this.zipFC,
-    emailFileId : this.emailFileIdFC,
-    numOfParcels : this.numOfParcelsFC,
-    orginalTB : this.orginalTBFC,
-    feeWithoutOrginalTB: this.feeWithoutOrginalTBFC,
-    listedPayment : this.listedPaymentFC,
-    emailWire : this.emailWireFC,
-    overNight : this.overNightFC,
-    postmarkAccepted : this.postmarkAcceptedFC,
-    paymentRequiredId : this.paymentRequiredIdFC,
-  })
+  stateOptions$ : Observable<StateOptions[]>;
+  stateOptions : Array<StateOptions> = new Array<StateOptions>();
+  subscriptions: Array<Subscription> = new Array<Subscription>();
+  
+  public paymentFormGroup  = this.fb.group({
+    payName :[''],     
+    payAddress :[''],
+    payCity : [''],
+    stateId : [''],
+    zip : [''],
+    emailFileId : [''],
+    numOfParcels : [''],
+    orginalTB : [''],
+    feeWithoutOrginalTB: [''],
+    listedPayment : [''],
+    emailWire : [''],
+    overNight : [''],
+    postmarkAccepted : [''],
+    paymentRequiredId : [''],
+  });
+
 
   isMobile: boolean = false;
-  constructor( public deviceService:DeviceDetectorService,private agencyStoreFacade : AgencyStoreFacade, private authStoreFacade : AuthStoreFacade){
+  constructor( public deviceService:DeviceDetectorService,
+      private fb: FormBuilder,
+      public agencyStoreFacade : AgencyStoreFacade, 
+      private authStoreFacade : AuthStoreFacade){
     this.paymentDetails$ = this.agencyStoreFacade.paymentDetails$;
     this.authStoreFacade.loginProfile$.subscribe(data=>{
       this.loginData = data;
@@ -68,6 +62,11 @@ export class AgencyPaymentComponent implements OnInit {
     if(this.agencyMasterId){
     this.agencyStoreFacade.getPayments({userId : this.loginData.processOrgModel.userId, agencyMasterId : this.agencyMasterId, agencypaymentmasterId : undefined});
     }
+
+    this.stateOptions$ = this.agencyStoreFacade.stateOptions$;
+    this.subscriptions.push(this.stateOptions$.subscribe((response)=>{
+      this.stateOptions = response;
+    }))
   }
 
   ngOnInit() {
@@ -79,20 +78,20 @@ export class AgencyPaymentComponent implements OnInit {
     this.paymentDetails$.subscribe(paymentDetails=>{
       this.paymentDetails = paymentDetails
       if(paymentDetails){
-        this.paymentForm.controls['payName'].setValue(paymentDetails.payName);
-        this.paymentForm.controls['payAddress'].setValue(paymentDetails.payAddress);
-        this.paymentForm.controls['payCity'].setValue(paymentDetails.payCity);
-        this.paymentForm.controls['stateId'].setValue(paymentDetails.stateId);
-        this.paymentForm.controls['zip'].setValue(paymentDetails.zip);
-        this.paymentForm.controls['emailFileId'].setValue(paymentDetails.emailFileId);
-        this.paymentForm.controls['numOfParcels'].setValue(paymentDetails.numOfParcels);
-        this.paymentForm.controls['orginalTB'].setValue(paymentDetails.orginalTB);
-        this.paymentForm.controls['feeWithoutOrginalTB'].setValue(paymentDetails.feeWithoutOrginalTB);
-        this.paymentForm.controls['listedPayment'].setValue(paymentDetails.listedPayment);
-        this.paymentForm.controls['emailWire'].setValue(paymentDetails.emailWire);
-        this.paymentForm.controls['overNight'].setValue(paymentDetails.overNight);
-        this.paymentForm.controls['postmarkAccepted'].setValue(paymentDetails.postmarkAccepted);
-        this.paymentForm.controls['paymentRequiredId'].setValue(paymentDetails.paymentRequiredId);
+        this.paymentFormGroup.controls['payName'].setValue(paymentDetails.payName);
+        this.paymentFormGroup.controls['payAddress'].setValue(paymentDetails.payAddress);
+        this.paymentFormGroup.controls['payCity'].setValue(paymentDetails.payCity);
+        this.paymentFormGroup.controls['stateId'].setValue(paymentDetails.stateId);
+        this.paymentFormGroup.controls['zip'].setValue(paymentDetails.zip);
+        this.paymentFormGroup.controls['emailFileId'].setValue(paymentDetails.emailFileId);
+        this.paymentFormGroup.controls['numOfParcels'].setValue(paymentDetails.numOfParcels);
+        this.paymentFormGroup.controls['orginalTB'].setValue(paymentDetails.orginalTB);
+        this.paymentFormGroup.controls['feeWithoutOrginalTB'].setValue(paymentDetails.feeWithoutOrginalTB);
+        this.paymentFormGroup.controls['listedPayment'].setValue(paymentDetails.listedPayment);
+        this.paymentFormGroup.controls['emailWire'].setValue(paymentDetails.emailWire);
+        this.paymentFormGroup.controls['overNight'].setValue(paymentDetails.overNight);
+        this.paymentFormGroup.controls['postmarkAccepted'].setValue(paymentDetails.postmarkAccepted);
+        this.paymentFormGroup.controls['paymentRequiredId'].setValue(paymentDetails.paymentRequiredId);
       }
     })
    
@@ -102,6 +101,9 @@ export class AgencyPaymentComponent implements OnInit {
     window.open(link, '_blank');
   }
 
+  ispaymentFormGroupFieldRequired(name: string): boolean {
+    return this.paymentFormGroup.get(name)?.hasValidator(Validators.required) ?? false;
+  }
 
   save(form : FormGroup){
     this.newPaymentDetails = Object.create({});
@@ -136,8 +138,12 @@ export class AgencyPaymentComponent implements OnInit {
     }
   }
 
-  isPaymentFormFieldRequired(name: string): boolean {
-    return this.paymentForm.get(name)?.hasValidator(Validators.required) ?? false;
+  isAnyDataItemsAdded(){
+    let result =  false;
+
+    return result;
   }
+
+ 
 
 }

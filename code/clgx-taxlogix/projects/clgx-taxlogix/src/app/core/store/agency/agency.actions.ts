@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Agency, CollectionDates, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowRequest,GetNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails, StateOptions } from './agency.model';
+import { Agency, CollectionDates, County, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowRequest,GetNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails, StateOptions } from './agency.model';
 
 
 
@@ -22,6 +22,22 @@ export const actionGetStateOptionsSuccess = createAction(
 
 export const actionGetStateOptionsFailure = createAction(
   '[Agency] Get State Options Failure',
+  props<{error : any}>()
+)
+
+
+export const actionGetCountiesByStateId = createAction(
+  '[Agency] Get Counties by State Id ',
+  props<{ stateId : string}>()
+)
+
+export const actionGetCountiesByStateIdSuccess = createAction(
+  '[Agency] Get Counties by State Id Success',
+  props<{ response : Array<County>}>()
+)
+
+export const actionGetCountiesByStateIdFailure = createAction(
+  '[Agency] Get Counties by State Id Failure',
   props<{error : any}>()
 )
 

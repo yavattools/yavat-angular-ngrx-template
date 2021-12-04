@@ -14,8 +14,7 @@
         </div>
       </div>
     </div>
-  <form class="form" 
-    [formGroup]="paymentForm" (ngSubmit)="save(paymentForm)">
+    <form class="form" [formGroup]="paymentFormGroup" (ngSubmit)="save(paymentFormGroup)">
     <div class="payment-tab" style="width: 100%;">
       <div class="row" style="width: 100%;">
         <div class="col-4 pb-3">
@@ -26,47 +25,34 @@
             <div class="details-inputs">
                 <mat-form-field appearance="outline">
                   <mat-label>Pay to Name</mat-label>
-                  <input matInput formControlName="payName" [required]="isPaymentFormFieldRequired('payName')">
-                  <mat-error *ngIf="payNameFC?.errors?.required">
-                    Required Field
-                  </mat-error>
+                  <input matInput formControlName="payName" [required]="ispaymentFormGroupFieldRequired('payName')">
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Pay to Address</mat-label>
-                  <input matInput formControlName="payAddress" [required]="isPaymentFormFieldRequired('payAddress')">
-                  <mat-error *ngIf="payAddressFC?.errors?.required">
-                    Required Field
-                  </mat-error>
+                  <input matInput formControlName="payAddress" [required]="ispaymentFormGroupFieldRequired('payAddress')">
                 </mat-form-field>
                 <mat-form-field appearance="outline">
                   <mat-label>Pay to City</mat-label>
-                  <input matInput formControlName="payCity" [required]="isPaymentFormFieldRequired('payCity')">
-                  <mat-error *ngIf="payCityFC?.errors?.required">
-                    Required Field
-                  </mat-error>
+                  <input matInput formControlName="payCity" [required]="ispaymentFormGroupFieldRequired('payCity')">
                 </mat-form-field>
                 <div class="state-zip">
                   <mat-form-field appearance="outline" style="width: 40%;">
                     <mat-label>State</mat-label>
-                    <input matInput formControlName="stateId" [required]="isPaymentFormFieldRequired('stateId')">
-                    <mat-error *ngIf="stateIdFC?.errors?.required">
-                      Required Field
-                    </mat-error>
+                    <mat-select formControlName="stateId" [required]="ispaymentFormGroupFieldRequired('stateId')"
+                        >
+                      <mat-option *ngFor="let option of stateOptions" [value]="option.stateId">
+                        {{option.stateName}}
+                      </mat-option>
+                    </mat-select>
                   </mat-form-field>
                   <mat-form-field appearance="outline" style="width : 55%">
                     <mat-label>Zip</mat-label>
-                    <input matInput formControlName="zip" [required]="isPaymentFormFieldRequired('zip')">
-                    <mat-error *ngIf="zipFC?.errors?.required">
-                      Required Field
-                    </mat-error>
+                    <input matInput formControlName="zip" [required]="ispaymentFormGroupFieldRequired('zip')">
                   </mat-form-field>
                 </div>
                 <mat-form-field appearance="outline">
                   <mat-label>Email File to:</mat-label>
-                  <input matInput formControlName="emailFileId" [required]="isPaymentFormFieldRequired('emailFileId')">
-                  <mat-error *ngIf="emailFileIdFC?.errors?.required">
-                    Required Field
-                  </mat-error>
+                  <input matInput formControlName="emailFileId" [required]="ispaymentFormGroupFieldRequired('emailFileId')">
                 </mat-form-field>
             </div>
           </div>
@@ -79,30 +65,24 @@
             <div class="details-inputs">
               <mat-form-field appearance="outline">
                 <mat-label>Number of Parcels per Check</mat-label>
-                <input matInput formControlName="numOfParcels" [required]="isPaymentFormFieldRequired('numOfParcels')">
-                <mat-error *ngIf="numOfParcelsFC?.errors?.required">
-                  Required Field
-                </mat-error>
+                <input matInput formControlName="numOfParcels" [required]="ispaymentFormGroupFieldRequired('numOfParcels')">
               </mat-form-field>
               <div class="toggle">
                 <mat-label>Must Have Original TB</mat-label>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
-                [required]="isPaymentFormFieldRequired('orginalTB')" formControlName="orginalTB">
+                [required]="ispaymentFormGroupFieldRequired('orginalTB')" formControlName="orginalTB">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
               <mat-form-field appearance="outline">
                 <mat-label>Fee Without Original TB</mat-label>
-                <input matInput formControlName="feeWithoutOrginalTB" [required]="isPaymentFormFieldRequired('feeWithoutOrginalTB')">
-                <mat-error *ngIf="feeWithoutOrginalTBFC?.errors?.required">
-                  Required Field
-                </mat-error>
+                <input matInput formControlName="feeWithoutOrginalTB" [required]="ispaymentFormGroupFieldRequired('feeWithoutOrginalTB')">
               </mat-form-field>
               <div class="toggle">
                 <mat-label>Listing Accepted for Payment</mat-label>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
-                [required]="isPaymentFormFieldRequired('listedPayment')" formControlName="listedPayment">
+                [required]="ispaymentFormGroupFieldRequired('listedPayment')" formControlName="listedPayment">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
@@ -110,7 +90,7 @@
               <div class="toggle">
                 <mat-label>Email File / Wire Funds</mat-label>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
-                [required]="isPaymentFormFieldRequired('emailWire')" formControlName="emailWire">
+                [required]="ispaymentFormGroupFieldRequired('emailWire')" formControlName="emailWire">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
@@ -118,7 +98,7 @@
               <div class="toggle">
                 <mat-label>Overnight</mat-label>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style"
-                [required]="isPaymentFormFieldRequired('overNight')" formControlName="overNight">
+                [required]="ispaymentFormGroupFieldRequired('overNight')" formControlName="overNight">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
@@ -126,7 +106,7 @@
               <div class="toggle">
                 <mat-label>Postmark Accepted</mat-label>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
-                [required]="isPaymentFormFieldRequired('postmarkAccepted')"  formControlName="postmarkAccepted">
+                [required]="ispaymentFormGroupFieldRequired('postmarkAccepted')"  formControlName="postmarkAccepted">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
@@ -150,7 +130,7 @@
     <div class="divider">
     </div>
     <div class="save-btn">
-      <button  [disabled]="paymentForm.invalid">Save</button>
+      <button  [disabled]="isAnyDataItemsAdded()">Save</button>
     </div>
   </form>
 </div>

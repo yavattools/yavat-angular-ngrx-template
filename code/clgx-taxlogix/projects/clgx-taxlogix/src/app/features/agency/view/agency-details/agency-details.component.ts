@@ -1,11 +1,13 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
-import { Agency, StateOptions } from '@app/core/store/agency/agency.model';
+import { Agency, County, StateOptions } from '@app/core/store/agency/agency.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
+import { MatOptionSelectionChange } from '@angular/material/core';
+import { MatSelectChange } from '@angular/material/select';
 
 interface Options {
   value: string;
@@ -17,7 +19,7 @@ interface Options {
   styleUrls: ['./agency-details.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AgencyDetailsComponent implements OnInit {
+export class AgencyDetailsComponent implements OnInit, OnDestroy {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agency!: Agency;
   newAgencyDetails: any;
@@ -37,13 +39,13 @@ export class AgencyDetailsComponent implements OnInit {
     payZip: ['', Validators.required],
     countyId: ['', Validators.required],
     contactName: [''],
-    contactEmail: [''],
-    phoneNumber: ['', Validators.required],
+    contactEmail: ['', Validators.email],
+    phoneNumber: ['', Validators.required, Validators.minLength(10)],
     contactFax: [''],
     parcelFormat: [''],
     assessorName: [''],
     assessorContactName: [''],
-    assessorPhoneNumber: [''],
+    assessorPhoneNumber: ['', Validators.minLength(10)],
     mapCost: [''],
     websiteAccessCost: [''],
     assessorWebsite: [''],
@@ -53,10 +55,10 @@ export class AgencyDetailsComponent implements OnInit {
     assessorZip: [''],
     billingRequestId: [''],
     mediaTypeId: [''],
-    paperType: ['0'],
-    excelType: ['0'],
-    mailType: ['0'],
-    assessorEmailId: ['']
+    paperType: [0],
+    excelType: [0],
+    mailType: [0],
+    assessorEmailId: ['', Validators.email]
   });
   options: Options[] = [
     { value: "1", viewValue: "1" },
@@ -67,15 +69,37 @@ export class AgencyDetailsComponent implements OnInit {
   stateOptions$ : Observable<StateOptions[]>;
   stateOptions : Array<StateOptions> = new Array<StateOptions>();
 
+  counties$ : Observable<County[]>;
+  counties : Array<County> = new Array<County>();
+  isCountiesLoading: boolean = false;
   isMobile: Boolean = false;
+  subscriptions: Array<Subscription> = new Array<Subscription>();
+
   constructor(
     public deviceService: DeviceDetectorService,
     private fb: FormBuilder,
-    private agencyFacade: AgencyStoreFacade,
+    private cd: ChangeDetectorRef,
+    public agencyFacade: AgencyStoreFacade,
     public settingsFacadeService: SettingsStoreFacade
   ) {
     this.agency$ = this.agencyFacade.selectedAgency$;
     this.stateOptions$ = this.agencyFacade.stateOptions$;
+    this.counties$ = this.agencyFacade.counties$;
+    this.subscriptions.push(this.counties$.subscribe(cties => {
+      this.counties = [...cties];
+      debugger;
+      if(this.counties.length && this.isCountiesLoading){
+        setTimeout(() => {
+          this.isCountiesLoading = false;
+          this.cd.detectChanges();
+        }, 90);
+      }
+    }));
+  }
+  ngOnDestroy(){
+    this.subscriptions.forEach(s => {
+      s.unsubscribe();
+    })
   }
 
   ngOnInit() {
@@ -84,13 +108,13 @@ export class AgencyDetailsComponent implements OnInit {
       this.settingsFacadeService.showHeader();
     }, 100);
 
-    this.agency$.subscribe((agency) => {
+    this.subscriptions.push(this.agency$.subscribe((agency) => {
       this.agency = agency;
       console.log(agency);
-    });
-    this.stateOptions$.subscribe((response)=>{
+    }));
+    this.subscriptions.push(this.stateOptions$.subscribe((response)=>{
       this.stateOptions = response;
-    })
+    }))
     if (this.deviceService.isMobile()) {
       this.isMobile = true;
     } else {
@@ -108,6 +132,7 @@ export class AgencyDetailsComponent implements OnInit {
         this.agencyDetailsGroup.controls['stateId'].setValue(this.agency.stateId)
         this.agencyDetailsGroup.controls['payZip'].setValue(this.agency.payZip)
         this.agencyDetailsGroup.controls['countyId'].setValue(this.agency.countyId)
+        // this.agencyDetailsGroup.controls['countyId'].disable();
         this.agencyDetailsGroup.controls['contactName'].setValue(this.agency.contactName)
         this.agencyDetailsGroup.controls['contactEmail'].setValue(this.agency.contactEmail)
         this.agencyDetailsGroup.controls['phoneNumber'].setValue(this.agency.phoneNumber)
@@ -294,6 +319,12 @@ export class AgencyDetailsComponent implements OnInit {
   nonFreqSelectedHandler($event: string){
     debugger;
     this.nonFreqSelected = $event;
+  }
+
+  stateSelectionChangeHandler($event: MatSelectChange){
+    debugger;
+    this.isCountiesLoading = true;
+    this.agencyFacade.getCounties($event.value);
   }
 
 }

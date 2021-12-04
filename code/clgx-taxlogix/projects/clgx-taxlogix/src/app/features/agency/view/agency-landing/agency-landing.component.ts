@@ -69,8 +69,8 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     'actions'
   ];
   ngxDisplayedColumns = [
-    { name: 'agencyMasterId' }, { name: 'agencyNumber' }, { name: 'agencyName' }, { name: 'agencySuitsAddress' }, { name: 'agencyCity' }
-    , { name: 'assessorPhoneNumber' }
+    { name: 'agencyNumber' }, { name: 'agencyName' }, { name: 'agencySuitsAddress' }, { name: 'agencyCity' }
+    ,  { name: 'agencyState' }, { name: 'assessorPhoneNumber' }
   ];
   agencyDataSource!: MatTableDataSource<Agency>;
 

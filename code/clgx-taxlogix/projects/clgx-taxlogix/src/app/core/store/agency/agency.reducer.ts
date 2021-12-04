@@ -2,6 +2,7 @@ import {
   Agency,
   AgencyState,
   CollectionDates,
+  County,
   EscrowDetails,
   EscrowNonEscrowDetails,
   NonEscrowDetails,
@@ -24,6 +25,7 @@ export const initialState: AgencyState = {
   nonEscrowDetails: new NonEscrowDetails(),
   paymentDetails: new PaymentDetails(),
   stateOptions : new Array<StateOptions>(),
+  counties : new Array<County>(),
   actionInProgress: false,
   error: ''
 };
@@ -41,13 +43,25 @@ export const reducer = createReducer(
     state.error = action.error;
   }),
   mutableOn(agencyActions.actionGetStateOptions, (state, action) => {
-    state.actionInProgress = false;
+    state.actionInProgress = true;
   }),
   mutableOn(agencyActions.actionGetStateOptionsSuccess, (state, action) => {
     state.actionInProgress = false;
     state.stateOptions = [...action.response];
   }),
   mutableOn(agencyActions.actionGetStateOptionsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error;
+  }),
+  mutableOn(agencyActions.actionGetCountiesByStateId, (state, action) => {
+    state.actionInProgress = true;
+    state.counties = [];
+  }),
+  mutableOn(agencyActions.actionGetCountiesByStateIdSuccess, (state, action) => {
+    state.actionInProgress = false;
+    state.counties = [...action.response];
+  }),
+  mutableOn(agencyActions.actionGetCountiesByStateIdFailure, (state, action) => {
     state.actionInProgress = false;
     state.error = action.error;
   }),
@@ -69,6 +83,7 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSaveAgencyDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
+    action.agency.agencyMasterId = action.response.agencyMasterId;
     state.agencies = [...state.agencies, action.agency];
     state.selectedAgency = action.agency;
     debugger

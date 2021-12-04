@@ -13,8 +13,12 @@ export class AgencyDataService {
 
   constructor(private http: HttpClient, private _appConstantService: AppConstantsService) { }
 
-  getStateInputFieldOptions() : Observable<any>{
-    return this.http.get<any>(API_BASE_URL + this._appConstantService.StateOptions)
+  getStates() : Observable<any>{
+    return this.http.get<any>(API_BASE_URL + this._appConstantService.GET_STATES)
+  }
+
+  getCounties(stateId: string) : Observable<any>{
+    return this.http.get<any>(API_BASE_URL + this._appConstantService.GET_COUNTIES_BY_STATE_ID + '?stateId=' + stateId)
   }
 
   getAgencies(request: GetActiveAgenciesRequest ): Observable<Agency[]> {

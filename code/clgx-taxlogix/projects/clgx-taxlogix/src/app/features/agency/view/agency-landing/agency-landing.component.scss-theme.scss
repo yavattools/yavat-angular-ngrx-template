@@ -34,7 +34,7 @@
     .agency-table-header-label {
       font-family: Graphik-regular;
       font-style: normal;
-      font-weight: normal;
+      font-weight: 400;
       font-size: 16px;
       line-height: 18px;
       /* identical to box height */
@@ -46,14 +46,18 @@
     .agency-table-cell-data {
       font-family: Graphik-regular;
       font-style: normal;
-      font-weight: normal;
+      font-weight: 400;
       font-size: 16px;
-      line-height: 12px;
+      line-height: 18px;
       /* identical to box height, or 75% */
       color: #868686;
-      display: flex;
+      // display: flex;
       align-items: center;
       letter-spacing: 0.03em;
+      width: 98% !important;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .action-icon {

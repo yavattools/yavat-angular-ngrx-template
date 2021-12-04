@@ -48,33 +48,33 @@
             [loadingIndicator]="(agencyFacade.actionInProgress$ | async) || false"
             [headerHeight]="50"
             [footerHeight]="50"
-            [rowHeight]="50"
+            [rowHeight]="40"
             [scrollbarV]="true"
             style="height: 100%;margin-left: 15px;margin-right: 15px;"
             (page)="onPage($event)"
       >
-        <ngx-datatable-column name="agencyMasterId" [width]="50">
+        <!-- <ngx-datatable-column name="agencyMasterId" [width]="50">
           <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
             <span class="agency-table-header-label">Id</span> 
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
             <span class="agency-table-cell-data">{{ value }}</span>
           </ng-template>
-        </ngx-datatable-column>
+        </ngx-datatable-column> -->
         <ngx-datatable-column name="agencyNumber" [width]="120">
           <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
-            <span class="agency-table-header-label">Number</span> 
+            <span class="agency-table-header-label">Agency#</span> 
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <span class="agency-table-cell-data">{{ value }}</span>
+            <div class="agency-table-cell-data">{{ value }}</div>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="agencyName" [width]="250">
           <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
-            <span class="agency-table-header-label">Name</span>   
+            <span class="agency-table-header-label">Agency Name</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <span class="agency-table-cell-data">{{ value }}</span>
+            <div class="agency-table-cell-data">{{ value }}</div>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="agencySuitsAddress" [width]="350">
@@ -82,7 +82,7 @@
             <span class="agency-table-header-label">Address</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <span class="agency-table-cell-data">{{ value }}</span>
+            <div class="agency-table-cell-data">{{ value }}</div>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="agencyCity" [width]="175">
@@ -90,7 +90,15 @@
             <span class="agency-table-header-label">City</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <span class="agency-table-cell-data">{{ value }}</span>
+            <div class="agency-table-cell-data">{{ value }}</div>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="agencyState" [width]="100">
+          <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
+            <span class="agency-table-header-label">State</span>   
+          </ng-template>
+          <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+            <div class="agency-table-cell-data">{{ value }}</div>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="assessorPhoneNumber" [width]="125">
@@ -98,7 +106,7 @@
             <span class="agency-table-header-label">Phone Number</span>   
           </ng-template>
           <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-            <span class="agency-table-cell-data">{{ value }}</span>
+            <div class="agency-table-cell-data">{{ value }}</div>
           </ng-template>
         </ngx-datatable-column>
         <ngx-datatable-column name="actions" [width]="100" [resizeable]="false" frozenRight="true">

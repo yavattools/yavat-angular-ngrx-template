@@ -24,6 +24,7 @@ export class AgencyStoreFacade {
   escrowDetails$ = this.store.pipe(select(fromSelectors.selectEscrowDetails));
   nonEscrowDetails$ = this.store.pipe(select(fromSelectors.selectNonEscrowDetails));
   stateOptions$ = this.store.pipe(select(fromSelectors.selectStateOptions));
+  counties$ = this.store.pipe(select(fromSelectors.selectCounties));
 
   constructor(private store: Store<AppState>) {}
 
@@ -41,6 +42,10 @@ export class AgencyStoreFacade {
 
   getStateOptions(){
     this.store.dispatch(fromActions.actionGetStateOptions());
+  }
+
+  getCounties(stateId: string){
+    this.store.dispatch(fromActions.actionGetCountiesByStateId({stateId: stateId}));
   }
 
   getAgencies(request : GetActiveAgenciesRequest){

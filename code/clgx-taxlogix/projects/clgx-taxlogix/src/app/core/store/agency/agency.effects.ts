@@ -45,7 +45,7 @@ export class AgencyEffects {
       this.actions$.pipe(
         ofType(agencyActions.actionGetStateOptions),
         switchMap(() => this.agencyDataService.
-          getStateInputFieldOptions().pipe(
+        getStates().pipe(
           mergeMap( stateOptions => [
             agencyActions.actionGetStateOptionsSuccess({response: stateOptions}),
           ]),
@@ -53,6 +53,19 @@ export class AgencyEffects {
         ))
       )
     );
+
+  getCounties = createEffect(() =>
+    this.actions$.pipe(
+      ofType(agencyActions.actionGetCountiesByStateId),
+      switchMap((action) => this.agencyDataService.
+      getCounties(action.stateId).pipe(
+        mergeMap( counties => [
+          agencyActions.actionGetCountiesByStateIdSuccess({response: counties}),
+        ]),
+        catchError(error => of(agencyActions.actionGetCountiesByStateIdFailure(error)))
+      ))
+    )
+  );
 
   getAgencies = createEffect(() =>
       this.actions$.pipe(
