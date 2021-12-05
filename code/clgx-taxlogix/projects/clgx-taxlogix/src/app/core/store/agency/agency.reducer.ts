@@ -83,9 +83,10 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSaveAgencyDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
-    action.agency.agencyMasterId = action.response.agencyMasterId;
-    state.agencies = [...state.agencies, action.agency];
-    state.selectedAgency = action.agency;
+    let uAgency:Agency = _.cloneDeep(action.agency);
+    uAgency.agencyMasterId = action.response.agencyMasterId;
+    state.agencies = [...state.agencies, uAgency];
+    state.selectedAgency = uAgency;
     debugger
   }),
   mutableOn(agencyActions.actionSaveAgencyDetailsFailure, (state, action) => {
@@ -98,18 +99,18 @@ export const reducer = createReducer(
   mutableOn(agencyActions.actionUpdateAgencyDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
     state.selectedAgency = action.agency;
-    let uAgencies = state.agencies.filter(a => {
-      if(a.agencyMasterId === action.response.agencyMasterId){
-        return action.agency;
-      }else{
-        return a;
-      }
-    });
-    state.agencies = [...uAgencies];
-  //   let index = _.findIndex(state.agencies, (e) => {
-  //     return e.agencyMasterId == action.agency.agencyMasterId;
-  //   }, 0);
-  //  state.agencies = [...state.agencies.slice(0,index),action.agency,...state.agencies.slice(index+1)];
+    // let uAgencies = state.agencies.filter(a => {
+    //   if(a.agencyMasterId === action.response.agencyMasterId){
+    //     return action.agency;
+    //   }else{
+    //     return a;
+    //   }
+    // });
+    // state.agencies = [...uAgencies];
+    let index = _.findIndex(state.agencies, (e) => {
+      return e.agencyMasterId == action.agency.agencyMasterId;
+    }, 0);
+   state.agencies = [...state.agencies.slice(0,index),action.agency,...state.agencies.slice(index+1)];
   }),
   mutableOn(agencyActions.actionUpdateAgencyDetailsFailure, (state, action) => {
     state.actionInProgress = false;
