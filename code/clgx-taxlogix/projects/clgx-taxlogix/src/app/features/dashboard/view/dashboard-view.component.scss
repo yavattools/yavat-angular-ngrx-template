@@ -7,9 +7,12 @@
 }
 
 .dashboard-container{
-  max-width: 800px;
+  max-width: 1000px;
 }
-
+.dashboard-header{
+  height: 120px;
+  padding-top: 20px;
+}
 .main-heading {
   text-transform: uppercase;
   margin: 0 0 20px 0;
@@ -19,7 +22,7 @@ mat-card {
   margin: 0 0 20px 0;
   cursor: pointer;
   .feature-icon{
-    font-size: 3rem;
+    font-size: 5rem;
   }
   .image-center {
     position: relative;

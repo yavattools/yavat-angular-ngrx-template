@@ -11,14 +11,14 @@
                     <div [class.introText-desktop]="!isMobile" [class.introText-mobile]="isMobile" >
                         <div>
                             <div>
-                                <img animateOnScroll animationName="animated fadeInDown" 
+                                <img animateOnScroll animationName="animated fadeInRight" 
                                 src="././assets/icons/taxlogix-logo.svg" style="width:250px;height:64px;" alt="logo">
                                 <span animateOnScroll animationName="animated fadeInLeft" style="position: relative;left: -20px;" *ngIf="!isMobile">By Chainlogix</span>
                             </div>
                             <span *ngIf="isMobile" style="position: relative;top: -50px;" animateOnScroll animationName="animated fadeInDown">By Chainlogix</span>
                         </div>
-                        <h6 animateOnScroll animationName="animated fadeInDown">Make the change today! leverage our RPA technology </h6>
-                        <p animateOnScroll animationName="animated fadeInDown">Taxlogix solve our client's toughest challenges replaces time consuming and manual processes.
+                        <h6 animateOnScroll animationName="animated fadeInLeft">Make the change today! leverage our RPA technology </h6>
+                        <p animateOnScroll animationName="animated fadeInLeft">Taxlogix solve our client's toughest challenges replaces time consuming and manual processes.
                             Robotic Process Automation (RPA) and experienced team members provides for balance between human
                             and digital workers. We are the trusted source in real estate tax and the subject matter experts
                         </p>
@@ -33,9 +33,9 @@
                     <div>
                         <div class="shape" >
                             <div class="parallelogram-wrap " fxLayout="row wrap" fxLayoutAlign="center center" 
-                                    animateOnScroll animationName="animated fadeInDown"  style="height: 100vh;">
+                                    animateOnScroll animationName="animated fadeInRght"  style="height: 100vh;">
                                 <div fxFlex="100" fxLayoutAlign="end start" >
-                                    <img animateOnScroll animationName="animated fadeIn" 
+                                    <img animateOnScroll animationName="animated fadeInRight" 
                                             src="././assets/images/login-banner-1.png" alt="banner-1"
                                         class="img-fluid"  [class.login-banner1-desktop]="!isMobile" [class.login-banner1-mobile]="isMobile">
                                 </div>
@@ -151,13 +151,13 @@
     <form  fxLayout="row wrap"   fxLayoutAlign="center center"
             [formGroup]="loginForm" (ngSubmit)="submitForm()">
         <div fxFlex="37" fxLayoutAlign="center center">
-            <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-form-field appearance="outline" color="accent" style="width: 100%;">
                 <mat-label>Email</mat-label>
                 <input matInput formControlName="username">
             </mat-form-field>
         </div>
         <div fxFlex="37" fxLayoutAlign="center center">
-            <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-form-field appearance="outline" color="accent" style="width: 100%;">
                 <mat-label>Password</mat-label>
                 <input [type]="hide ? 'password' : 'text'" matInput
                     formControlName="password" autocomplete="on">

@@ -20,35 +20,36 @@
       </div>
     </div>
   </div>
-  <form class="form" [formGroup]="agencyDetailsGroup" (ngSubmit)="save(agencyDetailsGroup)">
+  <form class="form" 
+    [formGroup]="agencyDetailsGroup" (ngSubmit)="save(agencyDetailsGroup)">
   <div class="agency-details">
     <div class="details">
       <div class="detail">
         <span>Overview</span>
       </div>
       <div class="details-inputs">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" color="accent">
             <mat-label>Agency Number</mat-label>
             <input matInput formControlName="agencyNumber"  [required]="isRequired('agencyNumber')">
             <mat-error *ngIf="agencyNumber.errors?.required">
               Required 
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" color="accent">
             <mat-label>Agency Name</mat-label>
             <input matInput formControlName="agencyName" [required]="isRequired('agencyName')">
             <mat-error *ngIf="agencyName.errors?.required">
               Required 
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" color="accent">
             <mat-label>Agency Website</mat-label>
             <input matInput formControlName="agencyWebsite" [required]="isRequired('agencyWebsite')">
             <mat-error *ngIf="agencyWebsite.errors?.required">
               Required 
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" color="accent">
             <mat-label>Lower Level Agency</mat-label>
             <mat-select formControlName="agencyLowerLevel" [required]="isRequired('agencyLowerLevel')">
               <mat-option *ngFor="let option of options" [value]="option.value">
@@ -79,17 +80,17 @@
     </div>
     <div class="details">
       <div class="detail">
-        <span>Location</span>
+        <span>Location state: {{agencyState.value}}</span>
       </div>
       <div class="details-inputs">
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" color="accent">
             <mat-label>Agency Suits Address</mat-label>
             <input matInput formControlName="agencySuitsAddress" [required]="isRequired('agencySuitsAddress')">
             <mat-error *ngIf="agencySuitsAddress.errors?.required">
               Required 
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" color="accent">
             <mat-label>Agency City</mat-label>
             <input matInput formControlName="agencyCity" [required]="isRequired('agencyCity')">
             <mat-error *ngIf="agencyCity.errors?.required">
@@ -97,9 +98,9 @@
             </mat-error>
           </mat-form-field>
           <div class="state-zip">
-            <mat-form-field appearance="outline" style="width: 57%;">
+            <mat-form-field appearance="outline" color="accent" style="width: 57%;">
               <mat-label>State</mat-label>
-              <mat-select formControlName="stateId"
+              <mat-select formControlName="stateId" #agencyState
                 (selectionChange)="stateSelectionChangeHandler($event)"   [required]="isRequired('stateId')">
                 <mat-option *ngFor="let option of stateOptions" [value]="option.stateId">
                   {{option.stateName}}
@@ -109,17 +110,17 @@
                 Required 
               </mat-error>
             </mat-form-field>
-            <mat-form-field appearance="outline" style="width : 40%">
+            <mat-form-field appearance="outline" color="accent" style="width : 40%">
               <mat-label>Zip</mat-label>
-              <input matInput formControlName="payZip" [required]="isRequired('payZip')">
+              <input matInput formControlName="payZip"  [required]="isRequired('payZip')">
               <mat-error *ngIf="payZip.errors?.required">
                 Required 
               </mat-error>
             </mat-form-field>
           </div>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" color="accent">
             <mat-label>County</mat-label>
-            <mat-select formControlName="countyId" [disabled]="isCountiesLoading"
+            <mat-select formControlName="countyId" [disabled]="isCountiesLoading || !counties?.length"
                  [required]="isRequired('countyId')">
               <mat-option *ngFor="let option of (counties$ | async)" [value]="option.countyId">
                 {{option.countyName}}
@@ -130,6 +131,9 @@
             <mat-error *ngIf="countyId.errors?.required">
               Required 
             </mat-error>
+            <div *ngIf="!agencyState.value" class="show-orangered">
+              Select State to load County List
+            </div>
           </mat-form-field>
 
           <!-- <mat-form-field appearance="outline">
@@ -146,21 +150,21 @@
         <span>Contact</span>
       </div>
       <div class="details-inputs">
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field appearance="outline" color="accent" style="width: 100%;">
             <mat-label>Contact Name</mat-label>
             <input matInput formControlName="contactName" [required]="isRequired('contactName')">
             <mat-error *ngIf="contactName.errors?.required">
               Required 
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field appearance="outline" color="accent" style="width: 100%;">
             <mat-label>Contact Email</mat-label>
             <input matInput formControlName="contactEmail" [required]="isRequired('contactEmail')">
             <mat-error *ngIf="contactEmail.errors?.required">
               Required 
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field appearance="outline" color="accent" style="width: 100%;">
             <mat-label>Contact Phone</mat-label>
             <input   matInput  type="text" (keypress)="keyPress($event)" required 
               formControlName="phoneNumber"  [required]="isRequired('phoneNumber')">
@@ -171,14 +175,14 @@
               Phone number must be 10 numbers
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%">
+          <mat-form-field appearance="outline" color="accent" style="width: 100%">
             <mat-label>Contact Fax</mat-label>
             <input matInput formControlName="contactFax" [required]="isRequired('contactFax')">
             <mat-error *ngIf="contactFax.errors?.required">
               Required 
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" style="width: 100%">
+          <mat-form-field appearance="outline" color="accent" style="width: 100%">
             <mat-label>Parsel Format</mat-label>
             <input matInput formControlName="parcelFormat" [required]="isRequired('parcelFormat')">
             <mat-error *ngIf="parcelFormat.errors?.required">
@@ -196,21 +200,21 @@
         <span>Assessor Info</span>
       </div>
       <div class="details-inputs">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Assessor Name</mat-label>
           <input matInput formControlName="assessorName" [required]="isRequired('assessorName')">
           <mat-error *ngIf="assessorName.errors?.required">
             Required 
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Assessor Contact Name</mat-label>
           <input matInput formControlName="assessorContactName" [required]="isRequired('assessorContactName')">
           <mat-error *ngIf="assessorContactName.errors?.required">
             Required 
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Assessor Phone</mat-label>
           <input type="text" (keypress)="keyPress($event)" matInput 
             formControlName="assessorPhoneNumber" [required]="isRequired('assessorPhoneNumber')">
@@ -221,21 +225,21 @@
             Phone number must be 10 numbers
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Map Cost</mat-label>
           <input matInput formControlName="mapCost" [required]="isRequired('mapCost')">
           <mat-error *ngIf="mapCost.errors?.required">
             Required 
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Website Access Cost</mat-label>
           <input matInput formControlName="websiteAccessCost" [required]="isRequired('websiteAccessCost')">
           <mat-error *ngIf="websiteAccessCost.errors?.required">
             Required 
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Assessor Website</mat-label>
           <input matInput formControlName="assessorWebsite" [required]="isRequired('assessorWebsite')">
           <mat-error *ngIf="assessorWebsite.errors?.required">
@@ -249,14 +253,14 @@
         <span>Location</span>
       </div>
       <div class="details-inputs">
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Assessor Address</mat-label>
           <input matInput formControlName="assessorAddress" [required]="isRequired('assessorAddress')">
           <mat-error *ngIf="assessorAddress.errors?.required">
             Required 
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>Assessor City</mat-label>
           <input matInput formControlName="assessorCity" [required]="isRequired('assessorCity')">
           <mat-error *ngIf="assessorCity.errors?.required">
@@ -264,7 +268,7 @@
           </mat-error>
         </mat-form-field>
         <div class="state-zip">
-          <mat-form-field appearance="outline" style="width: 40%;">
+          <mat-form-field appearance="outline" color="accent" style="width: 40%;">
             <mat-label>State</mat-label>
             <mat-select formControlName="assessorStateId"
                  [required]="isRequired('assessorStateId')">
@@ -276,7 +280,7 @@
               Required 
             </mat-error>
           </mat-form-field>
-          <mat-form-field appearance="outline" style="width : 55%">
+          <mat-form-field appearance="outline" color="accent" style="width : 55%">
             <mat-label>Zip</mat-label>
             <input matInput formControlName="assessorZip" [required]="isRequired('assessorZip')">
             <mat-error *ngIf="assessorZip.errors?.required">
@@ -291,7 +295,7 @@
         <span>Tax bill request</span>
       </div>
       <div class="details-inputs">
-        <mat-form-field appearance="outline" style="width: 100%">
+        <mat-form-field appearance="outline" color="accent" style="width: 100%">
           <mat-label>Billing Request Format</mat-label>
           <mat-select formControlName="billingRequestId" [required]="isRequired('billingRequestId')">
             <mat-option *ngFor="let option of options" [value]="option.value">
@@ -302,7 +306,7 @@
             Required 
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" style="width: 100%">
+        <mat-form-field appearance="outline" color="accent" style="width: 100%">
           <mat-label>Media Type</mat-label>
           <mat-select formControlName="mediaTypeId" [required]="isRequired('mediaTypeId')">
             <mat-option *ngFor="let option of options" [value]="option.value">
@@ -337,7 +341,7 @@
             <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
           </mat-button-toggle-group>
         </div>
-        <mat-form-field appearance="outline" style="width: 100%">
+        <mat-form-field appearance="outline" color="accent" style="width: 100%">
           <mat-label>Email ID</mat-label>
           <input matInput formControlName="assessorEmailId" [required]="isRequired('assessorEmailId')">
           <mat-error *ngIf="assessorEmailId.errors?.required">

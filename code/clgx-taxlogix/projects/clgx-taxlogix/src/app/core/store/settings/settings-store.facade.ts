@@ -10,6 +10,7 @@ import { AppState } from '@app/core/core.state';
 export class SettingsStoreFacade {
   showHeader$ = this.store.pipe(select(fromSelectors.selectSettingsShowHeader));
   headerShowTime$ = this.store.pipe(select(fromSelectors.selectSettingsHeaderShowTime));
+  actionInProgress$ = this.store.pipe(select(fromSelectors.selectActionInProgress));
 
   constructor(private store: Store<AppState>) {}
 
@@ -23,6 +24,14 @@ export class SettingsStoreFacade {
 
   hideHeader(){
     this.store.dispatch(fromActions.actionSettingsHideHeader({showHeader: false}))
+  }
+
+  startActionInProgress(){
+    this.store.dispatch(fromActions.actionStartActionInProgress())
+  }
+
+  stopActionInProgress(){
+    this.store.dispatch(fromActions.actionStopActionInProgress())
   }
 
 }

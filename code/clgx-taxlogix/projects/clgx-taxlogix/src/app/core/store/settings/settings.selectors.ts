@@ -28,6 +28,12 @@ export const selectSettingsLanguage = createSelector(
   (state: SettingsState) => state.language
 );
 
+
+export const selectActionInProgress = createSelector(
+  selectSettings,
+  (state: SettingsState) => state.actionInProgress
+);
+
 export const selectTheme = createSelector(
   selectSettings,
   (settings) => settings.theme

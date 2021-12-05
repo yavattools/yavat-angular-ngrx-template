@@ -1,9 +1,11 @@
 
-<div class="container">
-  <mat-card [ngClass]="routeAnimationsElements">
+<div class="container pl-0 pr-0">
+  <mat-card class="agency-details-container pl-0 pr-0" [ngClass]="routeAnimationsElements">
     <mat-card-header >
-      <button mat-button color="primary" (click)="goToDashboardHandler($event)">
-        <i class="fa fa-chevron-left"></i> Agencies</button>
+      <button mat-button  class="bread-grum" (click)="goToDashboardHandler($event)">
+        <i class="fa fa-chevron-left"></i> 
+        Agencies
+      </button>
     </mat-card-header>
     <div class="details-container-content">
       <div class="agency-details-container-head" *ngIf="(agency$ | async)?.agencyName">
@@ -25,7 +27,7 @@
         </div>
       </mat-tab>
       <mat-tab label="Procurement">
-        <clgx-agency-procument></clgx-agency-procument>
+        <clgx-agency-procument *ngIf="selectedTabIndex === 2"></clgx-agency-procument>
       </mat-tab>
       <mat-tab label="Payment">
         <div class="tab-content tab-label">
@@ -46,26 +48,14 @@
           <mat-label>Comments and notes</mat-label>
           <textarea matInput style="height: 260px"></textarea>
         </mat-form-field>
-        <!-- <div >
-          <small></small>
-          <textarea class="big-input-box" type="text"></textarea>
-        </div> -->
         <div class="row" style="height: 200px;">
           <div class="col-12 pb-3">
-            <!-- <div>
-              <small>Last updated by</small>
-            </div>
-            <input type="text"> -->
             <mat-form-field >
               <mat-label>Last updated by</mat-label>
               <input [ngModel]="(agency$ | async)?.modifiedBy" disabled="true" matInput >
             </mat-form-field>
           </div>
           <div class="col-12 pb-3">
-            <!-- <div>
-              <small>Last date updated</small>
-            </div>
-            <input type="text"> -->
             <mat-form-field >
               <mat-label>Last date updated</mat-label>
               <input  disabled="true" [ngModel]="(agency$ | async)?.modifiedBy" matInput >

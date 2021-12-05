@@ -84,6 +84,25 @@
     .default-theme .mat-form-field-appearance-outline .mat-form-field-infix {
       padding: 0.4em 0 !important;
     }
+    .mat-form-field-flex{
+      background-color: white !important;
+    }
+
+    .agency-details-container{
+      // background-color: #F6F7F8 !important;
+    }
+    .bread-grum{
+      color: #868686 !important;
+      font-family: Graphik-regular;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 12px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      /* identical to box height, or 100% */
+      letter-spacing: 0.03em;
+    }
 
     .internal-label {
       font-family: Graphik-regular;
@@ -97,6 +116,12 @@
       display: flex;
       align-items: center;
     }
-   
+
+    .mat-tab-body-content{
+      overflow-x: hidden !important;
+    }
+    .mat-tab-list{
+      margin-left: 75px !important;
+    }
   }
 }

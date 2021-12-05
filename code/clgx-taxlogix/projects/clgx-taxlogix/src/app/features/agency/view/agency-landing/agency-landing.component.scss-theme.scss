@@ -69,6 +69,20 @@
       color: mat.get-color-from-palette($primary) !important;
     }
 
+    .bread-grum{
+      color: #868686 !important;
+      font-family: Graphik-regular;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 12px;
+      line-height: 12px;
+      max-height: 40px;
+      padding-top: 6px;
+      padding-bottom: 6px;
+      /* identical to box height, or 100% */
+      letter-spacing: 0.03em;
+    }
+
     .page-title {
       color: mat.get-color-from-palette($accent) !important;
       font-family: Graphik-medium;
@@ -92,6 +106,14 @@
 
     .mat-card-header-text{
       margin: 0px;
+    }
+
+    .datatable-row-even {
+      background-color: #fff;
+    }
+    
+    .datatable-row-odd {
+        background-color: #f0f0f0;
     }
   }
 }

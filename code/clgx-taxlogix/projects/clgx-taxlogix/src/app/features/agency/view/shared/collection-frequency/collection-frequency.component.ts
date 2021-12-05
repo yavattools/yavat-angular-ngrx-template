@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input, OnChanges } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { AgencyDefaultFrequency, AgencyNonFrequency, FrequencyType } from '@app/core/store/agency/agency.model';
 
@@ -11,7 +11,7 @@ export interface Freq {
   selector: 'clgx-collection-frequency',
   templateUrl: './collection-frequency.component.html',
   styleUrls: ['./collection-frequency.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
@@ -32,19 +32,8 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
   public agDefaultFreq: AgencyDefaultFrequency;
   public agNonFreq: AgencyNonFrequency;
 
-  // annual_default_checked: Boolean = false;
-  // annual_non_checked: Boolean = false;
-  // discount_annual_default_checked: Boolean = false;
-  // discount_annual_non_checked: Boolean = false;
-  // semi_annual_default_checked: Boolean = false;
-  // semi_annual_non_checked: Boolean = false;
-  // tri_default_checked: Boolean = false;
-  // tri_non_checked: Boolean = false;
-  // quarterly_default_checked: Boolean = false;
-  // quarterly_non_checked: Boolean = false;
-
-  constructor() {
-    this.agDefaultFreq = Object.create({});
+  constructor(public cd: ChangeDetectorRef) {
+    this.agDefaultFreq = new AgencyDefaultFrequency();
     this.agNonFreq = new AgencyNonFrequency();
   }
 
@@ -54,7 +43,27 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
   }
 
+  isAllFreqSelected(){
+    let result = false;
+    debugger;
+    if((this.agDefaultFreq.default_annual || this.agDefaultFreq.default_discount_annual ||
+        this.agDefaultFreq.default_quarterly || this.agDefaultFreq.default_semi_annual || 
+        this.agDefaultFreq.default_tri) && (this.agNonFreq.non_annual || this.agNonFreq.non_discount_annual ||
+          this.agNonFreq.non_quarterly || this.agNonFreq.non_semi_annual || this.agNonFreq.non_tri)){
+            result = true;
+    }
+
+    return result;
+  }
+
   defaultChangeHandler(default_freq: string){
+    if(!this.agDefaultFreq.default_annual || !this.agDefaultFreq.default_discount_annual ||
+      !this.agDefaultFreq.default_quarterly || !this.agDefaultFreq.default_semi_annual ||
+      !this.agDefaultFreq.default_tri){
+        this.defaultFreqSelected.emit('');
+        return;
+      }
+
     switch(default_freq){
       case FrequencyType.DEFAULT_ANNUAL:{
         this.agDefaultFreq.default_annual = true;
@@ -106,9 +115,18 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
         break;
       }
     }
+    this.cd.detectChanges();
   }
 
   nonChangeHandler(non_freq: string){
+    debugger;
+    if(!this.agNonFreq.non_annual || !this.agNonFreq.non_discount_annual || 
+      !this.agNonFreq.non_quarterly || !this.agNonFreq.non_semi_annual || 
+      !this.agNonFreq.non_tri){
+        this.nonFreqSelected.emit('');
+        return;
+      }
+
     switch(non_freq){
       case FrequencyType.NON_ANNUAL:{
         this.agNonFreq.non_annual = true;
@@ -160,5 +178,6 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
         break;
       }
     }
+    this.cd.detectChanges();
   }
 }

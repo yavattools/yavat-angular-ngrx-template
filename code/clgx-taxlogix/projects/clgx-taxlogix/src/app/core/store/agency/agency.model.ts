@@ -230,12 +230,19 @@ export enum PaymentMethod{
   WIRE = 'wire',
 }
 
-export interface AgencyDefaultFrequency{
-  default_annual: Boolean;
-  default_discount_annual: Boolean;
-  default_semi_annual: Boolean;
-  default_tri: Boolean;
-  default_quarterly: Boolean;
+export class AgencyDefaultFrequency{
+  default_annual!: Boolean;
+  default_discount_annual!: Boolean;
+  default_semi_annual!: Boolean;
+  default_tri!: Boolean;
+  default_quarterly!: Boolean;
+  constructor(){
+    this.default_annual = false;
+    this.default_discount_annual = false;
+    this.default_quarterly = false;
+    this.default_semi_annual = false;
+    this.default_tri = false;
+  }
 }
 
 

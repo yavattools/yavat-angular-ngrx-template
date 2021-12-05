@@ -84,6 +84,7 @@ export class AppComponent implements OnInit, AfterViewInit {
   showHeader$: Observable<boolean> | undefined;
   language$: Observable<string> | undefined;
   theme$: Observable<string> | undefined;
+  actionInProgress$: Observable<boolean> | undefined;
   headerShowTime: string = '';
   showHeader: boolean = false;
   actionInProgress: boolean = false;
@@ -107,14 +108,19 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.settingsFacadeService.headerShowTime$.subscribe((showTime) => {
       this.headerShowTime = showTime;
     });
-    
+    this.actionInProgress$?.subscribe(p => {
+      this.displayProgressSpinner = p;
+    })
     this.loadingService.value$.
     subscribe(r => {
       if(r != 0){
         this.displayProgressSpinner = true;
+        // alert('progress' + this.displayProgressSpinner);
       }else{
         setTimeout(() => {
           this.displayProgressSpinner = false;
+        // alert('progress stopped' + this.displayProgressSpinner);
+
         }, 1000);
       }
     })

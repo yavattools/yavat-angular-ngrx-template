@@ -1,7 +1,10 @@
 <div class="container">
   <mat-card style="height: 85vh;">
-    <mat-card-header >
-      <button mat-button color="primary" (click)="goToFeaturesHandler($event)"><i class="fa fa-chevron-left"></i> Dashboard</button>
+    <mat-card-header class="dashboard-header" >
+      <button mat-button class="bread-grum" (click)="goToFeaturesHandler($event)">
+        <i class="fa fa-chevron-left"></i> 
+        Dashboard
+      </button>
     </mat-card-header>
     <div class="row agencies-header-div" [ngClass]="routeAnimationsElements">
       <div class="col-3 p-10">
@@ -12,7 +15,7 @@
         </div>
       </div>
       <div class="col-9 pb-3 agency-search-field-div" >
-        <mat-form-field  class="name-filter-input">
+        <mat-form-field color="accent" class="name-filter-input">
           <input matInput placeholder="Name" value="" [(ngModel)]="agencyFilter.name">
           <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
           <mat-icon matPrefix *ngIf="agencyFilter.name" (click)="clearNameFilter($event)">
@@ -20,14 +23,20 @@
           </mat-icon>
         </mat-form-field>
   
-        <mat-form-field class="number-filter-input">
+        <mat-form-field color="accent" class="number-filter-input">
           <input matInput placeholder="Number" value="" [(ngModel)]="agencyFilter.number">
           <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
+          <mat-icon matPrefix *ngIf="agencyFilter.number" (click)="clearNameFilter($event)">
+            <i class="fa fa-close filter-icon-orange"></i>
+          </mat-icon>
         </mat-form-field>
   
-        <mat-form-field class="state-filter-input">
+        <mat-form-field color="accent" class="state-filter-input">
           <input matInput placeholder="State" value="" [(ngModel)]="agencyFilter.state">
           <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
+          <mat-icon matPrefix *ngIf="agencyFilter.state" (click)="clearNameFilter($event)">
+            <i class="fa fa-close filter-icon-orange"></i>
+          </mat-icon>
         </mat-form-field>
         <button mat-raised-button color="primary" 
         [disabled]="(agencyFacade.actionInProgress$ | async) || false"
@@ -122,11 +131,10 @@
         </ngx-datatable-column>
       </ngx-datatable>
       <button mat-icon-button color="primary" 
-       [ngClass]="routeAnimationsElements"
         [disabled]="(agencyFacade.actionInProgress$ | async) || false"
         matTooltip="Add New Agency"
         (click)="addNewAgency($event)"
-        style="position: absolute;top: 160px;right: 15px; cursor: pointer;">
+        style="position: absolute;top: 175px;right: 15px; cursor: pointer;">
         <i class="fa fa-plus fa-2x"></i>
       </button>
       <div *ngIf="(agencyFacade.actionInProgress$ | async) || false" 

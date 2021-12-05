@@ -1,6 +1,13 @@
 <div class="collection-freq">
     <div class="title">
-        <span>Collection Frequency <span>*</span></span>
+        <div>
+            <div>
+                <span>Collection Frequency </span>
+            </div>
+            <div *ngIf="!isAllFreqSelected()">
+                <small class="show-orangered">Select Frequency <span>*</span></small>
+            </div>
+        </div>
     </div>
     <div class="default-text">
         <span>Default</span>

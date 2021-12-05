@@ -9,6 +9,7 @@
 
 .agency-details-container-head {
   height: 150px;
+  padding: 75px;
   padding-top: 50px;
 }
 
@@ -18,7 +19,7 @@
 }
 
 .details-container-content {
-  padding: 0 3%;
+  padding: 0;
   position: relative;
   .tab-content {
     min-height: 500px;
@@ -32,6 +33,8 @@
 
 .internal-group {
   height: 500px;
+  padding-left: 75px;
+  padding-right: 75px;
   .grid-wrapper {
     display: grid;
     grid-template-columns: 70% 30%;

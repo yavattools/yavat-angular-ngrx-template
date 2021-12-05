@@ -77,6 +77,7 @@ export const reducer = createReducer(
   ),
   mutableOn(agencyActions.actionSetSelectedAgency, (state, action) => {
     state.selectedAgency = action.agency;
+    state.counties = [];
   }),
   mutableOn(agencyActions.actionSaveAgencyDetails, (state, action) => {
     state.actionInProgress = true;

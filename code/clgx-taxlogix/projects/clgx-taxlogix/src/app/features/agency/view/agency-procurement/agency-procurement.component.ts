@@ -24,7 +24,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   nonEscrowDetails : NonEscrowDetails = new NonEscrowDetails();
   newEscrowForm : any;
   newNonEscrowForm : any;
-  selectedTabIndex = 0;
+  tabSelectedIndex = 0;
   loginData : any
   agencyMasterId : string | undefined
 
@@ -229,7 +229,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   // }
 
   ngAfterViewInit(){
-    this.selectedTabIndex = 0;
+    this.tabSelectedIndex = 0;
   }
 
   openLink(link: string) {

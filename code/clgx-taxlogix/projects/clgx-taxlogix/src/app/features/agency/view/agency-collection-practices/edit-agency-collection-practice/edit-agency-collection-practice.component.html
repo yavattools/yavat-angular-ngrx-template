@@ -14,7 +14,7 @@
     (ngSubmit)="updateCollectionDate(editForm)">
     <div class="row">
       <div class="col-6">
-        <mat-form-field class="w-100">
+        <mat-form-field class="w-100" color="accent">
           <mat-label>Year</mat-label>
           <mat-select formControlName="year" [required]="isRequired('year')">
             <mat-option *ngFor="let year of years" [value]="year">
@@ -27,7 +27,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field class="w-100">
+        <mat-form-field class="w-100" color="accent">
           <mat-label>Installment</mat-label>
           <mat-select formControlName="installment" [required]="isRequired('installment')">
             <mat-option *ngFor="let installment of installmentsValues" [value]="installment">
@@ -40,7 +40,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field class="w-100">
+        <mat-form-field class="w-100" color="accent">
           <mat-label>Frequency</mat-label>
           <mat-select formControlName="frequency" (ngModelChange)="frequencyValue()" [required]="isRequired('frequency')">
             <mat-option *ngFor="let fre of frequency" [value]="fre.id">
@@ -53,7 +53,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100">
+        <mat-form-field  class="w-100" color="accent">
           <mat-label>Base</mat-label>
           <input [matDatepicker]="baseDatePicker" matInput formControlName="base" [required]="isRequired('base')">
           <mat-datepicker-toggle matSuffix [for]="baseDatePicker"></mat-datepicker-toggle>
@@ -64,7 +64,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100">
+        <mat-form-field  class="w-100" color="accent">
           <mat-label>Discount</mat-label>
           <input [matDatepicker]="discountDatePicker" matInput formControlName="discount" [required]="isRequired('discount')">
           <mat-datepicker-toggle matSuffix [for]="discountDatePicker"></mat-datepicker-toggle>
@@ -75,7 +75,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100">
+        <mat-form-field  class="w-100" color="accent">
           <mat-label>Penalty</mat-label>
           <input [matDatepicker]="penaltyDatePicker" matInput formControlName="penalty" 
           [required]="isRequired('penalty')">
@@ -87,7 +87,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100">
+        <mat-form-field  class="w-100" color="accent">
           <mat-label>Late Release</mat-label>
           <input [matDatepicker]="lateReleaseDatePicker" matInput formControlName="lateRelease" [required]="isRequired('lateRelease')">
           <mat-datepicker-toggle matSuffix [for]="lateReleaseDatePicker"></mat-datepicker-toggle>
@@ -98,7 +98,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100">
+        <mat-form-field  class="w-100" color="accent">
           <mat-label>Bill Request</mat-label>
           <input [matDatepicker]="billRequestDatePicker" matInput formControlName="billRequest" 
           [required]="isRequired('billRequest')">

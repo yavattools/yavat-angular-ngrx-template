@@ -1,4 +1,11 @@
 @import '../../../../../styles-variables';
+
+.logs-container{
+  overflow-x: hidden;
+  padding-left: 75px;
+  padding-right: 75px;
+  margin-bottom: 100px;
+}
 table {
   width: 100%;
 }

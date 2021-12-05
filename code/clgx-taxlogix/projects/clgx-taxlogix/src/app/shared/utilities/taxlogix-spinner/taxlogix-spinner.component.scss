@@ -1,4 +1,10 @@
 .taxlogix-splash-screen {
+  position: fixed;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  z-index: 100000;
   .webcube-loader {
     display: block;
 
@@ -7,7 +13,8 @@
     left: 50%;
     transform: translateY(-50%);
   }
-  background-color: #3dcbc5;
+  // background-color: #3dcbc43a;
+  background-color: rgba($color: #000, $alpha: 0.2);
   .webcube-loader > div {
     display: inline-block;
   }
@@ -17,12 +24,12 @@
     width: 42px;
     height: 25.09px;
     background-color: transparent;
-    border-left: solid 5px #c4c4c4;
-    border-right: solid 5px #c4c4c4;
+    border-left: solid 5px #a4a4a4;
+    border-right: solid 5px #a4a4a4;
     margin-right: -8px;
     transform: rotate(-90deg);
-    animation: loader 1.5s infinite ease both;
-    animation-delay: 1.2s;
+    animation: loader 3.5s infinite ease both;
+    animation-delay: 0.1s;
   }
 
   .hexagon:before,
@@ -42,14 +49,14 @@
 
   .hexagon:before {
     top: -18.1421px;
-    border-top: solid 7.0711px #c4c4c4;
-    border-right: solid 7.0711px #c4c4c4;
+    border-top: solid 7.0711px #a4a4a4;
+    border-right: solid 7.0711px #a4a4a4;
   }
 
   .hexagon:after {
     bottom: -18.1421px;
-    border-bottom: solid 7.0711px #c4c4c4;
-    border-left: solid 7.0711px #c4c4c4;
+    border-bottom: solid 7.0711px #a4a4a4;
+    border-left: solid 7.0711px #a4a4a4;
   }
 
   .hexagon2 {
@@ -100,8 +107,8 @@
     border-right: solid 5px #053481;
     z-index: 99;
     transform: rotate(-90deg);
-    animation: loader 5.5s infinite ease both;
-    animation-delay: 1.2s;
+    animation: loader 3.5s infinite ease both;
+    animation-delay: 1.8s;
     margin-left: -8px;
   }
 

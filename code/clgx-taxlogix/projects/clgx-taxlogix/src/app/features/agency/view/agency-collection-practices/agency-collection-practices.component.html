@@ -1,4 +1,4 @@
-<div style="overflow-x: hidden;margin-bottom: 100px;" [ngClass]="routeAnimationsElements">
+<div class="collection-out-container" [ngClass]="routeAnimationsElements">
   <div class="page-title-div">
     <span class="page-title"  animateOnScroll animationName="animated fadeInDown">Collection Dates</span>
   </div>
@@ -89,9 +89,9 @@
         [disabled]="(agencyStoreFacade.actionInProgress$ | async) || false"
         matTooltip="Add New Collection Dates"
         (click)="addCollectionDates($event)"
-        style="position: absolute;top: 75px;right: 10px; cursor: pointer;">
+        style="position: absolute;top: 75px;right: 40px; cursor: pointer;">
         <i class="fa fa-plus fa-2x"></i>
-      </button>
+  </button>
   <!-- <mat-paginator #currentPaginator [length]="currentTablelength" [pageSize]="currentPageSize" showFirstLastButtons></mat-paginator> -->
   <div class="page-second-section-div">
     <div class="row">
@@ -105,7 +105,7 @@
   </div>
   <div class="collection-container mat-elevation-z8">
     <div class="collection-history-container">
-      <table  class="collection-table " mat-table recycleRows [dataSource]="historyDataSource">
+      <table  class="collection-history-dates-table" mat-table recycleRows [dataSource]="historyDataSource">
         <!-- Frequency Column -->
         <ng-container matColumnDef="frequency">
           <th mat-header-cell *matHeaderCellDef>

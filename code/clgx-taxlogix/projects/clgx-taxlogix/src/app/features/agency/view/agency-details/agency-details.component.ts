@@ -114,17 +114,10 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
 
     this.subscriptions.push(this.agency$.subscribe((agency) => {
       this.agency = agency;
-      console.log(agency);
-    }));
-    this.subscriptions.push(this.stateOptions$.subscribe((response)=>{
-      this.stateOptions = response;
-    }))
-    if (this.deviceService.isMobile()) {
-      this.isMobile = true;
-    } else {
-      this.isMobile = false;
-    }
-    if(this.agency && this.agency.agencyMasterId) {
+      if(this.agency && this.agency.agencyMasterId) {
+        if(this.agency.stateId){
+          this.agencyFacade.getCounties(this.agency.stateId);
+        }
         this.agencyDetailsGroup.controls['agencyNumber'].setValue(this.agency.agencyNumber);
         this.agencyDetailsGroup.controls['agencyName'].setValue(this.agency.agencyName); 
         this.agencyDetailsGroup.controls['agencyWebsite'].setValue(this.agency.agencyWebsite);
@@ -160,6 +153,17 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
         this.agencyDetailsGroup.controls['mailType'].setValue(this.agency.mailType)
         this.agencyDetailsGroup.controls['assessorEmailId'].setValue(this.agency.assessorEmailId)
     }
+      console.log(agency);
+    }));
+    this.subscriptions.push(this.stateOptions$.subscribe((response)=>{
+      this.stateOptions = response;
+    }))
+    if (this.deviceService.isMobile()) {
+      this.isMobile = true;
+    } else {
+      this.isMobile = false;
+    }
+   
   }
 
    //only number will be add

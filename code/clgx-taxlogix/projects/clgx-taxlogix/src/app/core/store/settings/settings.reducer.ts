@@ -10,7 +10,9 @@ import {
   actionSettingsChangeTheme,
   actionSettingsHideHeader,
   actionSettingsShowHeader,
-  actionSettingsShowHeaderTime
+  actionSettingsShowHeaderTime,
+  actionStartActionInProgress,
+  actionStopActionInProgress
 } from './settings.actions';
 import { Action, createReducer, on } from '@ngrx/store';
 
@@ -26,7 +28,8 @@ export const initialState: SettingsState = {
   pageAnimations: true,
   pageAnimationsDisabled: false,
   elementsAnimations: true,
-  hour: 0
+  hour: 0,
+  actionInProgress: false
 };
 
 const reducer = createReducer(
@@ -60,6 +63,14 @@ const reducer = createReducer(
   on(actionSettingsHideHeader, (state, action) => ({
     ...state,
     stickyShowHeader: action.showHeader
+  })),
+  on(actionStartActionInProgress, (state, action) => ({
+    ...state,
+    actionInProgress: true
+  })),
+  on(actionStopActionInProgress, (state, action) => ({
+    ...state,
+    actionInProgress: false
   }))
 );
 

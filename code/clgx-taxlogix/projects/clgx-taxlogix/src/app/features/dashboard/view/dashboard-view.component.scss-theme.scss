@@ -36,9 +36,17 @@
       align-items: center;
     }
     .feature-card-title {
-      color: mat.get-color-from-palette($accent, 400);
-      font-weight: 700;
-      font-family: 'Barlow', sans-serif !important;
+      color: mat.get-color-from-palette($accent, 700);
+      font-family: Graphik-regular;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 18px;
+      /* identical to box height */
+      display: flex;
+      align-items: center;
+      text-align: center;
+      
     }
     .feature-card-status-green {
       color: mat.get-color-from-palette($success-colors) !important;
@@ -112,7 +120,8 @@
 
 
     .mat-badge-content {
-      // min-height: 150px;
+      min-height: 48px;
+      min-width: 48px;
       background-color: mat.get-color-from-palette(
         $primary
       ); /* For browsers that do not support gradients */
@@ -121,9 +130,19 @@
       //   mat.get-color-from-palette($accent),
       //   mat.get-color-from-palette($primary)
       // );
+      font-family: Graphik-regular !important;
+      font-style: normal !important;
+      font-weight: 500 !important;
+      font-size: 18px !important;
+      line-height: 20px !important;
+      /* identical to box height */
+      padding-top: 12px;
+      // display: flex !important;
+      // align-items: center !important;
+      // text-align: center !important;
       background: linear-gradient(46.28deg, #3746CD 40%, #1FFFE4 98.78%);
       opacity: 0.6;
-      color: white;
+      color: white !important;
     }
 
     // .background {

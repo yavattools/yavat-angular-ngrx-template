@@ -36,6 +36,14 @@ export const actionSettingsHideHeader = createAction(
   props<{ showHeader: boolean }>()
 );
 
+export const actionStartActionInProgress = createAction(
+  '[Settings] Start Action in Progress'
+);
+
+export const actionStopActionInProgress = createAction(
+  '[Settings] Stop Action in Progress'
+);
+
 export const actionSettingsChangeAnimationsPage = createAction(
   '[Settings] Change Animations Page',
   props<{ pageAnimations: boolean }>()

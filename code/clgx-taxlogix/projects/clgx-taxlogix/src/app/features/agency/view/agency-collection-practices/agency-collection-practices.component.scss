@@ -1,3 +1,11 @@
+
+.collection-out-container{
+  overflow-x: hidden;
+  overflow-y: hidden;
+  margin-bottom: 100px;
+  padding-left: 75px;
+  padding-right: 75px;
+}
 table {
   width: 100%;
 }
@@ -5,9 +13,16 @@ table {
   overflow: hidden;
 }
 .collection-dates-table{
-  box-shadow: none;
-  min-height: 250px;
+  box-shadow: none !important;
+  min-height: 250px !important;
 }
+
+.collection-history-dates-table{
+  box-shadow: none !important;
+  min-height: 450px !important;
+}
+
+
 .page-title-div{
   height: 70px;
   padding-top: 30px;
@@ -20,15 +35,16 @@ table {
 
 
 /* Structure */
-.collection-container {
-  position: relative;
-}
+// .collection-container {
+//   position: relative;
+// }
 
 .collection-container {
   position: relative;
   min-height: 400px;
   max-height: 700px;
   overflow: auto;
+  box-shadow: none;
 }
 
 .collection-history-container {
