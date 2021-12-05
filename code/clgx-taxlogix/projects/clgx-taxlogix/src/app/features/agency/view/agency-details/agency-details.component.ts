@@ -40,12 +40,16 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     countyId: ['', Validators.required],
     contactName: [''],
     contactEmail: ['', Validators.email],
-    phoneNumber: ['', Validators.required, Validators.minLength(10)],
+    phoneNumber:['', [ Validators.required,
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(10), Validators.maxLength(10)]],
     contactFax: [''],
     parcelFormat: [''],
     assessorName: [''],
     assessorContactName: [''],
-    assessorPhoneNumber: ['', Validators.minLength(10)],
+    assessorPhoneNumber: ['',[ 
+      Validators.pattern("^[0-9]*$"),
+      Validators.minLength(10), Validators.maxLength(10)]],
     mapCost: [''],
     websiteAccessCost: [''],
     assessorWebsite: [''],
@@ -132,15 +136,16 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
         this.agencyDetailsGroup.controls['stateId'].setValue(this.agency.stateId)
         this.agencyDetailsGroup.controls['payZip'].setValue(this.agency.payZip)
         this.agencyDetailsGroup.controls['countyId'].setValue(this.agency.countyId)
-        // this.agencyDetailsGroup.controls['countyId'].disable();
         this.agencyDetailsGroup.controls['contactName'].setValue(this.agency.contactName)
         this.agencyDetailsGroup.controls['contactEmail'].setValue(this.agency.contactEmail)
-        this.agencyDetailsGroup.controls['phoneNumber'].setValue(this.agency.phoneNumber)
+        let ph = this.agency.phoneNumber?this.agency.phoneNumber.split('-').join(''):'';
+        this.agencyDetailsGroup.controls['phoneNumber'].setValue( ph);
         this.agencyDetailsGroup.controls['contactFax'].setValue(this.agency.faxNumber)
         this.agencyDetailsGroup.controls['parcelFormat'].setValue(this.agency.parcelFormat)
         this.agencyDetailsGroup.controls['assessorName'].setValue(this.agency.assessorName)
         this.agencyDetailsGroup.controls['assessorContactName'].setValue(this.agency.assessorContactName)
-        this.agencyDetailsGroup.controls['assessorPhoneNumber'].setValue(this.agency.assessorPhoneNum)
+        let aph = this.agency.assessorPhoneNum?this.agency.assessorPhoneNum.split('-').join(''):'';
+        this.agencyDetailsGroup.controls['assessorPhoneNumber'].setValue(aph)
         this.agencyDetailsGroup.controls['mapCost'].setValue(this.agency.mapCost)
         this.agencyDetailsGroup.controls['websiteAccessCost'].setValue(this.agency.websiteAccessCost)
         this.agencyDetailsGroup.controls['assessorWebsite'].setValue(this.agency.assessorWebsite)
@@ -154,6 +159,15 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
         this.agencyDetailsGroup.controls['excelType'].setValue(this.agency.exceltype)
         this.agencyDetailsGroup.controls['mailType'].setValue(this.agency.mailType)
         this.agencyDetailsGroup.controls['assessorEmailId'].setValue(this.agency.assessorEmailId)
+    }
+  }
+
+   //only number will be add
+   keyPress(event: any) {
+    const pattern = /[0-9\+\-\ ]/;
+    let inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode != 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
     }
   }
 

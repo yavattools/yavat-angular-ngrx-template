@@ -7,9 +7,9 @@
         <div class="col-5 pb-3 text-left payment-method-section">
           <span class="method-label">Method of Payment Required</span>
           <section >
-            <mat-checkbox class="payment-method-check">Certified check</mat-checkbox>
-            <mat-checkbox class="payment-method-check" >Check</mat-checkbox>
-            <mat-checkbox class="payment-method-check" >Wire</mat-checkbox>
+            <mat-checkbox [ngModel]="paymentCertified" (change)="paymentMethodChangeHandler('certified')" class="payment-method-check">Certified check</mat-checkbox>
+            <mat-checkbox [ngModel]="paymentCheck" (change)="paymentMethodChangeHandler('check')" class="payment-method-check" >Check</mat-checkbox>
+            <mat-checkbox [ngModel]="paymentWire" (change)="paymentMethodChangeHandler('wire')" class="payment-method-check" >Wire</mat-checkbox>
           </section>
         </div>
       </div>

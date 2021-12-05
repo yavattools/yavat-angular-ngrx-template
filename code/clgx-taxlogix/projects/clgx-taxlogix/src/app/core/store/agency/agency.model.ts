@@ -224,6 +224,12 @@ export enum FrequencyType{
   NON_QUARTELY = 'non_quarterly'
 }
 
+export enum PaymentMethod{
+  CERTIFIED = 'certified',
+  CHECK = 'check',
+  WIRE = 'wire',
+}
+
 export interface AgencyDefaultFrequency{
   default_annual: Boolean;
   default_discount_annual: Boolean;

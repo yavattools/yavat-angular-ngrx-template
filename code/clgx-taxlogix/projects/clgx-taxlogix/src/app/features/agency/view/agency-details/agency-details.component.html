@@ -162,10 +162,13 @@
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Contact Phone</mat-label>
-            <input type="tel"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" matInput placeholder="xxx-xxx-xxxx"
-              formControlName="phoneNumber" [required]="isRequired('phoneNumber')">
-            <mat-error *ngIf="phoneNumber.errors?.required">
+            <input   matInput  type="text" (keypress)="keyPress($event)" required 
+              formControlName="phoneNumber"  [required]="isRequired('phoneNumber')">
+            <mat-error *ngIf="phoneNumber?.errors?.required">
               Required 
+            </mat-error>
+            <mat-error *ngIf="phoneNumber?.errors?.pattern || phoneNumber?.errors?.maxlength || phoneNumber?.errors?.minlength">
+              Phone number must be 10 numbers
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" style="width: 100%">
@@ -209,10 +212,13 @@
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>Assessor Phone</mat-label>
-          <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="xxx-xxx-xxxx" matInput 
+          <input type="text" (keypress)="keyPress($event)" matInput 
             formControlName="assessorPhoneNumber" [required]="isRequired('assessorPhoneNumber')">
           <mat-error *ngIf="assessorPhoneNumber.errors?.required">
             Required 
+          </mat-error>
+          <mat-error *ngIf="assessorPhoneNumber?.errors?.pattern || assessorPhoneNumber?.errors?.maxlength || assessorPhoneNumber?.errors?.minlength">
+            Phone number must be 10 numbers
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">

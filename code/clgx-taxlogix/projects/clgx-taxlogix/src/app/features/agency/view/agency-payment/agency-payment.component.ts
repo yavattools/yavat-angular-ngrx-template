@@ -1,13 +1,11 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
-import { PaymentDetails, StateOptions } from '@app/core/store/agency/agency.model';
+import { PaymentDetails, PaymentMethod, StateOptions } from '@app/core/store/agency/agency.model';
 import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable, Subscription } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
-
-import { AgencyFeature, agencies } from '../../agency-view.data';
 
 @Component({
   selector: 'clgx-agency-payment',
@@ -17,13 +15,15 @@ import { AgencyFeature, agencies } from '../../agency-view.data';
 })
 export class AgencyPaymentComponent implements OnInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
-  agencies: AgencyFeature[] = agencies;
   paymentDetails$!: Observable<PaymentDetails>;
   paymentDetails : any;
   loginData : any
   agencyMasterId : string | undefined
   newPaymentDetails!: PaymentDetails;
  
+  paymentCertified: boolean = false;
+  paymentCheck: boolean = false;
+  paymentWire: boolean = false;
 
   stateOptions$ : Observable<StateOptions[]>;
   stateOptions : Array<StateOptions> = new Array<StateOptions>();
@@ -120,7 +120,7 @@ export class AgencyPaymentComponent implements OnInit {
     this.newPaymentDetails.emailWire = form.controls['emailWire'].value;
     this.newPaymentDetails.overNight = form.controls['overNight'].value;
     this.newPaymentDetails.postmarkAccepted = form.controls['postmarkAccepted'].value;
-    this.newPaymentDetails.paymentRequiredId = form.controls['paymentRequiredId'].value;
+    this.newPaymentDetails.paymentRequiredId = this.getPaymentMethod();
     this.newPaymentDetails.agencyPaymentId = this.paymentDetails.agencyPaymentId?this.paymentDetails.agencyPaymentId : '';
     this.newPaymentDetails.agencyId = this.agencyMasterId;
     this.newPaymentDetails.countyId = this.paymentDetails.countyId?this.paymentDetails.countyId : '';
@@ -144,6 +144,31 @@ export class AgencyPaymentComponent implements OnInit {
     return result;
   }
 
- 
+  paymentMethodChangeHandler(method: string){
+    if(method === PaymentMethod.CERTIFIED){
+      this.paymentCertified = true;
+      this.paymentCheck = false;
+      this.paymentWire = false;
+    }else if(method === PaymentMethod.CHECK){
+      this.paymentCertified = false;
+      this.paymentCheck = true;
+      this.paymentWire = false;
+    }else if(method === PaymentMethod.WIRE){
+      this.paymentCertified = false;
+      this.paymentCheck = false;
+      this.paymentWire = true;
+    }
+  }
 
+  getPaymentMethod(){
+    let result = '';
+    if(this.paymentCertified){
+      result = PaymentMethod.CERTIFIED;
+    }else if(this.paymentCheck){
+      result = PaymentMethod.CHECK;
+    }else if (this.paymentWire){
+      result = PaymentMethod.WIRE;
+    }
+    return result;
+  }
 }
