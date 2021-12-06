@@ -57,8 +57,8 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
   }
 
   defaultChangeHandler(default_freq: string){
-    if(!this.agDefaultFreq.default_annual || !this.agDefaultFreq.default_discount_annual ||
-      !this.agDefaultFreq.default_quarterly || !this.agDefaultFreq.default_semi_annual ||
+    if(!this.agDefaultFreq.default_annual && !this.agDefaultFreq.default_discount_annual &&
+      !this.agDefaultFreq.default_quarterly && !this.agDefaultFreq.default_semi_annual &&
       !this.agDefaultFreq.default_tri){
         this.defaultFreqSelected.emit('');
         return;
@@ -120,8 +120,8 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
   nonChangeHandler(non_freq: string){
     debugger;
-    if(!this.agNonFreq.non_annual || !this.agNonFreq.non_discount_annual || 
-      !this.agNonFreq.non_quarterly || !this.agNonFreq.non_semi_annual || 
+    if(!this.agNonFreq.non_annual && !this.agNonFreq.non_discount_annual &&
+      !this.agNonFreq.non_quarterly && !this.agNonFreq.non_semi_annual &&
       !this.agNonFreq.non_tri){
         this.nonFreqSelected.emit('');
         return;
