@@ -28,7 +28,7 @@ processName!: string;
 export class AccountProfile{
    firstName!: string;
    lastName!: string;
-
+   userName!: string;
   loginProfile!: LoginResponse;
   constructor(){
     this.loginProfile = new LoginResponse();

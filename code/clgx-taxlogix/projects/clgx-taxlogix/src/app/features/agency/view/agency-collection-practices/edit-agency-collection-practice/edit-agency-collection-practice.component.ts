@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, Inject } from '@angular/cor
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
-import { CollectionDates } from '@app/core/store/agency/agency.model';
+import { CollectionDates, EditFrequencyType, FrequencyType } from '@app/core/store/agency/agency.model';
 import { DialogData } from '@app/shared/components/registration-plans/registration-plans.component';
 import { Observable } from 'rxjs';
 import { AgencyCollectionPracticesComponent } from '../agency-collection-practices.component';
@@ -21,8 +21,12 @@ export interface frequencys{
 export class EditAgencyCollectionPracticeComponent implements OnInit {
 
   collectionDates$ : Observable<CollectionDates[]>;
-  collectionDates : any
-  years : string[] = ['1990','1991','1992','1993','1994','1995','1996','1997','1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021']
+  collectionDates! : CollectionDates[];
+  years : any[] = [];
+    // ['1990','1991','1992','1993','1994','1995','1996','1997','1998',
+    // '1999','2000','2001','2002','2003','2004','2005','2006','2007','2008',
+    // '2009','2010','2011','2012','2013','2014','2015','2016','2017','2018',
+    // '2019','2020','2021']
   installmentsValues : string[] = []
   frequency  : frequencys[] = [
     {id : 'annual', frequency : 'Annual'},
@@ -34,7 +38,7 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
   collectionDate : CollectionDates = new CollectionDates
   newCollectionDateForm : any
   agencyMasterId : string | undefined
-  yearFC = new FormControl('',[Validators.required]);
+  yearFC = new FormControl(+(new Date().getFullYear()),[Validators.required]);
   installmentFC = new FormControl('',[Validators.required]);
   frequencyFC = new FormControl('',[Validators.required]);
   baseFC = new FormControl('',[Validators.required]);
@@ -64,23 +68,74 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
 
   ngOnInit(): void {
     this.collectionDates$.subscribe(data=>{
+      this.collectionDates = [...data];
       data.map((collectionDate)=>{
         if(this.years.includes(collectionDate.collectionYear?collectionDate.collectionYear : '0')){
           this.years.filter(e=> e !== collectionDate.collectionYear)
         }
       })
     });
+    this.loadYears();
     this.agencyStoreFacade.selectedCollectionDate$.subscribe(collectionDate =>{
       this.collectionDate = collectionDate;
-      if(collectionDate){
+      if(collectionDate && collectionDate.collectionYear){
         this.editForm.controls['year'].setValue(collectionDate.collectionYear);
+        this.editForm.controls['year'].disable();
         this.editForm.controls['installment'].setValue(collectionDate.collectionInstallment);
         this.editForm.controls['frequency'].setValue(collectionDate.collectionFrequency);
+        if(collectionDate.collectionFrequency){
+          this.editForm.controls['frequency'].disable();
+        }
         this.editForm.controls['base'].setValue(new Date(collectionDate.collectionBase));
         this.editForm.controls['discount'].setValue(collectionDate.collectionDiscount);
         this.editForm.controls['penalty'].setValue(new Date(collectionDate.collectionPenalty));
         this.editForm.controls['lateRelease'].setValue(collectionDate.collectionLastRelease);
         this.editForm.controls['billRequest'].setValue(new Date(collectionDate.collectionBillRequest));
+      }else{
+        let cYear = +(new Date().getFullYear());
+        this.editForm.controls['year'].setValue(+(new Date().getFullYear()));
+        // Find all records fro the Current year
+        // find out frequency of the first row 
+        //  based on frequency - check number of records. 
+        //  if number of records matches to expeced then 
+        // set frequency and disable installment option as no more instllaments allowed.
+        //  if number of records less than expected installments 
+        // set selected freq and disable and find the left over instllments and load to installment dropdown.
+        // this logic need to do on year selection also.
+
+        let records:CollectionDates[]  = this.collectionDates.filter(cd => +cd.collectionYear === cYear);
+        if(records && records.length){
+          let cFreq = records[0].collectionFrequency;
+           if(cFreq === EditFrequencyType.ANNUAL){
+            this.editForm.controls['installment'].disable();
+           }else if (cFreq === EditFrequencyType.DISCOUNT_ANNUAL){
+            this.editForm.controls['installment'].disable();
+           }else if (cFreq === EditFrequencyType.QUARTERLY){
+              for(let i = 0; i < 4; i++){
+                let ins = records.filter(r => +r.collectionInstallment === i);
+                if(!ins){
+                  this.installmentsValues.push(i.toString());
+                }
+              }
+           }else if (cFreq === EditFrequencyType.SEMI_ANNUAL){
+            for(let i = 0; i < 2; i++){
+              let ins = records.filter(r => +r.collectionInstallment === i);
+              if(!ins){
+                this.installmentsValues.push(i.toString());
+              }
+            }
+          }else if (cFreq === EditFrequencyType.TRI){
+            for(let i = 0; i < 3; i++){
+              let ins = records.filter(r => +r.collectionInstallment === i);
+              if(!ins){
+                this.installmentsValues.push(i.toString());
+              }
+            }
+          }
+        }else{
+          this.editForm.controls['installment'].disable();
+        }
+
       }
     });
     this.agencyStoreFacade.selectedAgency$.subscribe(data=>{
@@ -90,6 +145,16 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
 
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  loadYears(){
+    let currentYear = +(new Date().getFullYear());
+    for(let i = 0; i < 30; i++){
+      this.years.push(currentYear + i);
+    }
+    for(let i = 0; i < 20; i++){
+      this.years.push(currentYear - i);
+    }
   }
 
   updateCollectionDate(form : FormGroup){
@@ -122,6 +187,7 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     return this.editForm.get(name)?.hasValidator(Validators.required) ?? false;
   }
   frequencyValue(){
+    this.editForm.controls['installment'].enable();
     if(this.editForm.controls['frequency'].value === 'annual'){
       this.installmentsValues = ['1']
     }
@@ -136,6 +202,8 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     }
     else if(this.editForm.controls['frequency'].value === 'quarterly'){
       this.installmentsValues = ['1','2','3','4']
+    }else{
+      this.editForm.controls['installment'].disable();
     }
   }
 }

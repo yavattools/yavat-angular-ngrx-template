@@ -61,8 +61,8 @@ export class CollectionDates {
   agencyCollectionDatesId?: string | undefined;
   agencyMasterId?: string | undefined;
   collectionFrequency?: string | undefined;
-  collectionYear?: string | undefined;
-  collectionInstallment?: string | undefined;
+  collectionYear!: string;
+  collectionInstallment!: string;
   collectionBase: string;
   collectionDiscount?: string | undefined;
   collectionPenalty: string;
@@ -228,6 +228,15 @@ export enum PaymentMethod{
   CERTIFIED = 'certified',
   CHECK = 'check',
   WIRE = 'wire',
+}
+
+
+export enum EditFrequencyType{
+  ANNUAL = 'annual',
+  DISCOUNT_ANNUAL = 'discountAnnual',
+  SEMI_ANNUAL = 'semiAnnual',
+  TRI = 'tri',
+  QUARTERLY = 'quarterly',
 }
 
 export class AgencyDefaultFrequency{

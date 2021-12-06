@@ -12,6 +12,7 @@ import * as fromSelectors from './auth.selectors';
 export class AuthStoreFacade {
   actionInProgress$ = this.store.pipe(select(fromSelectors.getAuthorizationIsLoading));
   loginProfile$ = this.store.pipe(select(fromSelectors.getLoginProfile));
+  account$ = this.store.pipe(select(fromSelectors.getUserAccount));
   userMenus$ = this.store.pipe(select(fromSelectors.getUserMenus));
 
   loginError$ = this.store.pipe(select(fromSelectors.getAuthError));
