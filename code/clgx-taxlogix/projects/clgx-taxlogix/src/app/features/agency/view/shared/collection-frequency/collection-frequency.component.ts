@@ -46,10 +46,10 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
   isAllFreqSelected(){
     let result = false;
     debugger;
-    if((this.agDefaultFreq.default_annual || this.agDefaultFreq.default_discount_annual ||
-        this.agDefaultFreq.default_quarterly || this.agDefaultFreq.default_semi_annual || 
-        this.agDefaultFreq.default_tri) && (this.agNonFreq.non_annual || this.agNonFreq.non_discount_annual ||
-          this.agNonFreq.non_quarterly || this.agNonFreq.non_semi_annual || this.agNonFreq.non_tri)){
+    if((this.agDefaultFreq.defaultAnnual || this.agDefaultFreq.defaultDiscountAnnual ||
+        this.agDefaultFreq.defaultQuarterly || this.agDefaultFreq.defaultSemiAnnual || 
+        this.agDefaultFreq.defaultTri) && (this.agNonFreq.nonAnnual || this.agNonFreq.nonDiscountAnnual ||
+          this.agNonFreq.nonQuarterly || this.agNonFreq.nonSemiAnnual || this.agNonFreq.nonTri )){
             result = true;
     }
 
@@ -57,59 +57,59 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
   }
 
   defaultChangeHandler(default_freq: string){
-    if(!this.agDefaultFreq.default_annual && !this.agDefaultFreq.default_discount_annual &&
-      !this.agDefaultFreq.default_quarterly && !this.agDefaultFreq.default_semi_annual &&
-      !this.agDefaultFreq.default_tri){
+    if(!this.agDefaultFreq.defaultAnnual && !this.agDefaultFreq.defaultDiscountAnnual &&
+      !this.agDefaultFreq.defaultQuarterly && !this.agDefaultFreq.defaultSemiAnnual &&
+      !this.agDefaultFreq.defaultTri){
         this.defaultFreqSelected.emit('');
         return;
       }
 
     switch(default_freq){
       case FrequencyType.DEFAULT_ANNUAL:{
-        this.agDefaultFreq.default_annual = true;
-        this.agDefaultFreq.default_discount_annual = false;
-        this.agDefaultFreq.default_quarterly = false;
-        this.agDefaultFreq.default_semi_annual = false;
-        this.agDefaultFreq.default_tri = false;
+        this.agDefaultFreq.defaultAnnual = true;
+        this.agDefaultFreq.defaultDiscountAnnual = false;
+        this.agDefaultFreq.defaultQuarterly = false;
+        this.agDefaultFreq.defaultSemiAnnual = false;
+        this.agDefaultFreq.defaultTri = false;
         this.defaultFreqSelected.emit(FrequencyType.DEFAULT_ANNUAL);
         break;
       }
       case FrequencyType.DEFAULT_DISCOUNT_ANNUAL:{
-        this.agDefaultFreq.default_annual = false;
-        this.agDefaultFreq.default_discount_annual = true;
-        this.agDefaultFreq.default_quarterly = false;
-        this.agDefaultFreq.default_semi_annual = false;
-        this.agDefaultFreq.default_tri = false;
+        this.agDefaultFreq.defaultAnnual = false;
+        this.agDefaultFreq.defaultDiscountAnnual = true;
+        this.agDefaultFreq.defaultQuarterly = false;
+        this.agDefaultFreq.defaultSemiAnnual = false;
+        this.agDefaultFreq.defaultTri = false;
         this.defaultFreqSelected.emit(FrequencyType.DEFAULT_DISCOUNT_ANNUAL);
 
         break;
       }
       case FrequencyType.DEFAULT_QUARTELY:{
-        this.agDefaultFreq.default_annual = false;
-        this.agDefaultFreq.default_discount_annual = false;
-        this.agDefaultFreq.default_quarterly = true;
-        this.agDefaultFreq.default_semi_annual = false;
-        this.agDefaultFreq.default_tri = false;
+        this.agDefaultFreq.defaultAnnual = false;
+        this.agDefaultFreq.defaultDiscountAnnual = false;
+        this.agDefaultFreq.defaultQuarterly = true;
+        this.agDefaultFreq.defaultSemiAnnual = false;
+        this.agDefaultFreq.defaultTri = false;
         this.defaultFreqSelected.emit(FrequencyType.DEFAULT_QUARTELY);
 
         break;
       }
       case FrequencyType.DEFAULT_SEMI_ANNUAL:{
-        this.agDefaultFreq.default_annual = false;
-        this.agDefaultFreq.default_discount_annual = false;
-        this.agDefaultFreq.default_quarterly = false;
-        this.agDefaultFreq.default_semi_annual = true;
-        this.agDefaultFreq.default_tri = false;
+        this.agDefaultFreq.defaultAnnual = false;
+        this.agDefaultFreq.defaultDiscountAnnual = false;
+        this.agDefaultFreq.defaultQuarterly = false;
+        this.agDefaultFreq.defaultSemiAnnual = true;
+        this.agDefaultFreq.defaultTri = false;
         this.defaultFreqSelected.emit(FrequencyType.DEFAULT_SEMI_ANNUAL);
 
         break;
       }
       case FrequencyType.DEFAULT_TRI:{
-        this.agDefaultFreq.default_annual = false;
-        this.agDefaultFreq.default_discount_annual = false;
-        this.agDefaultFreq.default_quarterly = false;
-        this.agDefaultFreq.default_semi_annual = false;
-        this.agDefaultFreq.default_tri = true;
+        this.agDefaultFreq.defaultAnnual = false;
+        this.agDefaultFreq.defaultDiscountAnnual = false;
+        this.agDefaultFreq.defaultQuarterly = false;
+        this.agDefaultFreq.defaultSemiAnnual = false;
+        this.agDefaultFreq.defaultTri = true;
         this.defaultFreqSelected.emit(FrequencyType.DEFAULT_TRI);
 
         break;
@@ -120,59 +120,59 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
   nonChangeHandler(non_freq: string){
     debugger;
-    if(!this.agNonFreq.non_annual && !this.agNonFreq.non_discount_annual &&
-      !this.agNonFreq.non_quarterly && !this.agNonFreq.non_semi_annual &&
-      !this.agNonFreq.non_tri){
+    if(!this.agNonFreq.nonAnnual && !this.agNonFreq.nonDiscountAnnual &&
+      !this.agNonFreq.nonQuarterly && !this.agNonFreq.nonSemiAnnual &&
+      !this.agNonFreq.nonTri ){
         this.nonFreqSelected.emit('');
         return;
       }
 
     switch(non_freq){
       case FrequencyType.NON_ANNUAL:{
-        this.agNonFreq.non_annual = true;
-        this.agNonFreq.non_discount_annual = false;
-        this.agNonFreq.non_quarterly = false;
-        this.agNonFreq.non_semi_annual = false;
-        this.agNonFreq.non_tri = false;
+        this.agNonFreq.nonAnnual = true;
+        this.agNonFreq.nonDiscountAnnual = false;
+        this.agNonFreq.nonQuarterly = false;
+        this.agNonFreq.nonSemiAnnual = false;
+        this.agNonFreq.nonTri  = false;
         this.nonFreqSelected.emit(FrequencyType.NON_ANNUAL);
         break;
       }
       case FrequencyType.NON_DISCOUNT_ANNUAL:{
-        this.agNonFreq.non_annual = false;
-        this.agNonFreq.non_discount_annual = true;
-        this.agNonFreq.non_quarterly = false;
-        this.agNonFreq.non_semi_annual = false;
-        this.agNonFreq.non_tri = false;
+        this.agNonFreq.nonAnnual = false;
+        this.agNonFreq.nonDiscountAnnual = true;
+        this.agNonFreq.nonQuarterly = false;
+        this.agNonFreq.nonSemiAnnual = false;
+        this.agNonFreq.nonTri  = false;
         this.nonFreqSelected.emit(FrequencyType.NON_DISCOUNT_ANNUAL);
 
         break;
       }
       case FrequencyType.NON_QUARTELY:{
-        this.agNonFreq.non_annual = false;
-        this.agNonFreq.non_discount_annual = false;
-        this.agNonFreq.non_quarterly = true;
-        this.agNonFreq.non_semi_annual = false;
-        this.agNonFreq.non_tri = false;
+        this.agNonFreq.nonAnnual = false;
+        this.agNonFreq.nonDiscountAnnual = false;
+        this.agNonFreq.nonQuarterly = true;
+        this.agNonFreq.nonSemiAnnual = false;
+        this.agNonFreq.nonTri  = false;
         this.nonFreqSelected.emit(FrequencyType.NON_QUARTELY);
 
         break;
       }
       case FrequencyType.NON_SEMI_ANNUAL:{
-        this.agNonFreq.non_annual = false;
-        this.agNonFreq.non_discount_annual = false;
-        this.agNonFreq.non_quarterly = false;
-        this.agNonFreq.non_semi_annual = true;
-        this.agNonFreq.non_tri = false;
+        this.agNonFreq.nonAnnual = false;
+        this.agNonFreq.nonDiscountAnnual = false;
+        this.agNonFreq.nonQuarterly = false;
+        this.agNonFreq.nonSemiAnnual = true;
+        this.agNonFreq.nonTri  = false;
         this.nonFreqSelected.emit(FrequencyType.NON_SEMI_ANNUAL);
 
         break;
       }
-      case FrequencyType.NON_TRI:{
-        this.agNonFreq.non_annual = false;
-        this.agNonFreq.non_discount_annual = false;
-        this.agNonFreq.non_quarterly = false;
-        this.agNonFreq.non_semi_annual = false;
-        this.agNonFreq.non_tri = true;
+      case FrequencyType.NON_TRI :{
+        this.agNonFreq.nonAnnual = false;
+        this.agNonFreq.nonDiscountAnnual = false;
+        this.agNonFreq.nonQuarterly = false;
+        this.agNonFreq.nonSemiAnnual = false;
+        this.agNonFreq.nonTri = true;
         this.nonFreqSelected.emit(FrequencyType.NON_TRI);
 
         break;

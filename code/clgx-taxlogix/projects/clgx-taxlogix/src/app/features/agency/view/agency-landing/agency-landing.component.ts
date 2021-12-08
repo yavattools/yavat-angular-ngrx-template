@@ -116,6 +116,8 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
             }
           });
     this.agencyFacade.getStateOptions();
+    this.agencyFacade.getBillingRequest(this.loginData.processOrgModel.processId, this.loginData.processOrgModel.userId);
+    this.agencyFacade.getMediaType(this.loginData.processOrgModel.processId, this.loginData.processOrgModel.userId);
     this.agencyFilter = new AgencyFilter();
   }
 

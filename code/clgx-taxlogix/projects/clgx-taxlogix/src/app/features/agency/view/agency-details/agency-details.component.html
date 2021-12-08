@@ -16,7 +16,7 @@
       <div class="collection-frequency" >
         <clgx-collection-frequency 
         (defaultFreqSelected)="defaultFreqSelectedHandler($event)"
-        (nonFreqSelected)="nonFreqSelectedHandler($event)"></clgx-collection-frequency>
+        (nonFreqSelected)="nonFreqSelectedHandler($event)" [defFreq]="defFreqSelected" [nonFreq]="nonFreqSelected"></clgx-collection-frequency>
       </div>
     </div>
   </div>
@@ -298,8 +298,8 @@
         <mat-form-field appearance="outline" color="accent" style="width: 100%">
           <mat-label>Billing Request Format</mat-label>
           <mat-select formControlName="billingRequestId" [required]="isRequired('billingRequestId')">
-            <mat-option *ngFor="let option of options" [value]="option.value">
-              {{option.viewValue}}
+            <mat-option *ngFor="let option of billingRequest" [value]="option.dropDownId">
+              {{option.dropDownValue}}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="billingRequestId.errors?.required">
@@ -309,8 +309,8 @@
         <mat-form-field appearance="outline" color="accent" style="width: 100%">
           <mat-label>Media Type</mat-label>
           <mat-select formControlName="mediaTypeId" [required]="isRequired('mediaTypeId')">
-            <mat-option *ngFor="let option of options" [value]="option.value">
-              {{option.viewValue}}
+            <mat-option *ngFor="let option of mediaType" [value]="option.dropDownId">
+              {{option.dropDownValue}}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="mediaTypeId.errors?.required">

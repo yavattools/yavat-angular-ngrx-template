@@ -3,6 +3,7 @@ import {
   AgencyState,
   CollectionDates,
   County,
+  DropDownOptions,
   EscrowDetails,
   EscrowNonEscrowDetails,
   NonEscrowDetails,
@@ -25,6 +26,8 @@ export const initialState: AgencyState = {
   nonEscrowDetails: new NonEscrowDetails(),
   paymentDetails: new PaymentDetails(),
   stateOptions : new Array<StateOptions>(),
+  billingRequestOptions : new Array<DropDownOptions>(),
+  mediaTypeOptions :new  Array<DropDownOptions>(),
   counties : new Array<County>(),
   actionInProgress: false,
   error: ''
@@ -50,6 +53,28 @@ export const reducer = createReducer(
     state.stateOptions = [...action.response];
   }),
   mutableOn(agencyActions.actionGetStateOptionsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error;
+  }),
+  mutableOn(agencyActions.actionGetBillingRequestOptions, (state, action) => {
+    state.actionInProgress = true;
+  }),
+  mutableOn(agencyActions.actionGetBillingRequestOptionsSuccess, (state, action) => {
+    state.actionInProgress = false;
+    state.billingRequestOptions = [...action.response];
+  }),
+  mutableOn(agencyActions.actionGetBillingRequestOptionsFailure, (state, action) => {
+    state.actionInProgress = false;
+    state.error = action.error;
+  }),
+  mutableOn(agencyActions.actionGetMediaTypeOptions, (state, action) => {
+    state.actionInProgress = true;
+  }),
+  mutableOn(agencyActions.actionGetMediaTypeOptionsSuccess, (state, action) => {
+    state.actionInProgress = false;
+    state.mediaTypeOptions = [...action.response];
+  }),
+  mutableOn(agencyActions.actionGetMediaTypeOptionsFailure, (state, action) => {
     state.actionInProgress = false;
     state.error = action.error;
   }),
@@ -136,9 +161,10 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSaveCollectionDatesSuccess, (state, action) => {
     state.actionInProgress = false;
-    action.collectionDates.agencyCollectionDatesId = action.response.agencyCollectionDatesId;
-    state.collectionDates = [...state.collectionDates, action.collectionDates];
-    state.selectedCollectionDate = action.collectionDates;
+    let cDates:CollectionDates = _.cloneDeep(action.collectionDates);
+    cDates.agencyCollectionDatesId = action.response.agencyCollectionDatesId;
+    state.collectionDates = [...state.collectionDates, cDates];
+    state.selectedCollectionDate = cDates;
   }),
   mutableOn(agencyActions.actionUpdateCollectionDates, (state, action) => {
     state.actionInProgress = true;
@@ -187,8 +213,9 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSaveEscrowDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
-    action.escrowDetails.agencyEscrowId = action.response.agencyEscrowId;
-    state.escrowDetails = action.escrowDetails
+    let eDetails:EscrowDetails = _.cloneDeep(action.escrowDetails);
+    eDetails.agencyEscrowId = action.response.agencyEscrowId;
+    state.escrowDetails = eDetails
   }),
   mutableOn(agencyActions.actionSaveEscrowDetailsFailure, (state, action) => {
     state.actionInProgress = false;
@@ -212,8 +239,9 @@ export const reducer = createReducer(
     agencyActions.actionSaveNonEscrowDetailsSuccess,
     (state, action) => {
       state.actionInProgress = false;
-      action.nonEscrowDetails.agencyNonEscrowId = action.response.agencyNonEscrowId;
-      state.nonEscrowDetails = action.nonEscrowDetails;
+      let nEscrowDetails:NonEscrowDetails = _.cloneDeep(action.nonEscrowDetails);
+      nEscrowDetails.agencyNonEscrowId = action.response.agencyNonEscrowId;
+      state.nonEscrowDetails = nEscrowDetails;
     }
   ),
   mutableOn(
@@ -258,8 +286,9 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSavePaymentDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
-    action.details.agencyPaymentId = action.response.agencyPaymentId;
-    state.paymentDetails = action.details;
+    let pDetails:PaymentDetails = _.cloneDeep(action.details);
+    pDetails.agencyPaymentId = action.response.agencyPaymentId;
+    state.paymentDetails = pDetails;
   }),
   mutableOn(agencyActions.actionSavePaymentDetailsFailure, (state, action) => {
     state.actionInProgress = false;

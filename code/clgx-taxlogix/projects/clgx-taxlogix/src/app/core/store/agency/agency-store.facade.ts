@@ -25,6 +25,8 @@ export class AgencyStoreFacade {
   nonEscrowDetails$ = this.store.pipe(select(fromSelectors.selectNonEscrowDetails));
   stateOptions$ = this.store.pipe(select(fromSelectors.selectStateOptions));
   counties$ = this.store.pipe(select(fromSelectors.selectCounties));
+  billingRequest$ = this.store.pipe(select(fromSelectors.selectBillingRequestOptions));
+  mediaType$ = this.store.pipe(select(fromSelectors.selectMediaTypeOptions));
 
   constructor(private store: Store<AppState>) {}
 
@@ -46,6 +48,14 @@ export class AgencyStoreFacade {
 
   getCounties(stateId: string){
     this.store.dispatch(fromActions.actionGetCountiesByStateId({stateId: stateId}));
+  }
+
+  getBillingRequest(processId: number, userId : number){
+    this.store.dispatch(fromActions.actionGetBillingRequestOptions({processId : processId, userId : userId}));
+  }
+
+  getMediaType(processId: number, userId : number){
+    this.store.dispatch(fromActions.actionGetMediaTypeOptions({processId : processId, userId : userId}));
   }
 
   getAgencies(request : GetActiveAgenciesRequest){

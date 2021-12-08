@@ -83,15 +83,15 @@ export class AgencyPaymentComponent implements OnInit {
         this.paymentFormGroup.controls['payCity'].setValue(paymentDetails.payCity);
         this.paymentFormGroup.controls['stateId'].setValue(paymentDetails.stateId);
         this.paymentFormGroup.controls['zip'].setValue(paymentDetails.zip);
-        this.paymentFormGroup.controls['emailFileId'].setValue(paymentDetails.emailFileId);
+        this.paymentFormGroup.controls['emailFileId'].setValue(paymentDetails.emailFileTo);
         this.paymentFormGroup.controls['numOfParcels'].setValue(paymentDetails.numOfParcels);
         this.paymentFormGroup.controls['orginalTB'].setValue(paymentDetails.orginalTB);
         this.paymentFormGroup.controls['feeWithoutOrginalTB'].setValue(paymentDetails.feeWithoutOrginalTB);
         this.paymentFormGroup.controls['listedPayment'].setValue(paymentDetails.listedPayment);
         this.paymentFormGroup.controls['emailWire'].setValue(paymentDetails.emailWire);
         this.paymentFormGroup.controls['overNight'].setValue(paymentDetails.overNight);
-        this.paymentFormGroup.controls['postmarkAccepted'].setValue(paymentDetails.postmarkAccepted);
-        this.paymentFormGroup.controls['paymentRequiredId'].setValue(paymentDetails.paymentRequiredId);
+        this.paymentFormGroup.controls['postmarkAccepted'].setValue(paymentDetails.postMarkAccepted);
+        this.paymentFormGroup.controls['paymentRequiredId'].setValue(this.getPaymentMethod(paymentDetails.paymentRequiredId));
       }
     })
    
@@ -112,18 +112,18 @@ export class AgencyPaymentComponent implements OnInit {
     this.newPaymentDetails.payCity = form.controls['payCity'].value;
     this.newPaymentDetails.stateId = form.controls['stateId'].value;
     this.newPaymentDetails.zip = form.controls['zip'].value;
-    this.newPaymentDetails.emailFileId = form.controls['emailFileId'].value;
+    this.newPaymentDetails.emailFileTo = form.controls['emailFileId'].value;
     this.newPaymentDetails.numOfParcels = form.controls['numOfParcels'].value;
     this.newPaymentDetails.orginalTB = form.controls['orginalTB'].value;
     this.newPaymentDetails.feeWithoutOrginalTB = form.controls['feeWithoutOrginalTB'].value;
     this.newPaymentDetails.listedPayment = form.controls['listedPayment'].value;
     this.newPaymentDetails.emailWire = form.controls['emailWire'].value;
     this.newPaymentDetails.overNight = form.controls['overNight'].value;
-    this.newPaymentDetails.postmarkAccepted = form.controls['postmarkAccepted'].value;
-    this.newPaymentDetails.paymentRequiredId = this.getPaymentMethod();
+    this.newPaymentDetails.postMarkAccepted = form.controls['postmarkAccepted'].value;
+    this.newPaymentDetails.paymentRequiredId = this.getPaymentMethodId();
     this.newPaymentDetails.agencyPaymentId = this.paymentDetails.agencyPaymentId?this.paymentDetails.agencyPaymentId : '';
     this.newPaymentDetails.agencyId = this.agencyMasterId;
-    this.newPaymentDetails.countyId = this.paymentDetails.countyId?this.paymentDetails.countyId : '';
+    this.newPaymentDetails.countyId = this.paymentDetails.countyId?this.paymentDetails.countyId : '1';
     this.newPaymentDetails.internalNotes = this.paymentDetails.internalNotes?this.paymentDetails.internalNotes : '';
     this.newPaymentDetails.createdBy = this.paymentDetails.createdBy?this.paymentDetails.createdBy : '';
     this.newPaymentDetails.modifiedBy = this.paymentDetails.modifiedBy?this.paymentDetails.modifiedBy : '';
@@ -160,13 +160,25 @@ export class AgencyPaymentComponent implements OnInit {
     }
   }
 
-  getPaymentMethod(){
+  getPaymentMethodId(){
     let result = '';
     if(this.paymentCertified){
-      result = PaymentMethod.CERTIFIED;
+      result = '1';
     }else if(this.paymentCheck){
-      result = PaymentMethod.CHECK;
+      result = '2';
     }else if (this.paymentWire){
+      result = '3';
+    }
+    return result;
+  }
+
+  getPaymentMethod(id : any){
+    let result = '';
+    if(id === "1"){
+      result = PaymentMethod.CERTIFIED;
+    }else if(id === "2"){
+      result = PaymentMethod.CHECK;
+    }else if (id === "3"){
       result = PaymentMethod.WIRE;
     }
     return result;

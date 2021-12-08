@@ -18,6 +18,16 @@ export const selectStateOptions = createSelector(
   (state : AgencyState) => state.stateOptions
 )
 
+export const selectBillingRequestOptions = createSelector(
+  selectAgencyState,
+  (state : AgencyState) => state.billingRequestOptions
+)
+
+export const selectMediaTypeOptions = createSelector(
+  selectAgencyState,
+  (state : AgencyState) => state.mediaTypeOptions
+)
+
 
 export const selectCounties = createSelector(
   selectAgencyState,

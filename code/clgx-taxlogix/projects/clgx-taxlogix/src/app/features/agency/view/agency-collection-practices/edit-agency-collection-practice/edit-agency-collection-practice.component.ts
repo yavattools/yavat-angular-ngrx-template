@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import { CollectionDates, EditFrequencyType, FrequencyType } from '@app/core/store/agency/agency.model';
 import { DialogData } from '@app/shared/components/registration-plans/registration-plans.component';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { AgencyCollectionPracticesComponent } from '../agency-collection-practices.component';
 
 export interface frequencys{
@@ -37,6 +37,7 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
   ]
   collectionDate : CollectionDates = new CollectionDates
   newCollectionDateForm : any
+  description : string = ''
   agencyMasterId : string | undefined
   yearFC = new FormControl(+(new Date().getFullYear()),[Validators.required]);
   installmentFC = new FormControl('',[Validators.required]);
@@ -82,14 +83,14 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
         this.editForm.controls['year'].setValue(collectionDate.collectionYear);
         this.editForm.controls['year'].disable();
         this.editForm.controls['installment'].setValue(collectionDate.collectionInstallment);
-        this.editForm.controls['frequency'].setValue(collectionDate.collectionFrequency);
+        this.editForm.controls['frequency'].setValue(this.getFrequency(collectionDate.collectionFrequency));
         if(collectionDate.collectionFrequency){
           this.editForm.controls['frequency'].disable();
         }
         this.editForm.controls['base'].setValue(new Date(collectionDate.collectionBase));
-        this.editForm.controls['discount'].setValue(collectionDate.collectionDiscount);
+        this.editForm.controls['discount'].setValue(new Date(collectionDate.collectionDiscount));
         this.editForm.controls['penalty'].setValue(new Date(collectionDate.collectionPenalty));
-        this.editForm.controls['lateRelease'].setValue(collectionDate.collectionLastRelease);
+        this.editForm.controls['lateRelease'].setValue(new Date(collectionDate.collectionLastRelease));
         this.editForm.controls['billRequest'].setValue(new Date(collectionDate.collectionBillRequest));
       }else{
         let cYear = +(new Date().getFullYear());
@@ -159,9 +160,33 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
 
   updateCollectionDate(form : FormGroup){
     this.newCollectionDateForm = new CollectionDates();
+    if(form.controls['year'].value !== this.collectionDate.collectionYear){
+      this.addToDescription(this.collectionDate.collectionYear, form.controls['year'].value, 'Collection Year');
+    }
+    if(form.controls['installment'].value !== this.collectionDate.collectionInstallment){
+      this.addToDescription(this.collectionDate.collectionInstallment, form.controls['installment'].value, 'Collection Installment');
+    }
+    if(form.controls['frequency'].value !== this.getFrequency(this.collectionDate.collectionFrequency)){
+      this.addToDescription(this.collectionDate.collectionFrequency, form.controls['frequency'].value, 'Collection Frequency');
+    }
+    if(form.controls['base'].value !== new Date(this.collectionDate.collectionBase)){
+      this.addToDescription(this.collectionDate.collectionBase, form.controls['base'].value, 'Collection Base');
+    }
+    if(form.controls['discount'].value !== new Date(this.collectionDate.collectionDiscount)){
+      this.addToDescription(this.collectionDate.collectionDiscount, form.controls['discount'].value, 'Collection Discount');
+    }
+    if(form.controls['penalty'].value !== new Date(this.collectionDate.collectionPenalty)){
+      this.addToDescription(this.collectionDate.collectionPenalty, form.controls['penalty'].value, 'Collection Penalty');
+    }
+    if(form.controls['lateRelease'].value !== new Date(this.collectionDate.collectionLastRelease)){
+      this.addToDescription(this.collectionDate.collectionLastRelease, form.controls['lateRelease'].value, 'Collection Late Release');
+    }
+    if(form.controls['billRequest'].value !== new Date(this.collectionDate.collectionBillRequest)){
+      this.addToDescription(this.collectionDate.collectionBillRequest, form.controls['billRequest'].value, 'Collection Bill Request');
+    }
     this.newCollectionDateForm.collectionYear = form.controls['year'].value;
     this.newCollectionDateForm.collectionInstallment = form.controls['installment'].value;
-    this.newCollectionDateForm.collectionFrequency = form.controls['frequency'].value;
+    this.newCollectionDateForm.collectionFrequency = this.getFrequencyValue();
     this.newCollectionDateForm.collectionBase = new Date(form.controls['base'].value).toLocaleDateString("en-US").split('/').join('-');
     this.newCollectionDateForm.collectionDiscount =  new Date(form.controls['discount'].value).toLocaleDateString("en-US").split('/').join('-');
     this.newCollectionDateForm.collectionPenalty = new Date(form.controls['penalty'].value).toLocaleDateString("en-US").split('/').join('-');
@@ -176,6 +201,7 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     this.newCollectionDateForm.modifiedByUser = this.collectionDate.modifiedByUser?this.collectionDate.modifiedByUser : '';
     this.newCollectionDateForm.isDeleted = this.collectionDate.isDeleted?this.collectionDate.isDeleted : '';
     if(this.collectionDate.agencyCollectionDatesId){
+      this.newCollectionDateForm.description = this.description;
       this.agencyStoreFacade.updateCollectionDates(this.newCollectionDateForm);
     }else{
       this.agencyStoreFacade.saveCollectionDates(this.newCollectionDateForm);
@@ -206,4 +232,49 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
       this.editForm.controls['installment'].disable();
     }
   }
+
+  getFrequencyValue(){
+    let result = ''
+    if(this.editForm.controls['frequency'].value == "annual"){
+      result = '1'
+    }
+    else if(this.editForm.controls['frequency'].value == "discountAnnual"){
+      result = '1'
+    }
+    else if(this.editForm.controls['frequency'].value == "semiAnnual"){
+      result = '2'
+    }
+    else if(this.editForm.controls['frequency'].value == "tri"){
+      result = '3'
+    }
+    else if(this.editForm.controls['frequency'].value == "quarterly"){
+      result = '4'
+    }
+    return result
+  }
+
+  getFrequency(value : string | undefined){
+    let result = null
+    if(value == "1"){
+      result = 'annual'
+    }
+    else if(value == "1"){
+      result = 'discountAnnual'
+    }
+    else if(value == "2"){
+      result = 'semiAnnual'
+    }
+    else if(value == "3"){
+      result = 'tri'
+    }
+    else if(value == "4"){
+      result = 'quarterly'
+    }
+    return result
+  }
+
+  addToDescription(oldValue : any, newValue : any, fieldname : string){
+    this.description += fieldname + ' is updated from '+ oldValue +' to '+newValue + '; ';
+  }
+
 }

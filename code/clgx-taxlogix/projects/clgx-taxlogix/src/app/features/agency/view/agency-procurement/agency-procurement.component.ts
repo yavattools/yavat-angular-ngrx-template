@@ -27,6 +27,8 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   tabSelectedIndex = 0;
   loginData : any
   agencyMasterId : string | undefined
+  escrowDescription : string = ''
+  nonEscrowDescription : string =''
 
   escrowForm = this.fb.group({
     contactName : [''],
@@ -238,12 +240,51 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
 
   saveOrUpdateEscrowDetails(form : FormGroup){
     this.newEscrowForm = Object.create({});
+    if(form.controls['contactName'].value !== this.escrowDetails.contactName){
+      this.addToEscrowDescription(this.escrowDetails.contactName, form.controls['contactName'].value, 'Contact Name');
+    }
+    if(form.controls['contactPhone'].value !== this.escrowDetails.contactPhone){
+      this.addToEscrowDescription(this.escrowDetails.contactPhone, form.controls['contactPhone'].value, 'Contact Phone');
+    }
+    if(form.controls['contactFax'].value !== this.escrowDetails.contactFax){
+      this.addToEscrowDescription(this.escrowDetails.contactFax, form.controls['contactFax'].value, 'Contact Fax');
+    }
+    if(form.controls['agencyWebsite'].value !== this.escrowDetails.agencyWebsite){
+      this.addToEscrowDescription(this.escrowDetails.agencyWebsite, form.controls['agencyWebsite'].value, 'Agency Website');
+    }
+    if(form.controls['amtAvailableOnWebsite'].value !== this.escrowDetails.amtAvailable){
+      this.addToEscrowDescription(this.escrowDetails.amtAvailable, form.controls['amtAvailableOnWebsite'].value, 'AMT Available On Website');
+    }
+    if(form.controls['costToPayUsingCopyOfTb'].value !== this.escrowDetails.costToPay){
+      this.addToEscrowDescription(this.escrowDetails.costToPay, form.controls['costToPayUsingCopyOfTb'].value, 'Cost To Pay Using Copy Of TB');
+    }
+    if(form.controls['listingAcceptedForPayment'].value !== this.escrowDetails.isListingAccepted){
+      this.addToEscrowDescription(this.escrowDetails.isListingAccepted, form.controls['listingAcceptedForPayment'].value, 'Listing Accepted For Payment');
+    }
+    if(form.controls['mailAWayOnlyReq'].value !== this.escrowDetails.mailawayRegistered){
+      this.addToEscrowDescription(this.escrowDetails.mailawayRegistered, form.controls['mailAWayOnlyReq'].value, 'Mail AWay Only Req');
+    }
+    if(form.controls['agencyExpectWebTb'].value !== this.escrowDetails.isAgencyWebExpect){
+      this.addToEscrowDescription(this.escrowDetails.isAgencyWebExpect, form.controls['agencyExpectWebTb'].value, 'Agency Expect Web TB');
+    }
+    if(form.controls['postmarkAccepted'].value !== this.escrowDetails.postMarkAccepted){
+      this.addToEscrowDescription(this.escrowDetails.postMarkAccepted, form.controls['postmarkAccepted'].value, 'Post Mark Accepted');
+    }
+    if(form.controls['copyFee'].value !== this.escrowDetails.copyFee){
+      this.addToEscrowDescription(this.escrowDetails.copyFee, form.controls['copyFee'].value, 'Copy Fee');
+    }
+    if(form.controls['feeForMailAWay'].value !== this.escrowDetails.mailAwayFee){
+      this.addToEscrowDescription(this.escrowDetails.mailAwayFee, form.controls['feeForMailAWay'].value, 'Fee For Mail AWay');
+    }
+    if(form.controls['noOfParcelsPerCheck'].value !== this.escrowDetails.numOfParcels){
+      this.addToEscrowDescription(this.escrowDetails.numOfParcels, form.controls['noOfParcelsPerCheck'].value, 'Number of Parcels Per Check');
+    }
     this.newEscrowForm.contactName = form.controls['contactName'].value;
     this.newEscrowForm.contactPhone = form.controls['contactPhone'].value;
     this.newEscrowForm.contactFax = form.controls['contactFax'].value;
     this.newEscrowForm.contactEmail = form.controls['contactEmail'].value;
     this.newEscrowForm.agencyWebsite = form.controls['agencyWebsite'].value;
-    // this.newEscrowForm.amtAvailable = form.controls['amtAvailableOnWebsite'].value;
+    this.newEscrowForm.amtAvailable = form.controls['amtAvailableOnWebsite'].value;
     this.newEscrowForm.costToPay = form.controls['costToPayUsingCopyOfTb'].value;
     this.newEscrowForm.isListingAccepted = form.controls['listingAcceptedForPayment'].value;
     this.newEscrowForm.mailawayRegistered = form.controls['mailAWayOnlyReq'].value;
@@ -260,6 +301,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newEscrowForm.createdByUser = this.escrowDetails.createdByUser?this.escrowDetails.createdByUser : '';
     this.newEscrowForm.modifiedByUser = this.escrowDetails.modifiedByUser?this.escrowDetails.modifiedByUser : '';
     if(this.escrowDetails){
+      this.newEscrowForm.description = this.escrowDescription;
       this.agencyFacade.updateEscrowDetails(this.newEscrowForm);
     }
     else{
@@ -268,7 +310,55 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   }
   saveOrUpdateNonEscrowDetails(form : FormGroup){
     this.newNonEscrowForm = Object.create({});
-    // this.newNonEscrowForm.nameCollecting = this.nonEscrowForm.controls['collectingAgencyName'].value;
+    if(form.controls['collectingAgencyName'].value !== this.nonEscrowDetails.nameCollecting){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.nameCollecting, form.controls['collectingAgencyName'].value, 'Collecting Agency Name')
+    }
+    if(form.controls['contactName'].value !== this.nonEscrowDetails.contactName){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.contactName, form.controls['contactName'].value, 'Contact Name')
+    }
+    if(form.controls['contactPhone'].value !== this.nonEscrowDetails.contactPhone){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.contactPhone, form.controls['contactPhone'].value, 'Contact Phone')
+    }
+    if(form.controls['contactFax'].value !== this.nonEscrowDetails.contactFax){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.contactFax, form.controls['contactFax'].value, 'Contact Fax')
+    }
+    if(form.controls['contactEmail'].value !== this.nonEscrowDetails.contactEmail){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.contactEmail, form.controls['contactEmail'].value, 'Contact Email')
+    }
+    if(form.controls['agencyWebsite'].value !== this.nonEscrowDetails.agencyWebsite){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.agencyWebsite, form.controls['agencyWebsite'].value, 'Agency Website')
+    }
+    if(form.controls['collectedByAgency'].value !== this.nonEscrowDetails.agencyCollectedBy){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.agencyCollectedBy, form.controls['collectedByAgency'].value, 'Collected By Agency')
+    }
+    if(form.controls['thirdPartyCollections'].value !== this.nonEscrowDetails.thirdPartyCollections){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.thirdPartyCollections, form.controls['thirdPartyCollections'].value, 'Third Party Collections')
+    }
+    if(form.controls['amtAvailableOnWebsite'].value !== this.nonEscrowDetails.amtAvailable){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.amtAvailable, form.controls['amtAvailableOnWebsite'].value, 'AMT Available On Website')
+    }
+    if(form.controls['mailAWayOnlyReq'].value !== this.nonEscrowDetails.mailAwayReq){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.mailAwayReq, form.controls['mailAWayOnlyReq'].value, 'Mail AWay Only Req')
+    }
+    if(form.controls['payToName'].value !== this.nonEscrowDetails.payName){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.payName, form.controls['payToName'].value, 'Pay To Name')
+    }
+    if(form.controls['payToAddress'].value !== this.nonEscrowDetails.payAddress){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.payAddress, form.controls['payToAddress'].value, 'Pay To Address')
+    }
+    if(form.controls['payToCity'].value !== this.nonEscrowDetails.payCity){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.payCity, form.controls['payToCity'].value, 'Pay To City')
+    }
+    if(form.controls['stateId'].value !== this.nonEscrowDetails.payStateId){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.payStateId, form.controls['stateId'].value, 'Pay State Id')
+    }
+    if(form.controls['zipId'].value !== this.nonEscrowDetails.payZip){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.payZip, form.controls['zipId'].value, 'Pay Zip Id')
+    }
+    if(form.controls['methodOfPaymentRequired'].value !== this.nonEscrowDetails.paymentMethodId){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.paymentMethodId, form.controls['methodOfPaymentRequired'].value, 'Method Of Payment Required')
+    }
+    this.newNonEscrowForm.nameCollecting = this.nonEscrowForm.controls['collectingAgencyName'].value;
     this.newNonEscrowForm.contactName = this.nonEscrowForm.controls['contactName'].value;
     this.newNonEscrowForm.contactPhone = this.nonEscrowForm.controls['contactPhone'].value;
     this.newNonEscrowForm.contactFax = this.nonEscrowForm.controls['contactFax'].value;
@@ -280,7 +370,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newNonEscrowForm.mailAwayReq = this.nonEscrowForm.controls['mailAWayOnlyReq'].value;
     this.newNonEscrowForm.mailAwayFee = this.nonEscrowForm.controls['feeForMailAWay'].value;
     this.newNonEscrowForm.payName = this.nonEscrowForm.controls['payToName'].value;
-    // this.newNonEscrowForm.payAddress = this.nonEscrowForm.controls['payToAddress'].value;
+    this.newNonEscrowForm.payAddress = this.nonEscrowForm.controls['payToAddress'].value;
     this.newNonEscrowForm.payCity = this.nonEscrowForm.controls['payToCity'].value;
     this.newNonEscrowForm.payStateId = this.nonEscrowForm.controls['stateId'].value;
     this.newNonEscrowForm.payZip = this.nonEscrowForm.controls['zipId'].value;
@@ -296,6 +386,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     // this.newNonEscrowForm.isDeleted = this.nonEscrowDetails.isDeleted?this.nonEscrowDetails.isDeleted : '';
 
     if(this.nonEscrowDetails){
+      this.newNonEscrowForm.description = this.nonEscrowDescription;
       this.agencyFacade.updateNonEscrowDetails(this.newNonEscrowForm);
     }
     else{
@@ -309,6 +400,14 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
 
   isnonEscrowFormRequired(name: string): boolean {
     return this.nonEscrowForm.get(name)?.hasValidator(Validators.required) ?? false;
+  }
+
+  addToEscrowDescription(oldValue : any, newValue : any, fieldname : string){
+    this.escrowDescription += fieldname + ' is updated from '+ oldValue +' to '+newValue + '; ';
+  }
+
+  addToNonEscrowDescription(oldValue : any, newValue : any, fieldname : string){
+    this.nonEscrowDescription += fieldname + ' is updated from '+ oldValue +' to '+newValue + '; ';
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
-import { Agency, County, StateOptions } from '@app/core/store/agency/agency.model';
+import { Agency, County, DropDownOptions, StateOptions } from '@app/core/store/agency/agency.model';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Observable, Subscription } from 'rxjs';
@@ -26,6 +26,7 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
   agency$: Observable<Agency>;
   defFreqSelected: string = '';
   nonFreqSelected: string = '';
+  description : string = '';
   agencyDetailsGroup = this.fb.group({
     agencyNumber: ['', Validators.required],
     agencyName: ['', Validators.required],
@@ -59,16 +60,26 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     assessorZip: [''],
     billingRequestId: [''],
     mediaTypeId: [''],
-    paperType: [0],
-    excelType: [0],
-    mailType: [0],
+    paperType: ['0'],
+    excelType: ['0'],
+    mailType: ['0'],
     assessorEmailId: ['', Validators.email]
   });
-  options: Options[] = [
+
+  billingRequest$ : Observable<DropDownOptions[]>;
+  mediaType$ : Observable<DropDownOptions[]>;
+
+  billingRequest : Array<DropDownOptions> = new Array<DropDownOptions>();
+  mediaType : Array<DropDownOptions> = new Array<DropDownOptions>();
+
+  options : Options[] = [
     { value: "1", viewValue: "1" },
     { value: "2", viewValue: "2"},
-    { value: "3", viewValue: "3"}
-  ];
+    { value: "3", viewValue: "3"},
+    { value: "4", viewValue: "4"}
+  ]
+
+
 
   stateOptions$ : Observable<StateOptions[]>;
   stateOptions : Array<StateOptions> = new Array<StateOptions>();
@@ -89,6 +100,8 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     this.agency$ = this.agencyFacade.selectedAgency$;
     this.stateOptions$ = this.agencyFacade.stateOptions$;
     this.counties$ = this.agencyFacade.counties$;
+    this.billingRequest$ = this.agencyFacade.billingRequest$;
+    this.mediaType$ = this.agencyFacade.mediaType$;
     this.subscriptions.push(this.counties$.subscribe(cties => {
       this.counties = [...cties];
       debugger;
@@ -118,6 +131,8 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
         if(this.agency.stateId){
           this.agencyFacade.getCounties(this.agency.stateId);
         }
+        this.defFreqSelected = this.agency.frequencyDefault?this.agency.frequencyDefault : '';
+        this.nonFreqSelected = this.agency.frequencyNonDefault?this.agency.frequencyNonDefault : '';
         this.agencyDetailsGroup.controls['agencyNumber'].setValue(this.agency.agencyNumber);
         this.agencyDetailsGroup.controls['agencyName'].setValue(this.agency.agencyName); 
         this.agencyDetailsGroup.controls['agencyWebsite'].setValue(this.agency.agencyWebsite);
@@ -149,15 +164,22 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
         this.agencyDetailsGroup.controls['billingRequestId'].setValue(this.agency.billingRequestId)
         this.agencyDetailsGroup.controls['mediaTypeId'].setValue(this.agency.mediaTypeId)
         this.agencyDetailsGroup.controls['paperType'].setValue(this.agency.paperType)
-        this.agencyDetailsGroup.controls['excelType'].setValue(this.agency.exceltype)
+        this.agencyDetailsGroup.controls['excelType'].setValue(this.agency.excelType)
         this.agencyDetailsGroup.controls['mailType'].setValue(this.agency.mailType)
         this.agencyDetailsGroup.controls['assessorEmailId'].setValue(this.agency.assessorEmailId)
     }
       console.log(agency);
     }));
     this.subscriptions.push(this.stateOptions$.subscribe((response)=>{
-      this.stateOptions = response;
-    }))
+      this.stateOptions = [...response];
+    }));
+    this.subscriptions.push(this.billingRequest$.subscribe((response)=>{
+      this.billingRequest = [...response];
+    }));
+    this.subscriptions.push(this.mediaType$.subscribe((response)=>{
+      this.mediaType = [...response];
+    }));
+    debugger
     if (this.deviceService.isMobile()) {
       this.isMobile = true;
     } else {
@@ -278,6 +300,108 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
   save(form: FormGroup) {
     debugger;
     this.newAgencyDetails = Object.create({});
+    if(form.controls['agencyNumber'].value !== this.agency.agencyNumber){
+      this.addToDescription(this.agency.agencyNumber, form.controls['agencyNumber'].value, 'Agency Number');
+    }
+    if(form.controls['agencyName'].value !== this.agency.agencyName){
+      this.addToDescription(this.agency.agencyName, form.controls['agencyName'].value, 'Agency Name');
+    }
+    if(form.controls['agencyWebsite'].value !== this.agency.agencyWebsite){
+      this.addToDescription(this.agency.agencyWebsite, form.controls['agencyWebsite'].value, 'Agency Website');
+    }
+    if(form.controls['agencyLowerLevel'].value !== this.agency.lowLevelAgencyId){
+      this.addToDescription(this.agency.lowLevelAgencyId, form.controls['agencyLowerLevel'].value, 'Agency Lower Level');
+    }
+    if(form.controls['agencyCollecting'].value !== this.agency.collectingAgency){
+      this.addToDescription(this.agency.collectingAgency, form.controls['agencyCollecting'].value, 'Agency Collecting');
+    }
+    if(form.controls['agencyActive'].value !== this.agency.agencyActive){
+      this.addToDescription(this.agency.agencyActive, form.controls['agencyActive'].value, 'Agency Active');
+    }
+    if(form.controls['agencySuitsAddress'].value !== this.agency.agencySitusAddress){
+      this.addToDescription(this.agency.agencySitusAddress, form.controls['agencySuitsAddress'].value, 'Agency Situs Address');
+    }
+    if(form.controls['agencyCity'].value !== this.agency.agencyCity){
+      this.addToDescription(this.agency.agencyCity, form.controls['agencyCity'].value, 'Agency City');
+    }
+    if(form.controls['stateId'].value !== this.agency.stateId){
+      this.addToDescription(this.agency.stateId, form.controls['stateId'].value, 'Agency State Id');
+    }
+    if(form.controls['payZip'].value !== this.agency.payZip){
+      this.addToDescription(this.agency.payZip, form.controls['payZip'].value, 'Agency Zip');
+    }
+    if(form.controls['countyId'].value !== this.agency.countyId){
+      this.addToDescription(this.agency.countyId, form.controls['countyId'].value, 'Agency County Id');
+    }
+    if(form.controls['contactName'].value !== this.agency.contactName){
+      this.addToDescription(this.agency.contactName, form.controls['contactName'].value, 'Agency Contact Name');
+    }
+    if(form.controls['contactEmail'].value !== this.agency.contactEmail){
+      this.addToDescription(this.agency.contactEmail, form.controls['contactEmail'].value, 'Agency Contact Email');
+    }
+    if(form.controls['phoneNumber'].value !== this.agency.phoneNumber){
+      this.addToDescription(this.agency.phoneNumber, form.controls['phoneNumber'].value, 'Agency PhoneNumber');
+    }
+    if(form.controls['contactFax'].value !== this.agency.faxNumber){
+      this.addToDescription(this.agency.faxNumber, form.controls['contactFax'].value, 'Agency Fax Number');
+    }
+    if(form.controls['parcelFormat'].value !== this.agency.parcelFormat){
+      this.addToDescription(this.agency.parcelFormat, form.controls['parcelFormat'].value, 'Parsel Format');
+    }
+    if(form.controls['assessorName'].value !== this.agency.assessorName){
+      this.addToDescription(this.agency.assessorName, form.controls['assessorName'].value, 'Assessor Name');
+    }
+    if(form.controls['assessorContactName'].value !== this.agency.assessorContactName){
+      this.addToDescription(this.agency.assessorContactName, form.controls['assessorContactName'].value, 'Assessor Contact Name');
+    }
+    if(form.controls['assessorPhoneNumber'].value !== this.agency.assessorPhoneNum){
+      this.addToDescription(this.agency.assessorPhoneNum, form.controls['assessorPhoneNumber'].value, 'Assessor PhoneNumber');
+    }
+    if(form.controls['mapCost'].value !== this.agency.mapCost){
+      this.addToDescription(this.agency.mapCost, form.controls['mapCost'].value, 'Map Cost');
+    }
+    if(form.controls['websiteAccessCost'].value !== this.agency.websiteAccessCost){
+      this.addToDescription(this.agency.websiteAccessCost, form.controls['websiteAccessCost'].value, 'Website Access Cost');
+    }
+    if(form.controls['assessorWebsite'].value !== this.agency.assessorWebsite){
+      this.addToDescription(this.agency.assessorWebsite, form.controls['assessorWebsite'].value, 'Assessor Website');
+    }
+    if(form.controls['assessorAddress'].value !== this.agency.assessorAddress){
+      this.addToDescription(this.agency.assessorAddress, form.controls['assessorAddress'].value, 'Assessor Address');
+    }
+    if(form.controls['assessorCity'].value !== this.agency.assessorCity){
+      this.addToDescription(this.agency.assessorCity, form.controls['assessorCity'].value, 'Assessor City');
+    }
+    if(form.controls['assessorStateId'].value !== this.agency.assessorStateId){
+      this.addToDescription(this.agency.assessorStateId, form.controls['assessorStateId'].value, 'Assessor State Id');
+    }
+    if(form.controls['assessorZip'].value !== this.agency.assessorZip){
+      this.addToDescription(this.agency.assessorZip, form.controls['assessorZip'].value, 'Assessor Zip');
+    }
+    if(form.controls['billingRequestId'].value !== this.agency.billingRequestId){
+      this.addToDescription(this.agency.billingRequestId, form.controls['billingRequestId'].value, 'Billing Request Id');
+    }
+    if(form.controls['mediaTypeId'].value !== this.agency.mediaTypeId){
+      this.addToDescription(this.agency.mediaTypeId, form.controls['mediaTypeId'].value, 'Media Type Id');
+    }
+    if(form.controls['paperType'].value !== this.agency.paperType){
+      this.addToDescription(this.agency.paperType, form.controls['paperType'].value, 'Paper Type');
+    }
+    if(form.controls['excelType'].value !== this.agency.excelType){
+      this.addToDescription(this.agency.excelType, form.controls['excelType'].value, 'Excel Type');
+    }
+    if(form.controls['mailType'].value !== this.agency.mailType){
+      this.addToDescription(this.agency.mailType, form.controls['mailType'].value, 'Mail Type');
+    }
+    if(form.controls['assessorEmailId'].value !== this.agency.assessorEmailId){
+      this.addToDescription(this.agency.assessorEmailId, form.controls['assessorEmailId'].value, 'Assessor Email Id');
+    }
+    if(this.defFreqSelected !== this.agency.frequencyDefault){
+      this.addToDescription(this.agency.frequencyDefault, this.defFreqSelected, 'Default Frequency');
+    }
+    if(this.nonFreqSelected !== this.agency.frequencyNonDefault){
+      this.addToDescription(this.agency.frequencyNonDefault, this.nonFreqSelected, 'Non Frequency');
+    }
     this.newAgencyDetails.agencyNumber = form.controls['agencyNumber'].value;
     this.newAgencyDetails.agencyName = form.controls['agencyName'].value;
     this.newAgencyDetails.agencyWebsite = form.controls['agencyWebsite'].value;
@@ -307,19 +431,19 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     this.newAgencyDetails.billingRequestId = form.controls['billingRequestId'].value;
     this.newAgencyDetails.mediaTypeId = form.controls['mediaTypeId'].value;
     this.newAgencyDetails.paperType = form.controls['paperType'].value;
-    this.newAgencyDetails.exceltype = form.controls['excelType'].value;
+    this.newAgencyDetails.excelType = form.controls['excelType'].value;
     this.newAgencyDetails.mailType = form.controls['mailType'].value;
     this.newAgencyDetails.assessorEmailId = form.controls['assessorEmailId'].value;
+    this.newAgencyDetails.frequencyDefault = this.defFreqSelected;
+    this.newAgencyDetails.frequencyNonDefault  = this.nonFreqSelected;
     this.newAgencyDetails.agencyMasterId = this.agency.agencyMasterId?this.agency.agencyMasterId: "";
-    this.newAgencyDetails.agencyAddress = this.agency.agencyAddress?this.agency.agencyAddress: "";
-    this.newAgencyDetails.payName = this.agency.payName?this.agency.payName: "";
-    this.newAgencyDetails.assessorCountyId = this.agency.assessorCountyId?this.agency.assessorCountyId: "";
     this.newAgencyDetails.internalComments = this.agency.internalComments?this.agency.internalComments: "";
     this.newAgencyDetails.createdBy = this.agency.createdBy?this.agency.createdBy: "";
     this.newAgencyDetails.modifiedBy = this.agency.modifiedBy?this.agency.modifiedBy: "";
     this.newAgencyDetails.createdByUser = this.agency.createdByUser?this.agency.createdByUser: "";
     this.newAgencyDetails.modifiedByUser = this.agency.modifiedByUser?this.agency.modifiedByUser: "";
     if (this.agency.agencyMasterId) {
+      this.newAgencyDetails.description = this.description;
       this.agencyFacade.updateAgencyDetails(this.newAgencyDetails);
     } else {
       this.agencyFacade.saveAgencyDetails(this.newAgencyDetails);
@@ -343,6 +467,10 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     debugger;
     this.isCountiesLoading = true;
     this.agencyFacade.getCounties($event.value);
+  }
+
+  addToDescription(oldValue : any, newValue : any, fieldname : string){
+    this.description += fieldname + ' is updated from '+ oldValue +' to '+newValue + '; ';
   }
 
 }

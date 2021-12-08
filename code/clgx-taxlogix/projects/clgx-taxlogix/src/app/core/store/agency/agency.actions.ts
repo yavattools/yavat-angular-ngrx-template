@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Agency, CollectionDates, County, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowRequest,GetNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails, StateOptions } from './agency.model';
+import { Agency, CollectionDates, County, DropDownOptions, EscrowDetails, EscrowNonEscrowDetails, GetActiveAgenciesRequest, GetCollectionDatesRequest, GetEscrowRequest,GetNonEscrowDetailsRequest, GetPaymentDetailsRequest, NonEscrowDetails, PaymentDetails, StateOptions } from './agency.model';
 
 
 
@@ -40,6 +40,38 @@ export const actionGetCountiesByStateIdFailure = createAction(
   '[Agency] Get Counties by State Id Failure',
   props<{error : any}>()
 )
+
+
+export const actionGetBillingRequestOptions = createAction(
+  '[Agency] Get BillingRequest Options',
+  props<{processId : number, userId : number}>()
+)
+
+export const actionGetBillingRequestOptionsSuccess = createAction(
+  '[Agency] Get BillingRequest Options Success',
+  props<{ response : Array<DropDownOptions>}>()
+)
+
+export const actionGetBillingRequestOptionsFailure = createAction(
+  '[Agency] Get BillingRequest Options Failure',
+  props<{error : any}>()
+)
+
+export const actionGetMediaTypeOptions = createAction(
+  '[Agency] Get MediaType Options',
+  props<{processId : number, userId : number}>()
+)
+
+export const actionGetMediaTypeOptionsSuccess = createAction(
+  '[Agency] Get MediaType Options Success',
+  props<{ response : Array<DropDownOptions>}>()
+)
+
+export const actionGetMediaTypeOptionsFailure = createAction(
+  '[Agency] Get MediaType Options Failure',
+  props<{error : any}>()
+)
+
 
 export const actionGetAllActiveAgencies = createAction(
   '[Agency] Get All Active Agencies',

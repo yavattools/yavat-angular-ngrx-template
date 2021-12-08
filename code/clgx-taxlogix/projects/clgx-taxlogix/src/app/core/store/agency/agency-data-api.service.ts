@@ -21,6 +21,14 @@ export class AgencyDataService {
     return this.http.get<any>(API_BASE_URL + this._appConstantService.GET_COUNTIES_BY_STATE_ID + '?stateId=' + stateId)
   }
 
+  getBillingRequest(userId : number, processId : number) : Observable<any>{
+    return this.http.get<any>(API_BASE_URL + this._appConstantService.GET_DROP_DOWNLIST_BY_ADMINCODE + "?aprocessId=" + processId + "&userId=" + userId + "&adminCode=BillingRequest");
+  }
+
+  getMediaType(userId : number, processId : number) : Observable<any>{
+    return this.http.get<any>(API_BASE_URL + this._appConstantService.GET_DROP_DOWNLIST_BY_ADMINCODE + "?aprocessId=" + processId + "&userId=" + userId + "&adminCode=mediaType");
+  }
+
   getAgencies(request: GetActiveAgenciesRequest ): Observable<Agency[]> {
     console.log('getAgencies '+ this._appConstantService.BASE_API_URL + this._appConstantService.AGENCY_MASTER_LIST);
     return this.http.get<Agency[]>(API_BASE_URL + this._appConstantService.AGENCY_MASTER_LIST + '?userId=' + +request.userId + '&processId=' + +request.processId);

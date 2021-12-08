@@ -67,6 +67,30 @@ export class AgencyEffects {
     )
   );
 
+  getBillingRequest = createEffect(() =>
+    this.actions$.pipe(
+      ofType(agencyActions.actionGetBillingRequestOptions),
+      switchMap((action) => this.agencyDataService.getBillingRequest(action.userId, action.processId).pipe(
+        mergeMap( response => [
+          agencyActions.actionGetBillingRequestOptionsSuccess({response: response}),
+        ]),
+        catchError(error => of(agencyActions.actionGetBillingRequestOptionsFailure(error)))
+      ))
+    )
+  );
+
+  getMediaType = createEffect(() =>
+    this.actions$.pipe(
+      ofType(agencyActions.actionGetMediaTypeOptions),
+      switchMap((action) => this.agencyDataService.getMediaType(action.userId, action.processId).pipe(
+        mergeMap( response => [
+          agencyActions.actionGetMediaTypeOptionsSuccess({response: response}),
+        ]),
+        catchError(error => of(agencyActions.actionGetMediaTypeOptionsFailure(error)))
+      ))
+    )
+  );
+
   getAgencies = createEffect(() =>
       this.actions$.pipe(
         ofType(agencyActions.actionGetAllActiveAgencies),

@@ -3,7 +3,6 @@ import { AppState } from '../../core.module';
 export class Agency {
   agencyMasterId: string | undefined;
   agencyName: string | undefined;
-  agencyAddress: string | undefined;
   agencyCity: string | undefined;
   agencyState: string | undefined;
   agencyNumber!: string;
@@ -39,14 +38,16 @@ export class Agency {
   modifiedByUser: string | undefined;
   phoneNumber:string | undefined;
   faxNumber:string | undefined;
-  payName:string | undefined;
   payZip:string | undefined;
   lowLevelAgencyId:string | undefined;
   collectingAgency:string | undefined;
   agencySitusAddress:string | undefined;
   assessorPhoneNum:string | undefined;
-  exceltype:string | undefined;
+  excelType:string | undefined;
   assessorEmailId:string | undefined;
+  frequencyDefault : string | undefined;
+  frequencyNonDefault : string | undefined;
+  description : string | undefined;
 
   constructor(){}
 }
@@ -60,23 +61,26 @@ export interface GetActiveAgenciesRequest {
 export class CollectionDates {
   agencyCollectionDatesId?: string | undefined;
   agencyMasterId?: string | undefined;
-  collectionFrequency?: string | undefined;
+  collectionFrequency?: string;
   collectionYear!: string;
   collectionInstallment!: string;
   collectionBase: string;
-  collectionDiscount?: string | undefined;
+  collectionDiscount: string;
   collectionPenalty: string;
-  collectionLastRelease?: string | undefined;
+  collectionLastRelease: string;
   collectionBillRequest : string;
   isDeleted : any;
   createdBy?: string | undefined;
   modifiedBy?: string | undefined;
   createdByUser?: string | undefined;
   modifiedByUser?: string | undefined;
+  description : string | undefined;
   constructor() {
     this.collectionBase = '';
     this.collectionPenalty = '';
     this.collectionBillRequest = '';
+    this.collectionLastRelease = '';
+    this.collectionDiscount = '';
   }
 }
 
@@ -108,6 +112,7 @@ export class EscrowDetails {
   modifiedBy: string | undefined;
   createdByUser: string | undefined;
   modifiedByUser: string | undefined;
+  description : string | undefined;
 
   constructor() {}
 }
@@ -138,7 +143,8 @@ export class NonEscrowDetails {
   modifiedBy: string | undefined;
   createdByUser: string | undefined;
   modifiedByUser: string | undefined;
-  isDeleted : string | undefined
+  isDeleted : string | undefined;
+  description : string | undefined;
   constructor() {}
 }
 
@@ -174,20 +180,21 @@ export class PaymentDetails {
   stateId: string | undefined;
   countyId: string | undefined;
   zip: string | undefined;
-  emailFileId: string | undefined;
+  emailFileTo: string | undefined;
   numOfParcels: string | undefined;
   orginalTB: string | undefined;
   feeWithoutOrginalTB: string | undefined;
   listedPayment: string | undefined;
   emailWire: string | undefined;
   overNight: string | undefined;
-  postmarkAccepted: string | undefined;
+  postMarkAccepted: string | undefined;
   paymentRequiredId: string | undefined;
   internalNotes: string | undefined;
   createdBy: string | undefined;
   modifiedBy: string | undefined;
   createdByUser: string | undefined;
   modifiedByUser: string | undefined;
+  description : string | undefined;
 
   constructor() {}
 }
@@ -211,17 +218,22 @@ export interface County {
   countyCode : string | undefined
 }
 
+export interface DropDownOptions{
+  dropDownId : string | undefined,
+  dropDownValue : string | undefined
+}
+
 export enum FrequencyType{
-  DEFAULT_ANNUAL = 'default_annual',
-  DEFAULT_DISCOUNT_ANNUAL = 'default_discount_annual',
-  DEFAULT_SEMI_ANNUAL = 'default_semi_annual',
-  DEFAULT_TRI = 'default_tri',
-  DEFAULT_QUARTELY = 'default_quarterly',
-  NON_ANNUAL = 'non_annual',
-  NON_DISCOUNT_ANNUAL = 'non_discount_annual',
-  NON_SEMI_ANNUAL = 'non_semi_annual',
-  NON_TRI = 'non_tri',
-  NON_QUARTELY = 'non_quarterly'
+  DEFAULT_ANNUAL = 'defaultAnnual',
+  DEFAULT_DISCOUNT_ANNUAL = 'defaultDiscountAnnual',
+  DEFAULT_SEMI_ANNUAL = 'defaultSemiAnnual',
+  DEFAULT_TRI = 'defaultTri',
+  DEFAULT_QUARTELY = 'defaultQuarterly',
+  NON_ANNUAL = 'nonAnnual',
+  NON_DISCOUNT_ANNUAL = 'nonDiscountAnnual',
+  NON_SEMI_ANNUAL = 'nonSemiAnnual',
+  NON_TRI = 'nonTri ',
+  NON_QUARTELY = 'nonQuarterly'
 }
 
 export enum PaymentMethod{
@@ -240,34 +252,34 @@ export enum EditFrequencyType{
 }
 
 export class AgencyDefaultFrequency{
-  default_annual!: Boolean;
-  default_discount_annual!: Boolean;
-  default_semi_annual!: Boolean;
-  default_tri!: Boolean;
-  default_quarterly!: Boolean;
+  defaultAnnual!: Boolean;
+  defaultDiscountAnnual!: Boolean;
+  defaultSemiAnnual!: Boolean;
+  defaultTri!: Boolean;
+  defaultQuarterly!: Boolean;
   constructor(){
-    this.default_annual = false;
-    this.default_discount_annual = false;
-    this.default_quarterly = false;
-    this.default_semi_annual = false;
-    this.default_tri = false;
+    this.defaultAnnual = false;
+    this.defaultDiscountAnnual = false;
+    this.defaultQuarterly = false;
+    this.defaultSemiAnnual = false;
+    this.defaultTri = false;
   }
 }
 
 
 export class AgencyNonFrequency{
-  non_annual!: Boolean;
-  non_discount_annual!: Boolean;
-  non_semi_annual!: Boolean;
-  non_tri!: Boolean;
-  non_quarterly!: Boolean;
+  nonAnnual!: Boolean;
+  nonDiscountAnnual!: Boolean;
+  nonSemiAnnual!: Boolean;
+  nonTri !: Boolean;
+  nonQuarterly!: Boolean;
 
   constructor(){
-    this.non_annual = false;
-    this.non_discount_annual = false;
-    this.non_quarterly = false;
-    this.non_semi_annual = false;
-    this.non_tri = false;
+    this.nonAnnual = false;
+    this.nonDiscountAnnual = false;
+    this.nonQuarterly = false;
+    this.nonSemiAnnual = false;
+    this.nonTri  = false;
   }
 }
 
@@ -281,6 +293,8 @@ export interface AgencyState {
   nonEscrowDetails: NonEscrowDetails;
   paymentDetails: PaymentDetails;
   stateOptions : Array<StateOptions>;
+  billingRequestOptions : Array<DropDownOptions>;
+  mediaTypeOptions : Array<DropDownOptions>;
   counties : Array<County>;
   actionInProgress: boolean ;
   error: any;

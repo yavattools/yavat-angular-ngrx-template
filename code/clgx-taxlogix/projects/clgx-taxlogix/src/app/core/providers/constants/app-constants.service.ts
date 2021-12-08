@@ -30,6 +30,7 @@ export class AppConstantsService {
   public AGENCY_MASTER_LIST!: string;
   public GET_STATES : string;
   public GET_COUNTIES_BY_STATE_ID : string;
+  public GET_DROP_DOWNLIST_BY_ADMINCODE : string;
 
   public SAVE_AGENCIES: string;
   public COLLECTION_END_POINT: string;
@@ -56,6 +57,10 @@ export class AppConstantsService {
     this.GET_STATES = APP_CONTEXT
     ? '/'
     : '' + APP_CONTEXT + '/common/states';
+
+    this.GET_DROP_DOWNLIST_BY_ADMINCODE = APP_CONTEXT
+    ? '/'
+    : '' + APP_CONTEXT + '/agency/fetchDropList';
 
     this.SIGN_IN_URL =
       (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/auth/signin';
