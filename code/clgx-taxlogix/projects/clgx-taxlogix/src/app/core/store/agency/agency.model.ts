@@ -224,22 +224,29 @@ export interface DropDownOptions{
 }
 
 export enum FrequencyType{
-  DEFAULT_ANNUAL = 'defaultAnnual',
-  DEFAULT_DISCOUNT_ANNUAL = 'defaultDiscountAnnual',
-  DEFAULT_SEMI_ANNUAL = 'defaultSemiAnnual',
-  DEFAULT_TRI = 'defaultTri',
-  DEFAULT_QUARTELY = 'defaultQuarterly',
-  NON_ANNUAL = 'nonAnnual',
-  NON_DISCOUNT_ANNUAL = 'nonDiscountAnnual',
-  NON_SEMI_ANNUAL = 'nonSemiAnnual',
-  NON_TRI = 'nonTri ',
-  NON_QUARTELY = 'nonQuarterly'
+  DEFAULT_ANNUAL = 'Annual',
+  DEFAULT_DISCOUNT_ANNUAL = 'DiscountAnnual',
+  DEFAULT_SEMI_ANNUAL = 'SemiAnnual',
+  DEFAULT_TRI = 'Tri',
+  DEFAULT_QUARTELY = 'Quarterly',
+  NON_ANNUAL = 'Annual',
+  NON_DISCOUNT_ANNUAL = 'DiscountAnnual',
+  NON_SEMI_ANNUAL = 'SemiAnnual',
+  NON_TRI = 'Tri ',
+  NON_QUARTELY = 'Quarterly'
 }
 
 export enum PaymentMethod{
   CERTIFIED = 'certified',
   CHECK = 'check',
   WIRE = 'wire',
+}
+
+export enum CountiesForStates{
+  AGENCY_STATES = 'agencyStates',
+  ASSESSOR_STATES = 'assessorStates',
+  NON_ESCROW_STATES = 'nonEscrowStates',
+  PAYMENT_STATES = 'paymentStates'
 }
 
 
@@ -295,7 +302,10 @@ export interface AgencyState {
   stateOptions : Array<StateOptions>;
   billingRequestOptions : Array<DropDownOptions>;
   mediaTypeOptions : Array<DropDownOptions>;
-  counties : Array<County>;
+  agencyCounties : Array<County>;
+  assessorCounties : Array<County>;
+  nonEscrowCounties : Array<County>;
+  paymentCounties : Array<County>;
   actionInProgress: boolean ;
   error: any;
 }

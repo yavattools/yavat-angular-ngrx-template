@@ -24,7 +24,10 @@ export class AgencyStoreFacade {
   escrowDetails$ = this.store.pipe(select(fromSelectors.selectEscrowDetails));
   nonEscrowDetails$ = this.store.pipe(select(fromSelectors.selectNonEscrowDetails));
   stateOptions$ = this.store.pipe(select(fromSelectors.selectStateOptions));
-  counties$ = this.store.pipe(select(fromSelectors.selectCounties));
+  agencyCounties$ = this.store.pipe(select(fromSelectors.selectAgencyCounties));
+  assessorCounties$ = this.store.pipe(select(fromSelectors.selectAssessorCounties));
+  nonEscrowCounties$ = this.store.pipe(select(fromSelectors.selectNonEscrowCounties));
+  paymentCounties$ = this.store.pipe(select(fromSelectors.selectPaymentCounties));
   billingRequest$ = this.store.pipe(select(fromSelectors.selectBillingRequestOptions));
   mediaType$ = this.store.pipe(select(fromSelectors.selectMediaTypeOptions));
 
@@ -46,8 +49,8 @@ export class AgencyStoreFacade {
     this.store.dispatch(fromActions.actionGetStateOptions());
   }
 
-  getCounties(stateId: string){
-    this.store.dispatch(fromActions.actionGetCountiesByStateId({stateId: stateId}));
+  getCounties(stateId: string, stateField :string){
+    this.store.dispatch(fromActions.actionGetCountiesByStateId({stateId: stateId, stateField : stateField}));
   }
 
   getBillingRequest(processId: number, userId : number){

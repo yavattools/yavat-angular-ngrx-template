@@ -1,10 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
-import { Agency, EscrowDetails, NonEscrowDetails } from '@app/core/store/agency/agency.model';
+import { Agency, CountiesForStates, County, EscrowDetails, NonEscrowDetails, StateOptions } from '@app/core/store/agency/agency.model';
 import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
 import { DeviceDetectorService } from 'ngx-device-detector';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 
 import { AgencyFeature, agencies } from '../../agency-view.data';
@@ -29,7 +30,13 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   agencyMasterId : string | undefined
   escrowDescription : string = ''
   nonEscrowDescription : string =''
-
+  isNonEscrowCountiesLoading : boolean = false;
+  nonEscrowCounties$ : Observable<County[]>;
+  nonEscrowCounties : Array<County> = new Array<County>();
+  subscriptions: Array<Subscription> = new Array<Subscription>();
+  stateOptions$ : Observable<StateOptions[]>;
+  stateOptions : Array<StateOptions> = new Array<StateOptions>();
+  
   escrowForm = this.fb.group({
     contactName : [''],
     contactPhone : ['', Validators.minLength(10)],
@@ -61,16 +68,19 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     payToName : [''],
     payToAddress : [''],
     payToCity : [''],
-    stateId : [''],
-    zipId : [''],
+    stateId : ['', Validators.required],
+    zipId : ['', Validators.required],
+    countyId : ['', Validators.required],
     methodOfPaymentRequired : ['']
   });
   // selectedAgency$ : Observable<Agency>;
   // selectedAgency! : Agency;
   constructor( public deviceService:DeviceDetectorService, private fb : FormBuilder , private agencyFacade : AgencyStoreFacade,
-    private authStoreFacade : AuthStoreFacade){
+    private authStoreFacade : AuthStoreFacade, private cd: ChangeDetectorRef){
     this.escrowDetails$ = this.agencyFacade.escrowDetails$;
     this.nonEscrowDetails$ = this.agencyFacade.nonEscrowDetails$;
+    this.nonEscrowCounties$ = this.agencyFacade.nonEscrowCounties$;
+    this.stateOptions$ = this.agencyFacade.stateOptions$;
     this.authStoreFacade.loginProfile$.subscribe(data=>{
       this.loginData = data;
     });
@@ -81,6 +91,16 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
       this.agencyFacade.getEscrowDetails({agencyMasterId : this.agencyMasterId , userId : this.loginData.processOrgModel.userId , escrowId : undefined});
       this.agencyFacade.getNonEscrowDetails({agencyMasterId : this.agencyMasterId , userId : this.loginData.processOrgModel.userId , nonEscrowId : undefined});
     }
+    this.subscriptions.push(this.nonEscrowCounties$.subscribe(cties => {
+      this.nonEscrowCounties = [...cties];
+      debugger;
+      if(this.nonEscrowCounties.length && this.isNonEscrowCountiesLoading){
+        setTimeout(() => {
+          this.isNonEscrowCountiesLoading = false;
+          this.cd.detectChanges();
+        }, 90);
+      }
+    }));
   }
 
   ngOnInit() {
@@ -92,12 +112,12 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
         this.escrowForm.controls['contactFax'].setValue(escrowDetails.contactFax);
         this.escrowForm.controls['contactEmail'].setValue(escrowDetails.contactEmail);
         this.escrowForm.controls['agencyWebsite'].setValue(escrowDetails.agencyWebsite);
-        this.escrowForm.controls['amtAvailableOnWebsite'].setValue(escrowDetails.amtAvailable);
-        this.escrowForm.controls['costToPayUsingCopyOfTb'].setValue(escrowDetails.costToPay);
-        this.escrowForm.controls['listingAcceptedForPayment'].setValue(escrowDetails.isListingAccepted);
-        this.escrowForm.controls['mailAWayOnlyReq'].setValue(escrowDetails.mailawayRegistered);
-        this.escrowForm.controls['agencyExpectWebTb'].setValue(escrowDetails.isAgencyWebExpect);
-        this.escrowForm.controls['postmarkAccepted'].setValue(escrowDetails.postMarkAccepted);
+        this.escrowForm.controls['amtAvailableOnWebsite'].setValue(escrowDetails.amtAvailable?.toString());
+        this.escrowForm.controls['costToPayUsingCopyOfTb'].setValue(escrowDetails.costToPay?.toString());
+        this.escrowForm.controls['listingAcceptedForPayment'].setValue(escrowDetails.isListingAccepted?.toString());
+        this.escrowForm.controls['mailAWayOnlyReq'].setValue(escrowDetails.mailawayRegistered?.toString());
+        this.escrowForm.controls['agencyExpectWebTb'].setValue(escrowDetails.isAgencyWebExpect?.toString());
+        this.escrowForm.controls['postmarkAccepted'].setValue(escrowDetails.postMarkAccepted?.toString());
         this.escrowForm.controls['copyFee'].setValue(escrowDetails.copyFee);
         this.escrowForm.controls['feeForMailAWay'].setValue(escrowDetails.mailAwayFee);
         this.escrowForm.controls['noOfParcelsPerCheck'].setValue(escrowDetails.numOfParcels);
@@ -112,17 +132,24 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
         this.nonEscrowForm.controls['contactFax'].setValue(nonEscrowDetails.contactFax);
         this.nonEscrowForm.controls['contactEmail'].setValue(nonEscrowDetails.contactEmail);
         this.nonEscrowForm.controls['agencyWebsite'].setValue(nonEscrowDetails.agencyWebsite);
-        this.nonEscrowForm.controls['collectedByAgency'].setValue(nonEscrowDetails.agencyCollectedBy);
-        this.nonEscrowForm.controls['thirdPartyCollections'].setValue(nonEscrowDetails.thirdPartyCollections);
-        this.nonEscrowForm.controls['amtAvailableOnWebsite'].setValue(nonEscrowDetails.amtAvailable);
-        this.nonEscrowForm.controls['mailAWayOnlyReq'].setValue(nonEscrowDetails.mailAwayReq);
+        this.nonEscrowForm.controls['collectedByAgency'].setValue(nonEscrowDetails.agencyCollectedBy?.toString());
+        this.nonEscrowForm.controls['thirdPartyCollections'].setValue(nonEscrowDetails.thirdPartyCollections?.toString());
+        this.nonEscrowForm.controls['amtAvailableOnWebsite'].setValue(nonEscrowDetails.amtAvailable?.toString());
+        this.nonEscrowForm.controls['mailAWayOnlyReq'].setValue(nonEscrowDetails.mailAwayReq?.toString());
         this.nonEscrowForm.controls['feeForMailAWay'].setValue(nonEscrowDetails.mailAwayFee);
         this.nonEscrowForm.controls['payToName'].setValue(nonEscrowDetails.payName);
         this.nonEscrowForm.controls['payToAddress'].setValue(nonEscrowDetails.payAddress);
         this.nonEscrowForm.controls['payToCity'].setValue(nonEscrowDetails.payCity);
         this.nonEscrowForm.controls['stateId'].setValue(nonEscrowDetails.payStateId);
         this.nonEscrowForm.controls['zipId'].setValue(nonEscrowDetails.payZip);
-        this.nonEscrowForm.controls['methodOfPaymentRequired'].setValue(nonEscrowDetails.paymentMethodId);
+        this.nonEscrowForm.controls['countyId'].setValue(nonEscrowDetails.payCountyId);
+        this.nonEscrowForm.controls['methodOfPaymentRequired'].setValue(nonEscrowDetails.paymentMethodId?.toString());
+        if(nonEscrowDetails.payStateId && !this.nonEscrowCounties){
+          this.agencyFacade.getCounties(nonEscrowDetails.payStateId, 'nonEscrowStates');
+        }
+        else{
+          this.nonEscrowCounties = []
+        }
     }
     });
     if(this.deviceService.isMobile()){
@@ -130,6 +157,9 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     }else{
       this.isMobile = false;
     }
+    this.subscriptions.push(this.stateOptions$.subscribe((response)=>{
+      this.stateOptions = [...response];
+    }));
   }
 
   get contactName(){
@@ -222,6 +252,9 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   }
   get zipId(){
     return this.nonEscrowForm.get('zipId');
+  }
+  get countyId(){
+    return this.nonEscrowForm.get('countyId');
   }
   get methodOfPaymentRequired(){
     return this.nonEscrowForm.get('methodOfPaymentRequired');
@@ -355,6 +388,9 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     if(form.controls['zipId'].value !== this.nonEscrowDetails.payZip){
       this.addToNonEscrowDescription(this.nonEscrowDetails.payZip, form.controls['zipId'].value, 'Pay Zip Id')
     }
+    if(form.controls['countyId'].value !== this.nonEscrowDetails.payCountyId){
+      this.addToNonEscrowDescription(this.nonEscrowDetails.payCountyId, form.controls['countyId'].value, 'Pay County Id')
+    }
     if(form.controls['methodOfPaymentRequired'].value !== this.nonEscrowDetails.paymentMethodId){
       this.addToNonEscrowDescription(this.nonEscrowDetails.paymentMethodId, form.controls['methodOfPaymentRequired'].value, 'Method Of Payment Required')
     }
@@ -374,6 +410,7 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newNonEscrowForm.payCity = this.nonEscrowForm.controls['payToCity'].value;
     this.newNonEscrowForm.payStateId = this.nonEscrowForm.controls['stateId'].value;
     this.newNonEscrowForm.payZip = this.nonEscrowForm.controls['zipId'].value;
+    this.newNonEscrowForm.payCountyId = this.nonEscrowForm.controls['countyId'].value;
     this.newNonEscrowForm.paymentMethodId = this.nonEscrowForm.controls['methodOfPaymentRequired'].value? this.nonEscrowForm.controls['methodOfPaymentRequired'].value : '';
     this.newNonEscrowForm.agencyMasterId = this.agencyMasterId;
     this.newNonEscrowForm.agencyNonEscrowId = this.nonEscrowDetails.agencyNonEscrowId?this.nonEscrowDetails.agencyNonEscrowId : '';
@@ -382,8 +419,6 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     this.newNonEscrowForm.modifiedBy = this.nonEscrowDetails.modifiedBy?this.nonEscrowDetails.modifiedBy : '';
     this.newNonEscrowForm.createdByUser = this.nonEscrowDetails.createdByUser?this.nonEscrowDetails.createdByUser : '';
     this.newNonEscrowForm.modifiedByUser = this.nonEscrowDetails.modifiedByUser?this.nonEscrowDetails.modifiedByUser : '';
-    this.newNonEscrowForm.payCountyId = this.nonEscrowDetails.payCountyId?this.nonEscrowDetails.payCountyId : '';
-    // this.newNonEscrowForm.isDeleted = this.nonEscrowDetails.isDeleted?this.nonEscrowDetails.isDeleted : '';
 
     if(this.nonEscrowDetails){
       this.newNonEscrowForm.description = this.nonEscrowDescription;
@@ -408,6 +443,22 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
 
   addToNonEscrowDescription(oldValue : any, newValue : any, fieldname : string){
     this.nonEscrowDescription += fieldname + ' is updated from '+ oldValue +' to '+newValue + '; ';
+  }
+
+  isRequiredEscrowField(name: string): boolean {
+    return this.escrowForm.get(name)?.hasValidator(Validators.required) ?? false;
+  }
+
+  isRequiredNonEscrowField(name: string): boolean {
+    return this.nonEscrowForm.get(name)?.hasValidator(Validators.required) ?? false;
+  }
+  
+  stateSelectionChangeHandler($event: MatSelectChange, stateField : string){
+    debugger;
+    if(stateField === CountiesForStates.NON_ESCROW_STATES){
+      this.isNonEscrowCountiesLoading = true;
+    }
+    this.agencyFacade.getCounties($event.value, stateField);
   }
 
 }

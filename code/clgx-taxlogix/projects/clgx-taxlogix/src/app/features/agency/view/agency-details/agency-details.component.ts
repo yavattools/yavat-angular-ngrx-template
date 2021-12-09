@@ -8,6 +8,7 @@ import { ROUTE_ANIMATIONS_ELEMENTS } from '../../../../core/core.module';
 import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
 import { MatOptionSelectionChange } from '@angular/material/core';
 import { MatSelectChange } from '@angular/material/select';
+import {CountiesForStates} from '../../../../core/store/agency/agency.model';
 
 interface Options {
   value: string;
@@ -38,7 +39,7 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     agencyCity: ['', Validators.required],
     stateId: ['', Validators.required],
     payZip: ['', Validators.required],
-    countyId: ['', Validators.required],
+    countyId: [''],
     contactName: [''],
     contactEmail: ['', Validators.email],
     phoneNumber:['', [ Validators.required,
@@ -58,6 +59,7 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     assessorCity: [''],
     assessorStateId: [''],
     assessorZip: [''],
+    assessorCountyId : [''],
     billingRequestId: [''],
     mediaTypeId: [''],
     paperType: ['0'],
@@ -84,9 +86,12 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
   stateOptions$ : Observable<StateOptions[]>;
   stateOptions : Array<StateOptions> = new Array<StateOptions>();
 
-  counties$ : Observable<County[]>;
-  counties : Array<County> = new Array<County>();
-  isCountiesLoading: boolean = false;
+  agencyCounties$ : Observable<County[]>;
+  agencyCounties : Array<County> = new Array<County>();
+  assessorCounties$ : Observable<County[]>;
+  assessorCounties : Array<County> = new Array<County>();
+  isAgencyCountiesLoading: boolean = false;
+  isAssessorCountiesLoading: boolean = false;
   isMobile: Boolean = false;
   subscriptions: Array<Subscription> = new Array<Subscription>();
 
@@ -99,15 +104,26 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
   ) {
     this.agency$ = this.agencyFacade.selectedAgency$;
     this.stateOptions$ = this.agencyFacade.stateOptions$;
-    this.counties$ = this.agencyFacade.counties$;
+    this.agencyCounties$ = this.agencyFacade.agencyCounties$;
+    this.assessorCounties$ = this.agencyFacade.assessorCounties$;
     this.billingRequest$ = this.agencyFacade.billingRequest$;
     this.mediaType$ = this.agencyFacade.mediaType$;
-    this.subscriptions.push(this.counties$.subscribe(cties => {
-      this.counties = [...cties];
+    this.subscriptions.push(this.agencyCounties$.subscribe(cties => {
+      this.agencyCounties = [...cties];
       debugger;
-      if(this.counties.length && this.isCountiesLoading){
+      if(this.agencyCounties.length && this.isAgencyCountiesLoading){
         setTimeout(() => {
-          this.isCountiesLoading = false;
+          this.isAgencyCountiesLoading = false;
+          this.cd.detectChanges();
+        }, 90);
+      }
+    }));
+    this.subscriptions.push(this.assessorCounties$.subscribe(cties => {
+      this.assessorCounties = [...cties];
+      debugger;
+      if(this.assessorCounties.length && this.isAssessorCountiesLoading){
+        setTimeout(() => {
+          this.isAssessorCountiesLoading = false;
           this.cd.detectChanges();
         }, 90);
       }
@@ -128,8 +144,17 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     this.subscriptions.push(this.agency$.subscribe((agency) => {
       this.agency = agency;
       if(this.agency && this.agency.agencyMasterId) {
-        if(this.agency.stateId){
-          this.agencyFacade.getCounties(this.agency.stateId);
+        if(this.agency.stateId && !this.agencyCounties){
+          this.agencyFacade.getCounties(this.agency.stateId, 'agencyStates');
+        }
+        else{
+          this.agencyCounties = []
+        }
+        if(this.agency.assessorStateId && !this.assessorCounties){
+          this.agencyFacade.getCounties(this.agency.assessorStateId, 'assessorStates');
+        }
+        else{
+          this.assessorCounties = []
         }
         this.defFreqSelected = this.agency.frequencyDefault?this.agency.frequencyDefault : '';
         this.nonFreqSelected = this.agency.frequencyNonDefault?this.agency.frequencyNonDefault : '';
@@ -137,8 +162,8 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
         this.agencyDetailsGroup.controls['agencyName'].setValue(this.agency.agencyName); 
         this.agencyDetailsGroup.controls['agencyWebsite'].setValue(this.agency.agencyWebsite);
         this.agencyDetailsGroup.controls['agencyLowerLevel'].setValue(this.agency.lowLevelAgencyId)
-        this.agencyDetailsGroup.controls['agencyCollecting'].setValue(this.agency.collectingAgency)
-        this.agencyDetailsGroup.controls['agencyActive'].setValue(this.agency.agencyActive)
+        this.agencyDetailsGroup.controls['agencyCollecting'].setValue(this.agency.collectingAgency?.toString())
+        this.agencyDetailsGroup.controls['agencyActive'].setValue(this.agency.agencyActive?.toString())
         this.agencyDetailsGroup.controls['agencySuitsAddress'].setValue(this.agency.agencySitusAddress)
         this.agencyDetailsGroup.controls['agencyCity'].setValue(this.agency.agencyCity)
         this.agencyDetailsGroup.controls['stateId'].setValue(this.agency.stateId)
@@ -161,12 +186,13 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
         this.agencyDetailsGroup.controls['assessorCity'].setValue(this.agency.assessorCity)
         this.agencyDetailsGroup.controls['assessorStateId'].setValue(this.agency.assessorStateId)
         this.agencyDetailsGroup.controls['assessorZip'].setValue(this.agency.assessorZip)
+        this.agencyDetailsGroup.controls['assessorCountyId'].setValue(this.agency.assessorCountyId);
         this.agencyDetailsGroup.controls['billingRequestId'].setValue(this.agency.billingRequestId)
         this.agencyDetailsGroup.controls['mediaTypeId'].setValue(this.agency.mediaTypeId)
-        this.agencyDetailsGroup.controls['paperType'].setValue(this.agency.paperType)
-        this.agencyDetailsGroup.controls['excelType'].setValue(this.agency.excelType)
-        this.agencyDetailsGroup.controls['mailType'].setValue(this.agency.mailType)
-        this.agencyDetailsGroup.controls['assessorEmailId'].setValue(this.agency.assessorEmailId)
+        this.agencyDetailsGroup.controls['paperType'].setValue(this.agency.paperType?.toString())
+        this.agencyDetailsGroup.controls['excelType'].setValue(this.agency.excelType?.toString())
+        this.agencyDetailsGroup.controls['mailType'].setValue(this.agency.mailType?.toString())
+        this.agencyDetailsGroup.controls['assessorEmailId'].setValue(this.agency.assessorEmailId);
     }
       console.log(agency);
     }));
@@ -185,7 +211,6 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     } else {
       this.isMobile = false;
     }
-   
   }
 
    //only number will be add
@@ -274,6 +299,9 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
   }
   get assessorZip() {
     return this.agencyDetailsGroup.controls['assessorZip'];
+  }
+  get assessorCountyId() {
+    return this.agencyDetailsGroup.controls['assessorCountyId'];
   }
   get billingRequestId() {
     return this.agencyDetailsGroup.controls['billingRequestId'];
@@ -378,6 +406,9 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     if(form.controls['assessorZip'].value !== this.agency.assessorZip){
       this.addToDescription(this.agency.assessorZip, form.controls['assessorZip'].value, 'Assessor Zip');
     }
+    if(form.controls['assessorCountyId'].value !== this.agency.assessorCountyId){
+      this.addToDescription(this.agency.assessorCountyId, form.controls['assessorCountyId'].value, 'Assessor County Id');
+    }
     if(form.controls['billingRequestId'].value !== this.agency.billingRequestId){
       this.addToDescription(this.agency.billingRequestId, form.controls['billingRequestId'].value, 'Billing Request Id');
     }
@@ -428,6 +459,7 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     this.newAgencyDetails.assessorCity = form.controls['assessorCity'].value;
     this.newAgencyDetails.assessorStateId = form.controls['assessorStateId'].value;
     this.newAgencyDetails.assessorZip = form.controls['assessorZip'].value;
+    this.newAgencyDetails.assessorCountyId = form.controls['assessorCountyId'].value;
     this.newAgencyDetails.billingRequestId = form.controls['billingRequestId'].value;
     this.newAgencyDetails.mediaTypeId = form.controls['mediaTypeId'].value;
     this.newAgencyDetails.paperType = form.controls['paperType'].value;
@@ -463,10 +495,15 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     this.nonFreqSelected = $event;
   }
 
-  stateSelectionChangeHandler($event: MatSelectChange){
+  stateSelectionChangeHandler($event: MatSelectChange, stateField : string){
     debugger;
-    this.isCountiesLoading = true;
-    this.agencyFacade.getCounties($event.value);
+    if(stateField === CountiesForStates.AGENCY_STATES){
+      this.isAgencyCountiesLoading = true;
+    }
+    else{
+      this.isAssessorCountiesLoading = true;
+    }
+    this.agencyFacade.getCounties($event.value, stateField);
   }
 
   addToDescription(oldValue : any, newValue : any, fieldname : string){

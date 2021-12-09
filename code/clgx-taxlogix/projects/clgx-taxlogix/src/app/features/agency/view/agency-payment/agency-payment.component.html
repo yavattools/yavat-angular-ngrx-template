@@ -36,20 +36,43 @@
                   <input matInput formControlName="payCity" [required]="ispaymentFormGroupFieldRequired('payCity')">
                 </mat-form-field>
                 <div class="state-zip">
-                  <mat-form-field appearance="outline" color="accent" style="width: 40%;">
+                  <mat-form-field appearance="outline" color="accent" style="width: 57%;">
                     <mat-label>State</mat-label>
-                    <mat-select formControlName="stateId" [required]="ispaymentFormGroupFieldRequired('stateId')"
-                        >
+                    <mat-select formControlName="stateId" #paymentState
+                      (selectionChange)="stateSelectionChangeHandler($event, 'paymentStates')" [required]="isRequired('stateId')">
                       <mat-option *ngFor="let option of stateOptions" [value]="option.stateId">
                         {{option.stateName}}
                       </mat-option>
                     </mat-select>
+                    <mat-error *ngIf="stateId.errors?.required">
+                      Required 
+                    </mat-error>
                   </mat-form-field>
-                  <mat-form-field appearance="outline" color="accent" style="width : 55%">
+                  <mat-form-field appearance="outline" color="accent" style="width : 40%">
                     <mat-label>Zip</mat-label>
-                    <input matInput formControlName="zip" [required]="ispaymentFormGroupFieldRequired('zip')">
+                    <input matInput formControlName="zip"  [required]="isRequired('zip')">
+                    <mat-error *ngIf="zip.errors?.required">
+                      Required 
+                    </mat-error>
                   </mat-form-field>
                 </div>
+                <mat-form-field appearance="outline" color="accent">
+                  <mat-label>County</mat-label>
+                  <mat-select formControlName="countyId" [disabled]="isPaymentCountiesLoading || !paymentCounties?.length"
+                       [required]="isRequired('countyId')">
+                    <mat-option *ngFor="let option of (paymentCounties$ | async)" [value]="option.countyId">
+                      {{option.countyName}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-spinner matPrefix mode="indeterminate" style="margin:0 auto;"
+                    *ngIf="isPaymentCountiesLoading" [diameter]="30"></mat-spinner>
+                  <mat-error *ngIf="countyId.errors?.required">
+                    Required 
+                  </mat-error>
+                  <div *ngIf="!paymentState.value" class="show-orangered">
+                    Select State to load County List
+                  </div>
+                </mat-form-field>
                 <mat-form-field appearance="outline" color="accent">
                   <mat-label>Email File to:</mat-label>
                   <input matInput formControlName="emailFileId" [required]="ispaymentFormGroupFieldRequired('emailFileId')">

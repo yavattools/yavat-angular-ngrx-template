@@ -29,9 +29,24 @@ export const selectMediaTypeOptions = createSelector(
 )
 
 
-export const selectCounties = createSelector(
+export const selectAgencyCounties = createSelector(
   selectAgencyState,
-  (state : AgencyState) => state.counties
+  (state : AgencyState) => state.agencyCounties
+)
+
+export const selectAssessorCounties = createSelector(
+  selectAgencyState,
+  (state : AgencyState) => state.assessorCounties
+)
+
+export const selectNonEscrowCounties = createSelector(
+  selectAgencyState,
+  (state : AgencyState) => state.nonEscrowCounties
+)
+
+export const selectPaymentCounties = createSelector(
+  selectAgencyState,
+  (state : AgencyState) => state.paymentCounties
 )
 
 export const selectAgency = createSelector(

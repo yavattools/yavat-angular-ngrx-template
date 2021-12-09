@@ -101,7 +101,7 @@
             <mat-form-field appearance="outline" color="accent" style="width: 57%;">
               <mat-label>State</mat-label>
               <mat-select formControlName="stateId" #agencyState
-                (selectionChange)="stateSelectionChangeHandler($event)"   [required]="isRequired('stateId')">
+                (selectionChange)="stateSelectionChangeHandler($event, 'agencyStates')" [required]="isRequired('stateId')">
                 <mat-option *ngFor="let option of stateOptions" [value]="option.stateId">
                   {{option.stateName}}
                 </mat-option>
@@ -120,14 +120,14 @@
           </div>
           <mat-form-field appearance="outline" color="accent">
             <mat-label>County</mat-label>
-            <mat-select formControlName="countyId" [disabled]="isCountiesLoading || !counties?.length"
+            <mat-select formControlName="countyId" [disabled]="isAgencyCountiesLoading || !agencyCounties?.length"
                  [required]="isRequired('countyId')">
-              <mat-option *ngFor="let option of (counties$ | async)" [value]="option.countyId">
+              <mat-option *ngFor="let option of (agencyCounties$ | async)" [value]="option.countyId">
                 {{option.countyName}}
               </mat-option>
             </mat-select>
             <mat-spinner matPrefix mode="indeterminate" style="margin:0 auto;"
-              *ngIf="isCountiesLoading" [diameter]="30"></mat-spinner>
+              *ngIf="isAgencyCountiesLoading" [diameter]="30"></mat-spinner>
             <mat-error *ngIf="countyId.errors?.required">
               Required 
             </mat-error>
@@ -135,14 +135,6 @@
               Select State to load County List
             </div>
           </mat-form-field>
-
-          <!-- <mat-form-field appearance="outline">
-            <mat-label>County</mat-label>
-            <input matInput formControlName="countyId" [required]="isRequired('countyId')">
-            <mat-error *ngIf="countyId.errors?.required">
-              Required 
-            </mat-error>
-          </mat-form-field> -->
       </div>
     </div>
     <div class="details">
@@ -271,7 +263,7 @@
           <mat-form-field appearance="outline" color="accent" style="width: 40%;">
             <mat-label>State</mat-label>
             <mat-select formControlName="assessorStateId"
-                 [required]="isRequired('assessorStateId')">
+                 [required]="isRequired('assessorStateId')" #assessorState (selectionChange)="stateSelectionChangeHandler($event, 'assessorStates')">
               <mat-option *ngFor="let option of stateOptions" [value]="option.stateId">
                 {{option.stateName}}
               </mat-option>
@@ -288,6 +280,23 @@
             </mat-error>
           </mat-form-field>
         </div>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>County</mat-label>
+          <mat-select formControlName="assessorCountyId" [disabled]="isAssessorCountiesLoading || !assessorCounties?.length"
+               [required]="isRequired('assessorCountyId')">
+            <mat-option *ngFor="let option of (assessorCounties$ | async)" [value]="option.countyId">
+              {{option.countyName}}
+            </mat-option>
+          </mat-select>
+          <mat-spinner matPrefix mode="indeterminate" style="margin:0 auto;"
+            *ngIf="isAssessorCountiesLoading" [diameter]="30"></mat-spinner>
+          <mat-error *ngIf="assessorCountyId.errors?.required">
+            Required 
+          </mat-error>
+          <div *ngIf="!assessorState.value" class="show-orangered">
+            Select State to load County List
+          </div>
+        </mat-form-field>
       </div>
     </div>
     <div class="details">

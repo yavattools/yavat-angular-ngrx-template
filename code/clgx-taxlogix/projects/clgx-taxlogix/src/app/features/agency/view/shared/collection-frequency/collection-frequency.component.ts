@@ -1,6 +1,19 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, Input, OnChanges, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy,
+  Output,
+  EventEmitter,
+  Input,
+  OnChanges,
+  ChangeDetectorRef
+} from '@angular/core';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { AgencyDefaultFrequency, AgencyNonFrequency, FrequencyType } from '@app/core/store/agency/agency.model';
+import {
+  AgencyDefaultFrequency,
+  AgencyNonFrequency,
+  FrequencyType
+} from '@app/core/store/agency/agency.model';
 
 export interface Freq {
   default: string;
@@ -10,11 +23,10 @@ export interface Freq {
 @Component({
   selector: 'clgx-collection-frequency',
   templateUrl: './collection-frequency.component.html',
-  styleUrls: ['./collection-frequency.component.scss'],
+  styleUrls: ['./collection-frequency.component.scss']
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CollectionFrequencyComponent implements OnInit, OnChanges {
-
   @Output()
   defaultFreqSelected = new EventEmitter<string>();
 
@@ -24,10 +36,8 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
   @Input()
   defFreq!: string;
 
-  
   @Input()
   nonFreq!: string;
-  
 
   public agDefaultFreq: AgencyDefaultFrequency;
   public agNonFreq: AgencyNonFrequency;
@@ -39,33 +49,52 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {}
 
-  ngOnChanges(){
-
+  ngOnChanges() {
+    this.setDefaultFrequency(this.defFreq);
+    this.setNonFreqency(this.nonFreq);
   }
 
-  isAllFreqSelected(){
+  isAllFreqSelected() {
     let result = false;
     debugger;
-    if((this.agDefaultFreq.defaultAnnual || this.agDefaultFreq.defaultDiscountAnnual ||
-        this.agDefaultFreq.defaultQuarterly || this.agDefaultFreq.defaultSemiAnnual || 
-        this.agDefaultFreq.defaultTri) && (this.agNonFreq.nonAnnual || this.agNonFreq.nonDiscountAnnual ||
-          this.agNonFreq.nonQuarterly || this.agNonFreq.nonSemiAnnual || this.agNonFreq.nonTri )){
-            result = true;
+    if (
+      (this.agDefaultFreq.defaultAnnual ||
+        this.agDefaultFreq.defaultDiscountAnnual ||
+        this.agDefaultFreq.defaultQuarterly ||
+        this.agDefaultFreq.defaultSemiAnnual ||
+        this.agDefaultFreq.defaultTri) &&
+      (this.agNonFreq.nonAnnual ||
+        this.agNonFreq.nonDiscountAnnual ||
+        this.agNonFreq.nonQuarterly ||
+        this.agNonFreq.nonSemiAnnual ||
+        this.agNonFreq.nonTri)
+    ) {
+      result = true;
     }
 
     return result;
   }
 
-  defaultChangeHandler(default_freq: string){
-    if(!this.agDefaultFreq.defaultAnnual && !this.agDefaultFreq.defaultDiscountAnnual &&
-      !this.agDefaultFreq.defaultQuarterly && !this.agDefaultFreq.defaultSemiAnnual &&
-      !this.agDefaultFreq.defaultTri){
-        this.defaultFreqSelected.emit('');
-        return;
-      }
+  defaultChangeHandler(default_freq: string) {
+    if (
+      !this.agDefaultFreq.defaultAnnual &&
+      !this.agDefaultFreq.defaultDiscountAnnual &&
+      !this.agDefaultFreq.defaultQuarterly &&
+      !this.agDefaultFreq.defaultSemiAnnual &&
+      !this.agDefaultFreq.defaultTri
+    ) {
+      this.defaultFreqSelected.emit('');
+      return;
+    }
 
-    switch(default_freq){
-      case FrequencyType.DEFAULT_ANNUAL:{
+    this.setDefaultFrequency(default_freq);
+
+    this.cd.detectChanges();
+  }
+
+  setDefaultFrequency(freq: string) {
+    switch (freq) {
+      case FrequencyType.DEFAULT_ANNUAL: {
         this.agDefaultFreq.defaultAnnual = true;
         this.agDefaultFreq.defaultDiscountAnnual = false;
         this.agDefaultFreq.defaultQuarterly = false;
@@ -74,7 +103,7 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
         this.defaultFreqSelected.emit(FrequencyType.DEFAULT_ANNUAL);
         break;
       }
-      case FrequencyType.DEFAULT_DISCOUNT_ANNUAL:{
+      case FrequencyType.DEFAULT_DISCOUNT_ANNUAL: {
         this.agDefaultFreq.defaultAnnual = false;
         this.agDefaultFreq.defaultDiscountAnnual = true;
         this.agDefaultFreq.defaultQuarterly = false;
@@ -84,7 +113,7 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
         break;
       }
-      case FrequencyType.DEFAULT_QUARTELY:{
+      case FrequencyType.DEFAULT_QUARTELY: {
         this.agDefaultFreq.defaultAnnual = false;
         this.agDefaultFreq.defaultDiscountAnnual = false;
         this.agDefaultFreq.defaultQuarterly = true;
@@ -94,7 +123,7 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
         break;
       }
-      case FrequencyType.DEFAULT_SEMI_ANNUAL:{
+      case FrequencyType.DEFAULT_SEMI_ANNUAL: {
         this.agDefaultFreq.defaultAnnual = false;
         this.agDefaultFreq.defaultDiscountAnnual = false;
         this.agDefaultFreq.defaultQuarterly = false;
@@ -104,7 +133,7 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
         break;
       }
-      case FrequencyType.DEFAULT_TRI:{
+      case FrequencyType.DEFAULT_TRI: {
         this.agDefaultFreq.defaultAnnual = false;
         this.agDefaultFreq.defaultDiscountAnnual = false;
         this.agDefaultFreq.defaultQuarterly = false;
@@ -115,59 +144,67 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
         break;
       }
     }
+  }
+
+  nonChangeHandler(non_freq: string) {
+    debugger;
+    if (
+      !this.agNonFreq.nonAnnual &&
+      !this.agNonFreq.nonDiscountAnnual &&
+      !this.agNonFreq.nonQuarterly &&
+      !this.agNonFreq.nonSemiAnnual &&
+      !this.agNonFreq.nonTri
+    ) {
+      this.nonFreqSelected.emit('');
+      return;
+    }
+
+    this.setNonFreqency(non_freq);
     this.cd.detectChanges();
   }
 
-  nonChangeHandler(non_freq: string){
-    debugger;
-    if(!this.agNonFreq.nonAnnual && !this.agNonFreq.nonDiscountAnnual &&
-      !this.agNonFreq.nonQuarterly && !this.agNonFreq.nonSemiAnnual &&
-      !this.agNonFreq.nonTri ){
-        this.nonFreqSelected.emit('');
-        return;
-      }
-
-    switch(non_freq){
-      case FrequencyType.NON_ANNUAL:{
+  setNonFreqency(freq: string) {
+    switch (freq) {
+      case FrequencyType.NON_ANNUAL: {
         this.agNonFreq.nonAnnual = true;
         this.agNonFreq.nonDiscountAnnual = false;
         this.agNonFreq.nonQuarterly = false;
         this.agNonFreq.nonSemiAnnual = false;
-        this.agNonFreq.nonTri  = false;
+        this.agNonFreq.nonTri = false;
         this.nonFreqSelected.emit(FrequencyType.NON_ANNUAL);
         break;
       }
-      case FrequencyType.NON_DISCOUNT_ANNUAL:{
+      case FrequencyType.NON_DISCOUNT_ANNUAL: {
         this.agNonFreq.nonAnnual = false;
         this.agNonFreq.nonDiscountAnnual = true;
         this.agNonFreq.nonQuarterly = false;
         this.agNonFreq.nonSemiAnnual = false;
-        this.agNonFreq.nonTri  = false;
+        this.agNonFreq.nonTri = false;
         this.nonFreqSelected.emit(FrequencyType.NON_DISCOUNT_ANNUAL);
 
         break;
       }
-      case FrequencyType.NON_QUARTELY:{
+      case FrequencyType.NON_QUARTELY: {
         this.agNonFreq.nonAnnual = false;
         this.agNonFreq.nonDiscountAnnual = false;
         this.agNonFreq.nonQuarterly = true;
         this.agNonFreq.nonSemiAnnual = false;
-        this.agNonFreq.nonTri  = false;
+        this.agNonFreq.nonTri = false;
         this.nonFreqSelected.emit(FrequencyType.NON_QUARTELY);
 
         break;
       }
-      case FrequencyType.NON_SEMI_ANNUAL:{
+      case FrequencyType.NON_SEMI_ANNUAL: {
         this.agNonFreq.nonAnnual = false;
         this.agNonFreq.nonDiscountAnnual = false;
         this.agNonFreq.nonQuarterly = false;
         this.agNonFreq.nonSemiAnnual = true;
-        this.agNonFreq.nonTri  = false;
+        this.agNonFreq.nonTri = false;
         this.nonFreqSelected.emit(FrequencyType.NON_SEMI_ANNUAL);
 
         break;
       }
-      case FrequencyType.NON_TRI :{
+      case FrequencyType.NON_TRI: {
         this.agNonFreq.nonAnnual = false;
         this.agNonFreq.nonDiscountAnnual = false;
         this.agNonFreq.nonQuarterly = false;
@@ -178,6 +215,5 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
         break;
       }
     }
-    this.cd.detectChanges();
   }
 }

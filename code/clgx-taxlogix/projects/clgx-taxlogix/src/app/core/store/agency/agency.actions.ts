@@ -28,12 +28,12 @@ export const actionGetStateOptionsFailure = createAction(
 
 export const actionGetCountiesByStateId = createAction(
   '[Agency] Get Counties by State Id ',
-  props<{ stateId : string}>()
+  props<{ stateId : string, stateField : string}>()
 )
 
 export const actionGetCountiesByStateIdSuccess = createAction(
   '[Agency] Get Counties by State Id Success',
-  props<{ response : Array<County>}>()
+  props<{ response : Array<County>, stateField : string}>()
 )
 
 export const actionGetCountiesByStateIdFailure = createAction(

@@ -2,9 +2,9 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { SharedModule } from '../../../shared/shared.module';
+import { SharedModule } from '../../../../shared/shared.module';
 
-import { DashboardViewComponent } from './dashboard-view.component';
+import { DashboardViewComponent } from '../../../dashboard/view/dashboard-view.component';
 
 describe('DashboardViewComponent', () => {
   let component: DashboardViewComponent;

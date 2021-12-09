@@ -60,7 +60,7 @@ export class AgencyEffects {
       switchMap((action) => this.agencyDataService.
       getCounties(action.stateId).pipe(
         mergeMap( counties => [
-          agencyActions.actionGetCountiesByStateIdSuccess({response: counties}),
+          agencyActions.actionGetCountiesByStateIdSuccess({response: counties, stateField : action.stateField}),
         ]),
         catchError(error => of(agencyActions.actionGetCountiesByStateIdFailure(error)))
       ))

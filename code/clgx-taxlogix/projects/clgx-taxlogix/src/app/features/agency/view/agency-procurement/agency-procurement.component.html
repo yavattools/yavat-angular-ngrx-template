@@ -264,7 +264,12 @@
                 <div class="state-zip" style="width: 100%;">
                   <mat-form-field appearance="outline" color="accent" style="width: 40%;">
                     <mat-label>State</mat-label>
-                    <input matInput formControlName="stateId" [required]="isnonEscrowFormRequired('stateId')">
+                    <mat-select formControlName="stateId"
+                    [required]="isnonEscrowFormRequired('stateId')" #nonEscrowState (selectionChange)="stateSelectionChangeHandler($event, 'nonEscrowStates')">
+                      <mat-option *ngFor="let option of stateOptions" [value]="option.stateId">
+                        {{option.stateName}}
+                      </mat-option>
+                    </mat-select>
                     <mat-error *ngIf="stateId?.errors?.required">
                       Required 
                     </mat-error>
@@ -277,6 +282,23 @@
                     </mat-error>
                   </mat-form-field>
                 </div>
+                <mat-form-field appearance="outline" color="accent" style="width: 100%;">
+                  <mat-label>County</mat-label>
+                  <mat-select formControlName="countyId" [disabled]="isNonEscrowCountiesLoading || !nonEscrowCounties?.length"
+                       [required]="isRequiredNonEscrowField('countyId')">
+                    <mat-option *ngFor="let option of (nonEscrowCounties$ | async)" [value]="option.countyId">
+                      {{option.countyName}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-spinner matPrefix mode="indeterminate" style="margin:0 auto;"
+                    *ngIf="isNonEscrowCountiesLoading" [diameter]="30"></mat-spinner>
+                  <mat-error *ngIf="countyId?.errors?.required">
+                    Required 
+                  </mat-error>
+                  <div *ngIf="!nonEscrowState.value" class="show-orangered">
+                    Select State to load County List
+                  </div>
+                </mat-form-field>
                   <section class="checkbox">
                     <mat-label>Method of Payment Required</mat-label>
                     <mat-checkbox class="check-box" style="padding-right:10px;" value="1">Certified check</mat-checkbox>

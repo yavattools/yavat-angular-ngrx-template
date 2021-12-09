@@ -8,7 +8,8 @@ import {
   EscrowNonEscrowDetails,
   NonEscrowDetails,
   PaymentDetails,
-  StateOptions
+  StateOptions,
+  CountiesForStates
 } from './agency.model';
 import { Action, createReducer, on } from '@ngrx/store';
 import { mutableOn } from 'ngrx-etc';
@@ -28,7 +29,10 @@ export const initialState: AgencyState = {
   stateOptions : new Array<StateOptions>(),
   billingRequestOptions : new Array<DropDownOptions>(),
   mediaTypeOptions :new  Array<DropDownOptions>(),
-  counties : new Array<County>(),
+  agencyCounties : new Array<County>(),
+  assessorCounties : new Array<County>(),
+  nonEscrowCounties : new Array<County>(),
+  paymentCounties : new Array<County>(),
   actionInProgress: false,
   error: ''
 };
@@ -80,11 +84,21 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionGetCountiesByStateId, (state, action) => {
     state.actionInProgress = true;
-    state.counties = [];
   }),
   mutableOn(agencyActions.actionGetCountiesByStateIdSuccess, (state, action) => {
     state.actionInProgress = false;
-    state.counties = [...action.response];
+    if(CountiesForStates.AGENCY_STATES === action.stateField){
+      state.agencyCounties = [...action.response]
+    }
+    else if(CountiesForStates.ASSESSOR_STATES === action.stateField){
+      state.assessorCounties = [...action.response]
+    }
+    else if(CountiesForStates.NON_ESCROW_STATES === action.stateField){
+      state.nonEscrowCounties = [...action.response]
+    }
+    else if(CountiesForStates.PAYMENT_STATES === action.stateField){
+      state.paymentCounties = [...action.response]
+    }
   }),
   mutableOn(agencyActions.actionGetCountiesByStateIdFailure, (state, action) => {
     state.actionInProgress = false;
@@ -102,7 +116,6 @@ export const reducer = createReducer(
   ),
   mutableOn(agencyActions.actionSetSelectedAgency, (state, action) => {
     state.selectedAgency = action.agency;
-    state.counties = [];
   }),
   mutableOn(agencyActions.actionSaveAgencyDetails, (state, action) => {
     state.actionInProgress = true;
@@ -188,6 +201,7 @@ export const reducer = createReducer(
   ),
   mutableOn(agencyActions.actionGetEscrowDetails, (state, action) => {
     state.actionInProgress = true;
+    state.escrowDetails = Object.create({})
   }),
   mutableOn(agencyActions.actionGetEscrowDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
@@ -199,6 +213,7 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionGetNonEscrowDetails, (state, action) => {
     state.actionInProgress = true;
+    state.nonEscrowDetails = Object.create({})
   }),
   mutableOn(agencyActions.actionGetNonEscrowDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
@@ -271,6 +286,7 @@ export const reducer = createReducer(
 
   mutableOn(agencyActions.actionGetPaymentDetails, (state, action) => {
     state.actionInProgress = true;
+    state.paymentDetails = Object.create({});
   }),
   mutableOn(agencyActions.actionGetPaymentDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
