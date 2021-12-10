@@ -12,8 +12,15 @@
     //   font-size: 12px;
     // }
 
-    .ngx-datatable.material{
+    .ngx-datatable.material {
       box-shadow: none !important;
+    }
+
+    .ngx-datatable.bootstrap:not(.cell-selection) .datatable-body-row:hover,
+    .ngx-datatable.material:not(.cell-selection)
+      .datatable-body-row:hover
+      .datatable-row-group {
+      background: rgba(0, 243, 243, 0.118) !important;
     }
 
     .mat-row:hover {
@@ -58,6 +65,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      padding-top: 4px !important;
     }
 
     .action-icon {
@@ -66,10 +74,10 @@
     }
 
     .action-icon:hover {
-      color: mat.get-color-from-palette($primary) !important;
+      color: mat.get-color-from-palette($accent) !important;
     }
 
-    .bread-grum{
+    .bread-grum {
       color: #868686 !important;
       font-family: Graphik-regular;
       font-style: normal;
@@ -104,16 +112,16 @@
       letter-spacing: 0.03em;
     }
 
-    .mat-card-header-text{
+    .mat-card-header-text {
       margin: 0px;
     }
 
     .datatable-row-even {
       background-color: #fff;
     }
-    
+
     .datatable-row-odd {
-        background-color: #f0f0f0;
+      background-color: #f0f0f0;
     }
   }
 }

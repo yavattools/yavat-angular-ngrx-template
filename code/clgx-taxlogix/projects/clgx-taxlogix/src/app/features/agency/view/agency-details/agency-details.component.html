@@ -120,7 +120,7 @@
           </div>
           <mat-form-field appearance="outline" color="accent">
             <mat-label>County</mat-label>
-            <mat-select formControlName="countyId" [disabled]="isAgencyCountiesLoading || !agencyCounties?.length"
+            <mat-select formControlName="countyId" [disabled]="isAgencyCountiesLoading || !(agencyCounties$ | async)?.length"
                  [required]="isRequired('countyId')">
               <mat-option *ngFor="let option of (agencyCounties$ | async)" [value]="option.countyId">
                 {{option.countyName}}
@@ -282,7 +282,7 @@
         </div>
         <mat-form-field appearance="outline" color="accent">
           <mat-label>County</mat-label>
-          <mat-select formControlName="assessorCountyId" [disabled]="isAssessorCountiesLoading || !assessorCounties?.length"
+          <mat-select formControlName="assessorCountyId" [disabled]="isAssessorCountiesLoading || !(assessorCounties$ | async)?.length"
                [required]="isRequired('assessorCountyId')">
             <mat-option *ngFor="let option of (assessorCounties$ | async)" [value]="option.countyId">
               {{option.countyName}}

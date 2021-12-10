@@ -36,26 +36,26 @@ export class Agency {
   modifiedBy: string | undefined;
   createdByUser: string | undefined;
   modifiedByUser: string | undefined;
-  phoneNumber:string | undefined;
-  faxNumber:string | undefined;
-  payZip:string | undefined;
-  lowLevelAgencyId:string | undefined;
-  collectingAgency:string | undefined;
-  agencySitusAddress:string | undefined;
-  assessorPhoneNum:string | undefined;
-  excelType:string | undefined;
-  assessorEmailId:string | undefined;
-  frequencyDefault : string | undefined;
-  frequencyNonDefault : string | undefined;
-  description : string | undefined;
+  phoneNumber: string | undefined;
+  faxNumber: string | undefined;
+  payZip: string | undefined;
+  lowLevelAgencyId: string | undefined;
+  collectingAgency: string | undefined;
+  agencySitusAddress: string | undefined;
+  assessorPhoneNum: string | undefined;
+  excelType: string | undefined;
+  assessorEmailId: string | undefined;
+  frequencyDefault: string | undefined;
+  frequencyNonDefault: string | undefined;
+  description: string | undefined;
 
-  constructor(){}
+  constructor() {}
 }
 
 export interface GetActiveAgenciesRequest {
   userId: string;
   processId: string;
-  agencyMasterId : string | undefined;
+  agencyMasterId: string | undefined;
 }
 
 export class CollectionDates {
@@ -68,13 +68,13 @@ export class CollectionDates {
   collectionDiscount: string;
   collectionPenalty: string;
   collectionLastRelease: string;
-  collectionBillRequest : string;
-  isDeleted : any;
+  collectionBillRequest: string;
+  isDeleted: any;
   createdBy?: string | undefined;
   modifiedBy?: string | undefined;
   createdByUser?: string | undefined;
   modifiedByUser?: string | undefined;
-  description : string | undefined;
+  description: string | undefined;
   constructor() {
     this.collectionBase = '';
     this.collectionPenalty = '';
@@ -112,7 +112,7 @@ export class EscrowDetails {
   modifiedBy: string | undefined;
   createdByUser: string | undefined;
   modifiedByUser: string | undefined;
-  description : string | undefined;
+  description: string | undefined;
 
   constructor() {}
 }
@@ -143,8 +143,8 @@ export class NonEscrowDetails {
   modifiedBy: string | undefined;
   createdByUser: string | undefined;
   modifiedByUser: string | undefined;
-  isDeleted : string | undefined;
-  description : string | undefined;
+  isDeleted: string | undefined;
+  description: string | undefined;
   constructor() {}
 }
 
@@ -164,7 +164,7 @@ export interface GetEscrowRequest {
   escrowId: string | undefined;
 }
 
-export interface GetNonEscrowDetailsRequest{
+export interface GetNonEscrowDetailsRequest {
   agencyMasterId: string | undefined;
   userId: string | undefined;
   nonEscrowId: string | undefined;
@@ -194,7 +194,7 @@ export class PaymentDetails {
   modifiedBy: string | undefined;
   createdByUser: string | undefined;
   modifiedByUser: string | undefined;
-  description : string | undefined;
+  description: string | undefined;
 
   constructor() {}
 }
@@ -206,24 +206,23 @@ export interface GetPaymentDetailsRequest {
 }
 
 export interface StateOptions {
-  stateId : number | undefined,
-  stateName : string | undefined,
-  stateCode : string | undefined
+  stateId: number | undefined;
+  stateName: string | undefined;
+  stateCode: string | undefined;
 }
-
 
 export interface County {
-  countyId : number | undefined,
-  countyName : string | undefined,
-  countyCode : string | undefined
+  countyId: number | undefined;
+  countyName: string | undefined;
+  countyCode: string | undefined;
 }
 
-export interface DropDownOptions{
-  dropDownId : string | undefined,
-  dropDownValue : string | undefined
+export interface DropDownOptions {
+  dropDownId: string | undefined;
+  dropDownValue: string | undefined;
 }
 
-export enum FrequencyType{
+export enum FrequencyType {
   DEFAULT_ANNUAL = 'Annual',
   DEFAULT_DISCOUNT_ANNUAL = 'DiscountAnnual',
   DEFAULT_SEMI_ANNUAL = 'SemiAnnual',
@@ -236,35 +235,34 @@ export enum FrequencyType{
   NON_QUARTELY = 'Quarterly'
 }
 
-export enum PaymentMethod{
+export enum PaymentMethod {
   CERTIFIED = 'certified',
   CHECK = 'check',
-  WIRE = 'wire',
+  WIRE = 'wire'
 }
 
-export enum CountiesForStates{
+export enum CountiesForStates {
   AGENCY_STATES = 'agencyStates',
   ASSESSOR_STATES = 'assessorStates',
   NON_ESCROW_STATES = 'nonEscrowStates',
   PAYMENT_STATES = 'paymentStates'
 }
 
-
-export enum EditFrequencyType{
+export enum EditFrequencyType {
   ANNUAL = 'annual',
   DISCOUNT_ANNUAL = 'discountAnnual',
   SEMI_ANNUAL = 'semiAnnual',
   TRI = 'tri',
-  QUARTERLY = 'quarterly',
+  QUARTERLY = 'quarterly'
 }
 
-export class AgencyDefaultFrequency{
+export class AgencyDefaultFrequency {
   defaultAnnual!: Boolean;
   defaultDiscountAnnual!: Boolean;
   defaultSemiAnnual!: Boolean;
   defaultTri!: Boolean;
   defaultQuarterly!: Boolean;
-  constructor(){
+  constructor() {
     this.defaultAnnual = false;
     this.defaultDiscountAnnual = false;
     this.defaultQuarterly = false;
@@ -273,20 +271,19 @@ export class AgencyDefaultFrequency{
   }
 }
 
-
-export class AgencyNonFrequency{
+export class AgencyNonFrequency {
   nonAnnual!: Boolean;
   nonDiscountAnnual!: Boolean;
   nonSemiAnnual!: Boolean;
-  nonTri !: Boolean;
+  nonTri!: Boolean;
   nonQuarterly!: Boolean;
 
-  constructor(){
+  constructor() {
     this.nonAnnual = false;
     this.nonDiscountAnnual = false;
     this.nonQuarterly = false;
     this.nonSemiAnnual = false;
-    this.nonTri  = false;
+    this.nonTri = false;
   }
 }
 
@@ -294,19 +291,20 @@ export interface AgencyState {
   agencies: Array<Agency>;
   selectedAgency: Agency;
   collectionDates: Array<CollectionDates>;
-  selectedCollectionDate : CollectionDates,
+  collectionHistoryDates: Array<CollectionDates>;
+  selectedCollectionDate: CollectionDates;
   escrowNonEscrowDetails: Array<EscrowNonEscrowDetails>;
   escrowDetails: EscrowDetails;
   nonEscrowDetails: NonEscrowDetails;
   paymentDetails: PaymentDetails;
-  stateOptions : Array<StateOptions>;
-  billingRequestOptions : Array<DropDownOptions>;
-  mediaTypeOptions : Array<DropDownOptions>;
-  agencyCounties : Array<County>;
-  assessorCounties : Array<County>;
-  nonEscrowCounties : Array<County>;
-  paymentCounties : Array<County>;
-  actionInProgress: boolean ;
+  stateOptions: Array<StateOptions>;
+  billingRequestOptions: Array<DropDownOptions>;
+  mediaTypeOptions: Array<DropDownOptions>;
+  agencyCounties: Array<County>;
+  assessorCounties: Array<County>;
+  nonEscrowCounties: Array<County>;
+  paymentCounties: Array<County>;
+  actionInProgress: boolean;
   error: any;
 }
 

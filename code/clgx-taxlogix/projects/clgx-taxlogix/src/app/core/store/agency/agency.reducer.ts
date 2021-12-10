@@ -21,18 +21,19 @@ export const initialState: AgencyState = {
   agencies: new Array<Agency>(),
   selectedAgency: Object.create({}),
   collectionDates: new Array<CollectionDates>(),
-  selectedCollectionDate : Object.create({}),
+  collectionHistoryDates: new Array<CollectionDates>(),
+  selectedCollectionDate: Object.create({}),
   escrowNonEscrowDetails: new Array<EscrowNonEscrowDetails>(),
   escrowDetails: new EscrowDetails(),
   nonEscrowDetails: new NonEscrowDetails(),
   paymentDetails: new PaymentDetails(),
-  stateOptions : new Array<StateOptions>(),
-  billingRequestOptions : new Array<DropDownOptions>(),
-  mediaTypeOptions :new  Array<DropDownOptions>(),
-  agencyCounties : new Array<County>(),
-  assessorCounties : new Array<County>(),
-  nonEscrowCounties : new Array<County>(),
-  paymentCounties : new Array<County>(),
+  stateOptions: new Array<StateOptions>(),
+  billingRequestOptions: new Array<DropDownOptions>(),
+  mediaTypeOptions: new Array<DropDownOptions>(),
+  agencyCounties: new Array<County>(),
+  assessorCounties: new Array<County>(),
+  nonEscrowCounties: new Array<County>(),
+  paymentCounties: new Array<County>(),
   actionInProgress: false,
   error: ''
 };
@@ -63,14 +64,20 @@ export const reducer = createReducer(
   mutableOn(agencyActions.actionGetBillingRequestOptions, (state, action) => {
     state.actionInProgress = true;
   }),
-  mutableOn(agencyActions.actionGetBillingRequestOptionsSuccess, (state, action) => {
-    state.actionInProgress = false;
-    state.billingRequestOptions = [...action.response];
-  }),
-  mutableOn(agencyActions.actionGetBillingRequestOptionsFailure, (state, action) => {
-    state.actionInProgress = false;
-    state.error = action.error;
-  }),
+  mutableOn(
+    agencyActions.actionGetBillingRequestOptionsSuccess,
+    (state, action) => {
+      state.actionInProgress = false;
+      state.billingRequestOptions = [...action.response];
+    }
+  ),
+  mutableOn(
+    agencyActions.actionGetBillingRequestOptionsFailure,
+    (state, action) => {
+      state.actionInProgress = false;
+      state.error = action.error;
+    }
+  ),
   mutableOn(agencyActions.actionGetMediaTypeOptions, (state, action) => {
     state.actionInProgress = true;
   }),
@@ -85,25 +92,28 @@ export const reducer = createReducer(
   mutableOn(agencyActions.actionGetCountiesByStateId, (state, action) => {
     state.actionInProgress = true;
   }),
-  mutableOn(agencyActions.actionGetCountiesByStateIdSuccess, (state, action) => {
-    state.actionInProgress = false;
-    if(CountiesForStates.AGENCY_STATES === action.stateField){
-      state.agencyCounties = [...action.response]
+  mutableOn(
+    agencyActions.actionGetCountiesByStateIdSuccess,
+    (state, action) => {
+      state.actionInProgress = false;
+      if (CountiesForStates.AGENCY_STATES === action.stateField) {
+        state.agencyCounties = [...action.response];
+      } else if (CountiesForStates.ASSESSOR_STATES === action.stateField) {
+        state.assessorCounties = [...action.response];
+      } else if (CountiesForStates.NON_ESCROW_STATES === action.stateField) {
+        state.nonEscrowCounties = [...action.response];
+      } else if (CountiesForStates.PAYMENT_STATES === action.stateField) {
+        state.paymentCounties = [...action.response];
+      }
     }
-    else if(CountiesForStates.ASSESSOR_STATES === action.stateField){
-      state.assessorCounties = [...action.response]
+  ),
+  mutableOn(
+    agencyActions.actionGetCountiesByStateIdFailure,
+    (state, action) => {
+      state.actionInProgress = false;
+      state.error = action.error;
     }
-    else if(CountiesForStates.NON_ESCROW_STATES === action.stateField){
-      state.nonEscrowCounties = [...action.response]
-    }
-    else if(CountiesForStates.PAYMENT_STATES === action.stateField){
-      state.paymentCounties = [...action.response]
-    }
-  }),
-  mutableOn(agencyActions.actionGetCountiesByStateIdFailure, (state, action) => {
-    state.actionInProgress = false;
-    state.error = action.error;
-  }),
+  ),
   mutableOn(agencyActions.actionGetAllActiveAgencies, (state, action) => {
     state.actionInProgress = true;
   }),
@@ -122,11 +132,11 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSaveAgencyDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
-    let uAgency:Agency = _.cloneDeep(action.agency);
+    let uAgency: Agency = _.cloneDeep(action.agency);
     uAgency.agencyMasterId = action.response.agencyMasterId;
     state.agencies = [...state.agencies, uAgency];
     state.selectedAgency = uAgency;
-    debugger
+    debugger;
   }),
   mutableOn(agencyActions.actionSaveAgencyDetailsFailure, (state, action) => {
     state.actionInProgress = false;
@@ -146,10 +156,18 @@ export const reducer = createReducer(
     //   }
     // });
     // state.agencies = [...uAgencies];
-    let index = _.findIndex(state.agencies, (e) => {
-      return e.agencyMasterId == action.agency.agencyMasterId;
-    }, 0);
-   state.agencies = [...state.agencies.slice(0,index),action.agency,...state.agencies.slice(index+1)];
+    let index = _.findIndex(
+      state.agencies,
+      (e) => {
+        return e.agencyMasterId == action.agency.agencyMasterId;
+      },
+      0
+    );
+    state.agencies = [
+      ...state.agencies.slice(0, index),
+      action.agency,
+      ...state.agencies.slice(index + 1)
+    ];
   }),
   mutableOn(agencyActions.actionUpdateAgencyDetailsFailure, (state, action) => {
     state.actionInProgress = false;
@@ -160,23 +178,42 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionGetCollectionDatesSuccess, (state, action) => {
     state.actionInProgress = false;
-    state.collectionDates = [...action.collectionDates];
+    let collectionDates = [...action.collectionDates];
+    let ucDates: Array<CollectionDates> = [];
+    let uchDates: Array<CollectionDates> = [];
+
+    if (collectionDates && collectionDates.length) {
+      collectionDates.forEach((cd) => {
+        if (+cd.collectionYear === new Date().getFullYear()) {
+          ucDates.push(cd);
+        } else {
+          uchDates.push(cd);
+        }
+      });
+    }
+    state.collectionDates = [...ucDates];
+    state.collectionHistoryDates = [...uchDates];
   }),
   mutableOn(agencyActions.actionGetCollectionDatesFailure, (state, action) => {
     state.actionInProgress = false;
     state.error = action.error;
   }),
   mutableOn(agencyActions.actionSetCollectionDates, (state, action) => {
-    state.selectedCollectionDate = action.collectionDate
+    state.selectedCollectionDate = action.collectionDate;
   }),
   mutableOn(agencyActions.actionSaveCollectionDates, (state, action) => {
     state.actionInProgress = true;
   }),
   mutableOn(agencyActions.actionSaveCollectionDatesSuccess, (state, action) => {
     state.actionInProgress = false;
-    let cDates:CollectionDates = _.cloneDeep(action.collectionDates);
+    let cDates: CollectionDates = _.cloneDeep(action.collectionDates);
     cDates.agencyCollectionDatesId = action.response.agencyCollectionDatesId;
     state.collectionDates = [...state.collectionDates, cDates];
+    if (+action.collectionDates.collectionYear === +new Date().getFullYear()) {
+      state.collectionDates = [...state.collectionDates, cDates];
+    } else {
+      state.collectionHistoryDates = [...state.collectionHistoryDates, cDates];
+    }
     state.selectedCollectionDate = cDates;
   }),
   mutableOn(agencyActions.actionUpdateCollectionDates, (state, action) => {
@@ -186,22 +223,33 @@ export const reducer = createReducer(
     agencyActions.actionUpdateCollectionDatesSuccess,
     (state, action) => {
       state.actionInProgress = false;
-      let index = _.findIndex(state.collectionDates, (e) => {
-        return e.agencyCollectionDatesId == action.collectionDates.agencyCollectionDatesId;
-      }, 0);
-     state.collectionDates = [...state.collectionDates.slice(0,index),action.collectionDates,...state.collectionDates.slice(index+1)];
+      let index = _.findIndex(
+        state.collectionDates,
+        (e) => {
+          return (
+            e.agencyCollectionDatesId ==
+            action.collectionDates.agencyCollectionDatesId
+          );
+        },
+        0
+      );
+      state.collectionDates = [
+        ...state.collectionDates.slice(0, index),
+        action.collectionDates,
+        ...state.collectionDates.slice(index + 1)
+      ];
     }
   ),
   mutableOn(
     agencyActions.actionUpdateCollectionDatesFailure,
     (state, action) => {
       state.actionInProgress = false;
-      state.error =action.error
+      state.error = action.error;
     }
   ),
   mutableOn(agencyActions.actionGetEscrowDetails, (state, action) => {
     state.actionInProgress = true;
-    state.escrowDetails = Object.create({})
+    state.escrowDetails = Object.create({});
   }),
   mutableOn(agencyActions.actionGetEscrowDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
@@ -213,7 +261,7 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionGetNonEscrowDetails, (state, action) => {
     state.actionInProgress = true;
-    state.nonEscrowDetails = Object.create({})
+    state.nonEscrowDetails = Object.create({});
   }),
   mutableOn(agencyActions.actionGetNonEscrowDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
@@ -228,24 +276,24 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSaveEscrowDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
-    let eDetails:EscrowDetails = _.cloneDeep(action.escrowDetails);
+    let eDetails: EscrowDetails = _.cloneDeep(action.escrowDetails);
     eDetails.agencyEscrowId = action.response.agencyEscrowId;
-    state.escrowDetails = eDetails
+    state.escrowDetails = eDetails;
   }),
   mutableOn(agencyActions.actionSaveEscrowDetailsFailure, (state, action) => {
     state.actionInProgress = false;
-    state.error = action.error
+    state.error = action.error;
   }),
   mutableOn(agencyActions.actionUpdateEscrowDetails, (state, action) => {
     state.actionInProgress = true;
   }),
   mutableOn(agencyActions.actionUpdateEscrowDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
-    state.escrowDetails = action.escrowDetails
+    state.escrowDetails = action.escrowDetails;
   }),
   mutableOn(agencyActions.actionUpdateEscrowDetailsFailure, (state, action) => {
     state.actionInProgress = false;
-    state.error = action.error
+    state.error = action.error;
   }),
   mutableOn(agencyActions.actionSaveNonEscrowDetails, (state, action) => {
     state.actionInProgress = true;
@@ -254,7 +302,9 @@ export const reducer = createReducer(
     agencyActions.actionSaveNonEscrowDetailsSuccess,
     (state, action) => {
       state.actionInProgress = false;
-      let nEscrowDetails:NonEscrowDetails = _.cloneDeep(action.nonEscrowDetails);
+      let nEscrowDetails: NonEscrowDetails = _.cloneDeep(
+        action.nonEscrowDetails
+      );
       nEscrowDetails.agencyNonEscrowId = action.response.agencyNonEscrowId;
       state.nonEscrowDetails = nEscrowDetails;
     }
@@ -263,7 +313,7 @@ export const reducer = createReducer(
     agencyActions.actionSaveNonEscrowDetailsFailure,
     (state, action) => {
       state.actionInProgress = false;
-      state.error = action.error
+      state.error = action.error;
     }
   ),
   mutableOn(agencyActions.actionUpdateNonEscrowDetails, (state, action) => {
@@ -273,14 +323,14 @@ export const reducer = createReducer(
     agencyActions.actionUpdateNonEscrowDetailsSuccess,
     (state, action) => {
       state.actionInProgress = false;
-      state.nonEscrowDetails = action.nonEscrowDetails
+      state.nonEscrowDetails = action.nonEscrowDetails;
     }
   ),
   mutableOn(
     agencyActions.actionUpdateNonEscrowDetailsFailure,
     (state, action) => {
       state.actionInProgress = false;
-      state.error = action.error
+      state.error = action.error;
     }
   ),
 
@@ -294,7 +344,7 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionGetPaymentDetailsFailure, (state, action) => {
     state.actionInProgress = false;
-    state.error = action.error
+    state.error = action.error;
   }),
 
   mutableOn(agencyActions.actionSavePaymentDetails, (state, action) => {
@@ -302,7 +352,7 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionSavePaymentDetailsSuccess, (state, action) => {
     state.actionInProgress = false;
-    let pDetails:PaymentDetails = _.cloneDeep(action.details);
+    let pDetails: PaymentDetails = _.cloneDeep(action.details);
     pDetails.agencyPaymentId = action.response.agencyPaymentId;
     state.paymentDetails = pDetails;
   }),
@@ -327,8 +377,7 @@ export const reducer = createReducer(
       state.error = action.error;
     }
   )
-  );
-
+);
 
 export function agencyReducer(state: AgencyState | undefined, action: Action) {
   return reducer(state, action);

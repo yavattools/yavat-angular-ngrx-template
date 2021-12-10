@@ -15,39 +15,38 @@ export const selectAgencies = createSelector(
 
 export const selectStateOptions = createSelector(
   selectAgencyState,
-  (state : AgencyState) => state.stateOptions
-)
+  (state: AgencyState) => state.stateOptions
+);
 
 export const selectBillingRequestOptions = createSelector(
   selectAgencyState,
-  (state : AgencyState) => state.billingRequestOptions
-)
+  (state: AgencyState) => state.billingRequestOptions
+);
 
 export const selectMediaTypeOptions = createSelector(
   selectAgencyState,
-  (state : AgencyState) => state.mediaTypeOptions
-)
-
+  (state: AgencyState) => state.mediaTypeOptions
+);
 
 export const selectAgencyCounties = createSelector(
   selectAgencyState,
-  (state : AgencyState) => state.agencyCounties
-)
+  (state: AgencyState) => state.agencyCounties
+);
 
 export const selectAssessorCounties = createSelector(
   selectAgencyState,
-  (state : AgencyState) => state.assessorCounties
-)
+  (state: AgencyState) => state.assessorCounties
+);
 
 export const selectNonEscrowCounties = createSelector(
   selectAgencyState,
-  (state : AgencyState) => state.nonEscrowCounties
-)
+  (state: AgencyState) => state.nonEscrowCounties
+);
 
 export const selectPaymentCounties = createSelector(
   selectAgencyState,
-  (state : AgencyState) => state.paymentCounties
-)
+  (state: AgencyState) => state.paymentCounties
+);
 
 export const selectAgency = createSelector(
   selectAgencyState,
@@ -57,6 +56,11 @@ export const selectAgency = createSelector(
 export const selectCollectionDates = createSelector(
   selectAgencyState,
   (state: AgencyState) => state.collectionDates
+);
+
+export const selectCollectionHistoryDates = createSelector(
+  selectAgencyState,
+  (state: AgencyState) => state.collectionHistoryDates
 );
 
 export const selectSelectedCollectionDate = createSelector(
@@ -88,4 +92,3 @@ export const selectActionInProgress = createSelector(
   selectAgencyState,
   (state: AgencyState) => state.actionInProgress
 );
-

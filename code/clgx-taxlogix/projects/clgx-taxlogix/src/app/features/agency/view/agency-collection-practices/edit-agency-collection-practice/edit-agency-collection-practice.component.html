@@ -16,7 +16,9 @@
       <div class="col-6">
         <mat-form-field class="w-100" color="accent">
           <mat-label>Year</mat-label>
-          <mat-select formControlName="year" [required]="isRequired('year')">
+          <mat-select formControlName="year"
+          (selectionChange)="yearSelectionChanged($event)"
+             [required]="isRequired('year')">
             <mat-option *ngFor="let year of years" [value]="year">
               {{year}}
             </mat-option>
@@ -42,7 +44,7 @@
       <div class="col-6">
         <mat-form-field class="w-100" color="accent">
           <mat-label>Installment</mat-label>
-          <mat-select formControlName="installment"  [required]="isRequired('installment')">
+          <mat-select formControlName="installment" [disabled]="!installmentsValues?.length" [required]="isRequired('installment')">
             <mat-option *ngFor="let installment of installmentsValues" [value]="installment">
               {{installment}}
             </mat-option>
