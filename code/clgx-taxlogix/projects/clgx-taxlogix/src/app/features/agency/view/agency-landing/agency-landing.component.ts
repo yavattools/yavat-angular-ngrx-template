@@ -158,6 +158,12 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     this.searchAgency($event);
   }
 
+  clearStateFilter($event: MouseEvent){
+    $event.stopPropagation();
+    this.agencyFilter.state = ''; 
+
+    this.searchAgency($event);
+  }
   
   clearNumberFilter($event: MouseEvent){
     $event.stopPropagation();
@@ -218,7 +224,9 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
   searchAgency($event:MouseEvent){
     if(this.agencyFilter.name !== '' || this.agencyFilter.number !== '' || this.agencyFilter.state !== ''){
       this.filterAgencies = [...this.agencies.filter(a => 
-          a.agencyName?.includes(this.agencyFilter.name.trim()) && a.agencyNumber?.includes(this.agencyFilter.number.trim()))];
+          a.agencyName?.includes(this.agencyFilter.name.trim()) && 
+          a.agencyNumber?.includes(this.agencyFilter.number.trim()) && 
+          a.stateId === this.agencyFilter.state)];
       this.agencyDataSource = new MatTableDataSource(this.filterAgencies);
     }else{
       this.filterAgencies = [...this.agencies];
