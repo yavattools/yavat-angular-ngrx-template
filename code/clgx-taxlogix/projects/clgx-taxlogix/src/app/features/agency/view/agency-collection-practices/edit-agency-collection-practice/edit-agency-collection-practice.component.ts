@@ -155,9 +155,9 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
           }
           this.editForm.controls['frequency'].setValue(freq);
 
-          if (collectionDate.collectionFrequency) {
-            this.editForm.controls['frequency'].disable();
-          }
+          // if (collectionDate.collectionFrequency) {
+          //   this.editForm.controls['frequency'].disable();
+          // }
           this.editForm.controls['base'].setValue(
             new Date(collectionDate.collectionBase)
           );
@@ -191,35 +191,39 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
           if (records && records.length) {
             let cFreq = this.getFrequency(records[0].collectionFrequency);
             this.editForm.controls['frequency'].setValue(cFreq);
-            this.editForm.controls['frequency'].disable();
+            // this.editForm.controls['frequency'].disable();
             if (cFreq === EditFrequencyType.ANNUAL) {
               this.editForm.controls['installment'].disable();
             } else if (cFreq === EditFrequencyType.DISCOUNT_ANNUAL) {
               this.editForm.controls['installment'].disable();
             } else if (cFreq === EditFrequencyType.QUARTERLY) {
-              for (let i = 0; i < 4; i++) {
+              for (let i = 1; i < 5; i++) {
                 let ins = records.filter((r) => +r.collectionInstallment === i);
                 if (!ins) {
                   this.installmentsValues.push(i);
                 }
               }
             } else if (cFreq === EditFrequencyType.SEMI_ANNUAL) {
-              for (let i = 0; i < 2; i++) {
+              for (let i = 1; i < 3; i++) {
                 let ins = records.filter((r) => +r.collectionInstallment === i);
                 if (!ins) {
                   this.installmentsValues.push(i);
                 }
               }
             } else if (cFreq === EditFrequencyType.TRI) {
-              for (let i = 0; i < 3; i++) {
+              for (let i = 1; i < 4; i++) {
                 let ins = records.filter((r) => +r.collectionInstallment === i);
-                if (!ins) {
+                if (!ins || (ins && ins.length == 0) ) {
                   this.installmentsValues.push(i);
                 }
               }
+            
             }
           } else {
             this.editForm.controls['installment'].disable();
+          }
+          if(this.installmentsValues.length){
+            this.editForm.controls['installment'].enable();
           }
         }
       }
@@ -512,13 +516,13 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     let result = null;
     if (value == '1') {
       result = 'annual';
-    } else if (value == '1') {
-      result = 'discountAnnual';
     } else if (value == '2') {
-      result = 'semiAnnual';
+      result = 'discountAnnual';
     } else if (value == '3') {
-      result = 'tri';
+      result = 'semiAnnual';
     } else if (value == '4') {
+      result = 'tri';
+    } else if (value == '5') {
       result = 'quarterly';
     }
     return result;

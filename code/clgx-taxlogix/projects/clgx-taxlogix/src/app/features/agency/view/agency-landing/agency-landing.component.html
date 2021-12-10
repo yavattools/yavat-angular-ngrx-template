@@ -26,7 +26,7 @@
         <mat-form-field color="accent" class="number-filter-input">
           <input matInput placeholder="Number" value="" [(ngModel)]="agencyFilter.number">
           <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
-          <mat-icon matPrefix *ngIf="agencyFilter.number" (click)="clearNameFilter($event)">
+          <mat-icon matPrefix *ngIf="agencyFilter.number" (click)="clearNumberFilter($event)">
             <i class="fa fa-close filter-icon-orange"></i>
           </mat-icon>
         </mat-form-field>

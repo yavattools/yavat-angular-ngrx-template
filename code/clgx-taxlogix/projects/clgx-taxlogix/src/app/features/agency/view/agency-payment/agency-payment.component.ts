@@ -105,6 +105,9 @@ export class AgencyPaymentComponent implements OnInit {
         this.paymentFormGroup.controls['overNight'].setValue(paymentDetails.overNight?.toString());
         this.paymentFormGroup.controls['postmarkAccepted'].setValue(paymentDetails.postMarkAccepted?.toString());
         this.paymentFormGroup.controls['paymentRequiredId'].setValue(this.getPaymentMethod(paymentDetails.paymentRequiredId)?.toString());
+
+        this.setPayemtnRequiredCheckMark(+paymentDetails.paymentRequiredId);
+
       }
     })
     this.subscriptions.push(this.paymentCounties$.subscribe(cties => {
@@ -174,6 +177,22 @@ export class AgencyPaymentComponent implements OnInit {
     let result =  false;
 
     return result;
+  }
+
+  setPayemtnRequiredCheckMark(id: number) {
+    if(id === 1){
+      this.paymentCertified = true;
+      this.paymentCheck = false;
+      this.paymentWire = false;
+    }else if(id === 2){
+      this.paymentCertified = false;
+      this.paymentCheck = true;
+      this.paymentWire = false;
+    }else if(id === 3){
+      this.paymentCertified = false;
+      this.paymentCheck = false;
+      this.paymentWire = true;
+    }
   }
 
   paymentMethodChangeHandler(method: string){

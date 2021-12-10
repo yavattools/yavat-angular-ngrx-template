@@ -208,7 +208,7 @@ export const reducer = createReducer(
     state.actionInProgress = false;
     let cDates: CollectionDates = _.cloneDeep(action.collectionDates);
     cDates.agencyCollectionDatesId = action.response.agencyCollectionDatesId;
-    state.collectionDates = [...state.collectionDates, cDates];
+    // state.collectionDates = [...state.collectionDates, cDates];
     if (+action.collectionDates.collectionYear === +new Date().getFullYear()) {
       state.collectionDates = [...state.collectionDates, cDates];
     } else {

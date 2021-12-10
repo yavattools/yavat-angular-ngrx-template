@@ -188,7 +188,7 @@ export class PaymentDetails {
   emailWire: string | undefined;
   overNight: string | undefined;
   postMarkAccepted: string | undefined;
-  paymentRequiredId: string | undefined;
+  paymentRequiredId!: string;
   internalNotes: string | undefined;
   createdBy: string | undefined;
   modifiedBy: string | undefined;
