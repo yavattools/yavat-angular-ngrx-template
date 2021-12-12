@@ -16,11 +16,14 @@ import { settingsReducer } from './store/settings/settings.reducer';
 import { SettingsState } from './store/settings/settings.model';
 import { agencyReducer } from './store/agency/agency.reducer';
 import { AgencyState } from './store/agency/agency.model';
+import { ClientState } from './store/client/client.model';
+import { clientReducer } from './store/client/client.reducer';
 
 export const reducers: ActionReducerMap<AppState> = {
   auth: authReducer,
   settings: settingsReducer,
   agency: agencyReducer,
+  client: clientReducer,
   router: routerReducer
 };
 
@@ -54,9 +57,15 @@ export const selectRouterState = createFeatureSelector<
   RouterReducerState<RouterStateUrl>
 >('router');
 
+export const selectClientState = createFeatureSelector<
+  AppState,
+  ClientState
+>('client');
+
 export interface AppState {
   auth: AuthState;
   settings: SettingsState;
   agency: AgencyState;
+  client : ClientState;
   router: RouterReducerState<RouterStateUrl>;
 }

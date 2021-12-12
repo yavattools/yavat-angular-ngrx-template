@@ -41,7 +41,17 @@ export class AppConstantsService {
   public SAVE_NONESCROW_DETAILS : string;
   public PAYMENTDETAILS_END_POINT:string;
   public SAVE_PAYMENTDETAILS : string;
-
+  public GET_CLIENTS : string;
+  public SAVE_CLIENTINFO : string;
+  public GET_CLIENTINFO : string;
+  public GET_LEGAL : string;
+  public SAVE_LEGAL : string;
+  public GET_BILLING : string;
+  public SAVE_BILLING : string;
+  public GET_PRODUCT_PRICING_DETAILS : string;
+  public SAVE_PRODUCT_PRICING_DETAILS : string;
+  public GET_BANK_DETAILS : string;
+  public SAVE_BANK_DETAILS : string;
 
   public snackbarType: SnackTypes;
 
@@ -111,6 +121,50 @@ export class AppConstantsService {
     this.SAVE_PAYMENTDETAILS = APP_CONTEXT
     ? '/'
     : '' + APP_CONTEXT + '/api/agency/createAgencyPayDetls';
+
+    this.GET_CLIENTS = APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/fetchClientInfofDetls';
+
+    this.SAVE_CLIENTINFO =  APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/createClientSetup';
+
+    this.GET_CLIENTINFO = APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/fetchClientSetUpDetls';
+
+    this.GET_LEGAL = APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/fetchLegalClientDetls';
+
+    this.SAVE_LEGAL =  APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/createLegal';
+
+    this.GET_BILLING = APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/fetchBillingDetls';
+
+    this.SAVE_BILLING =  APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/createClientBillingDetls';
+
+    this.GET_PRODUCT_PRICING_DETAILS = APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/fetchClientProductPricing';
+
+    this.SAVE_PRODUCT_PRICING_DETAILS =  APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/createProductPricingDetls';
+
+    this.GET_BANK_DETAILS = APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/fetchClientBankDetls';
+
+    this.SAVE_BANK_DETAILS =  APP_CONTEXT 
+    ? '/' 
+    : ''+ APP_CONTEXT + '/api/clientsetup/createClientBankDetls';
 
     this.snackbarType = new SnackTypes();
   }
