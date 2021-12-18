@@ -45,6 +45,9 @@ import { LetsconnectDialogComponent } from './dialog-model/letsconnect-dialog/le
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ClgxInputComponent } from './big-input/clgx-input/clgx-input.component';
+import { ClgxSelectComponent } from './big-input/clgx-select/clgx-select.component';
+import { ClgxButtonComponent } from './big-input/clgx-button/clgx-button.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -61,6 +64,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   declarations: [
     BigInputComponent,
     BigInputActionComponent,
+    ClgxInputComponent,
+    ClgxSelectComponent,
+    ClgxButtonComponent,
     RtlSupportDirective,
     MultiLineSnackbarComponent,
     FooterLgComponent,
@@ -83,6 +89,9 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxDatatableModule,
     BigInputComponent,
     BigInputActionComponent,
+    ClgxInputComponent,
+    ClgxSelectComponent,
+    ClgxButtonComponent,
     RtlSupportDirective,
     FooterLgComponent,
     ButtonComponent,

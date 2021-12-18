@@ -46,6 +46,9 @@
 @import './app/features/login/login/login.component.scss-theme';
 @import './app/features/agency/view/agency-details-container/agency-details-container.component.scss-theme.scss';
 @import './app/shared/big-input/big-input/big-input.component.scss-theme';
+@import './app/shared/big-input/clgx-input/clgx-input.component.scss-theme';
+@import './app/shared/big-input/clgx-select/clgx-select.component.scss-theme';
+@import './app/shared/big-input/clgx-button/clgx-button.component.scss-theme';
 
 @mixin custom-components-theme($theme) {
   @include clgx-styles-reset-theme($theme);
@@ -53,6 +56,9 @@
   @include clgx-dashboard-component-theme($theme);
   @include clgx-login-component-theme($theme);
   @include clgx-big-input-component-theme($theme);
+  @include clgx-select-component-theme($theme);
+  @include clgx-input-component-theme($theme);
+  @include clgx-button-component-theme($theme);
   @include clgx-agency-landing-component-theme($theme);
   @include clgx-agency-details-container-component-theme($theme);
   @include clgx-agency-details-component-theme($theme);
@@ -727,7 +733,7 @@ mat-form-field:focus-visible {
 }
 
 ///////////////////////////////////////////
-.show-orangered{
+.show-orangered {
   color: orangered;
 }
 .container {

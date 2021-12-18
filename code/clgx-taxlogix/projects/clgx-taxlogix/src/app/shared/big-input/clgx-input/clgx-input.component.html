@@ -1,0 +1,15 @@
+  <div class="big-input">
+    <div>
+      <div>
+        <span class="agency-input-label">{{titleLabel}}</span>
+      </div>
+      <div >
+        <mat-form-field class="clgx-mat-input" floatLabel='never' 
+            appearance="outline" color="accent">
+          <input matInput #inputValue [(ngModel)]="value" (ngModelChange)="modelChangeFn($event)" >
+          <i matPrefix *ngIf="inputValue.value.length" (click)="clearTextHandler($event)" 
+            class="fa fa-close clear-icon"></i>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>

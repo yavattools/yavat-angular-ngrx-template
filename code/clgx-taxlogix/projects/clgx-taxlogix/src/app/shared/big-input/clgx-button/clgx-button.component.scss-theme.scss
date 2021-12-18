@@ -1,0 +1,36 @@
+@use '~@angular/material' as mat;
+
+@mixin clgx-button-component-theme($theme) {
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $foreground: map-get($theme, foreground);
+  $background: map-get($theme, background);
+
+  clgx-button {
+    .big-button {
+      position: relative !important;
+      box-shadow: none !important;
+      transition: all 0.5s;
+      display: 100%;
+      padding: 3px;
+      .clgx-button-type {
+        // width : 128px;
+        height: 48px;
+        color: white;
+        font-family: Graphik-medium !important;
+        border-radius: 4px;
+        background: #00ebcf;
+        border-radius: 4px;
+      }
+      .clgx-button-type-disabled {
+        // width : 128px;
+        height: 48px;
+        color: darkgray;
+        font-family: Graphik-medium !important;
+        border-radius: 4px;
+        background: silver;
+        border-radius: 4px;
+      }
+    }
+  }
+}

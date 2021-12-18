@@ -27,6 +27,22 @@ export const initialState: AgencyState = {
   escrowDetails: new EscrowDetails(),
   nonEscrowDetails: new NonEscrowDetails(),
   paymentDetails: new PaymentDetails(),
+  // stateOptions: [
+  //   {
+  //     stateId: 1,
+  //     stateName: 'GEORGIA',
+  //     value: 1,
+  //     display: 'GEORGIA',
+  //     stateCode: '1'
+  //   },
+  //   {
+  //     stateId: 2,
+  //     stateName: 'TEXUS',
+  //     value: 2,
+  //     display: 'TEXUS',
+  //     stateCode: '2'
+  //   }
+  // ],
   stateOptions: new Array<StateOptions>(),
   billingRequestOptions: new Array<DropDownOptions>(),
   mediaTypeOptions: new Array<DropDownOptions>(),
@@ -35,6 +51,7 @@ export const initialState: AgencyState = {
   nonEscrowCounties: new Array<County>(),
   paymentCounties: new Array<County>(),
   actionInProgress: false,
+  counties: new Array<County>(),
   error: ''
 };
 
@@ -55,7 +72,17 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionGetStateOptionsSuccess, (state, action) => {
     state.actionInProgress = false;
-    state.stateOptions = [...action.response];
+    let uStatesOptions: Array<StateOptions> = [];
+    action.response.forEach((s) => {
+      uStatesOptions.push({
+        stateId: s.stateId,
+        stateName: s.stateName,
+        value: s.stateId,
+        display: s.stateName,
+        stateCode: s.stateCode
+      });
+    });
+    state.stateOptions = [...uStatesOptions];
   }),
   mutableOn(agencyActions.actionGetStateOptionsFailure, (state, action) => {
     state.actionInProgress = false;

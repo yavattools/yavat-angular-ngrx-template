@@ -1,0 +1,10 @@
+  <div class="big-button">
+    <button type="button"
+        (click)="clickHandler($event)" 
+        [disabled]="disabled"
+        [class.clgx-button-type]="!disabled"
+        [class.clgx-button-type-disabled]="disabled"
+        class="btn clgx-button-type btn-lg">
+        {{titleLabel}}
+    </button>
+  </div>

@@ -16,7 +16,7 @@ const routes: Routes = [
   },
   {
     path: 'dashboard',
-    canActivateChild: [AuthGuardService],
+    // canActivateChild: [AuthGuardService],
     loadChildren: () =>
       import('./features/dashboard/dashboard.module').then(
         (m) => m.DashboardModule
@@ -24,7 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'agency',
-    canActivateChild: [AuthGuardService],
+    // canActivateChild: [AuthGuardService],
     loadChildren: () =>
       import('./features/agency/agency.module').then((m) => m.AgencyModule)
   },

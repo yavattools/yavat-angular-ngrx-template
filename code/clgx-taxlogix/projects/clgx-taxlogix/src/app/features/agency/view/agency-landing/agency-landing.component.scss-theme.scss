@@ -12,6 +12,59 @@
     //   font-size: 12px;
     // }
 
+    .agency-input-container {
+      max-width: 200px;
+      float: left;
+      margin-right: 15px;
+    }
+
+    .agency-select-box {
+      padding: 0.5rem 1rem;
+      font-size: 1.45rem;
+      min-width: 210px;
+      border-radius: 0.3rem;
+      background: #ffffff !important;
+      border: 1px solid #aeafbc !important;
+      box-sizing: border-box !important;
+      box-shadow: inset 0px 2px 2px rgb(134 134 134 / 25%) !important;
+    }
+
+    .agency-input-box {
+      background: #ffffff !important;
+      border: 1px solid #aeafbc !important;
+      box-sizing: border-box !important;
+      box-shadow: inset 0px 2px 2px rgba(134, 134, 134, 0.25) !important;
+    }
+
+    .agency-input-label {
+      font-family: Graphik-medium !important;
+      font-style: normal !important;
+      font-weight: normal !important;
+      font-size: 12px !important;
+      line-height: 22px !important;
+      /* identical to box height, or 100% */
+
+      display: flex !important;
+      align-items: center !important;
+      letter-spacing: 0.03em !important;
+
+      color: #868686 !important;
+    }
+
+    .agency-button-type {
+      width: 128px;
+      height: 48px;
+      color: white;
+      font-family: Graphik-medium !important;
+      border-radius: 4px;
+      background: #00ebcf;
+      border-radius: 4px;
+    }
+
+    .mat-form-field-label {
+      font-size: 1.1rem !important;
+      color: black !important;
+    }
     .ngx-datatable.material {
       box-shadow: none !important;
     }
