@@ -30,7 +30,7 @@
               (changeValue)="numberChangeHandler($event)">
             </clgx-input>
           </div>
-          <div class="col-3">
+          <div class="col-2">
             <clgx-select
               [titleLabel]="'State'"
               [options]="(agencyFacade.stateOptions$ | async) || []"
@@ -42,12 +42,12 @@
               [titleLabel]="'Search'"
               [disabled]="((agencyFacade.actionInProgress$ | async) || false) || 
               (agencyFilter.name == '' && agencyFilter.number == '' && agencyFilter.state == '') "
-              (click)="searchAgency($event)" >
+              (clgClick)="searchAgency($event)" >
             </clgx-button>
           </div>
-            <div class="col-1" style="padding-top: 18px;">
+            <div class="col-2" style="padding-top: 18px;">
             <clgx-button  
-                (click)="addNewAgency($event)"  
+                (clgClick)="addNewAgency($event)"  
                 [disabled]="(agencyFacade.actionInProgress$ | async) || false"
                 [titleLabel]="'Add'" >
             </clgx-button>

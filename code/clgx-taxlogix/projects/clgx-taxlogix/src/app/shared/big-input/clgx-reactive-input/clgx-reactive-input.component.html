@@ -1,7 +1,7 @@
   <div class="clgx-reactive-input" >
     <div>
       <div>
-        <span class="agency-input-label">{{titleLabel}}</span>
+        <span class="agency-input-label">{{titleLabel}}<span *ngIf="required" style="color:orangered;">*</span></span>
       </div>
       <div >
         <mat-form-field 

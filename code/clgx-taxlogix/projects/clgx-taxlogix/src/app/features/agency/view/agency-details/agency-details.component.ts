@@ -455,7 +455,7 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     window.open(link, '_blank');
   }
 
-  save(form: FormGroup) {
+  save($event: MouseEvent, form: FormGroup) {
     debugger;
     this.newAgencyDetails = Object.create({});
     if (form.controls['agencyNumber'].value !== this.agency.agencyNumber) {

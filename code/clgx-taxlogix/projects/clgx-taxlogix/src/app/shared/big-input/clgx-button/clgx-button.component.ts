@@ -3,7 +3,10 @@ import {
   Input,
   ChangeDetectionStrategy,
   Output,
-  EventEmitter
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChanges
 } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
@@ -13,9 +16,9 @@ import { FormControl, Validators } from '@angular/forms';
   styleUrls: ['./clgx-button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ClgxButtonComponent {
+export class ClgxButtonComponent implements OnInit, OnChanges {
   @Output()
-  click = new EventEmitter<MouseEvent>();
+  clgClick = new EventEmitter<MouseEvent>();
 
   @Input()
   titleLabel = 'button';
@@ -23,7 +26,27 @@ export class ClgxButtonComponent {
   @Input()
   disabled = false;
 
+  
+  @Input()
+  width = 0;
+
+  elementWidth: number = 100;
+
+  ngOnInit(): void {
+      
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+      if(!this.width){
+        this.elementWidth = 100;
+      }else{
+        this.elementWidth = this.width;
+      }
+  }
+
   clickHandler($event: MouseEvent) {
-    this.click.emit($event);
+    if(!this.disabled){
+      this.clgClick.emit($event);
+    }
   }
 }
