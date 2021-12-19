@@ -105,7 +105,7 @@ export class AgencyCollectionPracticesComponent implements OnInit {
     });
     if (this.agencyMasterId) {
       this.agencyStoreFacade.getCollectionDates({
-        userId: this.loginData.processOrgModel.userId,
+        userId: this.loginData.userId,
         agencyMasterId: this.agencyMasterId,
         agencyCollectionDatesId: undefined
       });

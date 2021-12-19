@@ -23,20 +23,33 @@
               <span>Payment contact details</span>
             </div>
             <div class="details-inputs">
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Pay to Name</mat-label>
-                  <input matInput formControlName="payName" [required]="ispaymentFormGroupFieldRequired('payName')">
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Pay to Address</mat-label>
-                  <input matInput formControlName="payAddress" [required]="ispaymentFormGroupFieldRequired('payAddress')">
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Pay to City</mat-label>
-                  <input matInput formControlName="payCity" [required]="ispaymentFormGroupFieldRequired('payCity')">
-                </mat-form-field>
+                <clgx-reactive-input
+                  [titleLabel]="'Pay to Name'"
+                  [required]="isRequired('payName')"
+                  [clgxControlName]="'payName'"
+                  [showClear]="false">
+                </clgx-reactive-input>
+                <clgx-reactive-input
+                  [titleLabel]="'Pay to Address'"
+                  [required]="isRequired('payAddress')"
+                  [clgxControlName]="'payAddress'"
+                  [showClear]="false">
+                </clgx-reactive-input>
+                <clgx-reactive-input
+                  [titleLabel]="'Pay to City'"
+                  [required]="isRequired('payCity')"
+                  [clgxControlName]="'payCity'"
+                  [showClear]="false">
+                </clgx-reactive-input>
                 <div class="state-zip">
-                  <mat-form-field appearance="outline" color="accent" style="width: 57%;">
+                  <clgx-reactive-select
+                    [titleLabel]="'State'"
+                    [options]="stateOptions || []"
+                    [clgxControlName]="'stateId'"
+                    [required]="isRequired('stateId')"
+                    [error]="stateId.errors?.required">
+                  </clgx-reactive-select>
+                  <!-- <mat-form-field appearance="outline" color="accent" style="width: 57%;">
                     <mat-label>State</mat-label>
                     <mat-select formControlName="stateId" #paymentState
                       (selectionChange)="stateSelectionChangeHandler($event, 'paymentStates')" [required]="isRequired('stateId')">
@@ -47,36 +60,29 @@
                     <mat-error *ngIf="stateId.errors?.required">
                       Required 
                     </mat-error>
-                  </mat-form-field>
-                  <mat-form-field appearance="outline" color="accent" style="width : 40%">
-                    <mat-label>Zip</mat-label>
-                    <input matInput formControlName="zip"  [required]="isRequired('zip')">
-                    <mat-error *ngIf="zip.errors?.required">
-                      Required 
-                    </mat-error>
-                  </mat-form-field>
+                  </mat-form-field> -->
+                  <clgx-reactive-input
+                    [titleLabel]="'Zip'"
+                    [required]="isRequired('zip')"
+                    [clgxControlName]="'zip'"
+                    [showClear]="false"
+                    [error]="zip.errors?.required">
+                  </clgx-reactive-input>
                 </div>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>County</mat-label>
-                  <mat-select formControlName="countyId" [disabled]="isPaymentCountiesLoading || !paymentCounties?.length"
-                       [required]="isRequired('countyId')">
-                    <mat-option *ngFor="let option of (paymentCounties$ | async)" [value]="option.countyId">
-                      {{option.countyName}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-spinner matPrefix mode="indeterminate" style="margin:0 auto;"
-                    *ngIf="isPaymentCountiesLoading" [diameter]="30"></mat-spinner>
-                  <mat-error *ngIf="countyId.errors?.required">
-                    Required 
-                  </mat-error>
-                  <div *ngIf="!paymentState.value" class="show-orangered">
-                    Select State to load County List
-                  </div>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Email File to:</mat-label>
-                  <input matInput formControlName="emailFileId" [required]="ispaymentFormGroupFieldRequired('emailFileId')">
-                </mat-form-field>
+                <clgx-reactive-select
+                  [titleLabel]="'County'"
+                  [options]="(paymentCounties$ | async) || []"
+                  [clgxControlName]="'countyId'"
+                  [disabled]="isPaymentCountiesLoading || !(paymentCounties$ | async)?.length"
+                  [required]="isRequired('countyId')"
+                  [error]="countyId.errors?.required">
+                </clgx-reactive-select>
+                <clgx-reactive-input
+                  [titleLabel]="'Email File to:'"
+                  [required]="isRequired('emailFileId')"
+                  [clgxControlName]="'emailFileId'"
+                  [showClear]="false">
+                </clgx-reactive-input>
             </div>
           </div>
         </div>
@@ -86,10 +92,12 @@
               <span>Payment details</span>
             </div>
             <div class="details-inputs">
-              <mat-form-field appearance="outline" color="accent">
-                <mat-label>Number of Parcels per Check</mat-label>
-                <input matInput formControlName="numOfParcels" [required]="ispaymentFormGroupFieldRequired('numOfParcels')">
-              </mat-form-field>
+              <clgx-reactive-input
+                [titleLabel]="'Number of Parcels per Check'"
+                [required]="isRequired('numOfParcels')"
+                [clgxControlName]="'numOfParcels'"
+                [showClear]="false">
+              </clgx-reactive-input>
               <div class="toggle">
                 <mat-label>Must Have Original TB</mat-label>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
@@ -98,10 +106,12 @@
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <mat-form-field appearance="outline" color="accent">
-                <mat-label>Fee Without Original TB</mat-label>
-                <input matInput formControlName="feeWithoutOrginalTB" [required]="ispaymentFormGroupFieldRequired('feeWithoutOrginalTB')">
-              </mat-form-field>
+              <clgx-reactive-input
+                [titleLabel]="'Fee Without Original TB'"
+                [required]="isRequired('feeWithoutOrginalTB')"
+                [clgxControlName]="'feeWithoutOrginalTB'"
+                [showClear]="false">
+              </clgx-reactive-input>
               <div class="toggle">
                 <mat-label>Listing Accepted for Payment</mat-label>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 

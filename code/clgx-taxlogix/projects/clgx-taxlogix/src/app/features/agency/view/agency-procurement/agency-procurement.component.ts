@@ -88,8 +88,8 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
       this.agencyMasterId = data.agencyMasterId;
     });
     if(this.agencyMasterId){
-      this.agencyFacade.getEscrowDetails({agencyMasterId : this.agencyMasterId , userId : this.loginData.processOrgModel.userId , escrowId : undefined});
-      this.agencyFacade.getNonEscrowDetails({agencyMasterId : this.agencyMasterId , userId : this.loginData.processOrgModel.userId , nonEscrowId : undefined});
+      this.agencyFacade.getEscrowDetails({agencyMasterId : this.agencyMasterId , userId : this.loginData.userId , escrowId : undefined});
+      this.agencyFacade.getNonEscrowDetails({agencyMasterId : this.agencyMasterId , userId : this.loginData.userId , nonEscrowId : undefined});
     }
     this.subscriptions.push(this.nonEscrowCounties$.subscribe(cties => {
       this.nonEscrowCounties = [...cties];

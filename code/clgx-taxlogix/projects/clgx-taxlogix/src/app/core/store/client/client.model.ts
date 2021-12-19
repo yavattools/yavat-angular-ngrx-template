@@ -83,7 +83,7 @@ export class Legal{
     sowreceivedDate: string | undefined
     renewalDate: string | undefined
     modifiedBy: string | undefined
-    lisOfDocumentModel: Array<DocumentModel> | undefined
+    multipartFiles: Array<string> | undefined
 }
 
 export interface DocumentModel{
@@ -169,9 +169,9 @@ export class BankDetails{
     signatureCard:string | undefined
     posspayFileRecevied:string | undefined
     clientBankData : string | undefined
-    logoFileLocation : string | undefined
-    signatureCardLocation : string | undefined
-    possPayFileReceLoc : string | undefined
+    logoFileLocation : Array<string> | undefined
+    signatureCardLocation : Array<string> | undefined
+    possPayFileReceLoc : Array<string> | undefined
     constructor(){}
 }
 

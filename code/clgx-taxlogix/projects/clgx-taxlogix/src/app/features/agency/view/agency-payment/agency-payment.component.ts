@@ -66,7 +66,7 @@ export class AgencyPaymentComponent implements OnInit {
       this.agencyMasterId = data.agencyMasterId;
     });
     if(this.agencyMasterId){
-    this.agencyStoreFacade.getPayments({userId : this.loginData.processOrgModel.userId, agencyMasterId : this.agencyMasterId, agencypaymentmasterId : undefined});
+    this.agencyStoreFacade.getPayments({userId : this.loginData.userId, agencyMasterId : this.agencyMasterId, agencypaymentmasterId : undefined});
     }
 
     this.stateOptions$ = this.agencyStoreFacade.stateOptions$;

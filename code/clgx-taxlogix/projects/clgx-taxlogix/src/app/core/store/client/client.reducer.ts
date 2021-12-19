@@ -92,7 +92,7 @@ import { Client, ClientState, ClientInformation, Legal, Billing, ProductPricing,
     mutableOn(clientActions.actionSaveLegalDetailsSuccess, (state, action) => {
         state.actionInProgress = false;
         let lDetails: Legal = _.cloneDeep(action.legalDetails);
-        lDetails.clientId = action.response.clientId;
+        lDetails.legalmasterId = action.response.legalmasterId;
         state.legalDetails = lDetails;
     }),
     mutableOn(clientActions.actionSaveLegalDetailsFailure, (state, action) => {
@@ -128,7 +128,7 @@ import { Client, ClientState, ClientInformation, Legal, Billing, ProductPricing,
     mutableOn(clientActions.actionSaveBillingDetailsSuccess, (state, action) => {
         state.actionInProgress = false;
         let bDetails: Billing = _.cloneDeep(action.billingDetails);
-        bDetails.clientId = action.response.clientId;
+        bDetails.clientBillingMasterId = action.response.clientBillingMasterId;
         state.billingDetails = bDetails;
     }),
     mutableOn(clientActions.actionSaveBillingDetailsFailure, (state, action) => {
@@ -164,7 +164,7 @@ import { Client, ClientState, ClientInformation, Legal, Billing, ProductPricing,
     mutableOn(clientActions.actionSaveProductPricingDetailsSuccess, (state, action) => {
         state.actionInProgress = false;
         let ppDetails: ProductPricing = _.cloneDeep(action.productPricing);
-        ppDetails.clientId = action.response.clientId;
+        ppDetails.clientProductPricingId = action.response.clientProductPricingId;
         state.productPricingDetails = ppDetails;
     }),
     mutableOn(clientActions.actionSaveProductPricingDetailsFailure, (state, action) => {
@@ -200,7 +200,7 @@ import { Client, ClientState, ClientInformation, Legal, Billing, ProductPricing,
     mutableOn(clientActions.actionSaveBankDetailsSuccess, (state, action) => {
         state.actionInProgress = false;
         let bDetails: BankDetails = _.cloneDeep(action.bankDetails);
-        bDetails.clientId = action.response.clientId;
+        bDetails.clientBankDetlsId = action.response.clientBankDetlsId;
         state.bankDetails = bDetails;
     }),
     mutableOn(clientActions.actionSaveBankDetailsFailure, (state, action) => {

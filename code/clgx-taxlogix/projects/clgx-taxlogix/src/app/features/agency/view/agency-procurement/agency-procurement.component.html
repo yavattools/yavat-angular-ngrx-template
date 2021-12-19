@@ -10,42 +10,50 @@
               <span>Contact info</span>
             </div>
             <div class="details-inputs">
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Contact Name</mat-label>
-                  <input matInput formControlName="contactName" [required]="isescrowFormRequired('contactName')">
-                  <mat-error *ngIf="contactName?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
+                <clgx-reactive-input
+                    [titleLabel]="'Contact Name'"
+                    [required]="isescrowFormRequired('contactName')"
+                    [clgxControlName]="'contactName'"
+                    [showClear]="false"
+                    [error]="contactName?.errors?.required">
+                </clgx-reactive-input>
+                <clgx-reactive-input
+                  [titleLabel]="'Contact Phone'"
+                  [required]="isescrowFormRequired('contactPhone')"
+                  [clgxControlName]="'contactPhone'"
+                  [showClear]="false"
+                  [error]="contactPhone?.errors?.required"
+                  [placeholder]="'xxx-xxx-xxxx'">
+                </clgx-reactive-input>
+                <!-- <mat-form-field appearance="outline" color="accent">
                   <mat-label>Contact Phone</mat-label>
                   <input type="tel"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" matInput placeholder="xxx-xxx-xxxx"
                         formControlName="contactPhone" [required]="isescrowFormRequired('contactPhone')">
                   <mat-error *ngIf="contactPhone?.errors?.required">
                     Required 
                   </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Contact Fax</mat-label>
-                  <input matInput formControlName="contactFax" [required]="isescrowFormRequired('contactFax')">
-                  <mat-error *ngIf="contactFax?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Contact Email</mat-label>
-                  <input matInput formControlName="contactEmail" [required]="isescrowFormRequired('contactEmail')">
-                  <mat-error *ngIf="contactEmail?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Agency Website</mat-label>
-                  <input matInput formControlName="agencyWebsite" [required]="isescrowFormRequired('agencyWebsite')">
-                  <mat-error *ngIf="agencyWebsite?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
+                <clgx-reactive-input
+                    [titleLabel]="'Contact Fax'"
+                    [required]="isescrowFormRequired('contactFax')"
+                    [clgxControlName]="'contactFax'"
+                    [showClear]="false"
+                    [error]="contactFax?.errors?.required">
+                </clgx-reactive-input>
+                <clgx-reactive-input
+                    [titleLabel]="'Contact Email'"
+                    [required]="isescrowFormRequired('contactEmail')"
+                    [clgxControlName]="'contactEmail'"
+                    [showClear]="false"
+                    [error]="contactEmail?.errors?.required">
+                </clgx-reactive-input>
+                <clgx-reactive-input
+                    [titleLabel]="'Agency Website'"
+                    [required]="isescrowFormRequired('agencyWebsite')"
+                    [clgxControlName]="'agencyWebsite'"
+                    [showClear]="false"
+                    [error]="agencyWebsite?.errors?.required">
+                </clgx-reactive-input>
             </div>
           </div>
           <div class="details">
@@ -105,27 +113,27 @@
           </div>
           <div class="details">
             <div class="details-inputs">
-                <mat-form-field appearance="outline" color="accent" style="width: 100%;margin-top: 20px;">
-                  <mat-label>Copy Fee</mat-label>
-                  <input matInput formControlName="copyFee" [required]="isescrowFormRequired('copyFee')" >
-                  <mat-error *ngIf="copyFee?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent" style="width: 100%;">
-                  <mat-label>Fee for Mail-a-Way</mat-label>
-                  <input matInput formControlName="feeForMailAWay" [required]="isescrowFormRequired('feeForMailAWay')">
-                  <mat-error *ngIf="feeForMailAWay?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent" style="width: 100%;">
-                  <mat-label>No. of Parcels Per Check</mat-label>
-                  <input matInput formControlName="noOfParcelsPerCheck" [required]="isescrowFormRequired('noOfParcelsPerCheck')">
-                  <mat-error *ngIf="noOfParcelsPerCheck?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
+              <clgx-reactive-input
+                  [titleLabel]="'Copy Fee'"
+                  [required]="isescrowFormRequired('copyFee')"
+                  [clgxControlName]="'copyFee'"
+                  [showClear]="false"
+                  [error]="copyFee?.errors?.required">
+              </clgx-reactive-input>
+              <clgx-reactive-input
+                  [titleLabel]="'Fee for Mail-a-Way'"
+                  [required]="isescrowFormRequired('feeForMailAWay')"
+                  [clgxControlName]="'feeForMailAWay'"
+                  [showClear]="false"
+                  [error]="feeForMailAWay?.errors?.required">
+              </clgx-reactive-input>
+              <clgx-reactive-input
+                  [titleLabel]="'No. of Parcels Per Check'"
+                  [required]="isescrowFormRequired('noOfParcelsPerCheck')"
+                  [clgxControlName]="'noOfParcelsPerCheck'"
+                  [showClear]="false"
+                  [error]="noOfParcelsPerCheck?.errors?.required">
+              </clgx-reactive-input>
             </div>
           </div>
         </div>
