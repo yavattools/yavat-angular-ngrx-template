@@ -61,7 +61,7 @@ export interface GetActiveAgenciesRequest {
 export class CollectionDates {
   agencyCollectionDatesId?: string | undefined;
   agencyMasterId?: string | undefined;
-  collectionFrequency?: string;
+  collectionFrequency!: string;
   collectionYear!: string;
   collectionInstallment!: string;
   collectionBase: string;

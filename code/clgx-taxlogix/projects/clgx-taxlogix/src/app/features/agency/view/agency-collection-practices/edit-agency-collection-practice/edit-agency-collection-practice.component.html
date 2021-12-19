@@ -1,17 +1,30 @@
 <div mat-dialog-header>
-  <div class="row">
-    <div class="col-md-8 pb-3">
+  <div class="row" [ngClass]="routeAnimationsElements">
+    <div class="col-8 pb-3">
       <span class="edit-agency-model-header-label">Collection Dates</span>
     </div>
-    <div class="col-md-4 pb-3 text-right">
+    <div class="col-4 pb-3 text-right">
         <i (click)="onNoClick()" class="fas fa-times action-icon"></i>
     </div>
+    <div class="col-12 pb-3" 
+      style="padding: 10px;background-color: rgba(255, 68, 0, 0.137);"  
+      *ngIf="isExisit">
+      <div class="row">
+        <div class="col-11">
+          <span style="color:orangered">Installment Record already exist, please add diffrent</span>
+        </div>
+        <div class="col-1 text-center">
+          <i (click)="clearMessageHandler($event)" 
+          class="fa fa-close"></i>
+        </div>
+      </div>
+      </div>
   </div>
 </div>
 <div mat-dialog-content>
   <div>
     <form class="collection-dates" [formGroup]="editForm" 
-          (ngSubmit)="updateCollectionDate(editForm)">
+          >
     <div class="row">
       <div class="col-6">
         <clgx-reactive-select
@@ -87,9 +100,19 @@
         </clgx-reactive-date>
       </div>
       <div class="col-12">
-        <div  class="action-section">
-          <button color="primary" [disabled]="editForm.invalid" mat-raised-button>Save</button>
+        <div class="row">
+          <div class="col-8"></div>
+          <div class="col-4">
+              <clgx-button  
+                  (clgClick)="updateCollectionDate(editForm)"  
+                  [disabled]="((agencyStoreFacade.actionInProgress$ | async) || false) || editForm.invalid"
+                  [titleLabel]="collectionDate.agencyCollectionDatesId?'Update':'Add'" >
+              </clgx-button>
+              <!-- <button color="primary" [disabled]="editForm.invalid" 
+                mat-raised-button>Save</button> -->
+          </div>
         </div>
+      
       </div>
     </div>
   </form>

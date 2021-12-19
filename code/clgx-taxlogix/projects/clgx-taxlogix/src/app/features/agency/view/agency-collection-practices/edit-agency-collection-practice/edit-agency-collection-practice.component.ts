@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core/core.module';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import {
   CollectionDates,
@@ -47,6 +48,8 @@ export interface Installment {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditAgencyCollectionPracticeComponent implements OnInit {
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+
   collectionDates$: Observable<CollectionDates[]>;
   collectionHistoryDates$: Observable<CollectionDates[]>;
   collectionDates!: CollectionDates[];
@@ -64,6 +67,7 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     { id: 'quarterly',value: 'quarterly',  frequency: 'Quarterly', display: 'Quarterly'  }
   ];
   collectionDate: CollectionDates = new CollectionDates();
+  collectionHistoryDates!: CollectionDates[];
   newCollectionDateForm: any;
   description: string = '';
   agencyMasterId: string | undefined;
@@ -85,11 +89,12 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     lateRelease:  ['', Validators.required],
     billRequest:  ['', Validators.required]
   });
+  isExisit = false;
 
   constructor(
     public dialogRef: MatDialogRef<AgencyCollectionPracticesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private agencyStoreFacade: AgencyStoreFacade,
+    public  agencyStoreFacade: AgencyStoreFacade,
     private fb: FormBuilder
   ) {
     this.collectionDates$ = this.agencyStoreFacade.collectionDates$;
@@ -102,6 +107,9 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
       this.frequencyValue();
     })
   
+    this.collectionHistoryDates$.subscribe(chdates => {
+      this.collectionHistoryDates = [...chdates];
+    })
     this.collectionDates$.subscribe((data) => {
       this.collectionDates = [...data];
       data.map((collectionDate) => {
@@ -114,7 +122,6 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
       });
     });
     this.loadYears();
-    this.loadInstallments();
     this.frequencyValue();
     this.agencyStoreFacade.selectedCollectionDate$.subscribe(
       (collectionDate) => {
@@ -408,6 +415,45 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
   }
 
   updateCollectionDate(form: FormGroup) {
+
+    // Check for Record in Exisiting Records if not add 
+    // if exisit then stay on same screen with message.
+    if(!this.collectionDate.agencyCollectionDatesId){
+      let sYear = form.controls['year'].value;
+      let sinstall = form.controls['installment'].value;
+      let sfreq: string = form.controls['frequency'].value;
+      this.isExisit = false;
+      for(let i = 0; i < this.collectionDates.length; i++){
+        if(+this.collectionDates[i].collectionYear === +sYear && 
+          +this.collectionDates[i].collectionInstallment === +sinstall && 
+          +this.collectionDates[i].collectionFrequency === 
+          +this.getFrequencyValue()){
+            this.isExisit = true;
+            break;
+          }
+      }
+      if(this.isExisit) {
+        setTimeout(() => {
+          this.isExisit = false;
+        }, 50);
+        return
+      };
+      for(let i = 0; i < this.collectionHistoryDates.length; i++){
+        if( +this.collectionHistoryDates[i].collectionYear === +sYear && 
+            +this.collectionHistoryDates[i].collectionInstallment === +sinstall && 
+            +this.collectionHistoryDates[i].collectionFrequency
+              === +this.getFrequencyValue()){
+            this.isExisit = true;
+            break;
+          }
+      }
+      if(this.isExisit) {
+        setTimeout(() => {
+          this.isExisit = false;
+        }, 50);
+        return
+      };
+    }
     this.newCollectionDateForm = new CollectionDates();
     if (form.controls['year'].value !== this.collectionDate.collectionYear) {
       this.addToDescription(
@@ -557,11 +603,14 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
   frequencyValue() {
     this.editForm.controls['installment'].enable();
     if (this.editForm.controls['frequency'].value === 'annual') {
+      this.installmentsValues = [];
       this.installmentsValues.push({
         value: 1,
         display: 1
       });
     } else if (this.editForm.controls['frequency'].value === 'discountAnnual') {
+      this.installmentsValues = [];
+
       this.installmentsValues.push({
         value: 1,
         display: 1
@@ -627,6 +676,9 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     return result;
   }
 
+  clearMessageHandler($event: MouseEvent){
+    this.isExisit = false;
+  }
   addToDescription(oldValue: any, newValue: any, fieldname: string) {
     this.description +=
       fieldname + ' is updated from ' + oldValue + ' to ' + newValue + '; ';
