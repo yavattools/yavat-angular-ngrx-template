@@ -41,7 +41,6 @@
                   [clgxControlName]="'payCity'"
                   [showClear]="false">
                 </clgx-reactive-input>
-                <div class="state-zip">
                   <clgx-reactive-select
                     [titleLabel]="'State'"
                     [options]="stateOptions || []"
@@ -68,7 +67,6 @@
                     [showClear]="false"
                     [error]="zip.errors?.required">
                   </clgx-reactive-input>
-                </div>
                 <clgx-reactive-select
                   [titleLabel]="'County'"
                   [options]="(paymentCounties$ | async) || []"
@@ -98,8 +96,8 @@
                 [clgxControlName]="'numOfParcels'"
                 [showClear]="false">
               </clgx-reactive-input>
-              <div class="toggle">
-                <mat-label>Must Have Original TB</mat-label>
+              <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Must Have Original TB</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="ispaymentFormGroupFieldRequired('orginalTB')" formControlName="orginalTB">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
@@ -112,32 +110,32 @@
                 [clgxControlName]="'feeWithoutOrginalTB'"
                 [showClear]="false">
               </clgx-reactive-input>
-              <div class="toggle">
-                <mat-label>Listing Accepted for Payment</mat-label>
+             <div class="toggle"  style="width: 100%">
+              <span class="agency-reactive-input-label">Listing Accepted for Payment</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="ispaymentFormGroupFieldRequired('listedPayment')" formControlName="listedPayment">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Email File / Wire Funds</mat-label>
+             <div class="toggle"  style="width: 100%">
+              <span class="agency-reactive-input-label">Email File / Wire Funds</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="ispaymentFormGroupFieldRequired('emailWire')" formControlName="emailWire">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Overnight</mat-label>
+             <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Overnight</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style"
                 [required]="ispaymentFormGroupFieldRequired('overNight')" formControlName="overNight">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Postmark Accepted</mat-label>
+             <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Postmark Accepted</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="ispaymentFormGroupFieldRequired('postmarkAccepted')"  formControlName="postmarkAccepted">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>

@@ -61,48 +61,48 @@
               <span>Payment details</span>
             </div>
             <div class="details-inputs">
-              <div class="toggle">
-                <mat-label>AMT Available on Website</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">AMT Available on Website</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isescrowFormRequired('amtAvailableOnWebsite')" formControlName="amtAvailableOnWebsite">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Cost to Pay Using Copy of TB</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Cost to Pay Using Copy of TB</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isescrowFormRequired('costToPayUsingCopyOfTb')" formControlName="costToPayUsingCopyOfTb">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Listing Accepted for Payment</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Listing Accepted for Payment</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isescrowFormRequired('listingAcceptedForPayment')" formControlName="listingAcceptedForPayment">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Mail-a-way Only Req</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Mail-a-way Only Req</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isescrowFormRequired('mailAWayOnlyReq')" formControlName="mailAWayOnlyReq">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Agency Expect Web TB</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Agency Expect Web TB</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style"
                 [required]="isescrowFormRequired('agencyExpectWebTb')"  formControlName="agencyExpectWebTb">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Postmark Accepted</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Postmark Accepted</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isescrowFormRequired('postmarkAccepted')"  formControlName="postmarkAccepted">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
@@ -152,49 +152,56 @@
               <span>Contact info</span>
             </div>
             <div class="details-inputs">
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Collecting Agency Name</mat-label>
-                  <input matInput formControlName="collectingAgencyName"  [required]="isnonEscrowFormRequired('collectingAgencyName')">
-                  <mat-error *ngIf="collectingAgencyName?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Contact Name</mat-label>
-                  <input matInput formControlName="contactName" [required]="isnonEscrowFormRequired('contactName')">
-                  <mat-error *ngIf="contactNameNonEscrow?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
+              <clgx-reactive-input
+                  [titleLabel]="'Collecting Agency Name'"
+                  [required]="isnonEscrowFormRequired('collectingAgencyName')"
+                  [clgxControlName]="'collectingAgencyName'"
+                  [showClear]="false"
+                  [error]="collectingAgencyName?.errors?.required">
+              </clgx-reactive-input>
+              <clgx-reactive-input
+                  [titleLabel]="'Contact Name'"
+                  [required]="isnonEscrowFormRequired('contactName')"
+                  [clgxControlName]="'contactName'"
+                  [showClear]="false"
+                  [error]="contactNameNonEscrow?.errors?.required">
+              </clgx-reactive-input>
+              <clgx-reactive-input
+                  [titleLabel]="'Contact Phone'"
+                  [required]="isnonEscrowFormRequired('contactPhone')"
+                  [clgxControlName]="'contactPhone'"
+                  [showClear]="false"
+                  [error]="contactPhoneNonEscrow?.errors?.required">
+              </clgx-reactive-input>
+                <!-- <mat-form-field appearance="outline" color="accent">
                   <mat-label>Contact Phone</mat-label>
                   <input type="tel"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" matInput placeholder="xxx-xxx-xxxx"
                      formControlName="contactPhone" [required]="isnonEscrowFormRequired('contactPhone')">
                   <mat-error *ngIf="contactPhoneNonEscrow?.errors?.required">
                     Required 
                   </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Contact Fax</mat-label>
-                  <input matInput formControlName="contactFax" [required]="isnonEscrowFormRequired('contactFax')">
-                  <mat-error *ngIf="contactFaxNonEscrow?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Contact Email</mat-label>
-                  <input matInput formControlName="contactEmail" [required]="isnonEscrowFormRequired('contactEmail')">
-                  <mat-error *ngIf="contactEmailNonEscrow?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent">
-                  <mat-label>Agency Website</mat-label>
-                  <input matInput formControlName="agencyWebsite" [required]="isnonEscrowFormRequired('agencyWebsite')">
-                  <mat-error *ngIf="agencyWebsiteNonEscrow?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
+                </mat-form-field> -->
+                <clgx-reactive-input
+                    [titleLabel]="'Contact Fax'"
+                    [required]="isnonEscrowFormRequired('contactFax')"
+                    [clgxControlName]="'contactFax'"
+                    [showClear]="false"
+                    [error]="contactFaxNonEscrow?.errors?.required">
+                </clgx-reactive-input>
+                <clgx-reactive-input
+                    [titleLabel]="'Contact Email'"
+                    [required]="isnonEscrowFormRequired('contactEmail')"
+                    [clgxControlName]="'contactEmail'"
+                    [showClear]="false"
+                    [error]="contactEmailNonEscrow?.errors?.required">
+                </clgx-reactive-input>
+                <clgx-reactive-input
+                    [titleLabel]="'Agency Website'"
+                    [required]="isnonEscrowFormRequired('agencyWebsite')"
+                    [clgxControlName]="'agencyWebsite'"
+                    [showClear]="false"
+                    [error]="agencyWebsiteNonEscrow?.errors?.required">
+                </clgx-reactive-input>
             </div>
           </div>
           <div class="details">
@@ -202,45 +209,45 @@
               <span>Payment details</span>
             </div>
             <div class="details-inputs">
-              <div class="toggle">
-                <mat-label>Collected by Agency</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Collected by Agency</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isnonEscrowFormRequired('collectedByAgency')" formControlName="collectedByAgency">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Third Party Collections</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Third Party Collections</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isnonEscrowFormRequired('thirdPartyCollections')" formControlName="thirdPartyCollections">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>AMT Available on Website</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">AMT Available on Website</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isnonEscrowFormRequired('amtAvailableOnWebsite')" formControlName="amtAvailableOnWebsite">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <div class="toggle">
-                <mat-label>Mail-a-way Only Req</mat-label>
+               <div class="toggle"  style="width: 100%">
+                <span class="agency-reactive-input-label">Mail-a-way Only Req</span>
                 <mat-button-toggle-group name="fontStyle" aria-label="Font Style" 
                 [required]="isnonEscrowFormRequired('mailAWayOnlyReq')" formControlName="mailAWayOnlyReq">
                   <mat-button-toggle class="mat-button-toggle" value="1"><i class="fas fa-thumbs-up"></i></mat-button-toggle>
                   <mat-button-toggle class="mat-button-toggle" value="0"><i class="fas fa-thumbs-down"></i></mat-button-toggle>
                 </mat-button-toggle-group>
               </div>
-              <mat-form-field appearance="outline" color="accent">
-                <mat-label>Fee for Mail-a-Way</mat-label>
-                <input matInput formControlName="feeForMailAWay" [required]="isnonEscrowFormRequired('feeForMailAWay')">
-                <mat-error *ngIf="feeForMailAWayNonEscrow?.errors?.required">
-                  Required 
-                </mat-error>
-              </mat-form-field>
+              <clgx-reactive-input
+                    [titleLabel]="'Fee for Mail-a-Way'"
+                    [required]="isnonEscrowFormRequired('feeForMailAWay')"
+                    [clgxControlName]="'feeForMailAWay'"
+                    [showClear]="false"
+                    [error]="feeForMailAWayNonEscrow?.errors?.required">
+              </clgx-reactive-input>
             </div>
           </div>
           <div class="details">
@@ -248,65 +255,56 @@
               <span>Delinquent contact details</span>
             </div>
             <div class="details-inputs">
-                <mat-form-field appearance="outline" color="accent" style="width: 100%">
-                  <mat-label>Pay to Name</mat-label>
-                  <input matInput formControlName="payToName" [required]="isnonEscrowFormRequired('payToName')">
-                  <mat-error *ngIf="payToName?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent" style="width: 100%;">
-                  <mat-label>Pay to Address</mat-label>
-                  <input matInput formControlName="payToAddress" [required]="isnonEscrowFormRequired('payToAddress')">
-                  <mat-error *ngIf="payToAddress?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <mat-form-field appearance="outline" color="accent" style="width: 100%;">
-                  <mat-label>Pay to City</mat-label>
-                  <input matInput formControlName="payToCity" [required]="isnonEscrowFormRequired('payToCity')">
-                  <mat-error *ngIf="payToCity?.errors?.required">
-                    Required 
-                  </mat-error>
-                </mat-form-field>
-                <div class="state-zip" style="width: 100%;">
-                  <mat-form-field appearance="outline" color="accent" style="width: 40%;">
-                    <mat-label>State</mat-label>
-                    <mat-select formControlName="stateId"
-                    [required]="isnonEscrowFormRequired('stateId')" #nonEscrowState (selectionChange)="stateSelectionChangeHandler($event, 'nonEscrowStates')">
-                      <mat-option *ngFor="let option of stateOptions" [value]="option.stateId">
-                        {{option.stateName}}
-                      </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="stateId?.errors?.required">
-                      Required 
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field appearance="outline" color="accent" style="width : 55%">
-                    <mat-label>Zip</mat-label>
-                    <input matInput formControlName="zipId" [required]="isnonEscrowFormRequired('zipId')">
-                    <mat-error *ngIf="zipId?.errors?.required">
-                      Required 
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <mat-form-field appearance="outline" color="accent" style="width: 100%;">
-                  <mat-label>County</mat-label>
-                  <mat-select formControlName="countyId" [disabled]="isNonEscrowCountiesLoading || !nonEscrowCounties?.length"
-                       [required]="isRequiredNonEscrowField('countyId')">
-                    <mat-option *ngFor="let option of (nonEscrowCounties$ | async)" [value]="option.countyId">
-                      {{option.countyName}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-spinner matPrefix mode="indeterminate" style="margin:0 auto;"
-                    *ngIf="isNonEscrowCountiesLoading" [diameter]="30"></mat-spinner>
-                  <mat-error *ngIf="countyId?.errors?.required">
-                    Required 
-                  </mat-error>
-                  <div *ngIf="!nonEscrowState.value" class="show-orangered">
-                    Select State to load County List
-                  </div>
-                </mat-form-field>
+              <clgx-reactive-input
+                    [titleLabel]="'Pay to Name'"
+                    [required]="isnonEscrowFormRequired('payToName')"
+                    [clgxControlName]="'payToName'"
+                    [showClear]="false"
+                    [error]="payToName?.errors?.required">
+              </clgx-reactive-input>
+              <clgx-reactive-input
+                    [titleLabel]="'Pay to Address'"
+                    [required]="isnonEscrowFormRequired('payToAddress')"
+                    [clgxControlName]="'payToAddress'"
+                    [showClear]="false"
+                    [error]="payToAddress?.errors?.required">
+              </clgx-reactive-input>
+              <clgx-reactive-input
+                    [titleLabel]="'Pay to Address'"
+                    [required]="isnonEscrowFormRequired('payToAddress')"
+                    [clgxControlName]="'payToAddress'"
+                    [showClear]="false"
+                    [error]="payToAddress?.errors?.required">
+              </clgx-reactive-input>
+              <clgx-reactive-input
+                    [titleLabel]="'Pay to City'"
+                    [required]="isnonEscrowFormRequired('payToCity')"
+                    [clgxControlName]="'payToCity'"
+                    [showClear]="false"
+                    [error]="payToCity?.errors?.required">
+              </clgx-reactive-input>
+              <clgx-reactive-select
+                    [titleLabel]="'State'"
+                    [options]="stateOptions || []"
+                    [clgxControlName]="'stateId'"
+                    [required]="isnonEscrowFormRequired('stateId')"
+                    [error]="stateId?.errors?.required">
+                </clgx-reactive-select>
+                <clgx-reactive-input
+                    [titleLabel]="'Zip'"
+                    [required]="isnonEscrowFormRequired('zipId')"
+                    [clgxControlName]="'zipId'"
+                    [showClear]="false"
+                    [error]="zipId?.errors?.required">
+                 </clgx-reactive-input>
+                 <clgx-reactive-select
+                    [titleLabel]="'County'"
+                    [options]="(nonEscrowCounties$ | async) || []"
+                    [clgxControlName]="'countyId'"
+                    [disabled]="isNonEscrowCountiesLoading || !(nonEscrowCounties$ | async)?.length"
+                    [required]="isRequiredNonEscrowField('countyId')"
+                    [error]="countyId?.errors?.required">
+                  </clgx-reactive-select>               
                   <section class="checkbox">
                     <mat-label>Method of Payment Required</mat-label>
                     <mat-checkbox class="check-box" style="padding-right:10px;" value="1">Certified check</mat-checkbox>

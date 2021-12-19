@@ -161,3 +161,38 @@ button {
   color: white;
 }
 }
+.toggle {
+  width: 90%;
+  // margin: 0 0 2.7rem 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  .agency-reactive-input-label {
+    font-family: Graphik-regular !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: 12px !important;
+    line-height: 18px !important;
+    letter-spacing: 0.03em !important;
+    color: #868686 !important;
+  }
+  mat-button-toggle-group {
+    height: 48px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .mat-button-toggle {
+    width: 50%;
+    height: 56px;
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    i {
+      font-size: 25px;
+      color: rgba($color: #000000, $alpha: 0.4);
+    }
+  }
+}
