@@ -1,6 +1,16 @@
 <div class="collection-out-container" [ngClass]="routeAnimationsElements">
-  <div class="page-title-div">
-    <span class="page-title"  animateOnScroll animationName="animated fadeInDown">Collection Dates</span>
+  <div class="page-title-div row">
+    <div class="col-11">
+      <span class="page-title"  animateOnScroll 
+            animationName="animated fadeInDown">Collection Dates</span>
+    </div>
+    <div class="col-1">
+      <clgx-button  
+          (clgClick)="addCollectionDates($event)"  
+          [disabled]="(agencyStoreFacade.actionInProgress$ | async) || false"
+          [titleLabel]="'Edit'" >
+      </clgx-button>
+    </div>
   </div>
   <!-- <mat-table class="collection-dates-table"  
         [dataSource]="currentDataSource">
@@ -194,28 +204,26 @@
        </ng-template>
      </ngx-datatable-column>
    </ngx-datatable>
-   <button mat-icon-button color="accent" 
+   <!-- <button mat-icon-button color="accent" 
    [disabled]="(agencyStoreFacade.actionInProgress$ | async) || false"
    matTooltip="Add New Collection Dates"
    (click)="addCollectionDates($event)"
    style="position: absolute;top: 75px;right: 40px; cursor: pointer;">
      <i class="fa fa-plus fa-2x"></i>
-   </button>
+   </button> -->
    <div *ngIf="(agencyStoreFacade.actionInProgress$ | async) || false" 
      style="position: absolute;top: 500px;width: 100%;text-align: center;">
      <span>Loading Collection Dates Please wait!!</span>
    </div>
    </div>
  </div>
-
   <!-- <mat-paginator #currentPaginator [length]="currentTablelength" [pageSize]="currentPageSize" showFirstLastButtons></mat-paginator> -->
   <div class="page-second-section-div">
     <div class="row">
-      <div class="col-md-4 text-left">
+      <div class="col-11 text-left">
         <span  animateOnScroll animationName="animated fadeIn" class="page-title">History</span>
       </div>
-      <div class="col-md-8 text-right">
-        <span  animateOnScroll animationName="animated fadeIn" class="edit-this-table-label">Edit the History</span>
+      <div class="col-1 text-right">
       </div>
     </div>
   </div>
@@ -307,7 +315,21 @@
    <ngx-datatable-column name="collectionFrequency" >
     <ng-template let-column="column" let-value="value" 
        ngx-datatable-header-template>
-      <span class="collection-table-header-label">Frequency</span> 
+       <!-- <div class="row">
+        <div class="col-9"> -->
+          <span class="collection-table-header-label">Frequency</span> 
+        <!-- </div> -->
+        <!-- <div class="col-3">
+            <i class="material-icons sort-icon" color="accent" *ngIf="ngxCollectionDatesDisplayedColumns[0].currentSort === 'asc'"
+             >  arrow_upward</i>
+             <i class="material-icons sort-icon" color="accent" *ngIf="ngxCollectionDatesDisplayedColumns[0].currentSort === 'desc'"
+             >  arrow_upward</i>
+             <i class="material-icons no-sort" color="accent" 
+              *ngIf="ngxCollectionDatesDisplayedColumns[0].currentSort === 'undefined'"> 
+               swap_vert
+            </i>
+        </div> -->
+       <!-- </div> -->
     </ng-template>
     <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
       <div class="collection-table-cell-data">{{ getFreqLabel(value) }}</div>
@@ -381,13 +403,13 @@
        </ng-template>
      </ngx-datatable-column>
    </ngx-datatable>
-   <button mat-icon-button color="accent" 
+   <!-- <button mat-icon-button color="accent" 
       [disabled]="(agencyStoreFacade.actionInProgress$ | async) || false"
       matTooltip="Add New Collection Dates"
       (click)="addCollectionDates($event)"
       style="position: absolute;top: 75px;right: 40px; cursor: pointer;">
         <i class="fa fa-plus fa-2x"></i>
-    </button>
+    </button> -->
     <div *ngIf="(agencyStoreFacade.actionInProgress$ | async) || false" 
       style="position: absolute;top: 500px;width: 100%;text-align: center;">
       <span>Loading Collection Dates Please wait!!</span>

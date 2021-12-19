@@ -75,14 +75,14 @@ export class AgencyCollectionPracticesComponent implements OnInit {
   historyPaginator!: MatPaginator;
 
   ngxCollectionDatesDisplayedColumns = [
-    { name: 'collectionFrequency' },
-    { name: 'collectionYear' },
-    { name: 'collectionInstallment' },
-    { name: 'collectionBase' },
-    { name: 'collectionDiscount' },
-    { name: 'collectionPenalty' },
-    { name: 'collectionLastRelease' },
-    { name: 'collectionBillRequest' }
+    { name: 'collectionFrequency', currentSort: undefined },
+    { name: 'collectionYear', currentSort: undefined  },
+    { name: 'collectionInstallment', currentSort: undefined  },
+    { name: 'collectionBase', currentSort: undefined  },
+    { name: 'collectionDiscount', currentSort: undefined  },
+    { name: 'collectionPenalty', currentSort: undefined  },
+    { name: 'collectionLastRelease', currentSort: undefined  },
+    { name: 'collectionBillRequest', currentSort: undefined  }
   ];
   dataCollectionDatesTableMessage: NGXFreqDataTableMessages =
     new NGXFreqDataTableMessages();

@@ -11,105 +11,80 @@
 <div mat-dialog-content>
   <div>
     <form class="collection-dates" [formGroup]="editForm" 
-    (ngSubmit)="updateCollectionDate(editForm)">
+          (ngSubmit)="updateCollectionDate(editForm)">
     <div class="row">
       <div class="col-6">
-        <mat-form-field class="w-100" color="accent">
-          <mat-label>Year</mat-label>
-          <mat-select formControlName="year"
-          (selectionChange)="yearSelectionChanged($event)"
-             [required]="isRequired('year')">
-            <mat-option *ngFor="let year of years" [value]="year">
-              {{year}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="yearFC.errors?.required">
-            Required field
-          </mat-error>
-        </mat-form-field>
+        <clgx-reactive-select
+          [titleLabel]="'Year'"
+          [options]="years || []"
+          [clgxControlName]="'year'"
+          [required]="isRequired('year')"
+          [error]="year?.errors?.required">
+        </clgx-reactive-select>
       </div>
       <div class="col-6">
-        <mat-form-field class="w-100" color="accent">
-          <mat-label>Frequency</mat-label>
-          <mat-select formControlName="frequency"  (ngModelChange)="frequencyValue()" [required]="isRequired('frequency')">
-            <mat-option *ngFor="let fre of frequency" [value]="fre.id">
-              {{fre.frequency}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="frequencyFC.errors?.required">
-            Required field
-          </mat-error>
-        </mat-form-field>
+        <clgx-reactive-select
+          [titleLabel]="'Frequency'"
+          [options]="frequencies || []"
+          [clgxControlName]="'frequency'"
+          [required]="isRequired('frequency')"
+          [error]="frequency?.errors?.required">
+        </clgx-reactive-select>
       </div>
       <div class="col-6">
-        <mat-form-field class="w-100" color="accent">
-          <mat-label>Installment</mat-label>
-          <mat-select formControlName="installment" [disabled]="!installmentsValues?.length" [required]="isRequired('installment')">
-            <mat-option *ngFor="let installment of installmentsValues" [value]="installment">
-              {{installment}}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="installmentFC.errors?.required">
-            Required field
-          </mat-error>
-        </mat-form-field>
+        <clgx-reactive-select
+          [titleLabel]="'Installment'"
+          [options]="installmentsValues || []"
+          [clgxControlName]="'installment'"
+          [disabled]="!installmentsValues?.length"
+          [required]="isRequired('installment')"
+          [error]="installment?.errors?.required">
+        </clgx-reactive-select>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100" color="accent">
-          <mat-label>Base</mat-label>
-          <input [matDatepicker]="baseDatePicker" matInput formControlName="base" [required]="isRequired('base')">
-          <mat-datepicker-toggle matSuffix [for]="baseDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #baseDatePicker></mat-datepicker>
-          <mat-error *ngIf="baseFC.errors?.required">
-            Required 
-          </mat-error>
-        </mat-form-field>
+        <clgx-reactive-date
+          [titleLabel]="'Base'"
+          [required]="isRequired('base')"
+          [clgxControlName]="'base'"
+          [showClear]="false"
+          [error]="base?.errors?.required">
+        </clgx-reactive-date>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100" color="accent">
-          <mat-label>Discount</mat-label>
-          <input [matDatepicker]="discountDatePicker" matInput formControlName="discount" [required]="isRequired('discount')">
-          <mat-datepicker-toggle matSuffix [for]="discountDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #discountDatePicker></mat-datepicker>
-          <mat-error *ngIf="discountFC.errors?.required">
-            Required 
-          </mat-error>
-        </mat-form-field>
+        <clgx-reactive-date
+          [titleLabel]="'Discount'"
+          [required]="isRequired('discount')"
+          [clgxControlName]="'discount'"
+          [showClear]="false"
+          [error]="discount?.errors?.required">
+        </clgx-reactive-date>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100" color="accent">
-          <mat-label>Penalty</mat-label>
-          <input [matDatepicker]="penaltyDatePicker" matInput formControlName="penalty" 
-          [required]="isRequired('penalty')">
-          <mat-datepicker-toggle matSuffix [for]="penaltyDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #penaltyDatePicker></mat-datepicker>
-          <mat-error *ngIf="penaltyFC.errors?.required">
-            Required 
-          </mat-error>
-        </mat-form-field>
+        <clgx-reactive-date
+          [titleLabel]="'Penalty'"
+          [required]="isRequired('penalty')"
+          [clgxControlName]="'penalty'"
+          [showClear]="false"
+          [error]="penalty?.errors?.required">
+        </clgx-reactive-date>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100" color="accent">
-          <mat-label>Late Release</mat-label>
-          <input [matDatepicker]="lateReleaseDatePicker" matInput formControlName="lateRelease" [required]="isRequired('lateRelease')">
-          <mat-datepicker-toggle matSuffix [for]="lateReleaseDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #lateReleaseDatePicker></mat-datepicker>
-          <mat-error *ngIf="lateReleaseFC.errors?.required">
-            Required 
-          </mat-error>
-        </mat-form-field>
+        <clgx-reactive-date
+          [titleLabel]="'Late Release'"
+          [required]="isRequired('lateRelease')"
+          [clgxControlName]="'lateRelease'"
+          [showClear]="false"
+          [error]="lateRelease?.errors?.required">
+        </clgx-reactive-date>
       </div>
       <div class="col-6">
-        <mat-form-field  class="w-100" color="accent">
-          <mat-label>Bill Request</mat-label>
-          <input [matDatepicker]="billRequestDatePicker" matInput formControlName="billRequest" 
-          [required]="isRequired('billRequest')">
-          <mat-datepicker-toggle matSuffix [for]="billRequestDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #billRequestDatePicker></mat-datepicker>
-          <mat-error *ngIf="billRequestFC.errors?.required">
-            Required 
-          </mat-error>
-        </mat-form-field>
+        <clgx-reactive-date
+          [titleLabel]="'Bill Request'"
+          [required]="isRequired('billRequest')"
+          [clgxControlName]="'billRequest'"
+          [showClear]="false"
+          [error]="billRequest?.errors?.required">
+        </clgx-reactive-date>
       </div>
       <div class="col-12">
         <div  class="action-section">

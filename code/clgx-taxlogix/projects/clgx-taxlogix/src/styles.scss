@@ -51,6 +51,7 @@
 @import './app/shared/big-input/clgx-button/clgx-button.component.scss-theme';
 @import './app/shared/big-input/clgx-reactive-input/clgx-reactive-input.component.scss-theme.scss';
 @import './app/shared/big-input/clgx-reactive-select/clgx-reactive-select.component.scss-theme.scss';
+@import './app/shared/big-input/clgx-reactive-date/clgx-reactive-date.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include clgx-styles-reset-theme($theme);
@@ -62,6 +63,7 @@
   @include clgx-input-component-theme($theme);
   @include clgx-reactive-input-component-theme($theme);
   @include clgx-reactive-select-component-theme($theme);
+  @include clgx-reactive-date-component-theme($theme);
   @include clgx-button-component-theme($theme);
   @include clgx-agency-landing-component-theme($theme);
   @include clgx-agency-details-container-component-theme($theme);
@@ -767,3 +769,21 @@ input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
+
+.ngx-datatable { // datatable Style
+  .datatable-header { // header Style
+    .datatable-header-cell { // header Cell Style
+      .datatable-icon-up::before {
+        font-size: 200%;
+    }
+    
+    .datatable-icon-down::before {
+      font-size: 200%;
+    }
+    
+    .sort-btn.datatable-icon-sort-unset::before { // Icon Style
+      font-size: 200%;
+     }
+    }
+  }
+ }
