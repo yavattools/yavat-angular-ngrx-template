@@ -26,7 +26,6 @@ export const environment = {
     eslint: packageJson.devDependencies['eslint']
   }
 };
-
 //QA URL
 export const API_BASE_URL =
 'https://taxservices.chainlogix.net:8082/omschaingatewayservice/api';

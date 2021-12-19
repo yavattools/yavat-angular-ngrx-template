@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/
 import { Router } from '@angular/router';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import { AuthStoreFacade } from '@app/core/store/auth/auth-store-facade';
-import { AccountProfile } from '@app/core/store/auth/auth.models';
+import { AccountProfile, ListOfScreenMapping } from '@app/core/store/auth/auth.models';
 import { SettingsStoreFacade } from '@app/core/store/settings/settings-store.facade';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription } from 'rxjs';
@@ -30,6 +30,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     private router: Router
   ) {
     this.account = new AccountProfile();
+    
     this.subscriptions.push(this.authStoreFacade.account$.subscribe(a => {
       this.account = a;
     }));
@@ -55,10 +56,10 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     window.open(link, '_blank');
   }
 
-  featureClickHandler($event: MouseEvent, feature: any) {
+  featureClickHandler($event: MouseEvent, feature: ListOfScreenMapping) {
     $event.stopPropagation();
     if(feature.enabled){
-      this.router.navigateByUrl('/agency');
+      this.router.navigateByUrl('/' + feature.screeName.toLowerCase());
     }
   }
 }

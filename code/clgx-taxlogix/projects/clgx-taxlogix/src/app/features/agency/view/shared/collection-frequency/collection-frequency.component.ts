@@ -56,6 +56,7 @@ export class CollectionFrequencyComponent implements OnInit, OnChanges {
 
   isAllFreqSelected() {
     let result = false;
+    debugger;
     if (
       (this.agDefaultFreq.defaultAnnual ||
         this.agDefaultFreq.defaultDiscountAnnual ||

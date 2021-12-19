@@ -7,12 +7,12 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'clgx-big-input',
-  templateUrl: './big-input.component.html',
-  styleUrls: ['./big-input.component.scss'],
+  selector: 'clgx-big-select',
+  templateUrl: './big-select.component.html',
+  styleUrls: ['./big-select.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BigInputComponent {
+export class BigSelectComponent {
   @Output()
   blur = new EventEmitter<any>();
 
@@ -21,6 +21,9 @@ export class BigInputComponent {
 
   @Input()
   placeholder = '';
+
+  @Input()
+  options = [];
 
   @Input()
   value = '';

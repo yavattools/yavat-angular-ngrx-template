@@ -37,28 +37,75 @@ export class AccountProfile{
 
 
 export class LoginRequest {
-  public usernameOrEmail!: string;
+  public username!: string;
   public password!: string;
+  public ipaddress!: any;
   constructor() {
+    this.ipaddress =    {
+      ip: "122.171.94.175"
+      }
+  }
+}
+
+// export class LoginResponse {
+//   accessToken!: string;
+//   tokenType!: string;
+//   usersMenus!: Array<UserMenu>;
+//   username!: string;
+//   processOrgModel!: ProcessOrgModel;
+//   loginResponseStatus!: string;
+//   statusMessage!: string;
+//   statusCode!: string;
+//   errorCodeId!: string;
+//   userId!: string;
+//   profilePic!: string;
+
+//   constructor(){
+//     this.usersMenus = new Array<UserMenu>();
+//     this.processOrgModel = new ProcessOrgModel();
+//   }
+// }
+
+
+export class ListOfScreenMapping {
+  screeName!: string;
+  enabled!: boolean;
+
+  constructor(){
+    this.enabled = true;
+  }
+}
+
+export class LoginResponseStatus {
+  userMailId!: any;
+  firstTimeLogin!: boolean;
+  clientId!: number;
+  branchId!: number;
+  branchName!: string;
+  processId!: any;
+  clientNumber!: any;
+  listOfScreenMapping!: ListOfScreenMapping[];
+
+  constructor(){
+    this.listOfScreenMapping = new Array<ListOfScreenMapping>();
   }
 }
 
 export class LoginResponse {
   accessToken!: string;
   tokenType!: string;
-  usersMenus!: Array<UserMenu>;
+  usersMenus!: any;
   username!: string;
-  processOrgModel!: ProcessOrgModel;
-  loginResponseStatus!: string;
+  processOrgModel!: any;
+  loginResponseStatus!: LoginResponseStatus;
   statusMessage!: string;
-  statusCode!: string;
-  errorCodeId!: string;
-  userId!: string;
-  profilePic!: string;
+  statusCode!: number;
+  errorCodeId!: number;
+  userId!: number;
+  profilePic!: any;
 
   constructor(){
-    this.usersMenus = new Array<UserMenu>();
-    this.processOrgModel = new ProcessOrgModel();
+    this.loginResponseStatus = new LoginResponseStatus();
   }
 }
 

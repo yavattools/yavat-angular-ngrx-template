@@ -208,6 +208,8 @@ export interface GetPaymentDetailsRequest {
 export interface StateOptions {
   stateId: number | undefined;
   stateName: string | undefined;
+  value: number | undefined;
+  display: string | undefined;
   stateCode: string | undefined;
 }
 
@@ -215,6 +217,8 @@ export interface County {
   countyId: number | undefined;
   countyName: string | undefined;
   countyCode: string | undefined;
+  value: number | undefined;
+  display: string | undefined;
 }
 
 export interface DropDownOptions {
@@ -304,6 +308,7 @@ export interface AgencyState {
   assessorCounties: Array<County>;
   nonEscrowCounties: Array<County>;
   paymentCounties: Array<County>;
+  counties: Array<County>;
   actionInProgress: boolean;
   error: any;
 }

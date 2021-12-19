@@ -45,6 +45,11 @@ import { LetsconnectDialogComponent } from './dialog-model/letsconnect-dialog/le
 import { AnimateOnScrollModule } from 'ng2-animate-on-scroll';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ClgxInputComponent } from './big-input/clgx-input/clgx-input.component';
+import { ClgxSelectComponent } from './big-input/clgx-select/clgx-select.component';
+import { ClgxButtonComponent } from './big-input/clgx-button/clgx-button.component';
+import { ClgxReactiveInputComponent } from './big-input/clgx-reactive-input/clgx-reactive-input.component';
+import { ClgxReactiveSelectComponent } from './big-input/clgx-reactive-select/clgx-reactive-select.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -61,6 +66,11 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
   declarations: [
     BigInputComponent,
     BigInputActionComponent,
+    ClgxInputComponent,
+    ClgxSelectComponent,
+    ClgxReactiveInputComponent,
+    ClgxButtonComponent,
+    ClgxReactiveSelectComponent,
     RtlSupportDirective,
     MultiLineSnackbarComponent,
     FooterLgComponent,
@@ -83,6 +93,11 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
     NgxDatatableModule,
     BigInputComponent,
     BigInputActionComponent,
+    ClgxReactiveSelectComponent,
+    ClgxInputComponent,
+    ClgxSelectComponent,
+    ClgxReactiveInputComponent,
+    ClgxButtonComponent,
     RtlSupportDirective,
     FooterLgComponent,
     ButtonComponent,

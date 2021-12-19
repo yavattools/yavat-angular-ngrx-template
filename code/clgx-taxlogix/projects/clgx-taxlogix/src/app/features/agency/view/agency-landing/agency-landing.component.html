@@ -7,17 +7,91 @@
       </button>
     </mat-card-header>
     <div class="row agencies-header-div" [ngClass]="routeAnimationsElements">
-      <div class="col-3 p-10">
+      <div class="col-4 p-10">
         <div >
           <h3 class="page-title">Agencies</h3>
           <span class="page-subtitle"
           *ngIf="!(agencyFacade.actionInProgress$ | async) || false">{{filterAgencies?.length}} Agencies</span>
         </div>
       </div>
-      <div class="col-9 pb-3 agency-search-field-div" >
-        <mat-form-field color="accent" class="name-filter-input">
+      <div class="col-8 pb-3 agency-search-field-div" >
+        <div class="row text-right">
+          <div class="col-3" >
+            <clgx-input
+              [value]="agencyFilter.name"
+              [titleLabel]="'Name'"
+              (changeValue)="nameChangeHandler($event)">
+            </clgx-input>
+          </div>
+          <div class="col-3">
+            <clgx-input
+              [value]="agencyFilter.number"
+              [titleLabel]="'Number'"
+              (changeValue)="numberChangeHandler($event)">
+            </clgx-input>
+          </div>
+          <div class="col-3">
+            <clgx-select
+              [titleLabel]="'State'"
+              [options]="(agencyFacade.stateOptions$ | async) || []"
+              (changeValue)="stateChangeHandler($event)">
+            </clgx-select>
+          </div>
+          <div class="col-2" style="padding-top: 18px;text-align: left;">
+            <clgx-button 
+              [titleLabel]="'Search'"
+              [disabled]="((agencyFacade.actionInProgress$ | async) || false) || 
+              (agencyFilter.name == '' && agencyFilter.number == '' && agencyFilter.state == '') "
+              (click)="searchAgency($event)" >
+            </clgx-button>
+          </div>
+            <div class="col-1" style="padding-top: 18px;">
+            <clgx-button  
+                (click)="addNewAgency($event)"  
+                [disabled]="(agencyFacade.actionInProgress$ | async) || false"
+                [titleLabel]="'Add'" >
+            </clgx-button>
+          </div>
+        </div>
+        <!-- <div style="float: right;"> 
+          <div class="agency-input-container">
+            <label for="basic-url" class="agency-input-label">Name</label>
+            <div  class="input-group input-group-lg  mb-3">
+              <span class="input-group-prepend">
+                <div class="input-group-text bg-transparent border-right-0">
+                  <i class="fa fa-search"></i>
+                </div>
+              </span>
+              <input type="text" class="form-control agency-input-box" 
+                    [(ngModel)]="agencyFilter.name"
+                    id="basic-url" aria-label="Large"
+                    aria-describedby="inputGroup-sizing-sm">
+            </div>
+          </div>
+          <div class="agency-input-container">
+            <label for="basic-url" class="agency-input-label">Number</label>
+            <div class="input-group  input-group-lg  mb-3">
+              <input type="text" class="form-control  agency-input-box" id="basic-url" 
+                aria-describedby="basic-addon3">
+            </div>
+          </div>
+            <div class="agency-input-container">
+            <label for="state" class="agency-input-label">State</label>
+            <div class="input-group  input-group-lg   mb-3">
+              <select class="agency-select-box" id="state">
+                <option *ngFor="let option of (agencyFacade.stateOptions$ | async)" 
+                  value="option.stateId">
+                {{option.stateName}}
+              </option>
+              </select>
+            </div>
+            </div>
+            <button type="button" style="float: left;margin-top: 22px;" class="btn agency-button-type btn-lg">Search</button>
+            <button type="button" style="float: left;margin-left: 20px;margin-top: 22px;" class="btn agency-button-type btn-lg">Add</button>
+          </div> -->
+      
+        <!-- <mat-form-field color="accent" class="name-filter-input">
           <input matInput placeholder="Name" value="" [(ngModel)]="agencyFilter.name">
-          <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
           <mat-icon matPrefix *ngIf="agencyFilter.name" (click)="clearNameFilter($event)">
             <i class="fa fa-close filter-icon-orange"></i>
           </mat-icon>
@@ -25,7 +99,6 @@
   
         <mat-form-field color="accent" class="number-filter-input">
           <input matInput placeholder="Number" value="" [(ngModel)]="agencyFilter.number">
-          <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
           <mat-icon matPrefix *ngIf="agencyFilter.number" (click)="clearNumberFilter($event)">
             <i class="fa fa-close filter-icon-orange"></i>
           </mat-icon>
@@ -39,22 +112,13 @@
               {{option.stateName}}
             </mat-option>
           </mat-select>
-          <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
           <mat-icon matPrefix *ngIf="agencyFilter.state" (click)="clearStateFilter($event)">
             <i class="fa fa-close filter-icon-orange"></i>
           </mat-icon>
-        </mat-form-field>
-
-        <!-- <mat-form-field color="accent" >
-          <input matInput placeholder="State" value="" [(ngModel)]="agencyFilter.state">
-          <mat-icon matSuffix><i class="fa fa-filter filter-icon"></i></mat-icon>
-          <mat-icon matPrefix *ngIf="agencyFilter.state" (click)="clearNameFilter($event)">
-            <i class="fa fa-close filter-icon-orange"></i>
-          </mat-icon>
         </mat-form-field> -->
-        <button mat-raised-button color="primary" 
+        <!-- <button mat-raised-button color="primary" 
         [disabled]="(agencyFacade.actionInProgress$ | async) || false"
-          (click)="searchAgency($event)" >Search</button>
+          (click)="searchAgency($event)" >Search</button> -->
       </div>
     </div>
   
@@ -144,13 +208,13 @@
           </ng-template>
         </ngx-datatable-column>
       </ngx-datatable>
-      <button mat-icon-button color="accent" 
+      <!-- <button mat-icon-button color="accent" 
         [disabled]="(agencyFacade.actionInProgress$ | async) || false"
         matTooltip="Add New Agency"
         (click)="addNewAgency($event)"
         style="position: absolute;top: 175px;right: 15px; cursor: pointer;">
         <i class="fa fa-plus fa-2x"></i>
-      </button>
+      </button> -->
       <div *ngIf="(agencyFacade.actionInProgress$ | async) || false" 
         style="position: absolute;top: 500px;width: 100%;text-align: center;">
         <span>Loading Agencies Please wait!!</span>

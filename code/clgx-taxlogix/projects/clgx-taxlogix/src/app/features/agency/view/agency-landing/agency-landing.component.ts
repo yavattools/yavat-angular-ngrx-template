@@ -26,7 +26,7 @@ export class AgencyFilter {
   number: string;
   state: string;
 
-  constructor(){
+  constructor() {
     this.name = '';
     this.number = '';
     this.state = '';
@@ -34,12 +34,11 @@ export class AgencyFilter {
 }
 
 export class NGXDataTableMessages {
-
   emptyMessage!: string;
   totalMessage!: string;
   selectedMessage!: string;
 
-  constructor(){
+  constructor() {
     this.emptyMessage = 'No Agencies Found';
     this.totalMessage = 'Total Agencies';
   }
@@ -48,7 +47,7 @@ export class NGXDataTableMessages {
 @Component({
   selector: 'clgx-agency-landing',
   templateUrl: './agency-landing.component.html',
-  styleUrls: ['./agency-landing.component.scss'],
+  styleUrls: ['./agency-landing.component.scss']
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AgencyLandingComponent implements OnInit, AfterViewInit {
@@ -69,8 +68,12 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     'actions'
   ];
   ngxDisplayedColumns = [
-    { name: 'agencyNumber' }, { name: 'agencyName' }, { name: 'agencySuitsAddress' }, { name: 'agencyCity' }
-    ,  { name: 'agencyState' }, { name: 'assessorPhoneNumber' }
+    { name: 'agencyNumber' },
+    { name: 'agencyName' },
+    { name: 'agencySuitsAddress' },
+    { name: 'agencyCity' },
+    { name: 'agencyState' },
+    { name: 'assessorPhoneNumber' }
   ];
   agencyDataSource!: MatTableDataSource<Agency>;
 
@@ -87,10 +90,9 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
   rows: any[] = [];
   expanded: any = {};
   timeout: any;
-  loginData : any
+  loginData: any;
 
   // ColumnMode = ColumnMode;
-
 
   constructor(
     public deviceService: DeviceDetectorService,
@@ -98,26 +100,35 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     private cd: ChangeDetectorRef,
     public settingsFacadeService: SettingsStoreFacade,
     private router: Router,
-    private authStoreFacade : AuthStoreFacade
+    private authStoreFacade: AuthStoreFacade
   ) {
     this.dataTableMessage = new NGXDataTableMessages();
     this.dataTableMessage.emptyMessage = '';
     this.dataTableMessage.totalMessage = ' Agencies';
-    this.authStoreFacade.loginProfile$.subscribe(data=>{
+    this.authStoreFacade.loginProfile$.subscribe((data) => {
       this.loginData = data;
-    })
+    });
     this.agencies$ = this.agencyFacade.agencies$;
-    this.agencies$.pipe(first())
-          .subscribe((agencies) => {
-            if(!agencies.length){
-              this.agencyFacade.getAgencies({userId : this.loginData.processOrgModel.userId, processId : this.loginData.processOrgModel.processId, agencyMasterId : undefined});
-              this.dataTableMessage.emptyMessage = '';
-              this.dataTableMessage.totalMessage = ' Agencies';
-            }
-          });
+    this.agencies$.pipe(first()).subscribe((agencies) => {
+      if (!agencies.length) {
+        this.agencyFacade.getAgencies({
+          userId: this.loginData?.processOrgModel?.userId,
+          processId: this.loginData?.processOrgModel?.processId,
+          agencyMasterId: undefined
+        });
+        this.dataTableMessage.emptyMessage = '';
+        this.dataTableMessage.totalMessage = ' Agencies';
+      }
+    });
     this.agencyFacade.getStateOptions();
-    this.agencyFacade.getBillingRequest(this.loginData.processOrgModel.processId, this.loginData.processOrgModel.userId);
-    this.agencyFacade.getMediaType(this.loginData.processOrgModel.processId, this.loginData.processOrgModel.userId);
+    this.agencyFacade.getBillingRequest(
+      this.loginData?.processOrgModel?.processId,
+      this.loginData?.processOrgModel?.userId
+    );
+    this.agencyFacade.getMediaType(
+      this.loginData?.processOrgModel?.processId,
+      this.loginData?.processOrgModel?.userId
+    );
     this.agencyFilter = new AgencyFilter();
   }
 
@@ -151,27 +162,27 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     window.open(link, '_blank');
   }
 
-  clearNameFilter($event: MouseEvent){
+  clearNameFilter($event: MouseEvent) {
     $event.stopPropagation();
-    this.agencyFilter.name = ''; 
+    this.agencyFilter.name = '';
 
     this.searchAgency($event);
   }
 
-  clearStateFilter($event: MouseEvent){
+  clearStateFilter($event: MouseEvent) {
     $event.stopPropagation();
-    this.agencyFilter.state = ''; 
+    this.agencyFilter.state = '';
 
     this.searchAgency($event);
   }
-  
-  clearNumberFilter($event: MouseEvent){
+
+  clearNumberFilter($event: MouseEvent) {
     $event.stopPropagation();
-    this.agencyFilter.name = ''; 
+    this.agencyFilter.name = '';
 
     this.searchAgency($event);
   }
-  
+
   addNewAgency(event: MouseEvent) {
     let newAgency: Agency = new Agency();
     this.agencyFacade.setSelectedAgency(newAgency);
@@ -221,20 +232,45 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     }
   }
 
-  searchAgency($event:MouseEvent){
-    if(this.agencyFilter.name !== '' || this.agencyFilter.number !== '' || this.agencyFilter.state !== ''){
-      this.filterAgencies = [...this.agencies.filter(a => 
-          a.agencyName?.includes(this.agencyFilter.name.trim()) && 
-          a.agencyNumber?.includes(this.agencyFilter.number.trim()) && 
-          a.stateId === this.agencyFilter.state)];
+  searchAgency($event: MouseEvent) {
+    if (
+      this.agencyFilter.name !== '' ||
+      this.agencyFilter.number !== '' ||
+      this.agencyFilter.state !== ''
+    ) {
+      this.filterAgencies = [
+        ...this.agencies.filter((a) =>
+          this.agencyFilter.name
+            ? a.agencyName
+                ?.toLowerCase()
+                .includes(this.agencyFilter.name.toLowerCase().trim())
+            : true && this.agencyFilter.number
+            ? a.agencyNumber?.includes(this.agencyFilter.number.trim())
+            : true && this.agencyFilter.state
+            ? a.stateId === this.agencyFilter.state
+            : true
+        )
+      ];
       this.agencyDataSource = new MatTableDataSource(this.filterAgencies);
-    }else{
+    } else {
       this.filterAgencies = [...this.agencies];
       this.agencyDataSource = new MatTableDataSource(this.filterAgencies);
     }
   }
 
-  goToFeaturesHandler($event:MouseEvent){
+  goToFeaturesHandler($event: MouseEvent) {
     this.router.navigateByUrl('/dashboard');
+  }
+
+  nameChangeHandler($event: any) {
+    this.agencyFilter.name = $event;
+  }
+
+  numberChangeHandler($event: any) {
+    this.agencyFilter.number = $event;
+  }
+
+  stateChangeHandler($event: any) {
+    this.agencyFilter.state = $event;
   }
 }

@@ -1,4 +1,4 @@
-  <div class="big-input" [ngClass]="{ 'has-focus': hasFocus }">
+  <!-- <div class="big-input" [ngClass]="{ 'has-focus': hasFocus }">
     <div>
       <div>
         <span class="agency-input-label">Name</span>
@@ -12,4 +12,16 @@
             [disabled]="disabled" />
       </div>
     </div>
+  </div>
+ -->
+ <div class="agency-input-container">
+  <label for="state" class="agency-input-label">State</label>
+  <div class="input-group  input-group-lg   mb-3">
+    <select class="agency-select-box" id="state">
+      <option *ngFor="let option of (agencyFacade.stateOptions$ | async)" 
+        value="option.stateId">
+      {{option.stateName}}
+    </option>
+    </select>
+  </div>
   </div>

@@ -27,6 +27,22 @@ export const initialState: AgencyState = {
   escrowDetails: new EscrowDetails(),
   nonEscrowDetails: new NonEscrowDetails(),
   paymentDetails: new PaymentDetails(),
+  // stateOptions: [
+  //   {
+  //     stateId: 1,
+  //     stateName: 'GEORGIA',
+  //     value: 1,
+  //     display: 'GEORGIA',
+  //     stateCode: '1'
+  //   },
+  //   {
+  //     stateId: 2,
+  //     stateName: 'TEXUS',
+  //     value: 2,
+  //     display: 'TEXUS',
+  //     stateCode: '2'
+  //   }
+  // ],
   stateOptions: new Array<StateOptions>(),
   billingRequestOptions: new Array<DropDownOptions>(),
   mediaTypeOptions: new Array<DropDownOptions>(),
@@ -35,6 +51,7 @@ export const initialState: AgencyState = {
   nonEscrowCounties: new Array<County>(),
   paymentCounties: new Array<County>(),
   actionInProgress: false,
+  counties: new Array<County>(),
   error: ''
 };
 
@@ -55,7 +72,17 @@ export const reducer = createReducer(
   }),
   mutableOn(agencyActions.actionGetStateOptionsSuccess, (state, action) => {
     state.actionInProgress = false;
-    state.stateOptions = [...action.response];
+    let uStatesOptions: Array<StateOptions> = [];
+    action.response.forEach((s) => {
+      uStatesOptions.push({
+        stateId: s.stateId,
+        stateName: s.stateName,
+        value: s.stateId,
+        display: s.stateName,
+        stateCode: s.stateCode
+      });
+    });
+    state.stateOptions = [...uStatesOptions];
   }),
   mutableOn(agencyActions.actionGetStateOptionsFailure, (state, action) => {
     state.actionInProgress = false;
@@ -97,13 +124,53 @@ export const reducer = createReducer(
     (state, action) => {
       state.actionInProgress = false;
       if (CountiesForStates.AGENCY_STATES === action.stateField) {
-        state.agencyCounties = [...action.response];
+        let uCounties: Array<County> = [];
+        action.response.forEach((c) => {
+          uCounties.push({
+            countyId: c.countyId,
+            countyName: c.countyName,
+            value: c.countyId,
+            display: c.countyName,
+            countyCode: c.countyCode
+          });
+        });
+        state.agencyCounties = [...uCounties];
       } else if (CountiesForStates.ASSESSOR_STATES === action.stateField) {
-        state.assessorCounties = [...action.response];
+        let usCounties: Array<County> = [];
+        action.response.forEach((c) => {
+          usCounties.push({
+            countyId: c.countyId,
+            countyName: c.countyName,
+            value: c.countyId,
+            display: c.countyName,
+            countyCode: c.countyCode
+          });
+        });
+        state.assessorCounties = [...usCounties];
       } else if (CountiesForStates.NON_ESCROW_STATES === action.stateField) {
-        state.nonEscrowCounties = [...action.response];
+        let esCounties: Array<County> = [];
+        action.response.forEach((c) => {
+          esCounties.push({
+            countyId: c.countyId,
+            countyName: c.countyName,
+            value: c.countyId,
+            display: c.countyName,
+            countyCode: c.countyCode
+          });
+        });
+        state.nonEscrowCounties = [...esCounties];
       } else if (CountiesForStates.PAYMENT_STATES === action.stateField) {
-        state.paymentCounties = [...action.response];
+        let nesCounties: Array<County> = [];
+        action.response.forEach((c) => {
+          nesCounties.push({
+            countyId: c.countyId,
+            countyName: c.countyName,
+            value: c.countyId,
+            display: c.countyName,
+            countyCode: c.countyCode
+          });
+        });
+        state.paymentCounties = [...nesCounties];
       }
     }
   ),
