@@ -13,6 +13,7 @@ import {
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSelectChange } from '@angular/material/select';
+import { ROUTE_ANIMATIONS_ELEMENTS } from '@app/core/core.module';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import {
   CollectionDates,
@@ -31,13 +32,13 @@ export interface frequencys {
 }
 
 export interface Year {
-  value: string;
-  display: string;
+  value: number;
+  display: number;
 }
 
 export interface Installment {
-  value: string;
-  display: string;
+  value: number;
+  display: number;
 }
 
 @Component({
@@ -47,6 +48,8 @@ export interface Installment {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditAgencyCollectionPracticeComponent implements OnInit {
+  routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
+
   collectionDates$: Observable<CollectionDates[]>;
   collectionHistoryDates$: Observable<CollectionDates[]>;
   collectionDates!: CollectionDates[];
@@ -64,6 +67,7 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     { id: 'quarterly',value: 'quarterly',  frequency: 'Quarterly', display: 'Quarterly'  }
   ];
   collectionDate: CollectionDates = new CollectionDates();
+  collectionHistoryDates!: CollectionDates[];
   newCollectionDateForm: any;
   description: string = '';
   agencyMasterId: string | undefined;
@@ -85,11 +89,12 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     lateRelease:  ['', Validators.required],
     billRequest:  ['', Validators.required]
   });
+  isExisit = false;
 
   constructor(
     public dialogRef: MatDialogRef<AgencyCollectionPracticesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private agencyStoreFacade: AgencyStoreFacade,
+    public  agencyStoreFacade: AgencyStoreFacade,
     private fb: FormBuilder
   ) {
     this.collectionDates$ = this.agencyStoreFacade.collectionDates$;
@@ -102,18 +107,22 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
       this.frequencyValue();
     })
   
+    this.collectionHistoryDates$.subscribe(chdates => {
+      this.collectionHistoryDates = [...chdates];
+    })
     this.collectionDates$.subscribe((data) => {
       this.collectionDates = [...data];
       data.map((collectionDate) => {
         if (
-          this.years.filter((y) =>  y.value === collectionDate.collectionYear
+          this.years.filter((y) =>  y.value === +collectionDate.collectionYear
           )
         ) {
-          this.years.filter((e) => e.value !== collectionDate.collectionYear);
+          this.years.filter((e) => e.value !== +collectionDate.collectionYear);
         }
       });
     });
     this.loadYears();
+    this.frequencyValue();
     this.agencyStoreFacade.selectedCollectionDate$.subscribe(
       (collectionDate) => {
         this.collectionDate = collectionDate;
@@ -122,63 +131,63 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
           this.editForm.controls['year'].setValue(
             +collectionDate.collectionYear
           );
-          this.editForm.controls['year'].disable();
+          // this.editForm.controls['year'].disable();
 
           this.editForm.controls['installment'].setValue(
             +collectionDate.collectionInstallment
           );
           let freq = this.getFrequency(collectionDate.collectionFrequency);
-          if (freq === EditFrequencyType.ANNUAL) {
-            if (+collectionDate.collectionInstallment == 1) {
-              this.editForm.controls['installment'].disable();
-            }
-          } else if (freq === EditFrequencyType.DISCOUNT_ANNUAL) {
-            if (+collectionDate.collectionInstallment == 1) {
-              this.editForm.controls['installment'].disable();
-            }
-          } else if (freq === EditFrequencyType.QUARTERLY) {
-            let records: CollectionDates[] = this.collectionDates.filter(
-              (cd) => +cd.collectionYear === +collectionDate.collectionYear
-            );
-            this.installmentsValues = [];
-            for (let i = 0; i < 4; i++) {
-              let ins = records.filter((r) => +r.collectionInstallment === i);
-              if (!ins) {
-                this.installmentsValues.push({
-                  value: (i+1).toString(),
-                  display: (i+1).toString()
-                });
-              }
-            }
-          } else if (freq === EditFrequencyType.SEMI_ANNUAL) {
-            let records: CollectionDates[] = this.collectionDates.filter(
-              (cd) => +cd.collectionYear === +collectionDate.collectionYear
-            );
-            this.installmentsValues = []
-            for (let i = 0; i < 2; i++) {
-              let ins = records.filter((r) => +r.collectionInstallment === i);
-              if (!ins) {
-                this.installmentsValues.push({
-                  value: (i+1).toString(),
-                  display: (i+1).toString()
-                });
-              }
-            }
-          } else if (freq === EditFrequencyType.TRI) {
-            let records: CollectionDates[] = this.collectionDates.filter(
-              (cd) => +cd.collectionYear === +collectionDate.collectionYear
-            );
-            this.installmentsValues = [];
-            for (let i = 0; i < 3; i++) {
-              let ins = records.filter((r) => +r.collectionInstallment === i);
-              if (!ins) {
-                this.installmentsValues.push({
-                  value: (i+1).toString(),
-                  display: (i+1).toString()
-                });
-              }
-            }
-          }
+          // if (freq === EditFrequencyType.ANNUAL) {
+          //   if (+collectionDate.collectionInstallment == 1) {
+          //     this.editForm.controls['installment'].disable();
+          //   }
+          // } else if (freq === EditFrequencyType.DISCOUNT_ANNUAL) {
+          //   if (+collectionDate.collectionInstallment == 1) {
+          //     this.editForm.controls['installment'].disable();
+          //   }
+          // } else if (freq === EditFrequencyType.QUARTERLY) {
+          //   let records: CollectionDates[] = this.collectionDates.filter(
+          //     (cd) => +cd.collectionYear === +collectionDate.collectionYear
+          //   );
+          //   this.installmentsValues = [];
+          //   for (let i = 0; i < 4; i++) {
+          //     let ins = records.filter((r) => +r.collectionInstallment === i);
+          //     if (!ins) {
+          //       this.installmentsValues.push({
+          //         value: (i+1).toString(),
+          //         display: (i+1).toString()
+          //       });
+          //     }
+          //   }
+          // } else if (freq === EditFrequencyType.SEMI_ANNUAL) {
+          //   let records: CollectionDates[] = this.collectionDates.filter(
+          //     (cd) => +cd.collectionYear === +collectionDate.collectionYear
+          //   );
+          //   this.installmentsValues = []
+          //   for (let i = 0; i < 2; i++) {
+          //     let ins = records.filter((r) => +r.collectionInstallment === i);
+          //     if (!ins) {
+          //       this.installmentsValues.push({
+          //         value: (i+1).toString(),
+          //         display: (i+1).toString()
+          //       });
+          //     }
+          //   }
+          // } else if (freq === EditFrequencyType.TRI) {
+          //   let records: CollectionDates[] = this.collectionDates.filter(
+          //     (cd) => +cd.collectionYear === +collectionDate.collectionYear
+          //   );
+          //   this.installmentsValues = [];
+          //   for (let i = 0; i < 3; i++) {
+          //     let ins = records.filter((r) => +r.collectionInstallment === i);
+          //     if (!ins) {
+          //       this.installmentsValues.push({
+          //         value: (i+1).toString(),
+          //         display: (i+1).toString()
+          //       });
+          //     }
+          //   }
+          // }
           this.editForm.controls['frequency'].setValue(freq);
 
           // if (collectionDate.collectionFrequency) {
@@ -211,55 +220,55 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
           // set selected freq and disable and find the left over instllments and load to installment dropdown.
           // this logic need to do on year selection also.
 
-          let records: CollectionDates[] = this.collectionDates.filter(
-            (cd) => +cd.collectionYear === cYear
-          );
-          if (records && records.length) {
-            let cFreq = this.getFrequency(records[0].collectionFrequency);
-            this.editForm.controls['frequency'].setValue(cFreq);
-            // this.editForm.controls['frequency'].disable();
-            if (cFreq === EditFrequencyType.ANNUAL) {
-              this.editForm.controls['installment'].disable();
-            } else if (cFreq === EditFrequencyType.DISCOUNT_ANNUAL) {
-              this.editForm.controls['installment'].disable();
-            } else if (cFreq === EditFrequencyType.QUARTERLY) {
-              this.installmentsValues = [];
-              for (let i = 1; i < 5; i++) {
-                let ins = records.filter((r) => +r.collectionInstallment === i);
-                if (!ins) {
-                  this.installmentsValues.push({
-                    value: (i+1).toString(),
-                    display: (i+1).toString()
-                  });
-                }
-              }
-            } else if (cFreq === EditFrequencyType.SEMI_ANNUAL) {
-              this.installmentsValues = [];
-              for (let i = 1; i < 3; i++) {
-                let ins = records.filter((r) => +r.collectionInstallment === i);
-                if (!ins) {
-                  this.installmentsValues.push({
-                    value: (i+1).toString(),
-                    display: (i+1).toString()
-                  });
-                }
-              }
-            } else if (cFreq === EditFrequencyType.TRI) {
-              this.installmentsValues = [];
-              for (let i = 1; i < 4; i++) {
-                let ins = records.filter((r) => +r.collectionInstallment === i);
-                if (!ins || (ins && ins.length == 0) ) {
-                  this.installmentsValues.push({
-                    value: (i+1).toString(),
-                    display: (i+1).toString()
-                  });
-                }
-              }
+          // let records: CollectionDates[] = this.collectionDates.filter(
+          //   (cd) => +cd.collectionYear === cYear
+          // );
+          // if (records && records.length) {
+          //   let cFreq = this.getFrequency(records[0].collectionFrequency);
+          //   this.editForm.controls['frequency'].setValue(cFreq);
+          //   // this.editForm.controls['frequency'].disable();
+          //   if (cFreq === EditFrequencyType.ANNUAL) {
+          //     this.editForm.controls['installment'].disable();
+          //   } else if (cFreq === EditFrequencyType.DISCOUNT_ANNUAL) {
+          //     this.editForm.controls['installment'].disable();
+          //   } else if (cFreq === EditFrequencyType.QUARTERLY) {
+          //     this.installmentsValues = [];
+          //     for (let i = 1; i < 5; i++) {
+          //       let ins = records.filter((r) => +r.collectionInstallment === i);
+          //       if (!ins) {
+          //         this.installmentsValues.push({
+          //           value: (i+1).toString(),
+          //           display: (i+1).toString()
+          //         });
+          //       }
+          //     }
+          //   } else if (cFreq === EditFrequencyType.SEMI_ANNUAL) {
+          //     this.installmentsValues = [];
+          //     for (let i = 1; i < 3; i++) {
+          //       let ins = records.filter((r) => +r.collectionInstallment === i);
+          //       if (!ins) {
+          //         this.installmentsValues.push({
+          //           value: (i+1).toString(),
+          //           display: (i+1).toString()
+          //         });
+          //       }
+          //     }
+          //   } else if (cFreq === EditFrequencyType.TRI) {
+          //     this.installmentsValues = [];
+          //     for (let i = 1; i < 4; i++) {
+          //       let ins = records.filter((r) => +r.collectionInstallment === i);
+          //       if (!ins || (ins && ins.length == 0) ) {
+          //         this.installmentsValues.push({
+          //           value: (i+1).toString(),
+          //           display: (i+1).toString()
+          //         });
+          //       }
+          //     }
             
-            }
-          } else {
-            this.editForm.controls['installment'].disable();
-          }
+          //   }
+          // } else {
+          //   this.editForm.controls['installment'].disable();
+          // }
           if(this.installmentsValues.length){
             this.editForm.controls['installment'].enable();
           }
@@ -285,17 +294,26 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     for (let i = 0; i < 20; i++) {
       this.years.push(
         {
-         value: ((currentYear + 20) - i).toString(),
-         display: ((currentYear + 20) - i).toString()
+         value: ((currentYear + 20) - i),
+         display: ((currentYear + 20) - i)
         });
     }
   
     for (let i = 0; i < 20; i++) {
       this.years.push(
         {
-         value: (currentYear - i).toString(),
-         display: (currentYear - i).toString()
+         value: (currentYear - i),
+         display: (currentYear - i)
         });
+    }
+  }
+
+  loadInstallments(){
+    for(let i= 0; i < 4; i++){
+      this.installmentsValues.push({
+              value: (i+1),
+              display: (i+1)
+            });
     }
   }
 
@@ -319,8 +337,8 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
           let ins = records.filter((r) => +r.collectionInstallment === i);
           if (!ins) {
             this.installmentsValues.push({
-              value: (i+1).toString(),
-              display: (i+1).toString()
+              value: (i+1),
+              display: (i+1)
             });
           }
         }
@@ -331,8 +349,8 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
           let ins = records.filter((r) => +r.collectionInstallment === i);
           if (!ins) {
             this.installmentsValues.push({
-              value: (i+1).toString(),
-              display: (i+1).toString()
+              value: (i+1),
+              display: (i+1)
             });
           }
         }
@@ -342,8 +360,8 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
           let ins = records.filter((r) => +r.collectionInstallment === i);
           if (!ins) {
             this.installmentsValues.push({
-              value: (i+1).toString(),
-              display: (i+1).toString()
+              value: (i+1),
+              display: (i+1)
             });
           }
         }
@@ -397,6 +415,45 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
   }
 
   updateCollectionDate(form: FormGroup) {
+
+    // Check for Record in Exisiting Records if not add 
+    // if exisit then stay on same screen with message.
+    if(!this.collectionDate.agencyCollectionDatesId){
+      let sYear = form.controls['year'].value;
+      let sinstall = form.controls['installment'].value;
+      let sfreq: string = form.controls['frequency'].value;
+      this.isExisit = false;
+      for(let i = 0; i < this.collectionDates.length; i++){
+        if(+this.collectionDates[i].collectionYear === +sYear && 
+          +this.collectionDates[i].collectionInstallment === +sinstall && 
+          +this.collectionDates[i].collectionFrequency === 
+          +this.getFrequencyValue()){
+            this.isExisit = true;
+            break;
+          }
+      }
+      if(this.isExisit) {
+        setTimeout(() => {
+          this.isExisit = false;
+        }, 50);
+        return
+      };
+      for(let i = 0; i < this.collectionHistoryDates.length; i++){
+        if( +this.collectionHistoryDates[i].collectionYear === +sYear && 
+            +this.collectionHistoryDates[i].collectionInstallment === +sinstall && 
+            +this.collectionHistoryDates[i].collectionFrequency
+              === +this.getFrequencyValue()){
+            this.isExisit = true;
+            break;
+          }
+      }
+      if(this.isExisit) {
+        setTimeout(() => {
+          this.isExisit = false;
+        }, 50);
+        return
+      };
+    }
     this.newCollectionDateForm = new CollectionDates();
     if (form.controls['year'].value !== this.collectionDate.collectionYear) {
       this.addToDescription(
@@ -546,37 +603,40 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
   frequencyValue() {
     this.editForm.controls['installment'].enable();
     if (this.editForm.controls['frequency'].value === 'annual') {
+      this.installmentsValues = [];
       this.installmentsValues.push({
-        value: '1',
-        display: '1'
+        value: 1,
+        display: 1
       });
     } else if (this.editForm.controls['frequency'].value === 'discountAnnual') {
+      this.installmentsValues = [];
+
       this.installmentsValues.push({
-        value: '1',
-        display: '1'
+        value: 1,
+        display: 1
       });
     } else if (this.editForm.controls['frequency'].value === 'semiAnnual') {
       this.installmentsValues = [];
       for(let i = 0; i < 2; i++){
         this.installmentsValues.push({
-          value: (i+1).toString(),
-          display: (i+1).toString()
+          value: (i+1),
+          display: (i+1)
         });
       }
     } else if (this.editForm.controls['frequency'].value === 'tri') {
       this.installmentsValues = [];
       for(let i = 0; i < 3; i++){
         this.installmentsValues.push({
-          value: (i+1).toString(),
-          display: (i+1).toString()
+          value: (i+1),
+          display: (i+1)
         });
       }
     } else if (this.editForm.controls['frequency'].value === 'quarterly') {
       this.installmentsValues = [];
       for(let i = 0; i < 4; i++){
         this.installmentsValues.push({
-          value: (i+1).toString(),
-          display: (i+1).toString()
+          value: (i+1),
+          display: (i+1)
         });
       }
     } else {
@@ -616,6 +676,9 @@ export class EditAgencyCollectionPracticeComponent implements OnInit {
     return result;
   }
 
+  clearMessageHandler($event: MouseEvent){
+    this.isExisit = false;
+  }
   addToDescription(oldValue: any, newValue: any, fieldname: string) {
     this.description +=
       fieldname + ' is updated from ' + oldValue + ' to ' + newValue + '; ';

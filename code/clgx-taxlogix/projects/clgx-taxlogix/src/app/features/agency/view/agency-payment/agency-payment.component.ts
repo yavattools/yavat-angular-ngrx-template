@@ -76,6 +76,11 @@ export class AgencyPaymentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.paymentFormGroup.get('stateId')?.valueChanges.subscribe(s => {
+      if(s){
+        this.agencyStoreFacade.getCounties(s, 'paymentStates');
+      }
+    })
     if(this.deviceService.isMobile()){
       this.isMobile = true;
     }else{

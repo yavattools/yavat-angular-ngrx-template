@@ -48,7 +48,7 @@
 
     .collections-table {
       width: 100%;
-      height: 450px !important;
+      min-height: 300px !important;
       box-shadow: none;
       overflow-y: scroll;
       overflow-x: hidden;
@@ -193,5 +193,25 @@
     .collection-action-icon:hover {
       color: mat.get-color-from-palette($accent) !important;
     }
+
+    .ngx-datatable { // datatable Style
+      .datatable-header { // header Style
+        .datatable-header-cell { // header Cell Style
+          .datatable-icon-up::before {
+            font-size: 200%;
+            color:mat.get-color-from-palette($primary, 800) !important; ;
+        }
+        
+        .datatable-icon-down::before {
+          font-size: 200%;
+          color:mat.get-color-from-palette($primary, 800) !important; ;
+        }
+        
+        .sort-btn.datatable-icon-sort-unset::before { // Icon Style
+          font-size: 200%;
+         }
+        }
+      }
+     }
   }
 }

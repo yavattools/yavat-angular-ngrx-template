@@ -61,6 +61,8 @@
 .payment-tab{
   display: grid;
   // grid-template-columns: 35% 35% 30%;
+  grid-template-columns: 26% 11% 26% 11% 25%;
+
   padding: 3rem 0rem;
   .details {
     // display: flex;
@@ -107,9 +109,20 @@
       }
       .toggle {
         width: 90%;
-        margin: 0 0 2.7rem 0;
-        display: flex;
-        flex-direction: column;
+          // margin: 0 0 2.7rem 0;
+          padding-top: 13px;
+          padding-bottom: 13px;
+          display: flex;
+          flex-direction: column;
+          .agency-reactive-input-label {
+            font-family: Graphik-regular !important;
+            font-style: normal !important;
+            font-weight: 400 !important;
+            font-size: 12px !important;
+            line-height: 18px !important;
+            letter-spacing: 0.03em !important;
+            color: #868686 !important;
+            }
         mat-label {
           font-style: normal;
           font-weight: normal;
@@ -127,7 +140,7 @@
         }
         .mat-button-toggle {
           width: 50%;
-          height: 56px;
+          height: 48px;
           padding: 0 !important;
           display: flex;
           align-items: center;
