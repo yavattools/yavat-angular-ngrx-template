@@ -21,7 +21,7 @@
     </div>
   </div>
   <form class="form" 
-    [formGroup]="agencyDetailsGroup" (ngSubmit)="save(agencyDetailsGroup)">
+    [formGroup]="agencyDetailsGroup" >
   <div class="agency-details">
     <div class="details">
       <div class="detail">
@@ -326,11 +326,12 @@
   </div>
   <div class="divider">
   </div>
-  <div class="save-btn">
-    <button mat-raised-button color="primary" 
-        [disabled]="agencyDetailsGroup.invalid || !defFreqSelected || !nonFreqSelected">
-        Save
-    </button>
+  <div class="save-btn"> 
+    <clgx-button style="width: 300px;"
+      [titleLabel]="'Save'"
+      [disabled]="agencyDetailsGroup.invalid || !defFreqSelected || !nonFreqSelected"
+      (clgClick)="save($event, agencyDetailsGroup)" >
+    </clgx-button>
   </div>
   </form>
 </div>

@@ -133,6 +133,19 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+    this.agencyFacade.actionInProgress$.subscribe(p => {
+      if(p){
+        this.dataTableMessage = new NGXDataTableMessages();
+        this.dataTableMessage.emptyMessage = 'Loading Please wait...';
+        this.dataTableMessage.totalMessage = ' Agencies';
+      }else{
+        if(!this.agencies.length){
+          this.dataTableMessage = new NGXDataTableMessages();
+          this.dataTableMessage.emptyMessage = 'No Agencies Found...';
+          this.dataTableMessage.totalMessage = ' Agencies';
+        }
+      }
+    })
     this.agencies$.subscribe((agencies) => {
       debugger;
       this.agencies = [...agencies];

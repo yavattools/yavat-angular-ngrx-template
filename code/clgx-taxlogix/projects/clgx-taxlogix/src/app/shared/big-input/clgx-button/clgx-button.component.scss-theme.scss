@@ -15,7 +15,10 @@
       padding: 3px;
       .clgx-button-type {
         // width : 128px;
+        width: 100% !important;
+        min-width: 80px;
         height: 48px;
+        font-size: 1rem !important;
         color: white;
         font-family: Graphik-medium !important;
         border-radius: 4px;
@@ -24,8 +27,11 @@
       }
       .clgx-button-type-disabled {
         // width : 128px;
+        width: 100% !important;
+        min-width: 80px;
         height: 48px;
-        color: darkgray;
+        font-size: 1rem !important;
+        color: rgb(98, 97, 97);
         font-family: Graphik-medium !important;
         border-radius: 4px;
         background: silver;

@@ -75,7 +75,10 @@
       .datatable-row-group {
       background: rgba(0, 243, 243, 0.118) !important;
     }
-
+    .ngx-datatable.material .empty-row{
+      color: mat.get-color-from-palette($accent) !important;
+    }
+ 
     .mat-row:hover {
       // background-color: red;
     }
