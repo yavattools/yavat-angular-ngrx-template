@@ -39,9 +39,9 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   
   escrowForm = this.fb.group({
     contactName : [''],
-    contactPhone : ['', Validators.minLength(10)],
+    contactPhone : [''],
     contactFax : [''],
-    contactEmail : ['', Validators.email],
+    contactEmail : [''],
     agencyWebsite : [''],
     amtAvailableOnWebsite : [''],
     costToPayUsingCopyOfTb : [''],
@@ -56,9 +56,9 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   nonEscrowForm = this.fb.group({
     collectingAgencyName : [''],
     contactName : [''],
-    contactPhone : ['',Validators.minLength(10)],
+    contactPhone : [''],
     contactFax : [''],
-    contactEmail : ['', Validators.email],
+    contactEmail : [''],
     agencyWebsite : [''],
     collectedByAgency : [''],
     thirdPartyCollections : [''],
@@ -68,9 +68,9 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
     payToName : [''],
     payToAddress : [''],
     payToCity : [''],
-    stateId : ['', Validators.required],
-    zipId : ['', Validators.required],
-    countyId : ['', Validators.required],
+    stateId : [''],
+    zipId : [''],
+    countyId : [''],
     methodOfPaymentRequired : ['']
   });
   // selectedAgency$ : Observable<Agency>;
@@ -104,6 +104,12 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
+
+    this.nonEscrowForm.get('stateId')?.valueChanges.subscribe(s => {
+      if(s){
+        this.agencyFacade.getCounties(s, 'nonEscrowStates');
+      }
+    })
     this.escrowDetails$.subscribe(escrowDetails => {
       this.escrowDetails = escrowDetails;
       if(escrowDetails){
@@ -262,6 +268,14 @@ export class AgencyProcumentComponent implements OnInit, AfterViewInit {
   // get methodOfPaymentRequiredWire(){
   //   return this.nonEscrowForm.get('methodOfPaymentRequiredWire');
   // }
+
+  getStateId(){
+    let result = false;
+    if(this.nonEscrowForm.controls['stateId'].value){
+      result = true;
+    }
+    return result;
+  }
 
   ngAfterViewInit(){
     this.tabSelectedIndex = 0;

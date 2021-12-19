@@ -3,7 +3,8 @@ import {
   OnInit,
   ChangeDetectionStrategy,
   OnDestroy,
-  ChangeDetectorRef
+  ChangeDetectorRef,
+  AfterContentInit
 } from '@angular/core';
 import { AgencyStoreFacade } from '@app/core/store/agency/agency-store.facade';
 import {
@@ -32,7 +33,7 @@ interface Options {
   styleUrls: ['./agency-details.component.scss']
   // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AgencyDetailsComponent implements OnInit, OnDestroy {
+export class AgencyDetailsComponent implements OnInit, OnDestroy, AfterContentInit {
   routeAnimationsElements = ROUTE_ANIMATIONS_ELEMENTS;
   agency!: Agency;
   newAgencyDetails: any;
@@ -160,18 +161,29 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngAfterContentInit(): void {
+    this.agencyDetailsGroup.get('stateId')?.valueChanges.subscribe(s => {
+      debugger;
+      if(s){
+        this.agencyFacade.getCounties(s, 'agencyStates');
+      }
+    })
+    setTimeout(() => {
+      this.agencyDetailsGroup.get('assessorStateId')?.valueChanges.subscribe(s => {
+        debugger;
+        if(s){
+          this.agencyFacade.getCounties(s, 'assessorStates');
+        }
+      })
+    }, 100);
+   
+  }
+
   ngOnInit() {
     this.settingsFacadeService.setHeaderShowTime('always');
     setTimeout(() => {
       this.settingsFacadeService.showHeader();
     }, 100);
-    this.agencyDetailsGroup.get('stateId')?.valueChanges.subscribe(s => {
-      this.agencyFacade.getCounties(s, 'agencyStates');
-    })
-    this.agencyDetailsGroup.get('assessorStateId')?.valueChanges.subscribe(s => {
-      this.agencyFacade.getCounties(s, 'assessorStates');
-    })
-
     
     this.agencyDetailsGroup.get('payZip')?.valueChanges.subscribe(s => {
       // Get Details ..
@@ -188,11 +200,13 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
       this.agency$.subscribe((agency) => {
         this.agency = agency;
         if (this.agency && this.agency.agencyMasterId) {
+          debugger;
           if (
             this.agency.stateId &&
             this.agencyCounties &&
             !this.agencyCounties.length
           ) {
+            debugger;
             this.agencyFacade.getCounties(this.agency.stateId, 'agencyStates');
           } else {
             this.agencyCounties = [];

@@ -8,7 +8,7 @@
       <clgx-button  
           (clgClick)="addCollectionDates($event)"  
           [disabled]="(agencyStoreFacade.actionInProgress$ | async) || false"
-          [titleLabel]="'Edit'" >
+          [titleLabel]="'Add'" >
       </clgx-button>
     </div>
   </div>
@@ -193,7 +193,7 @@
         <div class="collection-table-cell-data">{{ value }}</div>
       </ng-template>
     </ngx-datatable-column>
-     <ngx-datatable-column name="actions"  >
+     <ngx-datatable-column name="actions"  [sortable]="false">
        <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
          <span class="collection-table-header-label">Actions</span>   
        </ng-template>
@@ -392,7 +392,7 @@
         <div class="collection-table-cell-data">{{ value }}</div>
       </ng-template>
     </ngx-datatable-column>
-     <ngx-datatable-column name="actions"  >
+     <ngx-datatable-column name="actions" [sortable]="false" >
        <ng-template let-column="column" let-value="value" ngx-datatable-header-template>
          <span class="collection-table-header-label">Actions</span>   
        </ng-template>
