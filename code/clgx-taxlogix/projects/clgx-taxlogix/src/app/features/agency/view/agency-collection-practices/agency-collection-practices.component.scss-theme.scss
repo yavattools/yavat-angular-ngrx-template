@@ -9,6 +9,19 @@
   $background: map-get($theme, background);
 
   clgx-agency-collection-practices {
+
+    .sort-icon:hover{
+      cursor: pointer;
+      .no-sort {
+        color: #A8A6A6;
+      }
+    }
+    .sort-icon{
+      width: 16px !important;
+      height: 16px !important;
+      line-height: 10px !important;
+    }
+
     .mat-table {
       width: 100%;
 

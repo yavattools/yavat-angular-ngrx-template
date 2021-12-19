@@ -50,6 +50,7 @@ import { ClgxSelectComponent } from './big-input/clgx-select/clgx-select.compone
 import { ClgxButtonComponent } from './big-input/clgx-button/clgx-button.component';
 import { ClgxReactiveInputComponent } from './big-input/clgx-reactive-input/clgx-reactive-input.component';
 import { ClgxReactiveSelectComponent } from './big-input/clgx-reactive-select/clgx-reactive-select.component';
+import { ClgxReactiveDateComponent } from './big-input/clgx-reactive-date/clgx-reactive-date.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -71,6 +72,7 @@ import { ClgxReactiveSelectComponent } from './big-input/clgx-reactive-select/cl
     ClgxReactiveInputComponent,
     ClgxButtonComponent,
     ClgxReactiveSelectComponent,
+    ClgxReactiveDateComponent,
     RtlSupportDirective,
     MultiLineSnackbarComponent,
     FooterLgComponent,
@@ -97,6 +99,7 @@ import { ClgxReactiveSelectComponent } from './big-input/clgx-reactive-select/cl
     ClgxInputComponent,
     ClgxSelectComponent,
     ClgxReactiveInputComponent,
+    ClgxReactiveDateComponent,
     ClgxButtonComponent,
     RtlSupportDirective,
     FooterLgComponent,

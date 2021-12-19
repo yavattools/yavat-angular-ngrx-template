@@ -1,0 +1,24 @@
+  <div class="clgx-reactive-date" >
+    <div>
+      <div>
+        <span class="agency-input-label">{{titleLabel}}<span *ngIf="required" style="color:orangered;">*</span></span>
+      </div>
+      <div >
+        <mat-form-field  
+            class="w-100" color="accent"
+            class="clgx-mat-input" 
+            floatLabel='never' 
+            appearance="outline">
+          <input [matDatepicker]="clgxDatePicker" matInput
+            #inputValue  
+            [formControlName]="clgxControlName"
+            [required]="required" >
+          <mat-datepicker-toggle matSuffix [for]="clgxDatePicker"></mat-datepicker-toggle>
+          <mat-datepicker #clgxDatePicker></mat-datepicker>
+          <mat-error *ngIf="error">
+            Required 
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
