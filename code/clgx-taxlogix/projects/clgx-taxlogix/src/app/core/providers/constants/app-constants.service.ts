@@ -73,7 +73,7 @@ export class AppConstantsService {
     : '' + APP_CONTEXT + '/agency/fetchDropList';
 
     this.SIGN_IN_URL =
-      (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/auth/signin';
+      (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/taxlogix/login';
       
     this.GET_ACCOUNT_INFO_URL =
       (APP_CONTEXT ? '/' : '') + APP_CONTEXT + '/api/account';

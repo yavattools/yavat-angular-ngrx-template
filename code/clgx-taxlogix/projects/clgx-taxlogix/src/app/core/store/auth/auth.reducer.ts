@@ -25,9 +25,11 @@ const reducer = createReducer(
   mutableOn(LoginSuccessAction, (state, action) => {
     state.actionInProgress = false;
     let uAccount =  _.cloneDeep(state.account);
-    uAccount.loginProfile = action.loginResponse;
+    uAccount.loginProfile = _.cloneDeep(action.loginResponse);
+    uAccount.loginProfile.loginResponseStatus.listOfScreenMapping.forEach(s => {
+      s.enabled = true;
+    })
     uAccount.userName = action.loginResponse.username;
-
     state.loginResponse = action.loginResponse;
     state.account = uAccount;
     // if(state.account.loginProfile.statusCode){

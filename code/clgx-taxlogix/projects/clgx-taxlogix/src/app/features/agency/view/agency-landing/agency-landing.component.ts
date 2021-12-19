@@ -112,8 +112,8 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     this.agencies$.pipe(first()).subscribe((agencies) => {
       if (!agencies.length) {
         this.agencyFacade.getAgencies({
-          userId: this.loginData?.processOrgModel.userId,
-          processId: this.loginData?.processOrgModel.processId,
+          userId: this.loginData?.processOrgModel?.userId,
+          processId: this.loginData?.processOrgModel?.processId,
           agencyMasterId: undefined
         });
         this.dataTableMessage.emptyMessage = '';
@@ -122,12 +122,12 @@ export class AgencyLandingComponent implements OnInit, AfterViewInit {
     });
     this.agencyFacade.getStateOptions();
     this.agencyFacade.getBillingRequest(
-      this.loginData?.processOrgModel.processId,
-      this.loginData?.processOrgModel.userId
+      this.loginData?.processOrgModel?.processId,
+      this.loginData?.processOrgModel?.userId
     );
     this.agencyFacade.getMediaType(
-      this.loginData?.processOrgModel.processId,
-      this.loginData?.processOrgModel.userId
+      this.loginData?.processOrgModel?.processId,
+      this.loginData?.processOrgModel?.userId
     );
     this.agencyFilter = new AgencyFilter();
   }

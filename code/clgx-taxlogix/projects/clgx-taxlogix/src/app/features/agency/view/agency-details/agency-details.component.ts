@@ -24,7 +24,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 interface Options {
   value: string;
-  viewValue: string;
+  display: string;
 }
 @Component({
   selector: 'clgx-agency-details',
@@ -97,11 +97,11 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
   billingRequest: Array<DropDownOptions> = new Array<DropDownOptions>();
   mediaType: Array<DropDownOptions> = new Array<DropDownOptions>();
 
-  options: Options[] = [
-    { value: '1', viewValue: '1' },
-    { value: '2', viewValue: '2' },
-    { value: '3', viewValue: '3' },
-    { value: '4', viewValue: '4' }
+  lowLEvelOptions: Options[] = [
+    { value: '1', display: '1' },
+    { value: '2', display: '2' },
+    { value: '3', display: '3' },
+    { value: '4', display: '4' }
   ];
 
   stateOptions$: Observable<StateOptions[]>;
@@ -165,6 +165,23 @@ export class AgencyDetailsComponent implements OnInit, OnDestroy {
     setTimeout(() => {
       this.settingsFacadeService.showHeader();
     }, 100);
+    this.agencyDetailsGroup.get('stateId')?.valueChanges.subscribe(s => {
+      this.agencyFacade.getCounties(s, 'agencyStates');
+    })
+    this.agencyDetailsGroup.get('assessorStateId')?.valueChanges.subscribe(s => {
+      this.agencyFacade.getCounties(s, 'assessorStates');
+    })
+
+    
+    this.agencyDetailsGroup.get('payZip')?.valueChanges.subscribe(s => {
+      // Get Details ..
+    })
+    this.agencyDetailsGroup.get('assessorPhoneNumber')?.valueChanges.subscribe(s => {
+      // this.keyPress()
+    })
+
+    
+
     this.isAgencyCountiesLoading = false;
     this.isAssessorCountiesLoading = false;
     this.subscriptions.push(

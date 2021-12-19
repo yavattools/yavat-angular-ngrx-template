@@ -49,6 +49,8 @@
 @import './app/shared/big-input/clgx-input/clgx-input.component.scss-theme';
 @import './app/shared/big-input/clgx-select/clgx-select.component.scss-theme';
 @import './app/shared/big-input/clgx-button/clgx-button.component.scss-theme';
+@import './app/shared/big-input/clgx-reactive-input/clgx-reactive-input.component.scss-theme.scss';
+@import './app/shared/big-input/clgx-reactive-select/clgx-reactive-select.component.scss-theme.scss';
 
 @mixin custom-components-theme($theme) {
   @include clgx-styles-reset-theme($theme);
@@ -58,6 +60,8 @@
   @include clgx-big-input-component-theme($theme);
   @include clgx-select-component-theme($theme);
   @include clgx-input-component-theme($theme);
+  @include clgx-reactive-input-component-theme($theme);
+  @include clgx-reactive-select-component-theme($theme);
   @include clgx-button-component-theme($theme);
   @include clgx-agency-landing-component-theme($theme);
   @include clgx-agency-details-container-component-theme($theme);
@@ -738,4 +742,28 @@ mat-form-field:focus-visible {
 }
 .container {
   // background-color: #F6F7F8 !important;
+}
+
+
+
+@-webkit-keyframes autofill {
+  0%,100% {
+      color: #666 !important;
+      background: transparent !important;
+  }
+}
+
+input:-webkit-autofill {
+  -webkit-animation-delay: 1s !important; /* Safari support - any positive time runs instantly */
+  -webkit-animation-name: autofill !important;
+  -webkit-animation-fill-mode: both !important;
+  background: transparent !important;
+}
+
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
 }

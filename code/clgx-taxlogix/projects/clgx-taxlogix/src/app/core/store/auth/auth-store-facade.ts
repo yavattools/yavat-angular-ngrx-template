@@ -14,6 +14,7 @@ export class AuthStoreFacade {
   loginProfile$ = this.store.pipe(select(fromSelectors.getLoginProfile));
   account$ = this.store.pipe(select(fromSelectors.getUserAccount));
   userMenus$ = this.store.pipe(select(fromSelectors.getUserMenus));
+  userScreens$ = this.store.pipe(select(fromSelectors.getUserScreens));
 
   loginError$ = this.store.pipe(select(fromSelectors.getAuthError));
   authenticated$ = this.store.pipe(select(fromSelectors.selectIsAuthenticated));

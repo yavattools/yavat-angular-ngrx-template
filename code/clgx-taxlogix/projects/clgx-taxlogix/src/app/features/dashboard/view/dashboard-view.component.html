@@ -1,16 +1,16 @@
 <div class="container dashboard-container">
   <div class="row dashboard-header">
     <div class="col-md-12 pb-3">
-      <mat-card-title  class="welcome-title">
+      <!-- <mat-card-title  class="welcome-title">
         Welcome, {{account?.userName}}!
-      </mat-card-title>
+      </mat-card-title> -->
     </div>
   </div>
-  <div class="row align-items-end">
-    <div *ngFor="let feature of features"  class="col-md-3 col-lg-3" [ngClass]="routeAnimationsElements">
+  <div class="row" style="min-height: 500px;">
+    <div *ngFor="let feature of (authStoreFacade.userScreens$ | async)"  class="col-md-3 col-lg-3" [ngClass]="routeAnimationsElements">
       <mat-card style="height: 196px;width: 196px;margin-bottom: 40px;"   [class.feature-card-enabled]="feature.enabled"
           [class.feature-card-disabled]="!feature.enabled" (click)="featureClickHandler($event, feature)"
-          class="mat-elevation-z1  align-middle" [matBadge]="feature.count" matBadgePosition="after" >
+          class="mat-elevation-z1  align-middle" >
         <mat-card-content class="d-flex justify-content-center mb-0 streach-v-100  align-middle">
           <div class="row d-flex justify-content-center p0 m0 streach-h-100">
             <div [class.col-4]="isMobile" [class.col-12]="!isMobile" 
@@ -23,7 +23,7 @@
                 class="col-12 d-flex justify-content-center text-justify">
                 <div class="row d-flex justify-content-center p0 m0">
                   <div class="col-12 d-flex justify-content-center p0 m0 align-item-middle text-center feature-card-title">
-                    {{ feature.name }}
+                    {{ feature.screeName }}
                   </div>
                   <!-- <div class="col-12 d-flex justify-content-center p0 m0 ">
                     <span >

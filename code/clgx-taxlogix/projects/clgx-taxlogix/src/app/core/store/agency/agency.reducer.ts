@@ -124,13 +124,53 @@ export const reducer = createReducer(
     (state, action) => {
       state.actionInProgress = false;
       if (CountiesForStates.AGENCY_STATES === action.stateField) {
-        state.agencyCounties = [...action.response];
+        let uCounties: Array<County> = [];
+        action.response.forEach((c) => {
+          uCounties.push({
+            countyId: c.countyId,
+            countyName: c.countyName,
+            value: c.countyId,
+            display: c.countyName,
+            countyCode: c.countyCode
+          });
+        });
+        state.agencyCounties = [...uCounties];
       } else if (CountiesForStates.ASSESSOR_STATES === action.stateField) {
-        state.assessorCounties = [...action.response];
+        let usCounties: Array<County> = [];
+        action.response.forEach((c) => {
+          usCounties.push({
+            countyId: c.countyId,
+            countyName: c.countyName,
+            value: c.countyId,
+            display: c.countyName,
+            countyCode: c.countyCode
+          });
+        });
+        state.assessorCounties = [...usCounties];
       } else if (CountiesForStates.NON_ESCROW_STATES === action.stateField) {
-        state.nonEscrowCounties = [...action.response];
+        let esCounties: Array<County> = [];
+        action.response.forEach((c) => {
+          esCounties.push({
+            countyId: c.countyId,
+            countyName: c.countyName,
+            value: c.countyId,
+            display: c.countyName,
+            countyCode: c.countyCode
+          });
+        });
+        state.nonEscrowCounties = [...esCounties];
       } else if (CountiesForStates.PAYMENT_STATES === action.stateField) {
-        state.paymentCounties = [...action.response];
+        let nesCounties: Array<County> = [];
+        action.response.forEach((c) => {
+          nesCounties.push({
+            countyId: c.countyId,
+            countyName: c.countyName,
+            value: c.countyId,
+            display: c.countyName,
+            countyCode: c.countyCode
+          });
+        });
+        state.paymentCounties = [...nesCounties];
       }
     }
   ),

@@ -116,7 +116,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       // this.displayProgressSpinner = true;
       let request: LoginRequest = new LoginRequest();
-     request.usernameOrEmail = this.loginForm.controls['username'].value;
+     request.username = this.loginForm.controls['username'].value;
      request.password = this.loginForm.controls['password'].value;
     this.authStoreFacade.login(request);
       // this.router.navigate(['dashboard']);

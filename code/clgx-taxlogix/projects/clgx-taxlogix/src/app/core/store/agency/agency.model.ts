@@ -217,6 +217,8 @@ export interface County {
   countyId: number | undefined;
   countyName: string | undefined;
   countyCode: string | undefined;
+  value: number | undefined;
+  display: string | undefined;
 }
 
 export interface DropDownOptions {

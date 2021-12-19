@@ -38,3 +38,9 @@ export const getUserMenus = createSelector(
   selectAuthState, 
   (state: AuthState) => state.account.loginProfile.usersMenus
 );
+
+
+export const getUserScreens = createSelector( 
+  selectAuthState, 
+  (state: AuthState) => state.account.loginProfile.loginResponseStatus.listOfScreenMapping
+);
